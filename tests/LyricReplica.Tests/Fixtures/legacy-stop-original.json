@@ -1,0 +1,313 @@
+{
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "publicStartCalled": true,
+  "publicStopCalled": true,
+  "windowShown": false,
+  "transportCommandsCalled": false,
+  "scope": "Four real-time standalone legacy word lifecycles; sampled plan presence/targets, not exact wall-clock pixel matching",
+  "cases": [
+    {
+      "text": "ab",
+      "duration": 2000,
+      "initialY": 2.75,
+      "stopRequestedMs": 30,
+      "stopActualMs": 54.2576,
+      "snapshots": [
+        {
+          "elapsedMs": 861.6536,
+          "scales": [
+            null,
+            null
+          ],
+          "moves": [
+            null,
+            null
+          ],
+          "hasGlow": false,
+          "glow": null
+        },
+        {
+          "elapsedMs": 1554.1421,
+          "scales": [
+            null,
+            null
+          ],
+          "moves": [
+            null,
+            null
+          ],
+          "hasGlow": false,
+          "glow": null
+        },
+        {
+          "elapsedMs": 2300.4812,
+          "scales": [
+            {
+              "to": 1.0,
+              "durationMs": 1200.0
+            },
+            {
+              "to": 1.0,
+              "durationMs": 1200.0
+            }
+          ],
+          "moves": [
+            null,
+            null
+          ],
+          "hasGlow": false,
+          "glow": null
+        }
+      ]
+    },
+    {
+      "text": "ab",
+      "duration": 2000,
+      "initialY": 2.75,
+      "stopRequestedMs": 250,
+      "stopActualMs": 257.0714,
+      "snapshots": [
+        {
+          "elapsedMs": 851.9582,
+          "scales": [
+            {
+              "to": 1.083,
+              "durationMs": 1200.0
+            },
+            null
+          ],
+          "moves": [
+            {
+              "to": -2.75,
+              "durationMs": 1440.0
+            },
+            null
+          ],
+          "hasGlow": true,
+          "glow": {
+            "to": 0.43,
+            "durationMs": 700.0
+          }
+        },
+        {
+          "elapsedMs": 1554.2325,
+          "scales": [
+            {
+              "to": 1.083,
+              "durationMs": 1200.0
+            },
+            null
+          ],
+          "moves": [
+            {
+              "to": -2.75,
+              "durationMs": 1440.0
+            },
+            null
+          ],
+          "hasGlow": false,
+          "glow": null
+        },
+        {
+          "elapsedMs": 2315.5377,
+          "scales": [
+            {
+              "to": 1.0,
+              "durationMs": 1200.0
+            },
+            {
+              "to": 1.0,
+              "durationMs": 1200.0
+            }
+          ],
+          "moves": [
+            {
+              "to": -2.75,
+              "durationMs": 1440.0
+            },
+            null
+          ],
+          "hasGlow": false,
+          "glow": null
+        }
+      ]
+    },
+    {
+      "text": "ab",
+      "duration": 2000,
+      "initialY": 2.75,
+      "stopRequestedMs": 600,
+      "stopActualMs": 602.4619,
+      "snapshots": [
+        {
+          "elapsedMs": 852.342,
+          "scales": [
+            {
+              "to": 1.083,
+              "durationMs": 1200.0
+            },
+            {
+              "to": 1.083,
+              "durationMs": 1200.0
+            }
+          ],
+          "moves": [
+            {
+              "to": -2.75,
+              "durationMs": 1440.0
+            },
+            {
+              "to": -2.75,
+              "durationMs": 1440.0
+            }
+          ],
+          "hasGlow": true,
+          "glow": {
+            "to": 0.43,
+            "durationMs": 700.0
+          }
+        },
+        {
+          "elapsedMs": 1554.0695,
+          "scales": [
+            {
+              "to": 1.083,
+              "durationMs": 1200.0
+            },
+            {
+              "to": 1.083,
+              "durationMs": 1200.0
+            }
+          ],
+          "moves": [
+            {
+              "to": -2.75,
+              "durationMs": 1440.0
+            },
+            {
+              "to": -2.75,
+              "durationMs": 1440.0
+            }
+          ],
+          "hasGlow": false,
+          "glow": null
+        },
+        {
+          "elapsedMs": 2311.9949,
+          "scales": [
+            {
+              "to": 1.0,
+              "durationMs": 1200.0
+            },
+            {
+              "to": 1.0,
+              "durationMs": 1200.0
+            }
+          ],
+          "moves": [
+            {
+              "to": -2.75,
+              "durationMs": 1440.0
+            },
+            {
+              "to": -2.75,
+              "durationMs": 1440.0
+            }
+          ],
+          "hasGlow": false,
+          "glow": null
+        }
+      ]
+    },
+    {
+      "text": "ab",
+      "duration": 2000,
+      "initialY": 2.75,
+      "stopRequestedMs": -1,
+      "stopActualMs": null,
+      "snapshots": [
+        {
+          "elapsedMs": 871.8902,
+          "scales": [
+            {
+              "to": 1.083,
+              "durationMs": 1200.0
+            },
+            {
+              "to": 1.083,
+              "durationMs": 1200.0
+            }
+          ],
+          "moves": [
+            {
+              "to": -2.75,
+              "durationMs": 1440.0
+            },
+            {
+              "to": -2.75,
+              "durationMs": 1440.0
+            }
+          ],
+          "hasGlow": true,
+          "glow": {
+            "to": 0.43,
+            "durationMs": 700.0
+          }
+        },
+        {
+          "elapsedMs": 1555.621,
+          "scales": [
+            {
+              "to": 1.083,
+              "durationMs": 1200.0
+            },
+            {
+              "to": 1.083,
+              "durationMs": 1200.0
+            }
+          ],
+          "moves": [
+            {
+              "to": -2.75,
+              "durationMs": 1440.0
+            },
+            {
+              "to": -2.75,
+              "durationMs": 1440.0
+            }
+          ],
+          "hasGlow": true,
+          "glow": {
+            "to": 0.0,
+            "durationMs": 700.0
+          }
+        },
+        {
+          "elapsedMs": 2303.8099,
+          "scales": [
+            {
+              "to": 1.0,
+              "durationMs": 1200.0
+            },
+            {
+              "to": 1.0,
+              "durationMs": 1200.0
+            }
+          ],
+          "moves": [
+            {
+              "to": -2.75,
+              "durationMs": 1440.0
+            },
+            {
+              "to": -2.75,
+              "durationMs": 1440.0
+            }
+          ],
+          "hasGlow": false,
+          "glow": null
+        }
+      ]
+    }
+  ]
+}

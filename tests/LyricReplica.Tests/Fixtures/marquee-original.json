@@ -1,0 +1,35 @@
+[
+  {
+    "From": 16.0,
+    "To": -129.0,
+    "Delay": 2000.0,
+    "End": 6235.384615384615,
+    "EnterEnd": 2330.0,
+    "CruisePosition": -71.0,
+    "CruiseEnd": 3558.461538461538,
+    "EnterPosition": 8.850000000000001,
+    "Width": 100.0
+  },
+  {
+    "From": 16.0,
+    "To": -429.0,
+    "Delay": 2000.0,
+    "End": 12758.461538461539,
+    "EnterEnd": 2330.0,
+    "CruisePosition": -309.0,
+    "CruiseEnd": 7220.000000000001,
+    "EnterPosition": 8.850000000000001,
+    "Width": 400.0
+  },
+  {
+    "From": 16.0,
+    "To": -929.0,
+    "Delay": 2000.0,
+    "End": 20450.76923076923,
+    "EnterEnd": 2330.0,
+    "CruisePosition": -809.0,
+    "CruiseEnd": 14912.307692307691,
+    "EnterPosition": 8.850000000000001,
+    "Width": 900.0
+  }
+]

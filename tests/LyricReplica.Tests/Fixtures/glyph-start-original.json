@@ -1,0 +1,3349 @@
+{
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "originalPreparationCalled": true,
+  "originalIosCharacterOrchestratorCalled": true,
+  "publicStartCalled": false,
+  "windowShown": false,
+  "transportCommandsCalled": false,
+  "scope": "Original preparation and per-character iOS orchestrator plans with explicit starting transforms; not full word scheduling, glow or page acceptance",
+  "preparation": [
+    {
+      "interline": 0,
+      "fontSize": 41.0,
+      "heightSetting": -1.0,
+      "speed": 0.5,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.AppleMusicLineChangeEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 2.75,
+        "durationMs": 328.5,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.8536028868373953
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 2.653992692479458
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 2.752282945374055
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 2.75
+          }
+        ]
+      }
+    },
+    {
+      "interline": 0,
+      "fontSize": 41.0,
+      "heightSetting": -1.0,
+      "speed": 1.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.AppleMusicLineChangeEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 2.75,
+        "durationMs": 657.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.8536028868373953
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 2.653992692479458
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 2.752282945374055
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 2.75
+          }
+        ]
+      }
+    },
+    {
+      "interline": 0,
+      "fontSize": 41.0,
+      "heightSetting": -1.0,
+      "speed": 2.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.AppleMusicLineChangeEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 2.75,
+        "durationMs": 1314.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.8536028868373953
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 2.653992692479458
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 2.752282945374055
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 2.75
+          }
+        ]
+      }
+    },
+    {
+      "interline": 0,
+      "fontSize": 41.0,
+      "heightSetting": 8.0,
+      "speed": 0.5,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.AppleMusicLineChangeEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 4.0,
+        "durationMs": 328.5,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 2.696149653581666
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 3.860353007242848
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 4.003320647816808
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 4.0
+          }
+        ]
+      }
+    },
+    {
+      "interline": 0,
+      "fontSize": 41.0,
+      "heightSetting": 8.0,
+      "speed": 1.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.AppleMusicLineChangeEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 4.0,
+        "durationMs": 657.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 2.696149653581666
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 3.860353007242848
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 4.003320647816808
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 4.0
+          }
+        ]
+      }
+    },
+    {
+      "interline": 0,
+      "fontSize": 41.0,
+      "heightSetting": 8.0,
+      "speed": 2.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.AppleMusicLineChangeEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 4.0,
+        "durationMs": 1314.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 2.696149653581666
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 3.860353007242848
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 4.003320647816808
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 4.0
+          }
+        ]
+      }
+    },
+    {
+      "interline": 0,
+      "fontSize": 73.8,
+      "heightSetting": -1.0,
+      "speed": 0.5,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.AppleMusicLineChangeEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 4.949999999999999,
+        "durationMs": 328.5,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 3.336485196307311
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 4.777186846463024
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 4.954109301673299
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 4.949999999999999
+          }
+        ]
+      }
+    },
+    {
+      "interline": 0,
+      "fontSize": 73.8,
+      "heightSetting": -1.0,
+      "speed": 1.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.AppleMusicLineChangeEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 4.949999999999999,
+        "durationMs": 657.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 3.336485196307311
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 4.777186846463024
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 4.954109301673299
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 4.949999999999999
+          }
+        ]
+      }
+    },
+    {
+      "interline": 0,
+      "fontSize": 73.8,
+      "heightSetting": -1.0,
+      "speed": 2.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.AppleMusicLineChangeEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 4.949999999999999,
+        "durationMs": 1314.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 3.336485196307311
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 4.777186846463024
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 4.954109301673299
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 4.949999999999999
+          }
+        ]
+      }
+    },
+    {
+      "interline": 0,
+      "fontSize": 73.8,
+      "heightSetting": 8.0,
+      "speed": 0.5,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.AppleMusicLineChangeEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 7.199999999999999,
+        "durationMs": 328.5,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 4.853069376446998
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 6.948635413037126
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 7.205977166070253
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 7.199999999999999
+          }
+        ]
+      }
+    },
+    {
+      "interline": 0,
+      "fontSize": 73.8,
+      "heightSetting": 8.0,
+      "speed": 1.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.AppleMusicLineChangeEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 7.199999999999999,
+        "durationMs": 657.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 4.853069376446998
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 6.948635413037126
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 7.205977166070253
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 7.199999999999999
+          }
+        ]
+      }
+    },
+    {
+      "interline": 0,
+      "fontSize": 73.8,
+      "heightSetting": 8.0,
+      "speed": 2.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.AppleMusicLineChangeEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 7.199999999999999,
+        "durationMs": 1314.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 4.853069376446998
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 6.948635413037126
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 7.205977166070253
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 7.199999999999999
+          }
+        ]
+      }
+    },
+    {
+      "interline": 1,
+      "fontSize": 41.0,
+      "heightSetting": -1.0,
+      "speed": 0.5,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.ScrollingEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 2.75,
+        "durationMs": 250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.3516948843761218
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 2.3489108918227166
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 2.7025683227738164
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 2.75
+          }
+        ]
+      }
+    },
+    {
+      "interline": 1,
+      "fontSize": 41.0,
+      "heightSetting": -1.0,
+      "speed": 1.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.ScrollingEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 2.75,
+        "durationMs": 500.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.3516948843761218
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 2.3489108918227166
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 2.7025683227738164
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 2.75
+          }
+        ]
+      }
+    },
+    {
+      "interline": 1,
+      "fontSize": 41.0,
+      "heightSetting": -1.0,
+      "speed": 2.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.ScrollingEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 2.75,
+        "durationMs": 1000.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.3516948843761218
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 2.3489108918227166
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 2.7025683227738164
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 2.75
+          }
+        ]
+      }
+    },
+    {
+      "interline": 1,
+      "fontSize": 41.0,
+      "heightSetting": 8.0,
+      "speed": 0.5,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.ScrollingEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 4.0,
+        "durationMs": 250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.9661016500016317
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 3.4165976608330424
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 3.9310084694891874
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 4.0
+          }
+        ]
+      }
+    },
+    {
+      "interline": 1,
+      "fontSize": 41.0,
+      "heightSetting": 8.0,
+      "speed": 1.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.ScrollingEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 4.0,
+        "durationMs": 500.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.9661016500016317
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 3.4165976608330424
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 3.9310084694891874
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 4.0
+          }
+        ]
+      }
+    },
+    {
+      "interline": 1,
+      "fontSize": 41.0,
+      "heightSetting": 8.0,
+      "speed": 2.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.ScrollingEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 4.0,
+        "durationMs": 1000.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.9661016500016317
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 3.4165976608330424
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 3.9310084694891874
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 4.0
+          }
+        ]
+      }
+    },
+    {
+      "interline": 1,
+      "fontSize": 73.8,
+      "heightSetting": -1.0,
+      "speed": 0.5,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.ScrollingEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 4.949999999999999,
+        "durationMs": 250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 2.433050791877019
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 4.228039605280889
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 4.864622980992869
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 4.949999999999999
+          }
+        ]
+      }
+    },
+    {
+      "interline": 1,
+      "fontSize": 73.8,
+      "heightSetting": -1.0,
+      "speed": 1.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.ScrollingEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 4.949999999999999,
+        "durationMs": 500.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 2.433050791877019
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 4.228039605280889
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 4.864622980992869
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 4.949999999999999
+          }
+        ]
+      }
+    },
+    {
+      "interline": 1,
+      "fontSize": 73.8,
+      "heightSetting": -1.0,
+      "speed": 2.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.ScrollingEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 4.949999999999999,
+        "durationMs": 1000.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 2.433050791877019
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 4.228039605280889
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 4.864622980992869
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 4.949999999999999
+          }
+        ]
+      }
+    },
+    {
+      "interline": 1,
+      "fontSize": 73.8,
+      "heightSetting": 8.0,
+      "speed": 0.5,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.ScrollingEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 7.199999999999999,
+        "durationMs": 250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 3.538982970002937
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 6.149875789499475
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 7.075815245080537
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 7.199999999999999
+          }
+        ]
+      }
+    },
+    {
+      "interline": 1,
+      "fontSize": 73.8,
+      "heightSetting": 8.0,
+      "speed": 1.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.ScrollingEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 7.199999999999999,
+        "durationMs": 500.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 3.538982970002937
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 6.149875789499475
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 7.075815245080537
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 7.199999999999999
+          }
+        ]
+      }
+    },
+    {
+      "interline": 1,
+      "fontSize": 73.8,
+      "heightSetting": 8.0,
+      "speed": 2.0,
+      "easingType": "Lyricify_for_Spotify.Helpers.AppleMusicHelper.ScrollingEasingFunction",
+      "plan": {
+        "from": 0.0,
+        "to": 7.199999999999999,
+        "durationMs": 1000.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 3.538982970002937
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 6.149875789499475
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 7.075815245080537
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 7.199999999999999
+          }
+        ]
+      }
+    }
+  ],
+  "glyphs": [
+    {
+      "fontSize": 41.0,
+      "heightSetting": -1.0,
+      "initialScale": 1.0,
+      "fromY": 0.0,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0477329392123897
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0664078763154319
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.069519106906272
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -2.75,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -1.8752226119153126
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -2.6088808552491067
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -2.7311077713178236
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -2.75
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 41.0,
+      "heightSetting": -1.0,
+      "initialScale": 1.0,
+      "fromY": 0.0,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0469747229852453
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0661134028493349
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.0694547630335658
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -5.156250000000002,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -3.460191648466735
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -4.869960477741186
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -5.116087455597476
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -5.156250000000002
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 41.0,
+      "heightSetting": -1.0,
+      "initialScale": 1.0,
+      "fromY": 2.75,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0477329392123897
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0664078763154319
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.069519106906272
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 2.75,
+        "to": -2.75,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 2.75
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -1.0004452238306252
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -2.4677617104982135
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -2.712215542635647
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -2.75
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 41.0,
+      "heightSetting": -1.0,
+      "initialScale": 1.0,
+      "fromY": 2.75,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0469747229852453
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0661134028493349
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.0694547630335658
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 2.75,
+        "to": -5.156250000000002,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 2.75
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -2.555627194315659
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -4.717272732536484
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -5.094667431916129
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -5.156250000000002
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 41.0,
+      "heightSetting": -1.0,
+      "initialScale": 1.08,
+      "fromY": 0.0,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0731810086839444
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.070513160526367
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.0700686990133899
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -2.75,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -1.8752226119153126
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -2.6088808552491067
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -2.7311077713178236
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -2.75
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 41.0,
+      "heightSetting": -1.0,
+      "initialScale": 1.08,
+      "fromY": 0.0,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0732893252878222
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0705552281643809
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.070077890995205
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -5.156250000000002,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -3.460191648466735
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -4.869960477741186
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -5.116087455597476
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -5.156250000000002
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 41.0,
+      "heightSetting": -1.0,
+      "initialScale": 1.08,
+      "fromY": 2.75,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0731810086839444
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.070513160526367
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.0700686990133899
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 2.75,
+        "to": -2.75,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 2.75
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -1.0004452238306252
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -2.4677617104982135
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -2.712215542635647
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -2.75
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 41.0,
+      "heightSetting": -1.0,
+      "initialScale": 1.08,
+      "fromY": 2.75,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0732893252878222
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0705552281643809
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.070077890995205
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 2.75,
+        "to": -5.156250000000002,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 2.75
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -2.555627194315659
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -4.717272732536484
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -5.094667431916129
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -5.156250000000002
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 41.0,
+      "heightSetting": 8.0,
+      "initialScale": 1.0,
+      "fromY": 0.0,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0477329392123897
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0664078763154319
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.069519106906272
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -4.0,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -2.727596526422273
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -3.794735789453246
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -3.972520394644107
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -4.0
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 41.0,
+      "heightSetting": 8.0,
+      "initialScale": 1.0,
+      "fromY": 0.0,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0469747229852453
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0661134028493349
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.0694547630335658
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -7.5000000000000036,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -5.033006034133433
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -7.083578876714453
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -7.44158175359633
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -7.5000000000000036
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 41.0,
+      "heightSetting": 8.0,
+      "initialScale": 1.0,
+      "fromY": 4.0,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0477329392123897
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0664078763154319
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.069519106906272
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 4.0,
+        "to": -4.0,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 4.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -1.455193052844546
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -3.589471578906492
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -3.945040789288214
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -4.0
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 41.0,
+      "heightSetting": 8.0,
+      "initialScale": 1.0,
+      "fromY": 4.0,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0469747229852453
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0661134028493349
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.0694547630335658
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 4.0,
+        "to": -7.5000000000000036,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 4.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -3.717275919004596
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -6.861487610962159
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -7.41042535551437
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -7.5000000000000036
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 41.0,
+      "heightSetting": 8.0,
+      "initialScale": 1.08,
+      "fromY": 0.0,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0731810086839444
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.070513160526367
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.0700686990133899
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -4.0,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -2.727596526422273
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -3.794735789453246
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -3.972520394644107
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -4.0
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 41.0,
+      "heightSetting": 8.0,
+      "initialScale": 1.08,
+      "fromY": 0.0,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0732893252878222
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0705552281643809
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.070077890995205
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -7.5000000000000036,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -5.033006034133433
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -7.083578876714453
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -7.44158175359633
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -7.5000000000000036
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 41.0,
+      "heightSetting": 8.0,
+      "initialScale": 1.08,
+      "fromY": 4.0,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0731810086839444
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.070513160526367
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.0700686990133899
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 4.0,
+        "to": -4.0,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 4.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -1.455193052844546
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -3.589471578906492
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -3.945040789288214
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -4.0
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 41.0,
+      "heightSetting": 8.0,
+      "initialScale": 1.08,
+      "fromY": 4.0,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0732893252878222
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0705552281643809
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.070077890995205
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 4.0,
+        "to": -7.5000000000000036,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 4.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -3.717275919004596
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -6.861487610962159
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -7.41042535551437
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -7.5000000000000036
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": -1.0,
+      "initialScale": 1.0,
+      "fromY": 0.0,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0477329392123897
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0664078763154319
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.069519106906272
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -4.949999999999999,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -3.375400701447562
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -4.695985539448391
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -4.915993988372081
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -4.949999999999999
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": -1.0,
+      "initialScale": 1.0,
+      "fromY": 0.0,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0469747229852453
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0661134028493349
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.0694547630335658
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -9.281250000000004,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -6.2283449672401225
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -8.765928859934135
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -9.208957420075457
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -9.281250000000004
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": -1.0,
+      "initialScale": 1.0,
+      "fromY": 4.949999999999999,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0477329392123897
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0664078763154319
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.069519106906272
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 4.949999999999999,
+        "to": -4.949999999999999,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 4.949999999999999
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -1.8008014028951251
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -4.441971078896783
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -4.881987976744163
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -4.949999999999999
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": -1.0,
+      "initialScale": 1.0,
+      "fromY": 4.949999999999999,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0469747229852453
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0661134028493349
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.0694547630335658
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 4.949999999999999,
+        "to": -9.281250000000004,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 4.949999999999999
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -4.600128949768187
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -8.491090918565673
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -9.170401377449032
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -9.281250000000004
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": -1.0,
+      "initialScale": 1.08,
+      "fromY": 0.0,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0731810086839444
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.070513160526367
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.0700686990133899
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -4.949999999999999,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -3.375400701447562
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -4.695985539448391
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -4.915993988372081
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -4.949999999999999
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": -1.0,
+      "initialScale": 1.08,
+      "fromY": 0.0,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0732893252878222
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0705552281643809
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.070077890995205
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -9.281250000000004,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -6.2283449672401225
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -8.765928859934135
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -9.208957420075457
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -9.281250000000004
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": -1.0,
+      "initialScale": 1.08,
+      "fromY": 4.949999999999999,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0731810086839444
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.070513160526367
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.0700686990133899
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 4.949999999999999,
+        "to": -4.949999999999999,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 4.949999999999999
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -1.8008014028951251
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -4.441971078896783
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -4.881987976744163
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -4.949999999999999
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": -1.0,
+      "initialScale": 1.08,
+      "fromY": 4.949999999999999,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0732893252878222
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0705552281643809
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.070077890995205
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 4.949999999999999,
+        "to": -9.281250000000004,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 4.949999999999999
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -4.600128949768187
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -8.491090918565673
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -9.170401377449032
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -9.281250000000004
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": 8.0,
+      "initialScale": 1.0,
+      "fromY": 0.0,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0477329392123897
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0664078763154319
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.069519106906272
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -7.199999999999999,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -4.909673747560091
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -6.830524421015842
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -7.1505367103593915
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -7.199999999999999
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": 8.0,
+      "initialScale": 1.0,
+      "fromY": 0.0,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0469747229852453
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0661134028493349
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.0694547630335658
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -13.500000000000005,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -9.05941086144018
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -12.750441978086014
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -13.394847156473391
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -13.500000000000005
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": 8.0,
+      "initialScale": 1.0,
+      "fromY": 7.199999999999999,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0477329392123897
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0664078763154319
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.069519106906272
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 7.199999999999999,
+        "to": -7.199999999999999,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 7.199999999999999
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -2.6193474951201825
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -6.461048842031685
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -7.101073420718784
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -7.199999999999999
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": 8.0,
+      "initialScale": 1.0,
+      "fromY": 7.199999999999999,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.0,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0469747229852453
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0661134028493349
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.0694547630335658
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 7.199999999999999,
+        "to": -13.500000000000005,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 7.199999999999999
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -6.6910966542082715
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -12.350677699731886
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -13.338765639925864
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -13.500000000000004
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": 8.0,
+      "initialScale": 1.08,
+      "fromY": 0.0,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0731810086839444
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.070513160526367
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.0700686990133899
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -7.199999999999999,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -4.909673747560091
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -6.830524421015842
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -7.1505367103593915
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -7.199999999999999
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": 8.0,
+      "initialScale": 1.08,
+      "fromY": 0.0,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0732893252878222
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0705552281643809
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.070077890995205
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 0.0,
+        "to": -13.500000000000005,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 0.0
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -9.05941086144018
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -12.750441978086014
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -13.394847156473391
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -13.500000000000005
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": 8.0,
+      "initialScale": 1.08,
+      "fromY": 7.199999999999999,
+      "ios264": false,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": 1.0731810086839444
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.070513160526367
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": 1.0700686990133899
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 7.199999999999999,
+        "to": -7.199999999999999,
+        "durationMs": 2250.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 7.199999999999999
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.25,
+            "value": -2.6193474951201825
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -6.461048842031685
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.75,
+            "value": -7.101073420718784
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -7.199999999999999
+          }
+        ]
+      }
+    },
+    {
+      "fontSize": 73.8,
+      "heightSetting": 8.0,
+      "initialScale": 1.08,
+      "fromY": 7.199999999999999,
+      "ios264": true,
+      "wordDurationMs": 1500,
+      "count": 1,
+      "index": 0,
+      "growDelayMs": 400,
+      "scale": {
+        "from": 1.08,
+        "to": 1.07,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 1.08
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": 1.0732893252878222
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": 1.0705552281643809
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": 1.070077890995205
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": 1.07
+          }
+        ]
+      },
+      "move": {
+        "from": 7.199999999999999,
+        "to": -13.500000000000005,
+        "durationMs": 2204.315,
+        "samples": [
+          {
+            "fraction": 0,
+            "progress": 0.0,
+            "value": 7.199999999999999
+          },
+          {
+            "fraction": 0.25,
+            "progress": 0.24999997731721646,
+            "value": -6.6910966542082715
+          },
+          {
+            "fraction": 0.5,
+            "progress": 0.5,
+            "value": -12.350677699731886
+          },
+          {
+            "fraction": 0.75,
+            "progress": 0.7499999773172165,
+            "value": -13.338765639925864
+          },
+          {
+            "fraction": 1,
+            "progress": 1.0,
+            "value": -13.500000000000004
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,2071 @@
+{
+  "release": "Lyricify 4.4.2",
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "scope": "Metadata, constructor/getter defaults and decompiled UI preset assignments; not a current-user profile",
+  "types": [
+    {
+      "type": "Lyricify_for_Spotify.Json.Settings.AppleMusicLyrics",
+      "baseType": "System.Object",
+      "properties": [
+        {
+          "name": "BlurLyrics",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "blur_lyrics",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BlurLevel",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "blur_level",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "AnimationSpeed",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "animation_speed",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "EnableTrackInfoMarquee",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "enable_track_info_marquee",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "AnimationArtworkEnter",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "animation_artwork_enter",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "PullingEffect",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "pulling",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "PullingEffectNew",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "pulling_new",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "PullingDelay",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "pulling_delay",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "Background",
+          "type": "Lyricify_for_Spotify.Json.Settings.BackgroundTypes",
+          "read": true,
+          "write": true,
+          "enumValues": [
+            "Static",
+            "Dynamic",
+            "DynamicBeating",
+            "DynamicIsolation",
+            "AppleMusicOriginal"
+          ],
+          "enumMembers": [
+            {
+              "name": "Static",
+              "value": 0
+            },
+            {
+              "name": "Dynamic",
+              "value": 1
+            },
+            {
+              "name": "DynamicBeating",
+              "value": 2
+            },
+            {
+              "name": "DynamicIsolation",
+              "value": 3
+            },
+            {
+              "name": "AppleMusicOriginal",
+              "value": 4
+            }
+          ],
+          "jsonPropertyName": "background_type",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BackgroundDynamicFrameRate",
+          "type": "System.Int32",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "background_dynamic_frame_rate",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BackgroundDynamicIsolationPalettes",
+          "type": "Lyricify_for_Spotify.Json.Settings.IsolationPalettes",
+          "read": true,
+          "write": true,
+          "enumValues": [
+            "Auto",
+            "KMeans",
+            "OctTree",
+            "MedianCut1",
+            "MedianCut2"
+          ],
+          "enumMembers": [
+            {
+              "name": "Auto",
+              "value": 0
+            },
+            {
+              "name": "KMeans",
+              "value": 1
+            },
+            {
+              "name": "OctTree",
+              "value": 2
+            },
+            {
+              "name": "MedianCut1",
+              "value": 3
+            },
+            {
+              "name": "MedianCut2",
+              "value": 4
+            }
+          ],
+          "jsonPropertyName": "background_dynamic_isolation_palettes_beta_2",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BackgroundDynamicIsolationFrameRateLimit",
+          "type": "System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "background_dynamic_isolation_frame_rate_limit",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BackgroundDynamicIsolationRenderScale",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "background_dynamic_isolation_render_scale",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "EnableIndependentBackgroundRenderer",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "enable_independent_background_renderer",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BackgroundAppleMusicOriginal",
+          "type": "Lyricify_for_Spotify.Json.Settings.AppleMusicOriginalBackgroundSettings",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "background_apple_music_original",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BoldText",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "bold_text",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "FontPreset",
+          "type": "Lyricify_for_Spotify.Json.Settings.FontPresets",
+          "read": true,
+          "write": true,
+          "enumValues": [
+            "Default",
+            "SpotifyMix",
+            "SpotifyCircular",
+            "SFPro",
+            "Custom"
+          ],
+          "enumMembers": [
+            {
+              "name": "Default",
+              "value": 0
+            },
+            {
+              "name": "SpotifyMix",
+              "value": 1
+            },
+            {
+              "name": "SpotifyCircular",
+              "value": 2
+            },
+            {
+              "name": "SFPro",
+              "value": 3
+            },
+            {
+              "name": "Custom",
+              "value": 4
+            }
+          ],
+          "jsonPropertyName": "font_preset",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "FontFamily",
+          "type": "System.String",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "font_family",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "Karaoke",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "is_karaoke",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "IsCjkKaraokeDisabled",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "disable_cjk_karaoke",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "KaraokeStyleEnableAnimation",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "karaoke_style_enable_animation",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "KaraokeStyleFloat",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "karaoke_style_float",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "KaraokeStyleFloatHeight",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "karaoke_style_float_height",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "KaraokeStyleProgressWidth",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "karaoke_style_progress_width",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "KaraokeStyleProgressWidthPreset",
+          "type": "System.Int32",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "karaoke_style_progress_width_preset",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "KaraokeStyleWordShine",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "karaoke_style_word_shine",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "KaraokeChineseRollingEasing",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "karaoke_chinese_easing",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "DuetView",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "duet_view",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "RightAlignFirst",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "right_align_first",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "MagicStripTutorialCount",
+          "type": "System.Int32",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "magic_strip_tutorial_count",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "MagicStripTutorial",
+          "type": "System.Nullable`1[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "magic_strip_tutorial",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "magicStripStatus",
+          "type": "System.Nullable`1[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "magic_strip_status",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "MagicStripStatus",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": null,
+          "jsonIgnored": true,
+          "attributes": [
+            "Newtonsoft.Json.JsonIgnoreAttribute"
+          ]
+        },
+        {
+          "name": "EnableTraditionalEntry",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "enable_traditional_entry",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "EnableDynamicArtwork",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "enable_dynamic_artwork",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "UnplayingOpacityOverride",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "unplaying_opacity_override",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "PlayingZoomOverride",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "playing_zoom_override",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BuggyApple",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "buggy_apple",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BuggyAppleOptions",
+          "type": "Lyricify_for_Spotify.Json.Settings.BuggyAppleOptions",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "buggy_apple_options",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "ShinyCjk",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "shiny_cjk",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "WordShineEffectPreset",
+          "type": "Lyricify_for_Spotify.Json.Settings.WordShineEffectPresetTypes",
+          "read": true,
+          "write": true,
+          "enumValues": [
+            "Lyricify",
+            "Android",
+            "iOS162",
+            "iOS264"
+          ],
+          "enumMembers": [
+            {
+              "name": "Lyricify",
+              "value": 0
+            },
+            {
+              "name": "Android",
+              "value": 1
+            },
+            {
+              "name": "iOS162",
+              "value": 2
+            },
+            {
+              "name": "iOS264",
+              "value": 3
+            }
+          ],
+          "jsonPropertyName": "word_shine_effect_preset",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "WordShineEffectIos",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "word_shine_effect_ios",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "LineSwitchingAppleIosStyle164",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "line_switching_apple_ios_style_16_4",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "InterLineAnimationPreset",
+          "type": "Lyricify_for_Spotify.Json.Settings.InterLineAnimationPresetTypes",
+          "read": true,
+          "write": true,
+          "enumValues": [
+            "iOS",
+            "Lyricify"
+          ],
+          "enumMembers": [
+            {
+              "name": "iOS",
+              "value": 0
+            },
+            {
+              "name": "Lyricify",
+              "value": 1
+            }
+          ],
+          "jsonPropertyName": "inter_line_animation_preset",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "LineSwitchingOpacitySpeedAppleIosStyle164",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "line_switching_opacity_speed_apple_ios_style_16_4",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "CurrentLinePreplayOpacityPreset",
+          "type": "System.Int32",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "current_line_preplay_opacity_preset",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "TranslationLinePreset",
+          "type": "Lyricify_for_Spotify.Json.Settings.TranslationLinePresetTypes",
+          "read": true,
+          "write": true,
+          "enumValues": [
+            "Lyricify",
+            "iOS"
+          ],
+          "enumMembers": [
+            {
+              "name": "Lyricify",
+              "value": 0
+            },
+            {
+              "name": "iOS",
+              "value": 1
+            }
+          ],
+          "jsonPropertyName": "translation_line_preset",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BackgroundVocalsEnterDirectionLeft",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "background_vocals_enter_direction_left",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BackgroundVocalsNativePosition",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "background_vocals_native_position",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BackgroundVocalsEnterAnimation",
+          "type": "System.Int32",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "background_vocals_enter_animation",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BackgroundVocalsEnterAnimationNew",
+          "type": "System.Boolean",
+          "read": true,
+          "write": false,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": null,
+          "jsonIgnored": true,
+          "attributes": [
+            "Newtonsoft.Json.JsonIgnoreAttribute"
+          ]
+        },
+        {
+          "name": "BackgroundVocalsEnterAnimationNewNew",
+          "type": "System.Boolean",
+          "read": true,
+          "write": false,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": null,
+          "jsonIgnored": true,
+          "attributes": [
+            "Newtonsoft.Json.JsonIgnoreAttribute"
+          ]
+        },
+        {
+          "name": "IosStylePreset",
+          "type": "System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "ios_style_preset",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BreathingDotsAlignmentLeft",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "breathing_dots_align_left",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "HighlightLineZooming",
+          "type": "System.Int32",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "highlight_line_zooming_preset",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "EnablePlusLighter",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "enable_plus_lighter",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "PlusLighterEffectPreset",
+          "type": "Lyricify_for_Spotify.Json.Settings.PlusLighterEffectPresetTypes",
+          "read": true,
+          "write": true,
+          "enumValues": [
+            "iOS18",
+            "iOS",
+            "Android",
+            "iOS26"
+          ],
+          "enumMembers": [
+            {
+              "name": "iOS18",
+              "value": 0
+            },
+            {
+              "name": "iOS",
+              "value": 0
+            },
+            {
+              "name": "Android",
+              "value": 1
+            },
+            {
+              "name": "iOS26",
+              "value": 2
+            }
+          ],
+          "jsonPropertyName": "plus_lighter_effect_preset",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "PreventSleepFullscreenOnly",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "prevent_sleep_fullscreen_only",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "EnableAdvancedButtonDragAnimation",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "enable_advanced_button_drag_animation",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "EnableAnimatedTimeStatus",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "enable_animated_time_status",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "DisableBlurAtLyricsLineMouseOver",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "disable_blur_at_lyrics_line_mouse_over",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "ZoomingRestore",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "zooming_restore",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "ZoomingLevels",
+          "type": "Lyricify_for_Spotify.Json.Settings.AppleMusicLyrics+ZoomLevels",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "zooming_levels",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "ShowFpsOverlay",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "show_fps_overlay",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "FpsOverlayUpdateInterval",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "fps_overlay_update_interval",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        }
+      ],
+      "defaultsEvaluated": false
+    },
+    {
+      "type": "Lyricify_for_Spotify.Json.Settings.AppleMusicOriginalBackgroundSettings",
+      "baseType": "System.Object",
+      "properties": [
+        {
+          "name": "FrameRateLimit",
+          "type": "System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "frame_rate_limit",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "RenderScale",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "render_scale",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BassPulseScale",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "bass_pulse_scale",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BlurScale",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "blur_scale",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "PortraitControlPointCount",
+          "type": "System.Int32",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "portrait_control_point_count",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "PortraitSubdivisionLevels",
+          "type": "System.Int32",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "portrait_subdivision_levels",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "LandscapeControlPointCount",
+          "type": "System.Int32",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "landscape_control_point_count",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "LandscapeSubdivisionLevels",
+          "type": "System.Int32",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "landscape_subdivision_levels",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        }
+      ],
+      "defaultsEvaluated": false
+    },
+    {
+      "type": "Lyricify_for_Spotify.Json.Settings.BuggyAppleOptions",
+      "baseType": "System.Object",
+      "properties": [
+        {
+          "name": "BackgroundVocalsOverlap",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "background_vocals_overlap",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BackgroundVocalsEnteringDirection",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "background_vocals_entering_direction",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "TremendousBreathingDots",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "tremendous_breathing_dots",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "BackgroundVocalTransparencySuddenChange",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "background_vocal_transparency_sudden_change",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "ChineseCharacterAbnormalFloating",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "chinese_character_abnormal_floating",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "LyricsLineTransparencySuddenChange",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "lyrics_line_transparency_sudden_change",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "WordShineAnimationInterruption",
+          "type": "System.Boolean",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "word_shine_animation_interruption",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        }
+      ],
+      "defaultsEvaluated": false
+    },
+    {
+      "type": "Lyricify_for_Spotify.Json.Settings.AppleMusicLyrics+ZoomLevels",
+      "baseType": "System.Object",
+      "properties": [
+        {
+          "name": "Horizontal",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "horizontal",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "Vertical",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "vertical",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "HorizontalFullscreen",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "horizontal_fullscreen",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        },
+        {
+          "name": "VerticalFullscreen",
+          "type": "System.Double",
+          "read": true,
+          "write": true,
+          "enumValues": null,
+          "enumMembers": null,
+          "jsonPropertyName": "vertical_fullscreen",
+          "jsonIgnored": false,
+          "attributes": [
+            "Newtonsoft.Json.JsonPropertyAttribute"
+          ]
+        }
+      ],
+      "defaultsEvaluated": false
+    }
+  ],
+  "defaults": [
+    {
+      "property": "BlurLyrics",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BlurLevel",
+      "type": "System.Double",
+      "value": 0.6,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "AnimationSpeed",
+      "type": "System.Double",
+      "value": 1.0,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "EnableTrackInfoMarquee",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "AnimationArtworkEnter",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "PullingEffect",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "PullingEffectNew",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "PullingDelay",
+      "type": "System.Double",
+      "value": 2.5,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "Background",
+      "type": "Lyricify_for_Spotify.Json.Settings.BackgroundTypes",
+      "value": "Static",
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundDynamicFrameRate",
+      "type": "System.Int32",
+      "value": 12,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundDynamicIsolationPalettes",
+      "type": "Lyricify_for_Spotify.Json.Settings.IsolationPalettes",
+      "value": "Auto",
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundDynamicIsolationFrameRateLimit",
+      "type": "System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+      "value": -1,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundDynamicIsolationRenderScale",
+      "type": "System.Double",
+      "value": 0.5,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "EnableIndependentBackgroundRenderer",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundAppleMusicOriginal.FrameRateLimit",
+      "type": "System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+      "value": -1,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundAppleMusicOriginal.RenderScale",
+      "type": "System.Double",
+      "value": 1.0,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundAppleMusicOriginal.BassPulseScale",
+      "type": "System.Double",
+      "value": 1.0,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundAppleMusicOriginal.BlurScale",
+      "type": "System.Double",
+      "value": 1.0,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundAppleMusicOriginal.PortraitControlPointCount",
+      "type": "System.Int32",
+      "value": -1,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundAppleMusicOriginal.PortraitSubdivisionLevels",
+      "type": "System.Int32",
+      "value": -1,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundAppleMusicOriginal.LandscapeControlPointCount",
+      "type": "System.Int32",
+      "value": -1,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundAppleMusicOriginal.LandscapeSubdivisionLevels",
+      "type": "System.Int32",
+      "value": -1,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BoldText",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "FontPreset",
+      "type": "Lyricify_for_Spotify.Json.Settings.FontPresets",
+      "value": "Default",
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "FontFamily",
+      "type": "System.String",
+      "value": "",
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "Karaoke",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "IsCjkKaraokeDisabled",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "KaraokeStyleEnableAnimation",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "KaraokeStyleFloat",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "KaraokeStyleFloatHeight",
+      "type": "System.Double",
+      "value": -1.0,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "KaraokeStyleProgressWidth",
+      "type": "System.Double",
+      "value": "NaN",
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "KaraokeStyleProgressWidthPreset",
+      "type": "System.Int32",
+      "value": 0,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "KaraokeStyleWordShine",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "KaraokeChineseRollingEasing",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "DuetView",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "RightAlignFirst",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "MagicStripTutorialCount",
+      "type": "System.Int32",
+      "value": 5,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "MagicStripTutorial",
+      "type": "System.Nullable`1[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+      "value": null,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "magicStripStatus",
+      "type": "System.Nullable`1[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+      "value": null,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "MagicStripStatus",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "EnableTraditionalEntry",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "EnableDynamicArtwork",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "UnplayingOpacityOverride",
+      "type": "System.Double",
+      "value": "NaN",
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "PlayingZoomOverride",
+      "type": "System.Double",
+      "value": "NaN",
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BuggyApple",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BuggyAppleOptions.BackgroundVocalsOverlap",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BuggyAppleOptions.BackgroundVocalsEnteringDirection",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BuggyAppleOptions.TremendousBreathingDots",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BuggyAppleOptions.BackgroundVocalTransparencySuddenChange",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BuggyAppleOptions.ChineseCharacterAbnormalFloating",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BuggyAppleOptions.LyricsLineTransparencySuddenChange",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BuggyAppleOptions.WordShineAnimationInterruption",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "ShinyCjk",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "WordShineEffectPreset",
+      "type": "Lyricify_for_Spotify.Json.Settings.WordShineEffectPresetTypes",
+      "value": "iOS162",
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "WordShineEffectIos",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "LineSwitchingAppleIosStyle164",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "InterLineAnimationPreset",
+      "type": "Lyricify_for_Spotify.Json.Settings.InterLineAnimationPresetTypes",
+      "value": "iOS",
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "LineSwitchingOpacitySpeedAppleIosStyle164",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "CurrentLinePreplayOpacityPreset",
+      "type": "System.Int32",
+      "value": 0,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "TranslationLinePreset",
+      "type": "Lyricify_for_Spotify.Json.Settings.TranslationLinePresetTypes",
+      "value": "Lyricify",
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundVocalsEnterDirectionLeft",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundVocalsNativePosition",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundVocalsEnterAnimation",
+      "type": "System.Int32",
+      "value": 1,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundVocalsEnterAnimationNew",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BackgroundVocalsEnterAnimationNewNew",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "IosStylePreset",
+      "type": "System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+      "value": null,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "BreathingDotsAlignmentLeft",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "HighlightLineZooming",
+      "type": "System.Int32",
+      "value": 0,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "EnablePlusLighter",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "PlusLighterEffectPreset",
+      "type": "Lyricify_for_Spotify.Json.Settings.PlusLighterEffectPresetTypes",
+      "value": "iOS18",
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "PreventSleepFullscreenOnly",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "EnableAdvancedButtonDragAnimation",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "EnableAnimatedTimeStatus",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "DisableBlurAtLyricsLineMouseOver",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "ZoomingRestore",
+      "type": "System.Boolean",
+      "value": true,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "ZoomingLevels.Horizontal",
+      "type": "System.Double",
+      "value": "NaN",
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "ZoomingLevels.Vertical",
+      "type": "System.Double",
+      "value": "NaN",
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "ZoomingLevels.HorizontalFullscreen",
+      "type": "System.Double",
+      "value": "NaN",
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "ZoomingLevels.VerticalFullscreen",
+      "type": "System.Double",
+      "value": "NaN",
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "ShowFpsOverlay",
+      "type": "System.Boolean",
+      "value": false,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    },
+    {
+      "property": "FpsOverlayUpdateInterval",
+      "type": "System.Double",
+      "value": 0.5,
+      "status": "read",
+      "source": "constructor/getter default, not onboarding preset or current user configuration"
+    }
+  ],
+  "stylePresetTargets": [
+    "ComboBoxAppleMusicLyricsTransitionWidth",
+    "ComboBoxAppleMusicLyricsInlineAnimation",
+    "ComboBoxAppleMusicLyricsLineSwitchingOpacitySpeed",
+    "ComboBoxAppleMusicLyricsSyllablePreplayOpacity",
+    "ComboBoxAppleMusicLyricsBackgroundVocalPosition",
+    "ComboBoxAppleMusicLyricsBackgroundVocalFlyout",
+    "ComboBoxAppleMusicLyricsMobileLayout",
+    "ComboBoxAppleMusicLyricsWordShineEffect",
+    "ComboBoxAppleMusicLyricsBreathingDotsAlignment",
+    "ComboBoxAppleMusicLyricsHighlightLineZooming",
+    "ComboBoxAppleMusicLyricsInterLineAnimation",
+    "ComboBoxAppleMusicLyricsTranslationLinePreset"
+  ],
+  "stylePresets": [
+    {
+      "index": 0,
+      "label": "Default",
+      "indices": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "index": 1,
+      "label": "iOS 26.4 and later",
+      "indices": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "index": 2,
+      "label": "iOS 26.0",
+      "indices": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "index": 3,
+      "label": "iOS 17.1",
+      "indices": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "index": 4,
+      "label": "iOS 16.4",
+      "indices": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        1,
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "index": 5,
+      "label": "iOS 16.3",
+      "indices": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "index": 6,
+      "label": "iOS 16.2",
+      "indices": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        1,
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "index": 7,
+      "label": "iOS 15",
+      "indices": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        1,
+        0,
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      "index": 8,
+      "label": "Android (New)",
+      "indices": [
+        0,
+        1,
+        0,
+        2,
+        1,
+        1,
+        0,
+        2,
+        1,
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "index": 9,
+      "label": "Android (Old)",
+      "indices": [
+        2,
+        1,
+        0,
+        2,
+        1,
+        1,
+        0,
+        2,
+        1,
+        3,
+        0,
+        0
+      ]
+    }
+  ],
+  "sources": [
+    "reference-settings-schema.json",
+    "reference-constructor-defaults.json",
+    "Pages-Settings-PageSettingsAppleMusicLyrics.cs",
+    "settings-il-consumers.json"
+  ],
+  "animationDifferences": [
+    {
+      "kind": "word-mask-endpoint",
+      "reference": "TextSing.Run uses full ink width at the end of each wrapped strip, otherwise subtracts half of the transition width",
+      "replicaInitial": "LyricRow.Update used ink width times word fraction for all words",
+      "currentState": "WordSweep matches 108 original Run plans / 540 samples; native whole-page verification pending",
+      "source": "work/settings-audit/Consumer-TextSing.cs:2321"
+    },
+    {
+      "kind": "glyph-cache",
+      "reference": "TextWordShine.LoadWord only creates BitmapCache when EnablePlusLighter is enabled",
+      "replicaInitial": "LyricRow.BuildStrip unconditionally cached emphasized glyphs",
+      "currentState": "Cache is now conditional on EnablePlusLighter",
+      "source": "work/settings-audit/Consumer-TextWordShine.cs:970"
+    },
+    {
+      "kind": "tail-animation-lifetime",
+      "reference": "TextSing.Stop and TextWordShine.Stop distinguish finishing the animation from immediate reset; BuggyApple can request interruption",
+      "replicaInitial": "LyricRow.Update reset glyph transforms when the line was no longer active",
+      "currentState": "iOS smooth/immediate stop and float height ported against 32 native fixtures; legacy cancellation ordering pending",
+      "source": "work/settings-audit/Consumer-TextSing.cs:2637"
+    }
+  ],
+  "edgeDefectRootCause": "Missing reference padding anchor made WPF map the mask to ink bounds; endpoint pixel checks now pass. Whole-page native verification remains open."
+}

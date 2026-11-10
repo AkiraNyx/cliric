@@ -1,0 +1,115 @@
+{
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "originalPointerHelperCalled": true,
+  "windowShown": false,
+  "pointerInputSent": false,
+  "scope": "Original point helper with synthetic 120x80 grid, no pressed gesture or physical mouse",
+  "cases": [
+    {
+      "requestedElapsed": 0,
+      "elapsedBefore": 0,
+      "elapsedAfter": 156,
+      "animated": true,
+      "x": {
+        "from": 3.0,
+        "to": 20.0,
+        "durationMs": 256.0,
+        "amplitude": 0.7,
+        "mode": "EaseOut"
+      },
+      "y": {
+        "from": -4.0,
+        "to": -10.0,
+        "durationMs": 194.0,
+        "amplitude": 0.7,
+        "mode": "EaseOut"
+      },
+      "margin": [
+        3.0,
+        -4.0,
+        -3.0,
+        4.0
+      ]
+    },
+    {
+      "requestedElapsed": 175,
+      "elapsedBefore": 175,
+      "elapsedAfter": 175,
+      "animated": true,
+      "x": {
+        "from": 3.0,
+        "to": 20.0,
+        "durationMs": 175.0,
+        "amplitude": 0.7,
+        "mode": "EaseOut"
+      },
+      "y": {
+        "from": -4.0,
+        "to": -10.0,
+        "durationMs": 175.0,
+        "amplitude": 0.7,
+        "mode": "EaseOut"
+      },
+      "margin": [
+        3.0,
+        -4.0,
+        -3.0,
+        4.0
+      ]
+    },
+    {
+      "requestedElapsed": 350,
+      "elapsedBefore": 350,
+      "elapsedAfter": 350,
+      "animated": true,
+      "x": {
+        "from": 3.0,
+        "to": 20.0,
+        "durationMs": 0.0,
+        "amplitude": 0.7,
+        "mode": "EaseOut"
+      },
+      "y": {
+        "from": -4.0,
+        "to": -10.0,
+        "durationMs": 0.0,
+        "amplitude": 0.7,
+        "mode": "EaseOut"
+      },
+      "margin": [
+        3.0,
+        -4.0,
+        -3.0,
+        4.0
+      ]
+    },
+    {
+      "requestedElapsed": 351,
+      "elapsedBefore": 351,
+      "elapsedAfter": 351,
+      "animated": false,
+      "x": null,
+      "y": null,
+      "margin": [
+        20.0,
+        -10.0,
+        -20.0,
+        10.0
+      ]
+    },
+    {
+      "requestedElapsed": 800,
+      "elapsedBefore": 800,
+      "elapsedAfter": 800,
+      "animated": false,
+      "x": null,
+      "y": null,
+      "margin": [
+        20.0,
+        -10.0,
+        -20.0,
+        10.0
+      ]
+    }
+  ]
+}

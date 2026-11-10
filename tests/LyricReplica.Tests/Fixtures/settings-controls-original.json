@@ -1,0 +1,319 @@
+[
+  {
+    "name": "ComboBoxAppleMusicLyricsBackground",
+    "properties": [
+      "Background"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsIndependentBackgroundRendering",
+    "properties": [
+      "EnableIndependentBackgroundRenderer"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsBackground_Isolation_Palette",
+    "properties": [
+      "BackgroundDynamicIsolationPalettes"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsBlurLyrics",
+    "properties": [
+      "BlurLyrics"
+    ]
+  },
+  {
+    "name": "SliderAppleMusicLyricsBlurLevel",
+    "properties": [
+      "BlurLevel"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsDisableBlurAtLyricsLineMouseOver",
+    "properties": [
+      "DisableBlurAtLyricsLineMouseOver"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsBoldText",
+    "properties": [
+      "BoldText"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsFontPreset",
+    "properties": [
+      "FontPreset"
+    ]
+  },
+  {
+    "name": "ButtonResetFont_AppleMusicLyrics",
+    "properties": [
+      "FontFamily"
+    ]
+  },
+  {
+    "name": "ButtonCustomFont_AppleMusicLyrics",
+    "properties": [
+      "FontFamily"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsKaraokeMode",
+    "properties": [
+      "Karaoke"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsKaraokeModeDisableCJK",
+    "properties": [
+      "IsCjkKaraokeDisabled"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsKaraokeModeEnableAnimation",
+    "properties": [
+      "KaraokeStyleEnableAnimation"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsKaraokeModeAnimationFloat",
+    "properties": [
+      "KaraokeStyleFloat",
+      "KaraokeStyleFloatHeight"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsKaraokeModeAnimationWordShine",
+    "properties": [
+      "KaraokeStyleWordShine"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsShinyCjk",
+    "properties": [
+      "ShinyCjk"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsDuetView",
+    "properties": [
+      "DuetView"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsRightAlignFirst",
+    "properties": [
+      "RightAlignFirst"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsPullingEffect",
+    "properties": [
+      "PullingDelay",
+      "PullingEffect"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsMagicStripFeatureNotice",
+    "properties": [
+      "MagicStripStatus"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsShowMagicStripTutorial",
+    "properties": [
+      "MagicStripTutorial",
+      "MagicStripTutorialCount"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicEnableAnimatedTime",
+    "properties": [
+      "EnableAnimatedTimeStatus"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicZoomingRestore",
+    "properties": [
+      "ZoomingLevels",
+      "ZoomingRestore"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsStylePreset",
+    "properties": [
+      "BackgroundVocalsEnterAnimation",
+      "BackgroundVocalsEnterDirectionLeft",
+      "BackgroundVocalsNativePosition",
+      "BreathingDotsAlignmentLeft",
+      "CurrentLinePreplayOpacityPreset",
+      "HighlightLineZooming",
+      "InterLineAnimationPreset",
+      "IosStylePreset",
+      "KaraokeStyleProgressWidthPreset",
+      "LineSwitchingAppleIosStyle164",
+      "LineSwitchingOpacitySpeedAppleIosStyle164",
+      "TranslationLinePreset",
+      "WordShineEffectPreset"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsTransitionWidth",
+    "properties": [
+      "KaraokeStyleProgressWidthPreset"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsInlineAnimation",
+    "properties": [
+      "LineSwitchingAppleIosStyle164"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsInterLineAnimation",
+    "properties": [
+      "InterLineAnimationPreset"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsLineSwitchingOpacitySpeed",
+    "properties": [
+      "LineSwitchingOpacitySpeedAppleIosStyle164"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsSyllablePreplayOpacity",
+    "properties": [
+      "CurrentLinePreplayOpacityPreset"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsTranslationLinePreset",
+    "properties": [
+      "TranslationLinePreset"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsBackgroundVocalPosition",
+    "properties": [
+      "BackgroundVocalsNativePosition"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsBackgroundVocalFlyout",
+    "properties": [
+      "BackgroundVocalsEnterAnimation",
+      "BackgroundVocalsEnterDirectionLeft"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsMobileLayout",
+    "properties": [
+      "IosStylePreset"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsWordShineEffect",
+    "properties": [
+      "WordShineEffectPreset"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsBreathingDotsAlignment",
+    "properties": [
+      "BreathingDotsAlignmentLeft"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsHighlightLineZooming",
+    "properties": [
+      "HighlightLineZooming"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsPreventSleep",
+    "properties": [
+      "PreventSleepFullscreenOnly"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsFpsOverlay",
+    "properties": [
+      "ShowFpsOverlay"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsFpsOverlayUpdateInterval",
+    "properties": [
+      "FpsOverlayUpdateInterval"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsBuggyApple",
+    "properties": [
+      "BuggyApple"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyrics_BuggyApple_BackgroundVocalsOverlap",
+    "properties": [
+      "BuggyAppleOptions.BackgroundVocalsOverlap"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyrics_BuggyApple_BackgroundVocalsEnteringDirection",
+    "properties": [
+      "BuggyAppleOptions.BackgroundVocalsEnteringDirection"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyrics_BuggyApple_TremendousBreathingDots",
+    "properties": [
+      "BuggyAppleOptions.TremendousBreathingDots"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyrics_BuggyApple_BackgroundVocalTransparencySuddenChange",
+    "properties": [
+      "BuggyAppleOptions.BackgroundVocalTransparencySuddenChange"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyrics_BuggyApple_ChineseCharacterAbnormalFloating",
+    "properties": [
+      "BuggyAppleOptions.ChineseCharacterAbnormalFloating"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyrics_BuggyApple_LyricsLineTransparencySuddenChange",
+    "properties": [
+      "BuggyAppleOptions.LyricsLineTransparencySuddenChange"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyrics_BuggyApple_WordShineAnimationInterruption",
+    "properties": [
+      "BuggyAppleOptions.WordShineAnimationInterruption"
+    ]
+  },
+  {
+    "name": "ToggleSwitchAppleMusicLyricsPlusLighter",
+    "properties": [
+      "EnablePlusLighter"
+    ]
+  },
+  {
+    "name": "ComboBoxAppleMusicLyricsPlusLighterOverflowHandling",
+    "properties": [
+      "PlusLighterEffectPreset"
+    ]
+  },
+  {
+    "name": "ToggleSwitchEnableAppleMusicLyricsTraditional",
+    "properties": [
+      "EnableTraditionalEntry"
+    ]
+  }
+]

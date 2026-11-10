@@ -1,0 +1,178 @@
+{
+  "defaults": {
+    "HighlightLineZooming": 0,
+    "CurrentLinePreplayOpacityPreset": 0,
+    "TranslationLinePreset": "Lyricify",
+    "InterLineAnimationPreset": "iOS",
+    "WordShineEffectPreset": "iOS162",
+    "KaraokeStyleProgressWidthPreset": 0,
+    "KaraokeStyleProgressWidth": "NaN",
+    "KaraokeStyleFloat": true,
+    "KaraokeStyleWordShine": true,
+    "KaraokeStyleEnableAnimation": true,
+    "DuetView": true,
+    "RightAlignFirst": false,
+    "BackgroundVocalsEnterAnimationNew": true,
+    "BackgroundVocalsEnterAnimationNewNew": false,
+    "BackgroundVocalsEnterDirectionLeft": false,
+    "BlurLevel": 0.6,
+    "BlurLyrics": false,
+    "BoldText": false,
+    "LineSwitchingAppleIosStyle164": true,
+    "AnimationSpeed": 1.0,
+    "PullingDelay": 2.5,
+    "EnableAnimatedTimeStatus": true
+  },
+  "scales": [
+    {
+      "timed": false,
+      "scale": 1.05
+    },
+    {
+      "timed": true,
+      "scale": 1.02
+    }
+  ],
+  "curves": [
+    {
+      "showing": true,
+      "duration": 1.6599378505129636,
+      "points": [
+        {
+          "p": 0.0,
+          "value": 0.0
+        },
+        {
+          "p": 0.1,
+          "value": 0.25015256387910345
+        },
+        {
+          "p": 0.25,
+          "value": 0.7437198573606473
+        },
+        {
+          "p": 0.5,
+          "value": 1.002369143838853
+        },
+        {
+          "p": 0.75,
+          "value": 1.0063178969552427
+        },
+        {
+          "p": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "showing": false,
+      "duration": 0.29390867927771835,
+      "points": [
+        {
+          "p": 0.0,
+          "value": 0.0
+        },
+        {
+          "p": 0.1,
+          "value": 0.23606867982504365
+        },
+        {
+          "p": 0.25,
+          "value": 0.6710675192857651
+        },
+        {
+          "p": 0.5,
+          "value": 0.9444771835619268
+        },
+        {
+          "p": 0.75,
+          "value": 0.9922109019050088
+        },
+        {
+          "p": 1.0,
+          "value": 1.0
+        }
+      ]
+    }
+  ],
+  "spacing": [
+    {
+      "available": 500.0,
+      "spacing": 0.02,
+      "width": 10.0
+    },
+    {
+      "available": 700.0,
+      "spacing": 0.09,
+      "width": 63.0
+    }
+  ],
+  "floats": [
+    {
+      "name": "FloatingEasingFunction",
+      "points": [
+        {
+          "p": 0.0,
+          "value": 0.0
+        },
+        {
+          "p": 0.05,
+          "value": 0.052291043250315306
+        },
+        {
+          "p": 0.136,
+          "value": 0.2111520516702412
+        },
+        {
+          "p": 0.25,
+          "value": 0.4461883305124723
+        },
+        {
+          "p": 0.5,
+          "value": 0.7990287401713589
+        },
+        {
+          "p": 0.75,
+          "value": 0.9644729648378911
+        },
+        {
+          "p": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "name": "AppleMusicSyllableLiftEasingFunction",
+      "points": [
+        {
+          "p": 0.0,
+          "value": 0.0
+        },
+        {
+          "p": 0.05,
+          "value": 0.06941830248902003
+        },
+        {
+          "p": 0.136,
+          "value": 0.3319939845152199
+        },
+        {
+          "p": 0.25,
+          "value": 0.6522058975180578
+        },
+        {
+          "p": 0.5,
+          "value": 0.9490759737705188
+        },
+        {
+          "p": 0.75,
+          "value": 0.996330141687322
+        },
+        {
+          "p": 1.0,
+          "value": 1.0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1577 @@
+{
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "originalScaleHelperCalled": true,
+  "windowShown": false,
+  "transportCommandsCalled": false,
+  "scope": "Original three-argument line scale helper with synthetic current-scale snapshots; no full State setter or SwitchDelay scheduling",
+  "cases": [
+    {
+      "preset": 0,
+      "timed": false,
+      "backEase": false,
+      "gap": 0.2,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 860.0,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 86.0,
+          "nativeProgress": 0.1,
+          "value": 0.981106943392165
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 215.0,
+          "nativeProgress": 0.25,
+          "value": 1.003701870669771
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 430.0,
+          "nativeProgress": 0.5,
+          "value": 1.0182544125905357
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 645.0,
+          "nativeProgress": 0.75,
+          "value": 1.02004150809771
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 860.0,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 0,
+      "timed": false,
+      "backEase": false,
+      "gap": 0.2,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 860.0,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 86.0,
+          "nativeProgress": 0.1,
+          "value": 1.010112194718037
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 215.0,
+          "nativeProgress": 0.25,
+          "value": 1.0042375136258594
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 430.0,
+          "nativeProgress": 0.5,
+          "value": 1.0004538527264608
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 645.0,
+          "nativeProgress": 0.75,
+          "value": 0.9999892078945953
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 860.0,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "preset": 0,
+      "timed": false,
+      "backEase": false,
+      "gap": 0.7,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 860.0,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 86.0,
+          "nativeProgress": 0.1,
+          "value": 0.981106943392165
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 215.0,
+          "nativeProgress": 0.25,
+          "value": 1.003701870669771
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 430.0,
+          "nativeProgress": 0.5,
+          "value": 1.0182544125905357
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 645.0,
+          "nativeProgress": 0.75,
+          "value": 1.02004150809771
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 860.0,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 0,
+      "timed": false,
+      "backEase": false,
+      "gap": 0.7,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 860.0,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 86.0,
+          "nativeProgress": 0.1,
+          "value": 1.010112194718037
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 215.0,
+          "nativeProgress": 0.25,
+          "value": 1.0042375136258594
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 430.0,
+          "nativeProgress": 0.5,
+          "value": 1.0004538527264608
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 645.0,
+          "nativeProgress": 0.75,
+          "value": 0.9999892078945953
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 860.0,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "preset": 0,
+      "timed": false,
+      "backEase": true,
+      "gap": 0.2,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 656.9916,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 65.6991,
+          "nativeProgress": 0.09999990867463146,
+          "value": 0.9811069281842202
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 164.2478,
+          "nativeProgress": 0.24999984779105242,
+          "value": 1.0037018531926665
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 328.4957,
+          "nativeProgress": 0.49999984779105244,
+          "value": 1.0182544095992625
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 492.7437,
+          "nativeProgress": 0.75,
+          "value": 1.02004150809771
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 656.9916,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 0,
+      "timed": false,
+      "backEase": true,
+      "gap": 0.2,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 656.9916,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 65.6991,
+          "nativeProgress": 0.09999990867463146,
+          "value": 1.0101121986721027
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 164.2478,
+          "nativeProgress": 0.24999984779105242,
+          "value": 1.0042375181699066
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 328.4957,
+          "nativeProgress": 0.49999984779105244,
+          "value": 1.0004538535041918
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 492.7437,
+          "nativeProgress": 0.75,
+          "value": 0.9999892078945953
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 656.9916,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "preset": 0,
+      "timed": false,
+      "backEase": true,
+      "gap": 0.7,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 1080.3776,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 108.0377,
+          "nativeProgress": 0.09999994446386153,
+          "value": 0.9832412839469251
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 270.0944,
+          "nativeProgress": 0.25,
+          "value": 1.0088402186240217
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 540.1888,
+          "nativeProgress": 0.5,
+          "value": 1.020748224740504
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 810.2832,
+          "nativeProgress": 0.75,
+          "value": 1.0203088243973837
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 1080.3776,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 0,
+      "timed": false,
+      "backEase": true,
+      "gap": 0.7,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 1080.3776,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 108.0377,
+          "nativeProgress": 0.09999994446386153,
+          "value": 1.0095572661737995
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 270.0944,
+          "nativeProgress": 0.25,
+          "value": 1.0029015431577544
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 540.1888,
+          "nativeProgress": 0.5,
+          "value": 0.999805461567469
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 810.2832,
+          "nativeProgress": 0.75,
+          "value": 0.9999197056566802
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 1080.3776,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "backEase": false,
+      "gap": 0.2,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 860.0,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 86.0,
+          "nativeProgress": 0.1,
+          "value": 0.981106943392165
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 215.0,
+          "nativeProgress": 0.25,
+          "value": 1.003701870669771
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 430.0,
+          "nativeProgress": 0.5,
+          "value": 1.0182544125905357
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 645.0,
+          "nativeProgress": 0.75,
+          "value": 1.02004150809771
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 860.0,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "backEase": false,
+      "gap": 0.2,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 860.0,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 86.0,
+          "nativeProgress": 0.1,
+          "value": 1.010112194718037
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 215.0,
+          "nativeProgress": 0.25,
+          "value": 1.0042375136258594
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 430.0,
+          "nativeProgress": 0.5,
+          "value": 1.0004538527264608
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 645.0,
+          "nativeProgress": 0.75,
+          "value": 0.9999892078945953
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 860.0,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "backEase": false,
+      "gap": 0.7,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 860.0,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 86.0,
+          "nativeProgress": 0.1,
+          "value": 0.981106943392165
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 215.0,
+          "nativeProgress": 0.25,
+          "value": 1.003701870669771
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 430.0,
+          "nativeProgress": 0.5,
+          "value": 1.0182544125905357
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 645.0,
+          "nativeProgress": 0.75,
+          "value": 1.02004150809771
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 860.0,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "backEase": false,
+      "gap": 0.7,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 860.0,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 86.0,
+          "nativeProgress": 0.1,
+          "value": 1.010112194718037
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 215.0,
+          "nativeProgress": 0.25,
+          "value": 1.0042375136258594
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 430.0,
+          "nativeProgress": 0.5,
+          "value": 1.0004538527264608
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 645.0,
+          "nativeProgress": 0.75,
+          "value": 0.9999892078945953
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 860.0,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "backEase": true,
+      "gap": 0.2,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 656.9916,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 65.6991,
+          "nativeProgress": 0.09999990867463146,
+          "value": 0.9811069281842202
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 164.2478,
+          "nativeProgress": 0.24999984779105242,
+          "value": 1.0037018531926665
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 328.4957,
+          "nativeProgress": 0.49999984779105244,
+          "value": 1.0182544095992625
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 492.7437,
+          "nativeProgress": 0.75,
+          "value": 1.02004150809771
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 656.9916,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "backEase": true,
+      "gap": 0.2,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 656.9916,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 65.6991,
+          "nativeProgress": 0.09999990867463146,
+          "value": 1.0101121986721027
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 164.2478,
+          "nativeProgress": 0.24999984779105242,
+          "value": 1.0042375181699066
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 328.4957,
+          "nativeProgress": 0.49999984779105244,
+          "value": 1.0004538535041918
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 492.7437,
+          "nativeProgress": 0.75,
+          "value": 0.9999892078945953
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 656.9916,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "backEase": true,
+      "gap": 0.7,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 1080.3776,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 108.0377,
+          "nativeProgress": 0.09999994446386153,
+          "value": 0.9832412839469251
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 270.0944,
+          "nativeProgress": 0.25,
+          "value": 1.0088402186240217
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 540.1888,
+          "nativeProgress": 0.5,
+          "value": 1.020748224740504
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 810.2832,
+          "nativeProgress": 0.75,
+          "value": 1.0203088243973837
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 1080.3776,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "backEase": true,
+      "gap": 0.7,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 1080.3776,
+      "easing": "AppleMusicLineChangeEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 108.0377,
+          "nativeProgress": 0.09999994446386153,
+          "value": 1.0095572661737995
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 270.0944,
+          "nativeProgress": 0.25,
+          "value": 1.0029015431577544
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 540.1888,
+          "nativeProgress": 0.5,
+          "value": 0.999805461567469
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 810.2832,
+          "nativeProgress": 0.75,
+          "value": 0.9999197056566802
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 1080.3776,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "backEase": false,
+      "gap": 0.2,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 607.6,
+      "easing": "ScrollingEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 60.76,
+          "nativeProgress": 0.1,
+          "value": 0.9755053415542944
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 151.9,
+          "nativeProgress": 0.25,
+          "value": 0.9945762706250204
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 303.8,
+          "nativeProgress": 0.5,
+          "value": 1.0127074707604131
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 455.7,
+          "nativeProgress": 0.75,
+          "value": 1.0191376058686148
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 607.6,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "backEase": false,
+      "gap": 0.2,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 607.6,
+      "easing": "ScrollingEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 60.76,
+          "nativeProgress": 0.1,
+          "value": 1.0115686111958833
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 151.9,
+          "nativeProgress": 0.25,
+          "value": 1.0066101696374947
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 303.8,
+          "nativeProgress": 0.5,
+          "value": 1.0018960576022926
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 455.7,
+          "nativeProgress": 0.75,
+          "value": 1.0002242224741602
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 607.6,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "backEase": false,
+      "gap": 0.7,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 607.6,
+      "easing": "ScrollingEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 60.76,
+          "nativeProgress": 0.1,
+          "value": 0.9755053415542944
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 151.9,
+          "nativeProgress": 0.25,
+          "value": 0.9945762706250204
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 303.8,
+          "nativeProgress": 0.5,
+          "value": 1.0127074707604131
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 455.7,
+          "nativeProgress": 0.75,
+          "value": 1.0191376058686148
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 607.6,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "backEase": false,
+      "gap": 0.7,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 607.6,
+      "easing": "ScrollingEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 60.76,
+          "nativeProgress": 0.1,
+          "value": 1.0115686111958833
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 151.9,
+          "nativeProgress": 0.25,
+          "value": 1.0066101696374947
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 303.8,
+          "nativeProgress": 0.5,
+          "value": 1.0018960576022926
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 455.7,
+          "nativeProgress": 0.75,
+          "value": 1.0002242224741602
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 607.6,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "backEase": true,
+      "gap": 0.2,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 1373.176,
+      "easing": "ScrollingBackEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 137.3176,
+          "nativeProgress": 0.1,
+          "value": 0.98397098987
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 343.294,
+          "nativeProgress": 0.25,
+          "value": 1.009805357055664
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 686.588,
+          "nativeProgress": 0.5,
+          "value": 1.02104671875
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 1029.882,
+          "nativeProgress": 0.75,
+          "value": 1.0202843267822268
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 1373.176,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "backEase": true,
+      "gap": 0.2,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 1373.176,
+      "easing": "ScrollingBackEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 137.3176,
+          "nativeProgress": 0.1,
+          "value": 1.0093675426338
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 343.294,
+          "nativeProgress": 0.25,
+          "value": 1.0026506071655272
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 686.588,
+          "nativeProgress": 0.5,
+          "value": 0.999727853125
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 1029.882,
+          "nativeProgress": 0.75,
+          "value": 0.999926075036621
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 1373.176,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "backEase": true,
+      "gap": 0.7,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 1373.176,
+      "easing": "ScrollingBackEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 137.3176,
+          "nativeProgress": 0.1,
+          "value": 0.98397098987
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 343.294,
+          "nativeProgress": 0.25,
+          "value": 1.009805357055664
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 686.588,
+          "nativeProgress": 0.5,
+          "value": 1.02104671875
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 1029.882,
+          "nativeProgress": 0.75,
+          "value": 1.0202843267822268
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 1373.176,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "backEase": true,
+      "gap": 0.7,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 1373.176,
+      "easing": "ScrollingBackEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 137.3176,
+          "nativeProgress": 0.1,
+          "value": 1.0093675426338
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 343.294,
+          "nativeProgress": 0.25,
+          "value": 1.0026506071655272
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 686.588,
+          "nativeProgress": 0.5,
+          "value": 0.999727853125
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 1029.882,
+          "nativeProgress": 0.75,
+          "value": 0.999926075036621
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 1373.176,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "backEase": false,
+      "gap": 0.2,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 490.0,
+      "easing": "ScrollingEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 49.0,
+          "nativeProgress": 0.1,
+          "value": 0.9755053415542944
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 122.5,
+          "nativeProgress": 0.25,
+          "value": 0.9945762706250204
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 245.0,
+          "nativeProgress": 0.5,
+          "value": 1.0127074707604131
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 367.5,
+          "nativeProgress": 0.75,
+          "value": 1.0191376058686148
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 490.0,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "backEase": false,
+      "gap": 0.2,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 490.0,
+      "easing": "ScrollingEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 49.0,
+          "nativeProgress": 0.1,
+          "value": 1.0115686111958833
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 122.5,
+          "nativeProgress": 0.25,
+          "value": 1.0066101696374947
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 245.0,
+          "nativeProgress": 0.5,
+          "value": 1.0018960576022926
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 367.5,
+          "nativeProgress": 0.75,
+          "value": 1.0002242224741602
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 490.0,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "backEase": false,
+      "gap": 0.7,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 490.0,
+      "easing": "ScrollingEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 49.0,
+          "nativeProgress": 0.1,
+          "value": 0.9755053415542944
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 122.5,
+          "nativeProgress": 0.25,
+          "value": 0.9945762706250204
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 245.0,
+          "nativeProgress": 0.5,
+          "value": 1.0127074707604131
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 367.5,
+          "nativeProgress": 0.75,
+          "value": 1.0191376058686148
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 490.0,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "backEase": false,
+      "gap": 0.7,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 490.0,
+      "easing": "ScrollingEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 49.0,
+          "nativeProgress": 0.1,
+          "value": 1.0115686111958833
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 122.5,
+          "nativeProgress": 0.25,
+          "value": 1.0066101696374947
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 245.0,
+          "nativeProgress": 0.5,
+          "value": 1.0018960576022926
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 367.5,
+          "nativeProgress": 0.75,
+          "value": 1.0002242224741602
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 490.0,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "backEase": true,
+      "gap": 0.2,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 1107.3999,
+      "easing": "ScrollingBackEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 110.7399,
+          "nativeProgress": 0.09999991872854604,
+          "value": 0.98397097338472
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 276.8499,
+          "nativeProgress": 0.24999993227378836,
+          "value": 1.0098053490994905
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 553.6999,
+          "nativeProgress": 0.49999995484919224,
+          "value": 1.0210467185979828
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 830.5499,
+          "nativeProgress": 0.7499999774245961,
+          "value": 1.0202843268803348
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 1107.3999,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "backEase": true,
+      "gap": 0.2,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 1107.3999,
+      "easing": "ScrollingBackEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 110.7399,
+          "nativeProgress": 0.09999991872854604,
+          "value": 1.0093675469199728
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 276.8499,
+          "nativeProgress": 0.24999993227378836,
+          "value": 1.0026506092341325
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 553.6999,
+          "nativeProgress": 0.49999995484919224,
+          "value": 0.9997278531645245
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 830.5499,
+          "nativeProgress": 0.7499999774245961,
+          "value": 0.999926075011113
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 1107.3999,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "backEase": true,
+      "gap": 0.7,
+      "phase": "enter",
+      "from": 0.97,
+      "to": 1.02,
+      "durationMs": 1107.3999,
+      "easing": "ScrollingBackEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 0.97
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 110.7399,
+          "nativeProgress": 0.09999991872854604,
+          "value": 0.98397097338472
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 276.8499,
+          "nativeProgress": 0.24999993227378836,
+          "value": 1.0098053490994905
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 553.6999,
+          "nativeProgress": 0.49999995484919224,
+          "value": 1.0210467185979828
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 830.5499,
+          "nativeProgress": 0.7499999774245961,
+          "value": 1.0202843268803348
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 1107.3999,
+          "nativeProgress": 1.0,
+          "value": 1.02
+        }
+      ]
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "backEase": true,
+      "gap": 0.7,
+      "phase": "leave",
+      "from": 1.013,
+      "to": 1.0,
+      "durationMs": 1107.3999,
+      "easing": "ScrollingBackEasingFunction",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "nativeProgress": 0.0,
+          "value": 1.013
+        },
+        {
+          "fraction": 0.1,
+          "elapsedMs": 110.7399,
+          "nativeProgress": 0.09999991872854604,
+          "value": 1.0093675469199728
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 276.8499,
+          "nativeProgress": 0.24999993227378836,
+          "value": 1.0026506092341325
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 553.6999,
+          "nativeProgress": 0.49999995484919224,
+          "value": 0.9997278531645245
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 830.5499,
+          "nativeProgress": 0.7499999774245961,
+          "value": 0.999926075011113
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 1107.3999,
+          "nativeProgress": 1.0,
+          "value": 1.0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,523 @@
+{
+  "originalStopCalled": true,
+  "iosActive": false,
+  "windowShown": false,
+  "fullLyricsPageStarted": false,
+  "transportCommandsCalled": false,
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "scope": "Explicit active/inactive WPF glyph fixtures; scale/translation stop plans, not full-page acceptance",
+  "cases": [
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -2.75
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -2.75
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -2.75
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -2.75
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -4.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -4.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -4.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.1,
+          "y": -7.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -4.0
+        }
+      ]
+    }
+  ]
+}

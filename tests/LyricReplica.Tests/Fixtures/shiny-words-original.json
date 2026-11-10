@@ -1,0 +1,798 @@
+{
+  "originalMethodCalled": true,
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "windowShown": false,
+  "fullPageStarted": false,
+  "cases": [
+    {
+      "input": [
+        {
+          "Text": "我",
+          "StartMs": 1000,
+          "DurationMs": 300,
+          "Syllables": []
+        },
+        {
+          "Text": "躲",
+          "StartMs": 1300,
+          "DurationMs": 337,
+          "Syllables": []
+        },
+        {
+          "Text": "在",
+          "StartMs": 1637,
+          "DurationMs": 374,
+          "Syllables": []
+        }
+      ],
+      "output": [
+        {
+          "Text": "我躲在",
+          "StartMs": 1000,
+          "DurationMs": 1011,
+          "Syllables": [
+            {
+              "Text": "我",
+              "StartMs": 1000,
+              "DurationMs": 300
+            },
+            {
+              "Text": "躲",
+              "StartMs": 1300,
+              "DurationMs": 337
+            },
+            {
+              "Text": "在",
+              "StartMs": 1637,
+              "DurationMs": 374
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": [
+        {
+          "Text": "生",
+          "StartMs": 1000,
+          "DurationMs": 300,
+          "Syllables": []
+        },
+        {
+          "Text": "长",
+          "StartMs": 1300,
+          "DurationMs": 337,
+          "Syllables": []
+        }
+      ],
+      "output": [
+        {
+          "Text": "生长",
+          "StartMs": 1000,
+          "DurationMs": 637,
+          "Syllables": [
+            {
+              "Text": "生",
+              "StartMs": 1000,
+              "DurationMs": 300
+            },
+            {
+              "Text": "长",
+              "StartMs": 1300,
+              "DurationMs": 337
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": [
+        {
+          "Text": "奇",
+          "StartMs": 1000,
+          "DurationMs": 300,
+          "Syllables": []
+        },
+        {
+          "Text": "形",
+          "StartMs": 1300,
+          "DurationMs": 337,
+          "Syllables": []
+        },
+        {
+          "Text": "怪",
+          "StartMs": 1637,
+          "DurationMs": 374,
+          "Syllables": []
+        },
+        {
+          "Text": "状 ",
+          "StartMs": 2011,
+          "DurationMs": 411,
+          "Syllables": []
+        },
+        {
+          "Text": "的",
+          "StartMs": 2422,
+          "DurationMs": 448,
+          "Syllables": []
+        },
+        {
+          "Text": "人",
+          "StartMs": 2870,
+          "DurationMs": 485,
+          "Syllables": []
+        },
+        {
+          "Text": "在",
+          "StartMs": 3355,
+          "DurationMs": 522,
+          "Syllables": []
+        },
+        {
+          "Text": "生",
+          "StartMs": 3877,
+          "DurationMs": 559,
+          "Syllables": []
+        },
+        {
+          "Text": "长",
+          "StartMs": 4436,
+          "DurationMs": 596,
+          "Syllables": []
+        }
+      ],
+      "output": [
+        {
+          "Text": "奇形怪状 ",
+          "StartMs": 1000,
+          "DurationMs": 1422,
+          "Syllables": [
+            {
+              "Text": "奇",
+              "StartMs": 1000,
+              "DurationMs": 300
+            },
+            {
+              "Text": "形",
+              "StartMs": 1300,
+              "DurationMs": 337
+            },
+            {
+              "Text": "怪",
+              "StartMs": 1637,
+              "DurationMs": 374
+            },
+            {
+              "Text": "状 ",
+              "StartMs": 2011,
+              "DurationMs": 411
+            }
+          ]
+        },
+        {
+          "Text": "的人在生长",
+          "StartMs": 2422,
+          "DurationMs": 2610,
+          "Syllables": [
+            {
+              "Text": "的",
+              "StartMs": 2422,
+              "DurationMs": 448
+            },
+            {
+              "Text": "人",
+              "StartMs": 2870,
+              "DurationMs": 485
+            },
+            {
+              "Text": "在",
+              "StartMs": 3355,
+              "DurationMs": 522
+            },
+            {
+              "Text": "生",
+              "StartMs": 3877,
+              "DurationMs": 559
+            },
+            {
+              "Text": "长",
+              "StartMs": 4436,
+              "DurationMs": 596
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": [
+        {
+          "Text": "a",
+          "StartMs": 1000,
+          "DurationMs": 300,
+          "Syllables": []
+        },
+        {
+          "Text": "b",
+          "StartMs": 1300,
+          "DurationMs": 337,
+          "Syllables": []
+        },
+        {
+          "Text": "c",
+          "StartMs": 1637,
+          "DurationMs": 374,
+          "Syllables": []
+        },
+        {
+          "Text": "d",
+          "StartMs": 2011,
+          "DurationMs": 411,
+          "Syllables": []
+        },
+        {
+          "Text": "e",
+          "StartMs": 2422,
+          "DurationMs": 448,
+          "Syllables": []
+        },
+        {
+          "Text": "f",
+          "StartMs": 2870,
+          "DurationMs": 485,
+          "Syllables": []
+        },
+        {
+          "Text": "g",
+          "StartMs": 3355,
+          "DurationMs": 522,
+          "Syllables": []
+        }
+      ],
+      "output": [
+        {
+          "Text": "abcdefg",
+          "StartMs": 1000,
+          "DurationMs": 2877,
+          "Syllables": [
+            {
+              "Text": "a",
+              "StartMs": 1000,
+              "DurationMs": 300
+            },
+            {
+              "Text": "b",
+              "StartMs": 1300,
+              "DurationMs": 337
+            },
+            {
+              "Text": "c",
+              "StartMs": 1637,
+              "DurationMs": 374
+            },
+            {
+              "Text": "d",
+              "StartMs": 2011,
+              "DurationMs": 411
+            },
+            {
+              "Text": "e",
+              "StartMs": 2422,
+              "DurationMs": 448
+            },
+            {
+              "Text": "f",
+              "StartMs": 2870,
+              "DurationMs": 485
+            },
+            {
+              "Text": "g",
+              "StartMs": 3355,
+              "DurationMs": 522
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": [
+        {
+          "Text": "a",
+          "StartMs": 1000,
+          "DurationMs": 300,
+          "Syllables": []
+        },
+        {
+          "Text": "b",
+          "StartMs": 1300,
+          "DurationMs": 337,
+          "Syllables": []
+        },
+        {
+          "Text": "c",
+          "StartMs": 1637,
+          "DurationMs": 374,
+          "Syllables": []
+        },
+        {
+          "Text": "d",
+          "StartMs": 2011,
+          "DurationMs": 411,
+          "Syllables": []
+        },
+        {
+          "Text": "e",
+          "StartMs": 2422,
+          "DurationMs": 448,
+          "Syllables": []
+        },
+        {
+          "Text": "f",
+          "StartMs": 2870,
+          "DurationMs": 485,
+          "Syllables": []
+        },
+        {
+          "Text": "g",
+          "StartMs": 3355,
+          "DurationMs": 522,
+          "Syllables": []
+        },
+        {
+          "Text": "h",
+          "StartMs": 3877,
+          "DurationMs": 559,
+          "Syllables": []
+        }
+      ],
+      "output": [
+        {
+          "Text": "a",
+          "StartMs": 1000,
+          "DurationMs": 300,
+          "Syllables": []
+        },
+        {
+          "Text": "b",
+          "StartMs": 1300,
+          "DurationMs": 337,
+          "Syllables": []
+        },
+        {
+          "Text": "c",
+          "StartMs": 1637,
+          "DurationMs": 374,
+          "Syllables": []
+        },
+        {
+          "Text": "d",
+          "StartMs": 2011,
+          "DurationMs": 411,
+          "Syllables": []
+        },
+        {
+          "Text": "e",
+          "StartMs": 2422,
+          "DurationMs": 448,
+          "Syllables": []
+        },
+        {
+          "Text": "f",
+          "StartMs": 2870,
+          "DurationMs": 485,
+          "Syllables": []
+        },
+        {
+          "Text": "g",
+          "StartMs": 3355,
+          "DurationMs": 522,
+          "Syllables": []
+        },
+        {
+          "Text": "h",
+          "StartMs": 3877,
+          "DurationMs": 559,
+          "Syllables": []
+        }
+      ]
+    },
+    {
+      "input": [
+        {
+          "Text": "a",
+          "StartMs": 1000,
+          "DurationMs": 300,
+          "Syllables": []
+        },
+        {
+          "Text": "b",
+          "StartMs": 1300,
+          "DurationMs": 337,
+          "Syllables": []
+        },
+        {
+          "Text": "c",
+          "StartMs": 1637,
+          "DurationMs": 374,
+          "Syllables": []
+        },
+        {
+          "Text": "d",
+          "StartMs": 2011,
+          "DurationMs": 411,
+          "Syllables": []
+        },
+        {
+          "Text": "e",
+          "StartMs": 2422,
+          "DurationMs": 448,
+          "Syllables": []
+        },
+        {
+          "Text": "f",
+          "StartMs": 2870,
+          "DurationMs": 485,
+          "Syllables": []
+        },
+        {
+          "Text": "g",
+          "StartMs": 3355,
+          "DurationMs": 522,
+          "Syllables": []
+        },
+        {
+          "Text": "h",
+          "StartMs": 3877,
+          "DurationMs": 559,
+          "Syllables": []
+        },
+        {
+          "Text": "i",
+          "StartMs": 4436,
+          "DurationMs": 596,
+          "Syllables": []
+        }
+      ],
+      "output": [
+        {
+          "Text": "a",
+          "StartMs": 1000,
+          "DurationMs": 300,
+          "Syllables": []
+        },
+        {
+          "Text": "b",
+          "StartMs": 1300,
+          "DurationMs": 337,
+          "Syllables": []
+        },
+        {
+          "Text": "c",
+          "StartMs": 1637,
+          "DurationMs": 374,
+          "Syllables": []
+        },
+        {
+          "Text": "d",
+          "StartMs": 2011,
+          "DurationMs": 411,
+          "Syllables": []
+        },
+        {
+          "Text": "e",
+          "StartMs": 2422,
+          "DurationMs": 448,
+          "Syllables": []
+        },
+        {
+          "Text": "f",
+          "StartMs": 2870,
+          "DurationMs": 485,
+          "Syllables": []
+        },
+        {
+          "Text": "g",
+          "StartMs": 3355,
+          "DurationMs": 522,
+          "Syllables": []
+        },
+        {
+          "Text": "h",
+          "StartMs": 3877,
+          "DurationMs": 559,
+          "Syllables": []
+        },
+        {
+          "Text": "i",
+          "StartMs": 4436,
+          "DurationMs": 596,
+          "Syllables": []
+        }
+      ]
+    },
+    {
+      "input": [
+        {
+          "Text": "hel",
+          "StartMs": 1000,
+          "DurationMs": 300,
+          "Syllables": []
+        },
+        {
+          "Text": "lo ",
+          "StartMs": 1300,
+          "DurationMs": 337,
+          "Syllables": []
+        },
+        {
+          "Text": "world",
+          "StartMs": 1637,
+          "DurationMs": 374,
+          "Syllables": []
+        }
+      ],
+      "output": [
+        {
+          "Text": "hello ",
+          "StartMs": 1000,
+          "DurationMs": 637,
+          "Syllables": [
+            {
+              "Text": "hel",
+              "StartMs": 1000,
+              "DurationMs": 300
+            },
+            {
+              "Text": "lo ",
+              "StartMs": 1300,
+              "DurationMs": 337
+            }
+          ]
+        },
+        {
+          "Text": "world",
+          "StartMs": 1637,
+          "DurationMs": 374,
+          "Syllables": []
+        }
+      ]
+    },
+    {
+      "input": [
+        {
+          "Text": "first ",
+          "StartMs": 1000,
+          "DurationMs": 300,
+          "Syllables": []
+        },
+        {
+          "Text": "one",
+          "StartMs": 1300,
+          "DurationMs": 337,
+          "Syllables": []
+        },
+        {
+          "Text": "/",
+          "StartMs": 1637,
+          "DurationMs": 374,
+          "Syllables": []
+        },
+        {
+          "Text": "last",
+          "StartMs": 2011,
+          "DurationMs": 411,
+          "Syllables": []
+        }
+      ],
+      "output": [
+        {
+          "Text": "first ",
+          "StartMs": 1000,
+          "DurationMs": 300,
+          "Syllables": []
+        },
+        {
+          "Text": "one/",
+          "StartMs": 1300,
+          "DurationMs": 711,
+          "Syllables": [
+            {
+              "Text": "one",
+              "StartMs": 1300,
+              "DurationMs": 337
+            },
+            {
+              "Text": "/",
+              "StartMs": 1637,
+              "DurationMs": 374
+            }
+          ]
+        },
+        {
+          "Text": "last",
+          "StartMs": 2011,
+          "DurationMs": 411,
+          "Syllables": []
+        }
+      ]
+    },
+    {
+      "input": [
+        {
+          "Text": "你,",
+          "StartMs": 1000,
+          "DurationMs": 300,
+          "Syllables": []
+        },
+        {
+          "Text": "好",
+          "StartMs": 1300,
+          "DurationMs": 337,
+          "Syllables": []
+        },
+        {
+          "Text": "啊",
+          "StartMs": 1637,
+          "DurationMs": 374,
+          "Syllables": []
+        }
+      ],
+      "output": [
+        {
+          "Text": "你,",
+          "StartMs": 1000,
+          "DurationMs": 300,
+          "Syllables": []
+        },
+        {
+          "Text": "好啊",
+          "StartMs": 1300,
+          "DurationMs": 711,
+          "Syllables": [
+            {
+              "Text": "好",
+              "StartMs": 1300,
+              "DurationMs": 337
+            },
+            {
+              "Text": "啊",
+              "StartMs": 1637,
+              "DurationMs": 374
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input": [
+        {
+          "Text": "a",
+          "StartMs": 1000,
+          "DurationMs": 300,
+          "Syllables": []
+        },
+        {
+          "Text": "b",
+          "StartMs": 1300,
+          "DurationMs": 337,
+          "Syllables": []
+        },
+        {
+          "Text": "c",
+          "StartMs": 1637,
+          "DurationMs": 374,
+          "Syllables": []
+        },
+        {
+          "Text": "d",
+          "StartMs": 2011,
+          "DurationMs": 411,
+          "Syllables": []
+        },
+        {
+          "Text": "e",
+          "StartMs": 2422,
+          "DurationMs": 448,
+          "Syllables": []
+        },
+        {
+          "Text": "f",
+          "StartMs": 2870,
+          "DurationMs": 485,
+          "Syllables": []
+        },
+        {
+          "Text": "g",
+          "StartMs": 3355,
+          "DurationMs": 522,
+          "Syllables": []
+        },
+        {
+          "Text": "h ",
+          "StartMs": 3877,
+          "DurationMs": 559,
+          "Syllables": []
+        },
+        {
+          "Text": "尾",
+          "StartMs": 4436,
+          "DurationMs": 596,
+          "Syllables": []
+        },
+        {
+          "Text": "字",
+          "StartMs": 5032,
+          "DurationMs": 633,
+          "Syllables": []
+        }
+      ],
+      "output": [
+        {
+          "Text": "a",
+          "StartMs": 1000,
+          "DurationMs": 300,
+          "Syllables": []
+        },
+        {
+          "Text": "b",
+          "StartMs": 1300,
+          "DurationMs": 337,
+          "Syllables": []
+        },
+        {
+          "Text": "c",
+          "StartMs": 1637,
+          "DurationMs": 374,
+          "Syllables": []
+        },
+        {
+          "Text": "d",
+          "StartMs": 2011,
+          "DurationMs": 411,
+          "Syllables": []
+        },
+        {
+          "Text": "e",
+          "StartMs": 2422,
+          "DurationMs": 448,
+          "Syllables": []
+        },
+        {
+          "Text": "f",
+          "StartMs": 2870,
+          "DurationMs": 485,
+          "Syllables": []
+        },
+        {
+          "Text": "g",
+          "StartMs": 3355,
+          "DurationMs": 522,
+          "Syllables": []
+        },
+        {
+          "Text": "h ",
+          "StartMs": 3877,
+          "DurationMs": 559,
+          "Syllables": []
+        },
+        {
+          "Text": "尾字",
+          "StartMs": 4436,
+          "DurationMs": 1229,
+          "Syllables": [
+            {
+              "Text": "尾",
+              "StartMs": 4436,
+              "DurationMs": 596
+            },
+            {
+              "Text": "字",
+              "StartMs": 5032,
+              "DurationMs": 633
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

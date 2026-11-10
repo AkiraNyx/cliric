@@ -1,0 +1,1113 @@
+{
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "originalRunCalled": true,
+  "windowShown": false,
+  "transportCommandsCalled": false,
+  "scope": "Four synthetic scheduler cases; original Run is observed before and inside the 500ms gate; no full page or pixel comparison",
+  "cases": [
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1200,
+      "lastWordStart": 1200,
+      "selectedWord": 1,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": false,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 0.9223130009192961,
+      "initialDurationMs": 1000.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 125.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1200,
+      "lastWordStart": 1200,
+      "selectedWord": 1,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": false,
+      "floating": true,
+      "floatPlans": [
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1584.0,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        },
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1337.6,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        }
+      ],
+      "initialTo": 0.9223130009192961,
+      "initialDurationMs": 1000.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 125.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1600,
+      "lastWordStart": 1200,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": true,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 125.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 125.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1600,
+      "lastWordStart": 1200,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": true,
+      "floating": true,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 125.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 125.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1200,
+      "lastWordStart": 1200,
+      "selectedWord": 1,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": false,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 0.9223130009192961,
+      "initialDurationMs": 1000.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 0.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1200,
+      "lastWordStart": 1200,
+      "selectedWord": 1,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": false,
+      "floating": true,
+      "floatPlans": [
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1584.0,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        },
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1337.6,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        }
+      ],
+      "initialTo": 0.9223130009192961,
+      "initialDurationMs": 1000.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 0.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1900,
+      "lastWordStart": 1200,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": true,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 0.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 0.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1900,
+      "lastWordStart": 1200,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": true,
+      "floating": true,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 0.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 0.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1000,
+      "lastWordStart": 1800,
+      "selectedWord": 0,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": false,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 0.4087371978299431,
+      "initialDurationMs": 200.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 125.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1000,
+      "lastWordStart": 1800,
+      "selectedWord": 0,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": false,
+      "floating": true,
+      "floatPlans": [
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1337.6,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        },
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1337.6,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        }
+      ],
+      "initialTo": 0.4087371978299431,
+      "initialDurationMs": 200.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 125.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1600,
+      "lastWordStart": 1800,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": true,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 125.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 125.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1600,
+      "lastWordStart": 1800,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": true,
+      "floating": true,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 125.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 125.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1000,
+      "lastWordStart": 1800,
+      "selectedWord": 0,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": false,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 0.4087371978299431,
+      "initialDurationMs": 200.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 0.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1000,
+      "lastWordStart": 1800,
+      "selectedWord": 0,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": false,
+      "floating": true,
+      "floatPlans": [
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1337.6,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        },
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1337.6,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        }
+      ],
+      "initialTo": 0.4087371978299431,
+      "initialDurationMs": 200.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 0.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1900,
+      "lastWordStart": 1800,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": true,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 0.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 0.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": false,
+      "nextStart": 2000,
+      "initialPosition": 1900,
+      "lastWordStart": 1800,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": true,
+      "floating": true,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 0.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 0.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1200,
+      "lastWordStart": 1200,
+      "selectedWord": 1,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": false,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 0.9223130009192961,
+      "initialDurationMs": 1000.0,
+      "forceFinish": false,
+      "to": 0.9223130009192961,
+      "durationMs": 1000.0,
+      "workerFinished": false
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1200,
+      "lastWordStart": 1200,
+      "selectedWord": 1,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": false,
+      "floating": true,
+      "floatPlans": [
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1584.0,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        },
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1760.0,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        }
+      ],
+      "initialTo": 0.9223130009192961,
+      "initialDurationMs": 1000.0,
+      "forceFinish": false,
+      "to": 0.9223130009192961,
+      "durationMs": 1000.0,
+      "workerFinished": false
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1600,
+      "lastWordStart": 1200,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": true,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 125.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 125.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1600,
+      "lastWordStart": 1200,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": true,
+      "floating": true,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 125.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 125.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1200,
+      "lastWordStart": 1200,
+      "selectedWord": 1,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": false,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 0.9223130009192961,
+      "initialDurationMs": 1000.0,
+      "forceFinish": false,
+      "to": 0.9223130009192961,
+      "durationMs": 1000.0,
+      "workerFinished": false
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1200,
+      "lastWordStart": 1200,
+      "selectedWord": 1,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": false,
+      "floating": true,
+      "floatPlans": [
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1584.0,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        },
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1760.0,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        }
+      ],
+      "initialTo": 0.9223130009192961,
+      "initialDurationMs": 1000.0,
+      "forceFinish": false,
+      "to": 0.9223130009192961,
+      "durationMs": 1000.0,
+      "workerFinished": false
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1900,
+      "lastWordStart": 1200,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": true,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 0.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 0.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1900,
+      "lastWordStart": 1200,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": true,
+      "floating": true,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 0.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 0.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1000,
+      "lastWordStart": 1800,
+      "selectedWord": 0,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": false,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 0.4087371978299431,
+      "initialDurationMs": 200.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 125.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1000,
+      "lastWordStart": 1800,
+      "selectedWord": 0,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": false,
+      "floating": true,
+      "floatPlans": [
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1337.6,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        },
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1337.6,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        }
+      ],
+      "initialTo": 0.4087371978299431,
+      "initialDurationMs": 200.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 125.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1600,
+      "lastWordStart": 1800,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": true,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 125.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 125.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1600,
+      "lastWordStart": 1800,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1600,
+      "restartInsideGate": true,
+      "floating": true,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 125.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 125.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1000,
+      "lastWordStart": 1800,
+      "selectedWord": 0,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": false,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 0.4087371978299431,
+      "initialDurationMs": 200.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 0.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1000,
+      "lastWordStart": 1800,
+      "selectedWord": 0,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": false,
+      "floating": true,
+      "floatPlans": [
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1337.6,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        },
+        {
+          "fromForSampling": 2.75,
+          "to": -2.75,
+          "durationMs": 1337.6,
+          "easing": "FloatingEasingFunction",
+          "samples": [
+            {
+              "fraction": 0,
+              "value": 2.75
+            },
+            {
+              "fraction": 0.25,
+              "value": 0.2959641821814021
+            },
+            {
+              "fraction": 0.5,
+              "value": -1.6446580709424738
+            },
+            {
+              "fraction": 0.75,
+              "value": -2.554601306608401
+            },
+            {
+              "fraction": 1,
+              "value": -2.75
+            }
+          ]
+        }
+      ],
+      "initialTo": 0.4087371978299431,
+      "initialDurationMs": 200.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 0.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1900,
+      "lastWordStart": 1800,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": true,
+      "floating": false,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 0.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 0.0,
+      "workerFinished": true
+    },
+    {
+      "ios164": true,
+      "nextStart": 2000,
+      "initialPosition": 1900,
+      "lastWordStart": 1800,
+      "selectedWord": -1,
+      "wordCount": 2,
+      "observedPosition": 1900,
+      "restartInsideGate": true,
+      "floating": true,
+      "floatPlans": [
+        null,
+        null
+      ],
+      "initialTo": 1.0,
+      "initialDurationMs": 0.0,
+      "forceFinish": true,
+      "to": 1.0,
+      "durationMs": 0.0,
+      "workerFinished": true
+    }
+  ]
+}

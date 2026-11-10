@@ -1,0 +1,145 @@
+{
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "originalResetCurrentWordCalled": true,
+  "windowShown": false,
+  "transportCommandsCalled": false,
+  "scope": "Direct reset on synthetic TextSing ordinary floating element and mask; no running dispatcher thread, page click, or emphasized character Stop acceptance",
+  "cases": [
+    {
+      "interline": 0,
+      "float": false,
+      "speed": 0.5,
+      "scrollDurationMs": 860,
+      "resetObservedMs": 128.4922,
+      "unblockedObservedMs": 234.2271,
+      "selectedAfter": -1,
+      "mask": {
+        "from": null,
+        "to": 0.0,
+        "durationMs": 300.0
+      },
+      "ordinaryFloat": null
+    },
+    {
+      "interline": 0,
+      "float": false,
+      "speed": 1.0,
+      "scrollDurationMs": 860,
+      "resetObservedMs": 107.5332,
+      "unblockedObservedMs": 218.4245,
+      "selectedAfter": -1,
+      "mask": {
+        "from": null,
+        "to": 0.0,
+        "durationMs": 300.0
+      },
+      "ordinaryFloat": null
+    },
+    {
+      "interline": 0,
+      "float": true,
+      "speed": 0.5,
+      "scrollDurationMs": 860,
+      "resetObservedMs": 119.6437,
+      "unblockedObservedMs": 231.6012,
+      "selectedAfter": -1,
+      "mask": {
+        "from": null,
+        "to": 0.0,
+        "durationMs": 300.0
+      },
+      "ordinaryFloat": {
+        "from": null,
+        "to": 4.0,
+        "durationMs": 380.0
+      }
+    },
+    {
+      "interline": 0,
+      "float": true,
+      "speed": 1.0,
+      "scrollDurationMs": 860,
+      "resetObservedMs": 111.4325,
+      "unblockedObservedMs": 215.0856,
+      "selectedAfter": -1,
+      "mask": {
+        "from": null,
+        "to": 0.0,
+        "durationMs": 300.0
+      },
+      "ordinaryFloat": {
+        "from": null,
+        "to": 4.0,
+        "durationMs": 810.0
+      }
+    },
+    {
+      "interline": 1,
+      "float": false,
+      "speed": 0.5,
+      "scrollDurationMs": 500,
+      "resetObservedMs": 111.4576,
+      "unblockedObservedMs": 222.9149,
+      "selectedAfter": -1,
+      "mask": {
+        "from": null,
+        "to": 0.0,
+        "durationMs": 300.0
+      },
+      "ordinaryFloat": null
+    },
+    {
+      "interline": 1,
+      "float": false,
+      "speed": 1.0,
+      "scrollDurationMs": 500,
+      "resetObservedMs": 119.6788,
+      "unblockedObservedMs": 232.0057,
+      "selectedAfter": -1,
+      "mask": {
+        "from": null,
+        "to": 0.0,
+        "durationMs": 300.0
+      },
+      "ordinaryFloat": null
+    },
+    {
+      "interline": 1,
+      "float": true,
+      "speed": 0.5,
+      "scrollDurationMs": 500,
+      "resetObservedMs": 127.4841,
+      "unblockedObservedMs": 231.5309,
+      "selectedAfter": -1,
+      "mask": {
+        "from": null,
+        "to": 0.0,
+        "durationMs": 300.0
+      },
+      "ordinaryFloat": {
+        "from": null,
+        "to": 4.0,
+        "durationMs": 200.0
+      }
+    },
+    {
+      "interline": 1,
+      "float": true,
+      "speed": 1.0,
+      "scrollDurationMs": 500,
+      "resetObservedMs": 126.2995,
+      "unblockedObservedMs": 230.7652,
+      "selectedAfter": -1,
+      "mask": {
+        "from": null,
+        "to": 0.0,
+        "durationMs": 300.0
+      },
+      "ordinaryFloat": {
+        "from": null,
+        "to": 4.0,
+        "durationMs": 450.0
+      }
+    }
+  ]
+}

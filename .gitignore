@@ -1,0 +1,13 @@
+tools/
+**/bin/
+**/obj/
+artifacts/
+.vs/
+
+/work/
+/analysis-*/
+/tools/
+**/UserData/
+**/Account.json
+.env
+.env.*

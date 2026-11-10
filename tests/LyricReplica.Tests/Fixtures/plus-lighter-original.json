@@ -1,0 +1,282 @@
+{
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "originalShaderEffectInstantiated": false,
+  "originalShaderAssetExecuted": true,
+  "resourceFailure": "\u627E\u4E0D\u5230\u8D44\u6E90\u201Ceffects/pluslighter/pluslightershader.ps\u201D\u3002",
+  "softwareRender": true,
+  "windowShown": false,
+  "fullPageStarted": false,
+  "resourceHost": "Unchanged original shader resources; fallback binds the recovered constant-register contract when original resource lookup is unavailable",
+  "cases": [
+    {
+      "preset": 0,
+      "inputArgb": [
+        255,
+        64,
+        128,
+        192
+      ],
+      "outputBgra": [
+        255,
+        231,
+        207,
+        255
+      ]
+    },
+    {
+      "preset": 0,
+      "inputArgb": [
+        128,
+        10,
+        50,
+        80
+      ],
+      "outputBgra": [
+        150,
+        131,
+        106,
+        128
+      ]
+    },
+    {
+      "preset": 0,
+      "inputArgb": [
+        71,
+        128,
+        90,
+        20
+      ],
+      "outputBgra": [
+        62,
+        85,
+        98,
+        71
+      ]
+    },
+    {
+      "preset": 0,
+      "inputArgb": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "outputBgra": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "preset": 0,
+      "inputArgb": [
+        47,
+        0,
+        0,
+        0
+      ],
+      "outputBgra": [
+        36,
+        36,
+        36,
+        47
+      ]
+    },
+    {
+      "preset": 0,
+      "inputArgb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "outputBgra": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "preset": 1,
+      "inputArgb": [
+        255,
+        64,
+        128,
+        192
+      ],
+      "outputBgra": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "preset": 1,
+      "inputArgb": [
+        128,
+        10,
+        50,
+        80
+      ],
+      "outputBgra": [
+        168,
+        153,
+        133,
+        128
+      ]
+    },
+    {
+      "preset": 1,
+      "inputArgb": [
+        71,
+        128,
+        90,
+        20
+      ],
+      "outputBgra": [
+        77,
+        96,
+        107,
+        71
+      ]
+    },
+    {
+      "preset": 1,
+      "inputArgb": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "outputBgra": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "preset": 1,
+      "inputArgb": [
+        47,
+        0,
+        0,
+        0
+      ],
+      "outputBgra": [
+        47,
+        47,
+        47,
+        47
+      ]
+    },
+    {
+      "preset": 1,
+      "inputArgb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "outputBgra": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "preset": 2,
+      "inputArgb": [
+        255,
+        64,
+        128,
+        192
+      ],
+      "outputBgra": [
+        255,
+        238,
+        221,
+        255
+      ]
+    },
+    {
+      "preset": 2,
+      "inputArgb": [
+        128,
+        10,
+        50,
+        80
+      ],
+      "outputBgra": [
+        153,
+        140,
+        122,
+        128
+      ]
+    },
+    {
+      "preset": 2,
+      "inputArgb": [
+        71,
+        128,
+        90,
+        20
+      ],
+      "outputBgra": [
+        71,
+        87,
+        97,
+        71
+      ]
+    },
+    {
+      "preset": 2,
+      "inputArgb": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "outputBgra": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "preset": 2,
+      "inputArgb": [
+        47,
+        0,
+        0,
+        0
+      ],
+      "outputBgra": [
+        43,
+        43,
+        43,
+        47
+      ]
+    },
+    {
+      "preset": 2,
+      "inputArgb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "outputBgra": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

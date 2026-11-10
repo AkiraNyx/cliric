@@ -1,0 +1,283 @@
+{
+  "cases": [
+    {
+      "timeMs": 100,
+      "slots": [
+        {
+          "text": " ",
+          "delayMs": 0.0,
+          "visible": false
+        },
+        {
+          "text": " ",
+          "delayMs": 0.0,
+          "visible": false
+        },
+        {
+          "text": "0",
+          "delayMs": 0.0,
+          "visible": true
+        },
+        {
+          "text": ":",
+          "delayMs": 75.0,
+          "visible": true
+        },
+        {
+          "text": "0",
+          "delayMs": 150.0,
+          "visible": true
+        },
+        {
+          "text": "0",
+          "delayMs": 225.0,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "timeMs": 9000,
+      "slots": [
+        {
+          "text": " ",
+          "delayMs": 0.0,
+          "visible": false
+        },
+        {
+          "text": " ",
+          "delayMs": 0.0,
+          "visible": false
+        },
+        {
+          "text": "0",
+          "delayMs": 0.0,
+          "visible": true
+        },
+        {
+          "text": ":",
+          "delayMs": 75.0,
+          "visible": true
+        },
+        {
+          "text": "0",
+          "delayMs": 150.0,
+          "visible": true
+        },
+        {
+          "text": "9",
+          "delayMs": 0.0,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "timeMs": 10000,
+      "slots": [
+        {
+          "text": " ",
+          "delayMs": 0.0,
+          "visible": false
+        },
+        {
+          "text": " ",
+          "delayMs": 0.0,
+          "visible": false
+        },
+        {
+          "text": "0",
+          "delayMs": 0.0,
+          "visible": true
+        },
+        {
+          "text": ":",
+          "delayMs": 75.0,
+          "visible": true
+        },
+        {
+          "text": "1",
+          "delayMs": 0.0,
+          "visible": true
+        },
+        {
+          "text": "0",
+          "delayMs": 110.0,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "timeMs": 59000,
+      "slots": [
+        {
+          "text": " ",
+          "delayMs": 0.0,
+          "visible": false
+        },
+        {
+          "text": " ",
+          "delayMs": 0.0,
+          "visible": false
+        },
+        {
+          "text": "0",
+          "delayMs": 0.0,
+          "visible": true
+        },
+        {
+          "text": ":",
+          "delayMs": 75.0,
+          "visible": true
+        },
+        {
+          "text": "5",
+          "delayMs": 0.0,
+          "visible": true
+        },
+        {
+          "text": "9",
+          "delayMs": 110.0,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "timeMs": 60000,
+      "slots": [
+        {
+          "text": " ",
+          "delayMs": 0.0,
+          "visible": false
+        },
+        {
+          "text": " ",
+          "delayMs": 0.0,
+          "visible": false
+        },
+        {
+          "text": "1",
+          "delayMs": 0.0,
+          "visible": true
+        },
+        {
+          "text": ":",
+          "delayMs": 75.0,
+          "visible": true
+        },
+        {
+          "text": "0",
+          "delayMs": 150.0,
+          "visible": true
+        },
+        {
+          "text": "0",
+          "delayMs": 225.0,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "timeMs": -1,
+      "slots": [
+        {
+          "text": "-",
+          "delayMs": 0.0,
+          "visible": true
+        },
+        {
+          "text": " ",
+          "delayMs": 75.0,
+          "visible": false
+        },
+        {
+          "text": "0",
+          "delayMs": 150.0,
+          "visible": true
+        },
+        {
+          "text": ":",
+          "delayMs": 225.0,
+          "visible": true
+        },
+        {
+          "text": "0",
+          "delayMs": 300.0,
+          "visible": true
+        },
+        {
+          "text": "0",
+          "delayMs": 375.0,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "timeMs": -10000,
+      "slots": [
+        {
+          "text": "-",
+          "delayMs": 0.0,
+          "visible": true
+        },
+        {
+          "text": " ",
+          "delayMs": 75.0,
+          "visible": false
+        },
+        {
+          "text": "0",
+          "delayMs": 150.0,
+          "visible": true
+        },
+        {
+          "text": ":",
+          "delayMs": 225.0,
+          "visible": true
+        },
+        {
+          "text": "1",
+          "delayMs": 0.0,
+          "visible": true
+        },
+        {
+          "text": "0",
+          "delayMs": 110.0,
+          "visible": true
+        }
+      ]
+    }
+  ],
+  "strings": [
+    {
+      "index": 32014,
+      "text": "0"
+    },
+    {
+      "index": 39956,
+      "text": ":"
+    },
+    {
+      "index": 42744,
+      "text": "Effect.(BlurEffect.Radius)"
+    },
+    {
+      "index": 42800,
+      "text": "RenderTransform.(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+    },
+    {
+      "index": 42940,
+      "text": "RenderTransform.(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+    },
+    {
+      "index": 43080,
+      "text": "RenderTransform.(TransformGroup.Children)[1].(TranslateTransform.Y)"
+    },
+    {
+      "index": 7232,
+      "text": "-"
+    },
+    {
+      "index": 53858,
+      "text": "-0:00"
+    }
+  ]
+}

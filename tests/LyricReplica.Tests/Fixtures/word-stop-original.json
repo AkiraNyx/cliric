@@ -1,0 +1,906 @@
+{
+  "originalStopCalled": true,
+  "windowShown": false,
+  "fullLyricsPageStarted": false,
+  "transportCommandsCalled": false,
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "scope": "Explicit iOS-active WPF glyph fixtures; scale/translation stop plans, not full-page acceptance",
+  "cases": [
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.25,
+          "scale": 1.0318100868394433,
+          "y": -2.2267060787610227
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.5,
+          "scale": 1.005131605263669,
+          "y": -0.35921236845681914
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.75,
+          "scale": 1.0006869901338973,
+          "y": -0.04808930937281275
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": 0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.24999998298791196,
+          "scale": 1.0328932516765217,
+          "y": -2.302527617356512
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.4999999659758239,
+          "scale": 1.0055522830775525,
+          "y": -0.388659815428678
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.7499999489637359,
+          "scale": 1.0007789101302365,
+          "y": -0.05452370911654647
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": 0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.25,
+          "scale": 1.0318100868394433,
+          "y": -2.2267060787610227
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.5,
+          "scale": 1.005131605263669,
+          "y": -0.35921236845681914
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.75,
+          "scale": 1.0006869901338973,
+          "y": -0.04808930937281275
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": 0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.24999998520688088,
+          "scale": 1.0328932512062912,
+          "y": -2.3025275844403827
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.5,
+          "scale": 1.0055522816438074,
+          "y": -0.3886597150665123
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.7499999852068809,
+          "scale": 1.0007789099024664,
+          "y": -0.0545236931726496
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": 0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.25,
+          "scale": 1.0318100868394433,
+          "y": -4.101928690676335
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.5,
+          "scale": 1.005131605263669,
+          "y": -2.9680932237059263
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.75,
+          "scale": 1.0006869901338973,
+          "y": -2.7791970806906363
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": -2.75
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -2.75
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.24999998298791196,
+          "scale": 1.0328932516765217,
+          "y": -4.147963196252167
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.4999999659758239,
+          "scale": 1.0055522830775525,
+          "y": -2.985972030795983
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.7499999489637359,
+          "scale": 1.0007789101302365,
+          "y": -2.7831036805350458
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": -2.75
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -2.75
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.25,
+          "scale": 1.0318100868394433,
+          "y": -4.101928690676335
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.5,
+          "scale": 1.005131605263669,
+          "y": -2.9680932237059263
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.75,
+          "scale": 1.0006869901338973,
+          "y": -2.7791970806906363
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": -2.75
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -2.75
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.24999998520688088,
+          "scale": 1.0328932512062912,
+          "y": -4.147963176267375
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.5,
+          "scale": 1.0055522816438074,
+          "y": -2.9859719698618115
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.7499999852068809,
+          "scale": 1.0007789099024664,
+          "y": -2.783103670854823
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": -2.75
+        }
+      ]
+    },
+    {
+      "heightSetting": -1.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 2.75,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -2.75
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.25,
+          "scale": 1.0318100868394433,
+          "y": -2.2267060787610227
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.5,
+          "scale": 1.005131605263669,
+          "y": -0.35921236845681914
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.75,
+          "scale": 1.0006869901338973,
+          "y": -0.04808930937281275
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": 0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.24999998298791196,
+          "scale": 1.0328932516765217,
+          "y": -2.302527617356512
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.4999999659758239,
+          "scale": 1.0055522830775525,
+          "y": -0.388659815428678
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.7499999489637359,
+          "scale": 1.0007789101302365,
+          "y": -0.05452370911654647
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": 0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.25,
+          "scale": 1.0318100868394433,
+          "y": -2.2267060787610227
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.5,
+          "scale": 1.005131605263669,
+          "y": -0.35921236845681914
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.75,
+          "scale": 1.0006869901338973,
+          "y": -0.04808930937281275
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": 0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.24999998520688088,
+          "scale": 1.0328932512062912,
+          "y": -2.3025275844403827
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.5,
+          "scale": 1.0055522816438074,
+          "y": -0.3886597150665123
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.7499999852068809,
+          "scale": 1.0007789099024664,
+          "y": -0.0545236931726496
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": 0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": false,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 0.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -0.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.25,
+          "scale": 1.0318100868394433,
+          "y": -4.954302605183296
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.5,
+          "scale": 1.005131605263669,
+          "y": -4.153948157910065
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.75,
+          "scale": 1.0006869901338973,
+          "y": -4.02060970401692
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": -4.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -4.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.24999998298791196,
+          "scale": 1.0328932516765217,
+          "y": -4.986797550295648
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.4999999659758239,
+          "scale": 1.0055522830775525,
+          "y": -4.166568492326576
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.7499999489637359,
+          "scale": 1.0007789101302365,
+          "y": -4.023367303907092
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": -4.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 1.0,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -4.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": false,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.25,
+          "scale": 1.0318100868394433,
+          "y": -4.954302605183296
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.5,
+          "scale": 1.005131605263669,
+          "y": -4.153948157910065
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.75,
+          "scale": 1.0006869901338973,
+          "y": -4.02060970401692
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": -4.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.5,
+      "immediate": true,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -4.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": false,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0.0,
+          "scale": 1.1,
+          "y": -7.0
+        },
+        {
+          "fraction": 0.25,
+          "nativeProgress": 0.24999998520688088,
+          "scale": 1.0328932512062912,
+          "y": -4.986797536188735
+        },
+        {
+          "fraction": 0.5,
+          "nativeProgress": 0.5,
+          "scale": 1.0055522816438074,
+          "y": -4.166568449314219
+        },
+        {
+          "fraction": 0.75,
+          "nativeProgress": 0.7499999852068809,
+          "scale": 1.0007789099024664,
+          "y": -4.023367297073992
+        },
+        {
+          "fraction": 1,
+          "nativeProgress": 1.0,
+          "scale": 1.0,
+          "y": -4.0
+        }
+      ]
+    },
+    {
+      "heightSetting": 8.0,
+      "floating": true,
+      "response": 2.3,
+      "multiplier": 1.4695433963885915,
+      "immediate": true,
+      "lift": 4.0,
+      "frames": [
+        {
+          "fraction": 0,
+          "nativeProgress": 0,
+          "scale": 1.0,
+          "y": -4.0
+        }
+      ]
+    }
+  ]
+}

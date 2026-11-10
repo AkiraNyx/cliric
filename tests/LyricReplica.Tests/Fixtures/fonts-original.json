@@ -1,0 +1,182 @@
+[
+  {
+    "file": "sf-pro-display-black.otf",
+    "sha256": "ECCD8347DBA11C04134BB7ABB597F69C061D17C99151C0BA2791D7CA4DB45F73",
+    "families": [
+      "SF Pro Display"
+    ],
+    "weight": 900,
+    "style": "Normal"
+  },
+  {
+    "file": "sf-pro-display-bold.otf",
+    "sha256": "A981001F6D4E70292FD26FA8E05437C4A9F0F8C5981027FF0CEEAD01BB30311F",
+    "families": [
+      "SF Pro Display"
+    ],
+    "weight": 700,
+    "style": "Normal"
+  },
+  {
+    "file": "sf-pro-display-bolditalic.otf",
+    "sha256": "5BE77A9E7E02857913F509D33E151C64DAD8D98A433751B73BCEF4EB2A4C2617",
+    "families": [
+      "SF Pro Display"
+    ],
+    "weight": 700,
+    "style": "Italic"
+  },
+  {
+    "file": "sf-pro-display-heavy.otf",
+    "sha256": "1A346F2AFD5296905DCF2944BA2D489D8583FAF887EF0ACC30E71DA644B55102",
+    "families": [
+      "SF Pro Display"
+    ],
+    "weight": 800,
+    "style": "Normal"
+  },
+  {
+    "file": "sf-pro-display-light.otf",
+    "sha256": "A32100917FE2828BFF593F5E946C2B97E53A0597B54B4C212484F7A214C53868",
+    "families": [
+      "SF Pro Display"
+    ],
+    "weight": 300,
+    "style": "Normal"
+  },
+  {
+    "file": "sf-pro-display-medium.otf",
+    "sha256": "CBFD17919856EFCEDABDD73781DAD2984326928AE7C9635BEF6227B1A7D71D21",
+    "families": [
+      "SF Pro Display"
+    ],
+    "weight": 500,
+    "style": "Normal"
+  },
+  {
+    "file": "sf-pro-display-mediumitalic.otf",
+    "sha256": "976A99E5C5D80C2B60E880E1FBBC5792537F467013E4D113E222826D9786BAD6",
+    "families": [
+      "SF Pro Display"
+    ],
+    "weight": 500,
+    "style": "Italic"
+  },
+  {
+    "file": "sf-pro-display-regular.otf",
+    "sha256": "71A2162C852E87BAA6440C983E406283391646778C8BC74E57B00613A3412F80",
+    "families": [
+      "SF Pro Display"
+    ],
+    "weight": 400,
+    "style": "Normal"
+  },
+  {
+    "file": "sf-pro-display-regularitalic.otf",
+    "sha256": "F52EC6B2889632CC2880FB1C6BD2794ADA6AB7946E1F7C458ABE0D59732C485C",
+    "families": [
+      "SF Pro Display"
+    ],
+    "weight": 400,
+    "style": "Italic"
+  },
+  {
+    "file": "sf-pro-display-semibold.otf",
+    "sha256": "53A55EC7E0A90C0E1980B9D95E3CB93851B4E473B575693813A1B150066661FF",
+    "families": [
+      "SF Pro Display"
+    ],
+    "weight": 600,
+    "style": "Normal"
+  },
+  {
+    "file": "sf-pro-display-semibolditalic.otf",
+    "sha256": "4181AAC0F0A4758E1C8FEF0CAEEDEBC1709319644043131556D68EF60621C4B7",
+    "families": [
+      "SF Pro Display"
+    ],
+    "weight": 600,
+    "style": "Italic"
+  },
+  {
+    "file": "sf-pro-text-bold.otf",
+    "sha256": "82AE43B1EC123E3B7F48A889319E63FC024875FCEF0DC0B226297C2542C1DAD2",
+    "families": [
+      "SF Pro Text"
+    ],
+    "weight": 700,
+    "style": "Normal"
+  },
+  {
+    "file": "sf-pro-text-heavy.otf",
+    "sha256": "FC3888B97326B1AB27F0F1F7AF4A043F3215616CFDB953A136F6FCA8FB8206AD",
+    "families": [
+      "SF Pro Text"
+    ],
+    "weight": 800,
+    "style": "Normal"
+  },
+  {
+    "file": "sf-pro-text-medium.otf",
+    "sha256": "5D076C6CE94F8883E9CD33AEC39C12222ED7B693B4A9624FE41C411FF2E41818",
+    "families": [
+      "SF Pro Text"
+    ],
+    "weight": 500,
+    "style": "Normal"
+  },
+  {
+    "file": "sf-pro-text-regular.otf",
+    "sha256": "86189A6307187A6943ADD3596432F72A7CB914FA1C77697736292F5E4D8EA6D8",
+    "families": [
+      "SF Pro Text"
+    ],
+    "weight": 400,
+    "style": "Normal"
+  },
+  {
+    "file": "sf-pro-text-semibold.otf",
+    "sha256": "874D3CF27683CD5F039C4E271642AA1FEB2A550A02D17EF6807D6D9CAEB74A2B",
+    "families": [
+      "SF Pro Text"
+    ],
+    "weight": 600,
+    "style": "Normal"
+  },
+  {
+    "file": "circularspuiv3t-black.ttf",
+    "sha256": "8FB869A6620C06D6DAC18F86B71D626C89371B4BE9958BB29F88C8811E76EFF6",
+    "families": [
+      "Circular Sp UI v3 T"
+    ],
+    "weight": 900,
+    "style": "Normal"
+  },
+  {
+    "file": "circularspuiv3t-bold.ttf",
+    "sha256": "4473618DE7E2FE219484E27867CCBBF7FC3A30A9617C854DC6638C7DADAC3836",
+    "families": [
+      "Circular Sp UI v3 T"
+    ],
+    "weight": 700,
+    "style": "Normal"
+  },
+  {
+    "file": "circularspuiv3t-book.ttf",
+    "sha256": "4F20B7231142F3FC01AC1FFF76D7EA3A7D27DCF085BA8BE16BF575469F8098DE",
+    "families": [
+      "Circular Sp UI v3 T"
+    ],
+    "weight": 450,
+    "style": "Normal"
+  },
+  {
+    "file": "circularspuiv3t-light.ttf",
+    "sha256": "B0D7134901A9BD6493A5AD62C2237582C1C00115B6392EB93016CF0C921A3C3F",
+    "families": [
+      "Circular Sp UI v3 T"
+    ],
+    "weight": 300,
+    "style": "Normal"
+  }
+]

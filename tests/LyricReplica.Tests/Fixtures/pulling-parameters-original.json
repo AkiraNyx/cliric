@@ -1,0 +1,1449 @@
+{
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "originalParameterMethodsCalled": true,
+  "originalPullingEffectCalled": false,
+  "windowShown": false,
+  "scope": "Actual original scalar parameter methods plus recovered PullingEffect line-delay arithmetic at m=1; not original visible-row scheduling or animation execution",
+  "cases": [
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 0.25,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 0.25,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 0.25,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 0.25,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 0.25,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 0.25,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 1,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 1,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 1,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 1,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 1,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 1,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 2,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 2,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 2,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 2,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 2,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 0,
+      "speed": 2,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 0.25,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 0.25,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 6
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 0.25,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 24
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 0.25,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 0.25,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 6
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 0.25,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 24
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 1,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 1,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 24
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 1,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 96
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 1,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 1,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 24
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 1,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 96
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 2,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 2,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 48
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 2,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 192
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 2,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 2,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 48
+    },
+    {
+      "interline": 0,
+      "delay": 1.2,
+      "speed": 2,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 192
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 0.25,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 0.25,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 12
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 0.25,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 50
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 0.25,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 0.25,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 12
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 0.25,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 50
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 1,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 1,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 50
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 1,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 200
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 1,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 1,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 50
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 1,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 200
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 2,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 2,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 100
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 2,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 400
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 2,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 2,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 100
+    },
+    {
+      "interline": 0,
+      "delay": 2.5,
+      "speed": 2,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 400
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 0.25,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 0.25,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 20
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 0.25,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 80
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 0.25,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 0.25,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 20
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 0.25,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 80
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 1,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 1,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 80
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 1,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 320
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 1,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 1,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 80
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 1,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 320
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 2,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 2,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 160
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 2,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 640
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 2,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 2,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 160
+    },
+    {
+      "interline": 0,
+      "delay": 4,
+      "speed": 2,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03225806451612903,
+      "backFactor": 1.0,
+      "delayMs": 640
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 0.25,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 0.25,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 0.25,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 0.25,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 0.25,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 0.25,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 1,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 1,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 1,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 1,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 1,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 1,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 2,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 2,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 2,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 2,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 2,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 0,
+      "speed": 2,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 0.25,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 0.25,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 5
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 0.25,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 22
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 0.25,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 0.25,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 6
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 0.25,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 27
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 1,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 1,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 22
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 1,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 89
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 1,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 1,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 27
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 1,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 109
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 2,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 2,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 44
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 2,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 178
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 2,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 2,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 54
+    },
+    {
+      "interline": 1,
+      "delay": 1.2,
+      "speed": 2,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 219
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 0.25,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 0.25,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 11
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 0.25,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 46
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 0.25,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 0.25,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 14
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 0.25,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 57
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 1,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 1,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 46
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 1,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 185
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 1,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 1,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 57
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 1,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 228
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 2,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 2,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 92
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 2,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 371
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 2,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 2,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 114
+    },
+    {
+      "interline": 1,
+      "delay": 2.5,
+      "speed": 2,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 457
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 0.25,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 0.25,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 18
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 0.25,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 74
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 0.25,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 0.25,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 22
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 0.25,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 91
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 1,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 1,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 74
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 1,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 297
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 1,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 1,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 91
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 1,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 366
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 2,
+      "back": false,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 2,
+      "back": false,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 148
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 2,
+      "back": false,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.0,
+      "delayMs": 595
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 2,
+      "back": true,
+      "distance": 0,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 0
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 2,
+      "back": true,
+      "distance": 1,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 183
+    },
+    {
+      "interline": 1,
+      "delay": 4,
+      "speed": 2,
+      "back": true,
+      "distance": 4,
+      "parameter": 0.03,
+      "backFactor": 1.23,
+      "delayMs": 732
+    }
+  ]
+}

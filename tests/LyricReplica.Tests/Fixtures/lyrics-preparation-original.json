@@ -1,0 +1,1078 @@
+{
+  "timelineOffset": 300,
+  "multiLine": true,
+  "interLinePreset": "iOS",
+  "cases": [
+    {
+      "name": "single-implicit",
+      "timed": true,
+      "input": [
+        {
+          "text": "main",
+          "end": 2000,
+          "background": null,
+          "start": 1000
+        },
+        {
+          "text": "(back)",
+          "end": 3000,
+          "background": null,
+          "start": 1500
+        }
+      ],
+      "optimized": [
+        {
+          "text": "main",
+          "start": 1000,
+          "end": 3000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "(back)",
+          "start": 1500,
+          "end": 3000,
+          "background": true,
+          "explicit": null
+        }
+      ],
+      "groups": [
+        {
+          "text": "main",
+          "start": 743,
+          "end": 3300,
+          "background": "(back)"
+        }
+      ]
+    },
+    {
+      "name": "two-implicit",
+      "timed": true,
+      "input": [
+        {
+          "text": "main",
+          "end": 2000,
+          "background": null,
+          "start": 1000
+        },
+        {
+          "text": "(one)",
+          "end": 2200,
+          "background": null,
+          "start": 1500
+        },
+        {
+          "text": "(two)",
+          "end": 3000,
+          "background": null,
+          "start": 1800
+        }
+      ],
+      "optimized": [
+        {
+          "text": "main",
+          "start": 1000,
+          "end": 2000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "(one)",
+          "start": 1500,
+          "end": 2200,
+          "background": false,
+          "explicit": false
+        },
+        {
+          "text": "(two)",
+          "start": 1800,
+          "end": 3000,
+          "background": false,
+          "explicit": false
+        }
+      ],
+      "groups": [
+        {
+          "text": "main",
+          "start": 743,
+          "end": 1800,
+          "background": null
+        },
+        {
+          "text": "(one)",
+          "start": 1500,
+          "end": 3300,
+          "background": null
+        },
+        {
+          "text": "(two)",
+          "start": 1800,
+          "end": 3300,
+          "background": null
+        }
+      ]
+    },
+    {
+      "name": "three-implicit",
+      "timed": true,
+      "input": [
+        {
+          "text": "main",
+          "end": 2000,
+          "background": null,
+          "start": 1000
+        },
+        {
+          "text": "(one)",
+          "end": 2200,
+          "background": null,
+          "start": 1500
+        },
+        {
+          "text": "(two)",
+          "end": 3000,
+          "background": null,
+          "start": 1800
+        },
+        {
+          "text": "(three)",
+          "end": 3500,
+          "background": null,
+          "start": 2500
+        }
+      ],
+      "optimized": [
+        {
+          "text": "main",
+          "start": 1000,
+          "end": 2000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "(one)",
+          "start": 1500,
+          "end": 2200,
+          "background": false,
+          "explicit": false
+        },
+        {
+          "text": "(two)",
+          "start": 1800,
+          "end": 3000,
+          "background": false,
+          "explicit": false
+        },
+        {
+          "text": "(three)",
+          "start": 2500,
+          "end": 3500,
+          "background": false,
+          "explicit": false
+        }
+      ],
+      "groups": [
+        {
+          "text": "main",
+          "start": 743,
+          "end": 1800,
+          "background": null
+        },
+        {
+          "text": "(one)",
+          "start": 1500,
+          "end": 2500,
+          "background": null
+        },
+        {
+          "text": "(two)",
+          "start": 1800,
+          "end": 3800,
+          "background": null
+        },
+        {
+          "text": "(three)",
+          "start": 2500,
+          "end": 3800,
+          "background": null
+        }
+      ]
+    },
+    {
+      "name": "only-brackets",
+      "timed": true,
+      "input": [
+        {
+          "text": "(one)",
+          "end": 2000,
+          "background": null,
+          "start": 1000
+        },
+        {
+          "text": "(two)",
+          "end": 2500,
+          "background": null,
+          "start": 1500
+        }
+      ],
+      "optimized": [
+        {
+          "text": "(one)",
+          "start": 1000,
+          "end": 2000,
+          "background": false,
+          "explicit": false
+        },
+        {
+          "text": "(two)",
+          "start": 1500,
+          "end": 2500,
+          "background": false,
+          "explicit": false
+        }
+      ],
+      "groups": [
+        {
+          "text": "(one)",
+          "start": 743,
+          "end": 2800,
+          "background": null
+        },
+        {
+          "text": "(two)",
+          "start": 1500,
+          "end": 2800,
+          "background": null
+        }
+      ]
+    },
+    {
+      "name": "two-explicit",
+      "timed": true,
+      "input": [
+        {
+          "text": "main",
+          "end": 2000,
+          "background": null,
+          "start": 1000
+        },
+        {
+          "text": "one",
+          "end": 2200,
+          "background": true,
+          "start": 1500
+        },
+        {
+          "text": "two",
+          "end": 3000,
+          "background": true,
+          "start": 1800
+        }
+      ],
+      "optimized": [
+        {
+          "text": "main",
+          "start": 1000,
+          "end": 2200,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "one",
+          "start": 1500,
+          "end": 2200,
+          "background": true,
+          "explicit": true
+        },
+        {
+          "text": "two",
+          "start": 1800,
+          "end": 3000,
+          "background": true,
+          "explicit": true
+        }
+      ],
+      "groups": [
+        {
+          "text": "main",
+          "start": 743,
+          "end": 3300,
+          "background": "one"
+        },
+        {
+          "text": "two",
+          "start": 1800,
+          "end": 3300,
+          "background": null
+        }
+      ]
+    },
+    {
+      "name": "three-explicit",
+      "timed": true,
+      "input": [
+        {
+          "text": "main",
+          "end": 2000,
+          "background": null,
+          "start": 1000
+        },
+        {
+          "text": "one",
+          "end": 2200,
+          "background": true,
+          "start": 1500
+        },
+        {
+          "text": "two",
+          "end": 3000,
+          "background": true,
+          "start": 1800
+        },
+        {
+          "text": "three",
+          "end": 3500,
+          "background": true,
+          "start": 2500
+        }
+      ],
+      "optimized": [
+        {
+          "text": "main",
+          "start": 1000,
+          "end": 2200,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "one",
+          "start": 1500,
+          "end": 2200,
+          "background": true,
+          "explicit": true
+        },
+        {
+          "text": "two",
+          "start": 1800,
+          "end": 3500,
+          "background": true,
+          "explicit": true
+        },
+        {
+          "text": "three",
+          "start": 2500,
+          "end": 3500,
+          "background": true,
+          "explicit": true
+        }
+      ],
+      "groups": [
+        {
+          "text": "main",
+          "start": 743,
+          "end": 3800,
+          "background": "one"
+        },
+        {
+          "text": "two",
+          "start": 1800,
+          "end": 3800,
+          "background": "three"
+        }
+      ]
+    },
+    {
+      "name": "explicit-false-elsewhere",
+      "timed": true,
+      "input": [
+        {
+          "text": "main",
+          "end": 2000,
+          "background": null,
+          "start": 1000
+        },
+        {
+          "text": "(one)",
+          "end": 2200,
+          "background": null,
+          "start": 1500
+        },
+        {
+          "text": "(two)",
+          "end": 3000,
+          "background": null,
+          "start": 1800
+        },
+        {
+          "text": "next",
+          "end": 6000,
+          "background": false,
+          "start": 5000
+        }
+      ],
+      "optimized": [
+        {
+          "text": "main",
+          "start": 1000,
+          "end": 2200,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "(one)",
+          "start": 1500,
+          "end": 2200,
+          "background": true,
+          "explicit": null
+        },
+        {
+          "text": "(two)",
+          "start": 1800,
+          "end": 3000,
+          "background": true,
+          "explicit": null
+        },
+        {
+          "text": "next",
+          "start": 5000,
+          "end": 6000,
+          "background": false,
+          "explicit": false
+        }
+      ],
+      "groups": [
+        {
+          "text": "main",
+          "start": 743,
+          "end": 4271,
+          "background": "(one)"
+        },
+        {
+          "text": "(two)",
+          "start": 1800,
+          "end": 4271,
+          "background": null
+        },
+        {
+          "text": "next",
+          "start": 4271,
+          "end": 6300,
+          "background": null
+        }
+      ]
+    },
+    {
+      "name": "pickup",
+      "timed": true,
+      "input": [
+        {
+          "text": "main",
+          "end": 3000,
+          "background": null,
+          "start": 2000
+        },
+        {
+          "text": "back",
+          "end": 3500,
+          "background": true,
+          "start": 1500
+        },
+        {
+          "text": "next",
+          "end": 6000,
+          "background": null,
+          "start": 5000
+        }
+      ],
+      "optimized": [
+        {
+          "text": "main",
+          "start": 1500,
+          "end": 3500,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "back",
+          "start": 1500,
+          "end": 3500,
+          "background": true,
+          "explicit": true
+        },
+        {
+          "text": "next",
+          "start": 5000,
+          "end": 6000,
+          "background": false,
+          "explicit": null
+        }
+      ],
+      "groups": [
+        {
+          "text": "main",
+          "start": 1243,
+          "end": 4271,
+          "background": "back"
+        },
+        {
+          "text": "next",
+          "start": 4271,
+          "end": 6300,
+          "background": null
+        }
+      ]
+    },
+    {
+      "name": "gaps",
+      "timed": true,
+      "input": [
+        {
+          "text": "a",
+          "end": 3000,
+          "background": null,
+          "start": 2000
+        },
+        {
+          "text": "b",
+          "end": 4000,
+          "background": null,
+          "start": 3500
+        },
+        {
+          "text": "c",
+          "end": 7000,
+          "background": null,
+          "start": 6000
+        },
+        {
+          "text": "d",
+          "end": 17000,
+          "background": null,
+          "start": 16000
+        }
+      ],
+      "optimized": [
+        {
+          "text": "a",
+          "start": 2000,
+          "end": 3000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "b",
+          "start": 3500,
+          "end": 4000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "c",
+          "start": 6000,
+          "end": 7000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "d",
+          "start": 16000,
+          "end": 17000,
+          "background": false,
+          "explicit": null
+        }
+      ],
+      "groups": [
+        {
+          "text": "a",
+          "start": 1743,
+          "end": 3002,
+          "background": null
+        },
+        {
+          "text": "b",
+          "start": 3002,
+          "end": 5271,
+          "background": null
+        },
+        {
+          "text": "c",
+          "start": 5271,
+          "end": 7300,
+          "background": null
+        },
+        {
+          "text": "d",
+          "start": 15743,
+          "end": 17300,
+          "background": null
+        }
+      ]
+    },
+    {
+      "name": "long-overlap",
+      "timed": true,
+      "input": [
+        {
+          "text": "long",
+          "end": 10000,
+          "background": null,
+          "start": 1000
+        },
+        {
+          "text": "short",
+          "end": 3000,
+          "background": null,
+          "start": 2000
+        },
+        {
+          "text": "last",
+          "end": 12000,
+          "background": null,
+          "start": 11000
+        }
+      ],
+      "optimized": [
+        {
+          "text": "long",
+          "start": 1000,
+          "end": 10000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "short",
+          "start": 2000,
+          "end": 3000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "last",
+          "start": 11000,
+          "end": 12000,
+          "background": false,
+          "explicit": null
+        }
+      ],
+      "groups": [
+        {
+          "text": "long",
+          "start": 743,
+          "end": 10271,
+          "background": null
+        },
+        {
+          "text": "short",
+          "start": 2000,
+          "end": 10271,
+          "background": null
+        },
+        {
+          "text": "last",
+          "start": 10271,
+          "end": 12300,
+          "background": null
+        }
+      ]
+    },
+    {
+      "name": "overlapping-pairs",
+      "timed": true,
+      "input": [
+        {
+          "text": "a",
+          "end": 3000,
+          "background": null,
+          "start": 1000
+        },
+        {
+          "text": "ab",
+          "end": 5000,
+          "background": true,
+          "start": 800
+        },
+        {
+          "text": "b",
+          "end": 6000,
+          "background": null,
+          "start": 4000
+        },
+        {
+          "text": "bb",
+          "end": 6500,
+          "background": true,
+          "start": 3900
+        },
+        {
+          "text": "c",
+          "end": 7000,
+          "background": null,
+          "start": 6200
+        }
+      ],
+      "optimized": [
+        {
+          "text": "a",
+          "start": 800,
+          "end": 3900,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "ab",
+          "start": 800,
+          "end": 5000,
+          "background": true,
+          "explicit": true
+        },
+        {
+          "text": "b",
+          "start": 3900,
+          "end": 6500,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "bb",
+          "start": 3900,
+          "end": 6500,
+          "background": true,
+          "explicit": true
+        },
+        {
+          "text": "c",
+          "start": 6200,
+          "end": 7000,
+          "background": false,
+          "explicit": null
+        }
+      ],
+      "groups": [
+        {
+          "text": "a",
+          "start": 543,
+          "end": 3643,
+          "background": "ab"
+        },
+        {
+          "text": "b",
+          "start": 3643,
+          "end": 5943,
+          "background": "bb"
+        },
+        {
+          "text": "c",
+          "start": 5943,
+          "end": 7300,
+          "background": null
+        }
+      ]
+    },
+    {
+      "name": "line-only",
+      "timed": false,
+      "input": [
+        {
+          "text": "a",
+          "end": 2000,
+          "background": null,
+          "start": 1000
+        },
+        {
+          "text": "b",
+          "end": 3000,
+          "background": null,
+          "start": 2500
+        },
+        {
+          "text": "c",
+          "end": 7000,
+          "background": null,
+          "start": 6000
+        }
+      ],
+      "optimized": [
+        {
+          "text": "a",
+          "start": 1000,
+          "end": 2000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "b",
+          "start": 2500,
+          "end": 3000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "c",
+          "start": 6000,
+          "end": 7000,
+          "background": false,
+          "explicit": null
+        }
+      ],
+      "groups": [
+        {
+          "text": "a",
+          "start": 1000,
+          "end": 2500,
+          "background": null
+        },
+        {
+          "text": "b",
+          "start": 2500,
+          "end": 3000,
+          "background": null
+        },
+        {
+          "text": "c",
+          "start": 6000,
+          "end": 7000,
+          "background": null
+        }
+      ]
+    },
+    {
+      "name": "line-only-overlap",
+      "timed": false,
+      "input": [
+        {
+          "text": "a",
+          "end": 5000,
+          "background": null,
+          "start": 1000
+        },
+        {
+          "text": "b",
+          "end": 3000,
+          "background": null,
+          "start": 2000
+        },
+        {
+          "text": "c",
+          "end": 6000,
+          "background": null,
+          "start": 5000
+        }
+      ],
+      "optimized": [
+        {
+          "text": "a",
+          "start": 1000,
+          "end": 5000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "b",
+          "start": 2000,
+          "end": 3000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "c",
+          "start": 5000,
+          "end": 6000,
+          "background": false,
+          "explicit": null
+        }
+      ],
+      "groups": [
+        {
+          "text": "a",
+          "start": 1000,
+          "end": 5000,
+          "background": null
+        },
+        {
+          "text": "b",
+          "start": 2000,
+          "end": 3000,
+          "background": null
+        },
+        {
+          "text": "c",
+          "start": 5000,
+          "end": 6000,
+          "background": null
+        }
+      ]
+    },
+    {
+      "name": "empty-line",
+      "timed": true,
+      "input": [
+        {
+          "text": "a",
+          "end": 2000,
+          "background": null,
+          "start": 1000
+        },
+        {
+          "text": "",
+          "end": 2300,
+          "background": null,
+          "start": 2200
+        },
+        {
+          "text": "b",
+          "end": 4000,
+          "background": null,
+          "start": 3000
+        }
+      ],
+      "optimized": [
+        {
+          "text": "a",
+          "start": 1000,
+          "end": 2000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "b",
+          "start": 3000,
+          "end": 4000,
+          "background": false,
+          "explicit": null
+        }
+      ],
+      "groups": [
+        {
+          "text": "a",
+          "start": 743,
+          "end": 2271,
+          "background": null
+        },
+        {
+          "text": "b",
+          "start": 2271,
+          "end": 4300,
+          "background": null
+        }
+      ]
+    },
+    {
+      "name": "late-pickup",
+      "timed": true,
+      "input": [
+        {
+          "text": "a",
+          "end": 4000,
+          "background": null,
+          "start": 1000
+        },
+        {
+          "text": "b",
+          "end": 3000,
+          "background": null,
+          "start": 2000
+        },
+        {
+          "text": "c",
+          "end": 7000,
+          "background": null,
+          "start": 4000
+        },
+        {
+          "text": "d",
+          "end": 8000,
+          "background": null,
+          "start": 5000
+        },
+        {
+          "text": "main",
+          "end": 10000,
+          "background": null,
+          "start": 9000
+        },
+        {
+          "text": "back",
+          "end": 10500,
+          "background": true,
+          "start": 7500
+        }
+      ],
+      "optimized": [
+        {
+          "text": "a",
+          "start": 1000,
+          "end": 4000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "b",
+          "start": 2000,
+          "end": 3000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "c",
+          "start": 4000,
+          "end": 7000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "d",
+          "start": 5000,
+          "end": 8000,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "main",
+          "start": 8000,
+          "end": 10500,
+          "background": false,
+          "explicit": null
+        },
+        {
+          "text": "back",
+          "start": 7500,
+          "end": 10500,
+          "background": true,
+          "explicit": true
+        }
+      ],
+      "groups": [
+        {
+          "text": "a",
+          "start": 743,
+          "end": 3271,
+          "background": null
+        },
+        {
+          "text": "b",
+          "start": 2000,
+          "end": 3271,
+          "background": null
+        },
+        {
+          "text": "c",
+          "start": 3271,
+          "end": 7500,
+          "background": null
+        },
+        {
+          "text": "d",
+          "start": 5000,
+          "end": 10800,
+          "background": null
+        },
+        {
+          "text": "main",
+          "start": 7500,
+          "end": 10800,
+          "background": "back"
+        }
+      ]
+    }
+  ]
+}

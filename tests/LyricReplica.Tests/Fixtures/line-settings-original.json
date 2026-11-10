@@ -1,0 +1,461 @@
+{
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "originalMethodsCalled": true,
+  "windowShown": false,
+  "fullPageStarted": false,
+  "zoom": [
+    {
+      "preset": 0,
+      "timed": false,
+      "blur": false,
+      "override": "NaN",
+      "value": 1.05
+    },
+    {
+      "preset": 0,
+      "timed": false,
+      "blur": false,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 0,
+      "timed": false,
+      "blur": false,
+      "override": 1.8,
+      "value": 1.05
+    },
+    {
+      "preset": 0,
+      "timed": false,
+      "blur": true,
+      "override": "NaN",
+      "value": 1.1
+    },
+    {
+      "preset": 0,
+      "timed": false,
+      "blur": true,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 0,
+      "timed": false,
+      "blur": true,
+      "override": 1.8,
+      "value": 1.1
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "blur": false,
+      "override": "NaN",
+      "value": 1.02
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "blur": false,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "blur": false,
+      "override": 1.8,
+      "value": 1.02
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "blur": true,
+      "override": "NaN",
+      "value": 1.02
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "blur": true,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "blur": true,
+      "override": 1.8,
+      "value": 1.02
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "blur": false,
+      "override": "NaN",
+      "value": 1.02
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "blur": false,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "blur": false,
+      "override": 1.8,
+      "value": 1.02
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "blur": true,
+      "override": "NaN",
+      "value": 1.02
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "blur": true,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "blur": true,
+      "override": 1.8,
+      "value": 1.02
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "blur": false,
+      "override": "NaN",
+      "value": 1.02
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "blur": false,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "blur": false,
+      "override": 1.8,
+      "value": 1.02
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "blur": true,
+      "override": "NaN",
+      "value": 1.02
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "blur": true,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "blur": true,
+      "override": 1.8,
+      "value": 1.02
+    },
+    {
+      "preset": 2,
+      "timed": false,
+      "blur": false,
+      "override": "NaN",
+      "value": 1.1
+    },
+    {
+      "preset": 2,
+      "timed": false,
+      "blur": false,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 2,
+      "timed": false,
+      "blur": false,
+      "override": 1.8,
+      "value": 1.1
+    },
+    {
+      "preset": 2,
+      "timed": false,
+      "blur": true,
+      "override": "NaN",
+      "value": 1.1
+    },
+    {
+      "preset": 2,
+      "timed": false,
+      "blur": true,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 2,
+      "timed": false,
+      "blur": true,
+      "override": 1.8,
+      "value": 1.1
+    },
+    {
+      "preset": 2,
+      "timed": true,
+      "blur": false,
+      "override": "NaN",
+      "value": 1.1
+    },
+    {
+      "preset": 2,
+      "timed": true,
+      "blur": false,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 2,
+      "timed": true,
+      "blur": false,
+      "override": 1.8,
+      "value": 1.1
+    },
+    {
+      "preset": 2,
+      "timed": true,
+      "blur": true,
+      "override": "NaN",
+      "value": 1.1
+    },
+    {
+      "preset": 2,
+      "timed": true,
+      "blur": true,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 2,
+      "timed": true,
+      "blur": true,
+      "override": 1.8,
+      "value": 1.1
+    },
+    {
+      "preset": 3,
+      "timed": false,
+      "blur": false,
+      "override": "NaN",
+      "value": 1.05
+    },
+    {
+      "preset": 3,
+      "timed": false,
+      "blur": false,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 3,
+      "timed": false,
+      "blur": false,
+      "override": 1.8,
+      "value": 1.05
+    },
+    {
+      "preset": 3,
+      "timed": false,
+      "blur": true,
+      "override": "NaN",
+      "value": 1.05
+    },
+    {
+      "preset": 3,
+      "timed": false,
+      "blur": true,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 3,
+      "timed": false,
+      "blur": true,
+      "override": 1.8,
+      "value": 1.05
+    },
+    {
+      "preset": 3,
+      "timed": true,
+      "blur": false,
+      "override": "NaN",
+      "value": 1.05
+    },
+    {
+      "preset": 3,
+      "timed": true,
+      "blur": false,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 3,
+      "timed": true,
+      "blur": false,
+      "override": 1.8,
+      "value": 1.05
+    },
+    {
+      "preset": 3,
+      "timed": true,
+      "blur": true,
+      "override": "NaN",
+      "value": 1.05
+    },
+    {
+      "preset": 3,
+      "timed": true,
+      "blur": true,
+      "override": 1.2,
+      "value": 1.2
+    },
+    {
+      "preset": 3,
+      "timed": true,
+      "blur": true,
+      "override": 1.8,
+      "value": 1.05
+    }
+  ],
+  "secondary": [
+    {
+      "preset": 0,
+      "timed": false,
+      "background": false,
+      "value": 1.0
+    },
+    {
+      "preset": 0,
+      "timed": false,
+      "background": true,
+      "value": 0.5
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "background": false,
+      "value": 0.7
+    },
+    {
+      "preset": 0,
+      "timed": true,
+      "background": true,
+      "value": 0.5
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "background": false,
+      "value": 0.37254901960784315
+    },
+    {
+      "preset": 1,
+      "timed": false,
+      "background": true,
+      "value": 0.5644682115270351
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "background": false,
+      "value": 0.37254901960784315
+    },
+    {
+      "preset": 1,
+      "timed": true,
+      "background": true,
+      "value": 0.5644682115270351
+    }
+  ],
+  "cjk": [
+    {
+      "texts": [],
+      "value": false
+    },
+    {
+      "texts": [
+        "中文"
+      ],
+      "value": true
+    },
+    {
+      "texts": [
+        "中文",
+        "汉字",
+        "English"
+      ],
+      "value": true
+    },
+    {
+      "texts": [
+        "中文",
+        "English",
+        "other"
+      ],
+      "value": false
+    },
+    {
+      "texts": [
+        "カナ",
+        "カナ",
+        "English"
+      ],
+      "value": true
+    },
+    {
+      "texts": [
+        "한글",
+        "한글",
+        "English"
+      ],
+      "value": true
+    },
+    {
+      "texts": [
+        "English中",
+        "English",
+        ""
+      ],
+      "value": false
+    },
+    {
+      "texts": [
+        "",
+        ""
+      ],
+      "value": false
+    },
+    {
+      "texts": [
+        "",
+        "",
+        "中文"
+      ],
+      "value": false
+    }
+  ]
+}

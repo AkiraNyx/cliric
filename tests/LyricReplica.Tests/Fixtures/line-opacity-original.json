@@ -1,0 +1,8130 @@
+{
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "originalPrepareForSingCalled": true,
+  "originalStopCalled": true,
+  "originalPageTransitionCalled": true,
+  "originalLineStateSetterCalled": true,
+  "timedPage": true,
+  "lineSwitchingIos164": true,
+  "singOpacityDuration": 700,
+  "durationAfterSettingToggle": 700,
+  "backEaseMinimumDuration": 450,
+  "windowShown": false,
+  "fullPageStarted": false,
+  "scope": "Standalone mask/secondary plans and page gap helper; no full lyric layout or playback; default background-stop tag branch only",
+  "cases": [
+    {
+      "interline": 0,
+      "speed": 0.5,
+      "backEase": false,
+      "instant": false,
+      "background": false,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 100.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 195
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 244
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 254
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 365.5,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 0.5,
+      "backEase": false,
+      "instant": false,
+      "background": true,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 100.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 126
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 153
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 365.5,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 0.5,
+      "backEase": false,
+      "instant": true,
+      "background": false,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 0.5,
+      "backEase": false,
+      "instant": true,
+      "background": true,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 0.5,
+      "backEase": true,
+      "instant": false,
+      "background": false,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 100.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 195
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 244
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 254
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 279.2214,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.24999982093063067,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.7499998209306307,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 0.5,
+      "backEase": true,
+      "instant": false,
+      "background": true,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 100.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 126
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 153
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 279.2214,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.24999982093063067,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.7499998209306307,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 0.5,
+      "backEase": true,
+      "instant": true,
+      "background": false,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 0.5,
+      "backEase": true,
+      "instant": true,
+      "background": true,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 1.0,
+      "backEase": false,
+      "instant": false,
+      "background": false,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 200.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 195
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 244
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 254
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 731.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 1.0,
+      "backEase": false,
+      "instant": false,
+      "background": true,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 200.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 126
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 153
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 731.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 1.0,
+      "backEase": false,
+      "instant": true,
+      "background": false,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 1.0,
+      "backEase": false,
+      "instant": true,
+      "background": true,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 1.0,
+      "backEase": true,
+      "instant": false,
+      "background": false,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 200.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 195
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 244
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 254
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 558.4428,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 1.0,
+      "backEase": true,
+      "instant": false,
+      "background": true,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 200.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 126
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 153
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 558.4428,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 1.0,
+      "backEase": true,
+      "instant": true,
+      "background": false,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 1.0,
+      "backEase": true,
+      "instant": true,
+      "background": true,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 2.0,
+      "backEase": false,
+      "instant": false,
+      "background": false,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 400.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 195
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 244
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 254
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 1462.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 2.0,
+      "backEase": false,
+      "instant": false,
+      "background": true,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 400.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 126
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 153
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 1462.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 2.0,
+      "backEase": false,
+      "instant": true,
+      "background": false,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 2.0,
+      "backEase": false,
+      "instant": true,
+      "background": true,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 2.0,
+      "backEase": true,
+      "instant": false,
+      "background": false,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 400.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 195
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 244
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 254
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 1116.8857,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.24999997761633083,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.49999995523266166,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.7499999328489925,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 2.0,
+      "backEase": true,
+      "instant": false,
+      "background": true,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 400.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 126
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 153
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 1116.8857,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.24999997761633083,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.49999995523266166,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.7499999328489925,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 2.0,
+      "backEase": true,
+      "instant": true,
+      "background": false,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 0,
+      "speed": 2.0,
+      "backEase": true,
+      "instant": true,
+      "background": true,
+      "scrollDurationMs": 860,
+      "backEaseRatio": 0.7639437268410976,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 0.5,
+      "backEase": false,
+      "instant": false,
+      "background": false,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 100.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 195
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 244
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 254
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 212.5,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 0.5,
+      "backEase": false,
+      "instant": false,
+      "background": true,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 100.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 126
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 153
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 212.5,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 0.5,
+      "backEase": false,
+      "instant": true,
+      "background": false,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 0.5,
+      "backEase": false,
+      "instant": true,
+      "background": true,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 0.5,
+      "backEase": true,
+      "instant": false,
+      "background": false,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 100.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 195
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 244
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 254
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 480.2499,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.24999984383130533,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.4999998958875369,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.7499999479437685,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 0.5,
+      "backEase": true,
+      "instant": false,
+      "background": true,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 100.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 126
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 153
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 480.2499,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.24999984383130533,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.4999998958875369,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.7499999479437685,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 0.5,
+      "backEase": true,
+      "instant": true,
+      "background": false,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 0.5,
+      "backEase": true,
+      "instant": true,
+      "background": true,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 350.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 1.0,
+      "backEase": false,
+      "instant": false,
+      "background": false,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 200.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 195
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 244
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 254
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 425.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 1.0,
+      "backEase": false,
+      "instant": false,
+      "background": true,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 200.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 126
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 153
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 425.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 1.0,
+      "backEase": false,
+      "instant": true,
+      "background": false,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 1.0,
+      "backEase": false,
+      "instant": true,
+      "background": true,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 1.0,
+      "backEase": true,
+      "instant": false,
+      "background": false,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 200.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 195
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 244
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 254
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 960.4999,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.24999992191566078,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.49999994794377384,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.7499999739718869,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 1.0,
+      "backEase": true,
+      "instant": false,
+      "background": true,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 200.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 126
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 153
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 960.4999,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.24999992191566078,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.49999994794377384,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.7499999739718869,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 1.0,
+      "backEase": true,
+      "instant": true,
+      "background": false,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 1.0,
+      "backEase": true,
+      "instant": true,
+      "background": true,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 700.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 2.0,
+      "backEase": false,
+      "instant": false,
+      "background": false,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 400.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 195
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 244
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 254
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 850.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 2.0,
+      "backEase": false,
+      "instant": false,
+      "background": true,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 400.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 126
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 153
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 850.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 2.0,
+      "backEase": false,
+      "instant": true,
+      "background": false,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 2.0,
+      "backEase": false,
+      "instant": true,
+      "background": true,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 2.0,
+      "backEase": true,
+      "instant": false,
+      "background": false,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 400.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 195
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 244
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 254
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 1920.9999,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.24999996095783242,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.4999999739718883,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.7499999869859442,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 2.0,
+      "backEase": true,
+      "instant": false,
+      "background": true,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 400.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 126
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 153
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 1920.9999,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 47
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.24999996095783242,
+              "alpha": 64
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.4999999739718883,
+              "alpha": 70
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.7499999869859442,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 2.0,
+      "backEase": true,
+      "instant": true,
+      "background": false,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 255,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 255
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 255,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 255
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 107
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 58
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 48
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "interline": 1,
+      "speed": 2.0,
+      "backEase": true,
+      "instant": true,
+      "background": true,
+      "scrollDurationMs": 500,
+      "backEaseRatio": 2.26,
+      "prepared": [
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 159,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 159
+            }
+          ]
+        },
+        {
+          "durationMs": 0.0,
+          "fromAlpha": 47,
+          "toAlpha": 71,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 71
+            }
+          ]
+        }
+      ],
+      "stopped": [
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 159,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 159
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 80
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 53
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        },
+        {
+          "durationMs": 1400.0,
+          "fromAlpha": 71,
+          "toAlpha": 47,
+          "power": 4.3,
+          "mode": "EaseOut",
+          "samples": [
+            {
+              "fraction": 0,
+              "nativeProgress": 0.0,
+              "alpha": 71
+            },
+            {
+              "fraction": 0.25,
+              "nativeProgress": 0.25,
+              "alpha": 54
+            },
+            {
+              "fraction": 0.5,
+              "nativeProgress": 0.5,
+              "alpha": 48
+            },
+            {
+              "fraction": 0.75,
+              "nativeProgress": 0.75,
+              "alpha": 47
+            },
+            {
+              "fraction": 1,
+              "nativeProgress": 1.0,
+              "alpha": 47
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "secondary": [
+    {
+      "timed": false,
+      "speed": 0.5,
+      "preset": 0,
+      "enter": {
+        "from": 1.0,
+        "to": 1.0,
+        "durationMs": 75.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 1.0
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 1.0
+          }
+        ]
+      },
+      "leave": {
+        "from": 1.0,
+        "to": 1.0,
+        "durationMs": 75.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 1.0
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "timed": false,
+      "speed": 0.5,
+      "preset": 1,
+      "enter": {
+        "from": 1.0,
+        "to": 0.37254901960784315,
+        "durationMs": 75.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.8431372549019608
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.6862745098039216
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.5294117647058824
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 0.37254901960784315
+          }
+        ]
+      },
+      "leave": {
+        "from": 0.37254901960784315,
+        "to": 1.0,
+        "durationMs": 75.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 0.37254901960784315
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.5294117647058824
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.6862745098039216
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.8431372549019608
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "timed": false,
+      "speed": 1.0,
+      "preset": 0,
+      "enter": {
+        "from": 1.0,
+        "to": 1.0,
+        "durationMs": 150.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 1.0
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 1.0
+          }
+        ]
+      },
+      "leave": {
+        "from": 1.0,
+        "to": 1.0,
+        "durationMs": 150.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 1.0
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "timed": false,
+      "speed": 1.0,
+      "preset": 1,
+      "enter": {
+        "from": 1.0,
+        "to": 0.37254901960784315,
+        "durationMs": 150.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.8431372549019608
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.6862745098039216
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.5294117647058824
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 0.37254901960784315
+          }
+        ]
+      },
+      "leave": {
+        "from": 0.37254901960784315,
+        "to": 1.0,
+        "durationMs": 150.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 0.37254901960784315
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.5294117647058824
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.6862745098039216
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.8431372549019608
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "timed": false,
+      "speed": 2.0,
+      "preset": 0,
+      "enter": {
+        "from": 1.0,
+        "to": 1.0,
+        "durationMs": 300.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 1.0
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 1.0
+          }
+        ]
+      },
+      "leave": {
+        "from": 1.0,
+        "to": 1.0,
+        "durationMs": 300.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 1.0
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "timed": false,
+      "speed": 2.0,
+      "preset": 1,
+      "enter": {
+        "from": 1.0,
+        "to": 0.37254901960784315,
+        "durationMs": 300.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.8431372549019608
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.6862745098039216
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.5294117647058824
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 0.37254901960784315
+          }
+        ]
+      },
+      "leave": {
+        "from": 0.37254901960784315,
+        "to": 1.0,
+        "durationMs": 300.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 0.37254901960784315
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.5294117647058824
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.6862745098039216
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.8431372549019608
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "timed": true,
+      "speed": 0.5,
+      "preset": 0,
+      "enter": {
+        "from": 0.21568627450980393,
+        "to": 0.7,
+        "durationMs": 350.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 0.21568627450980393
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.5594307881730198
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.6754134384926482
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.6987518441560934
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 0.7
+          }
+        ]
+      },
+      "leave": {
+        "from": 0.7,
+        "to": 0.1843137254901961,
+        "durationMs": 350.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 0.7
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.571078431372549
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.442156862745098
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.31323529411764706
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 0.1843137254901961
+          }
+        ]
+      }
+    },
+    {
+      "timed": true,
+      "speed": 0.5,
+      "preset": 1,
+      "enter": {
+        "from": 0.21568627450980393,
+        "to": 0.37254901960784315,
+        "durationMs": 350.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 0.21568627450980393
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.32702052994728276
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.3645857608200369
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.3721447586057681
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 0.37254901960784315
+          }
+        ]
+      },
+      "leave": {
+        "from": 0.37254901960784315,
+        "to": 0.1843137254901961,
+        "durationMs": 350.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 0.37254901960784315
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.3254901960784314
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.2784313725490196
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.23137254901960785
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 0.1843137254901961
+          }
+        ]
+      }
+    },
+    {
+      "timed": true,
+      "speed": 1.0,
+      "preset": 0,
+      "enter": {
+        "from": 0.21568627450980393,
+        "to": 0.7,
+        "durationMs": 700.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 0.21568627450980393
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.5594307881730198
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.6754134384926482
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.6987518441560934
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 0.7
+          }
+        ]
+      },
+      "leave": {
+        "from": 0.7,
+        "to": 0.1843137254901961,
+        "durationMs": 350.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 0.7
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.571078431372549
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.442156862745098
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.31323529411764706
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 0.1843137254901961
+          }
+        ]
+      }
+    },
+    {
+      "timed": true,
+      "speed": 1.0,
+      "preset": 1,
+      "enter": {
+        "from": 0.21568627450980393,
+        "to": 0.37254901960784315,
+        "durationMs": 700.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 0.21568627450980393
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.32702052994728276
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.3645857608200369
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.3721447586057681
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 0.37254901960784315
+          }
+        ]
+      },
+      "leave": {
+        "from": 0.37254901960784315,
+        "to": 0.1843137254901961,
+        "durationMs": 350.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 0.37254901960784315
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.3254901960784314
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.2784313725490196
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.23137254901960785
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 0.1843137254901961
+          }
+        ]
+      }
+    },
+    {
+      "timed": true,
+      "speed": 2.0,
+      "preset": 0,
+      "enter": {
+        "from": 0.21568627450980393,
+        "to": 0.7,
+        "durationMs": 1400.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 0.21568627450980393
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.5594307881730198
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.6754134384926482
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.6987518441560934
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 0.7
+          }
+        ]
+      },
+      "leave": {
+        "from": 0.7,
+        "to": 0.1843137254901961,
+        "durationMs": 350.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 0.7
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.571078431372549
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.442156862745098
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.31323529411764706
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 0.1843137254901961
+          }
+        ]
+      }
+    },
+    {
+      "timed": true,
+      "speed": 2.0,
+      "preset": 1,
+      "enter": {
+        "from": 0.21568627450980393,
+        "to": 0.37254901960784315,
+        "durationMs": 1400.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 0.21568627450980393
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.32702052994728276
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.3645857608200369
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.3721447586057681
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 0.37254901960784315
+          }
+        ]
+      },
+      "leave": {
+        "from": 0.37254901960784315,
+        "to": 0.1843137254901961,
+        "durationMs": 350.0,
+        "samples": [
+          {
+            "fraction": 0,
+            "nativeProgress": 0.0,
+            "value": 0.37254901960784315
+          },
+          {
+            "fraction": 0.25,
+            "nativeProgress": 0.25,
+            "value": 0.3254901960784314
+          },
+          {
+            "fraction": 0.5,
+            "nativeProgress": 0.5,
+            "value": 0.2784313725490196
+          },
+          {
+            "fraction": 0.75,
+            "nativeProgress": 0.75,
+            "value": 0.23137254901960785
+          },
+          {
+            "fraction": 1,
+            "nativeProgress": 1.0,
+            "value": 0.1843137254901961
+          }
+        ]
+      }
+    }
+  ],
+  "pageTransitions": [
+    {
+      "name": "first",
+      "preset": 0,
+      "selected": 0,
+      "rows": [
+        {
+          "end": 2000,
+          "start": 500,
+          "rawEnd": 2000,
+          "rawStart": 1000
+        }
+      ],
+      "useBackEase": true,
+      "gapSeconds": 0.2
+    },
+    {
+      "name": "true-word-gap",
+      "preset": 0,
+      "selected": 1,
+      "rows": [
+        {
+          "end": 2000,
+          "start": 500,
+          "rawEnd": 2000,
+          "rawStart": 1000
+        },
+        {
+          "end": 4000,
+          "start": 2200,
+          "rawEnd": 4000,
+          "rawStart": 2600
+        }
+      ],
+      "useBackEase": true,
+      "gapSeconds": 0.6
+    },
+    {
+      "name": "breathing",
+      "preset": 0,
+      "selected": 1,
+      "rows": [
+        {
+          "end": 2000,
+          "start": 500,
+          "rawEnd": 2000,
+          "rawStart": 1000
+        },
+        {
+          "end": 11000,
+          "start": 9000,
+          "rawEnd": 11000,
+          "rawStart": 9400
+        }
+      ],
+      "useBackEase": true,
+      "gapSeconds": 0.2
+    },
+    {
+      "name": "overlap",
+      "preset": 0,
+      "selected": 1,
+      "rows": [
+        {
+          "end": 2000,
+          "start": 500,
+          "rawEnd": 2000,
+          "rawStart": 1000
+        },
+        {
+          "end": 4000,
+          "start": 1500,
+          "rawEnd": 4000,
+          "rawStart": 1800
+        }
+      ],
+      "useBackEase": true,
+      "gapSeconds": -0.2
+    },
+    {
+      "name": "legacy-short-lead",
+      "preset": 1,
+      "selected": 1,
+      "rows": [
+        {
+          "end": 2000,
+          "start": 500,
+          "rawEnd": 2000,
+          "rawStart": 1000
+        },
+        {
+          "end": 4000,
+          "start": 2200,
+          "rawEnd": 4000,
+          "rawStart": 2600
+        }
+      ],
+      "useBackEase": false,
+      "gapSeconds": 0.0
+    },
+    {
+      "name": "legacy-long-lead",
+      "preset": 1,
+      "selected": 1,
+      "rows": [
+        {
+          "end": 2000,
+          "start": 500,
+          "rawEnd": 2000,
+          "rawStart": 1000
+        },
+        {
+          "end": 4000,
+          "start": 2100,
+          "rawEnd": 4000,
+          "rawStart": 2600
+        }
+      ],
+      "useBackEase": true,
+      "gapSeconds": 0.0
+    }
+  ],
+  "mobileFontEvidence": [
+    {
+      "resourceKey": "Font.Apple.Text",
+      "offset": 60148,
+      "source": "Original string decoder after original standalone TextSing component initializers",
+      "componentInitializers": 70,
+      "initializationFailures": 70
+    }
+  ]
+}

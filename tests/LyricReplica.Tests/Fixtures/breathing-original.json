@@ -1,0 +1,729 @@
+{
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "originalStartTickAndExitHelpersCalled": true,
+  "windowShown": false,
+  "transportCommandsCalled": false,
+  "scope": "Standalone paused Start, non-exit timer dispatch and deterministic original exit helper branches; random selection/full-page scheduling not executed",
+  "starts": [
+    {
+      "delayed": false,
+      "requestedStart": 1000,
+      "end": 13000,
+      "adjustedStart": 1500,
+      "visibleObservedMs": 540.9437,
+      "cycles": 2,
+      "period": 5120,
+      "dotPeriod": 3046,
+      "entry": [
+        {
+          "from": 0.0,
+          "defaultFrom": 0.0,
+          "to": 0.15,
+          "durationMs": 750.0,
+          "easing": "Linear",
+          "mode": null,
+          "samples": [
+            {
+              "fraction": 0,
+              "elapsedMs": 0.0,
+              "value": 0.0
+            },
+            {
+              "fraction": 0.25,
+              "elapsedMs": 187.5,
+              "value": 0.0375
+            },
+            {
+              "fraction": 0.5,
+              "elapsedMs": 375.0,
+              "value": 0.075
+            },
+            {
+              "fraction": 0.6666666666666666,
+              "elapsedMs": 500.0,
+              "value": 0.09999999999999999
+            },
+            {
+              "fraction": 0.75,
+              "elapsedMs": 562.5,
+              "value": 0.11249999999999999
+            },
+            {
+              "fraction": 1,
+              "elapsedMs": 750.0,
+              "value": 0.15
+            }
+          ]
+        },
+        {
+          "from": 0.0,
+          "defaultFrom": 0.0,
+          "to": 0.15,
+          "durationMs": 750.0,
+          "easing": "Linear",
+          "mode": null,
+          "samples": [
+            {
+              "fraction": 0,
+              "elapsedMs": 0.0,
+              "value": 0.0
+            },
+            {
+              "fraction": 0.25,
+              "elapsedMs": 187.5,
+              "value": 0.0375
+            },
+            {
+              "fraction": 0.5,
+              "elapsedMs": 375.0,
+              "value": 0.075
+            },
+            {
+              "fraction": 0.6666666666666666,
+              "elapsedMs": 500.0,
+              "value": 0.09999999999999999
+            },
+            {
+              "fraction": 0.75,
+              "elapsedMs": 562.5,
+              "value": 0.11249999999999999
+            },
+            {
+              "fraction": 1,
+              "elapsedMs": 750.0,
+              "value": 0.15
+            }
+          ]
+        },
+        {
+          "from": 0.0,
+          "defaultFrom": 0.0,
+          "to": 0.15,
+          "durationMs": 750.0,
+          "easing": "Linear",
+          "mode": null,
+          "samples": [
+            {
+              "fraction": 0,
+              "elapsedMs": 0.0,
+              "value": 0.0
+            },
+            {
+              "fraction": 0.25,
+              "elapsedMs": 187.5,
+              "value": 0.0375
+            },
+            {
+              "fraction": 0.5,
+              "elapsedMs": 375.0,
+              "value": 0.075
+            },
+            {
+              "fraction": 0.6666666666666666,
+              "elapsedMs": 500.0,
+              "value": 0.09999999999999999
+            },
+            {
+              "fraction": 0.75,
+              "elapsedMs": 562.5,
+              "value": 0.11249999999999999
+            },
+            {
+              "fraction": 1,
+              "elapsedMs": 750.0,
+              "value": 0.15
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "delayed": true,
+      "requestedStart": 1000,
+      "end": 13000,
+      "adjustedStart": 2000,
+      "visibleObservedMs": 1031.227,
+      "cycles": 2,
+      "period": 4870,
+      "dotPeriod": 2880,
+      "entry": [
+        {
+          "from": 0.0,
+          "defaultFrom": 0.0,
+          "to": 0.15,
+          "durationMs": 750.0,
+          "easing": "Linear",
+          "mode": null,
+          "samples": [
+            {
+              "fraction": 0,
+              "elapsedMs": 0.0,
+              "value": 0.0
+            },
+            {
+              "fraction": 0.25,
+              "elapsedMs": 187.5,
+              "value": 0.0375
+            },
+            {
+              "fraction": 0.5,
+              "elapsedMs": 375.0,
+              "value": 0.075
+            },
+            {
+              "fraction": 0.6666666666666666,
+              "elapsedMs": 500.0,
+              "value": 0.09999999999999999
+            },
+            {
+              "fraction": 0.75,
+              "elapsedMs": 562.5,
+              "value": 0.11249999999999999
+            },
+            {
+              "fraction": 1,
+              "elapsedMs": 750.0,
+              "value": 0.15
+            }
+          ]
+        },
+        {
+          "from": 0.0,
+          "defaultFrom": 0.0,
+          "to": 0.15,
+          "durationMs": 750.0,
+          "easing": "Linear",
+          "mode": null,
+          "samples": [
+            {
+              "fraction": 0,
+              "elapsedMs": 0.0,
+              "value": 0.0
+            },
+            {
+              "fraction": 0.25,
+              "elapsedMs": 187.5,
+              "value": 0.0375
+            },
+            {
+              "fraction": 0.5,
+              "elapsedMs": 375.0,
+              "value": 0.075
+            },
+            {
+              "fraction": 0.6666666666666666,
+              "elapsedMs": 500.0,
+              "value": 0.09999999999999999
+            },
+            {
+              "fraction": 0.75,
+              "elapsedMs": 562.5,
+              "value": 0.11249999999999999
+            },
+            {
+              "fraction": 1,
+              "elapsedMs": 750.0,
+              "value": 0.15
+            }
+          ]
+        },
+        {
+          "from": 0.0,
+          "defaultFrom": 0.0,
+          "to": 0.15,
+          "durationMs": 750.0,
+          "easing": "Linear",
+          "mode": null,
+          "samples": [
+            {
+              "fraction": 0,
+              "elapsedMs": 0.0,
+              "value": 0.0
+            },
+            {
+              "fraction": 0.25,
+              "elapsedMs": 187.5,
+              "value": 0.0375
+            },
+            {
+              "fraction": 0.5,
+              "elapsedMs": 375.0,
+              "value": 0.075
+            },
+            {
+              "fraction": 0.6666666666666666,
+              "elapsedMs": 500.0,
+              "value": 0.09999999999999999
+            },
+            {
+              "fraction": 0.75,
+              "elapsedMs": 562.5,
+              "value": 0.11249999999999999
+            },
+            {
+              "fraction": 1,
+              "elapsedMs": 750.0,
+              "value": 0.15
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "dispatch": {
+    "pausedKeepsClock": true,
+    "pulse1": {
+      "from": 0.8,
+      "defaultFrom": 1.0,
+      "to": 1.1,
+      "durationMs": 2926.8292,
+      "easing": "QuadraticEase",
+      "mode": "EaseInOut",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "value": 0.8
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 731.7073,
+          "value": 0.8375
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 1463.4146,
+          "value": 0.9500000000000001
+        },
+        {
+          "fraction": 0.6666666666666666,
+          "elapsedMs": 1951.2194,
+          "value": 1.0333333242222218
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 2195.1219,
+          "value": 1.0625
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 2926.8292,
+          "value": 1.1
+        }
+      ]
+    },
+    "pulse2": {
+      "from": 1.03,
+      "defaultFrom": 1.03,
+      "to": 0.8,
+      "durationMs": 2926.8292,
+      "easing": "QuadraticEase",
+      "mode": "EaseInOut",
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "value": 1.03
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 731.7073,
+          "value": 1.00125
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 1463.4146,
+          "value": 0.915
+        },
+        {
+          "fraction": 0.6666666666666666,
+          "elapsedMs": 1951.2194,
+          "value": 0.8511111180962967
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 2195.1219,
+          "value": 0.8287500000000001
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 2926.8292,
+          "value": 0.8
+        }
+      ]
+    },
+    "dot": {
+      "from": null,
+      "defaultFrom": 0.15,
+      "to": 1.0,
+      "durationMs": 4000.0,
+      "easing": "Linear",
+      "mode": null,
+      "samples": [
+        {
+          "fraction": 0,
+          "elapsedMs": 0.0,
+          "value": 0.15
+        },
+        {
+          "fraction": 0.25,
+          "elapsedMs": 1000.0,
+          "value": 0.3625
+        },
+        {
+          "fraction": 0.5,
+          "elapsedMs": 2000.0,
+          "value": 0.575
+        },
+        {
+          "fraction": 0.6666666666666666,
+          "elapsedMs": 2666.6666,
+          "value": 0.7166666525000001
+        },
+        {
+          "fraction": 0.75,
+          "elapsedMs": 3000.0,
+          "value": 0.7875
+        },
+        {
+          "fraction": 1,
+          "elapsedMs": 4000.0,
+          "value": 1.0
+        }
+      ]
+    },
+    "onePulsePerTick": true
+  },
+  "exits": [
+    {
+      "huge": false,
+      "expand": {
+        "from": null,
+        "defaultFrom": 1.04,
+        "to": 1.13,
+        "durationMs": 900.0,
+        "easing": "PowerEase",
+        "mode": "EaseOut",
+        "samples": [
+          {
+            "fraction": 0,
+            "elapsedMs": 0.0,
+            "value": 1.04
+          },
+          {
+            "fraction": 0.25,
+            "elapsedMs": 225.0,
+            "value": 1.0822055697406956
+          },
+          {
+            "fraction": 0.5,
+            "elapsedMs": 450.0,
+            "value": 1.110412612325837
+          },
+          {
+            "fraction": 0.6666666666666666,
+            "elapsedMs": 600.0,
+            "value": 1.1219725843823976
+          },
+          {
+            "fraction": 0.75,
+            "elapsedMs": 675.0,
+            "value": 1.1257370471566894
+          },
+          {
+            "fraction": 1,
+            "elapsedMs": 900.0,
+            "value": 1.13
+          }
+        ]
+      },
+      "shrink": {
+        "from": null,
+        "defaultFrom": 1.13,
+        "to": 0.85,
+        "durationMs": 267.0,
+        "easing": "PowerEase",
+        "mode": "EaseIn",
+        "samples": [
+          {
+            "fraction": 0,
+            "elapsedMs": 0.0,
+            "value": 1.13
+          },
+          {
+            "fraction": 0.25,
+            "elapsedMs": 66.75,
+            "value": 1.1233687400215169
+          },
+          {
+            "fraction": 0.5,
+            "elapsedMs": 133.5,
+            "value": 1.0869099455329279
+          },
+          {
+            "fraction": 0.6666666666666666,
+            "elapsedMs": 178.0,
+            "value": 1.036306032021357
+          },
+          {
+            "fraction": 0.75,
+            "elapsedMs": 200.25,
+            "value": 1.0012274065121203
+          },
+          {
+            "fraction": 1,
+            "elapsedMs": 267.0,
+            "value": 0.85
+          }
+        ]
+      },
+      "fade": {
+        "from": 1.0,
+        "defaultFrom": 1.0,
+        "to": 0.0,
+        "durationMs": 267.0,
+        "easing": "Linear",
+        "mode": null,
+        "samples": [
+          {
+            "fraction": 0,
+            "elapsedMs": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "elapsedMs": 66.75,
+            "value": 0.75
+          },
+          {
+            "fraction": 0.5,
+            "elapsedMs": 133.5,
+            "value": 0.5
+          },
+          {
+            "fraction": 0.6666666666666666,
+            "elapsedMs": 178.0,
+            "value": 0.33333333333333337
+          },
+          {
+            "fraction": 0.75,
+            "elapsedMs": 200.25,
+            "value": 0.25
+          },
+          {
+            "fraction": 1,
+            "elapsedMs": 267.0,
+            "value": 0.0
+          }
+        ]
+      },
+      "bounce": null,
+      "final": null,
+      "lastFade": null
+    },
+    {
+      "huge": true,
+      "expand": {
+        "from": null,
+        "defaultFrom": 1.04,
+        "to": 5.0,
+        "durationMs": 900.0,
+        "easing": "PowerEase",
+        "mode": "EaseOut",
+        "samples": [
+          {
+            "fraction": 0,
+            "elapsedMs": 0.0,
+            "value": 1.04
+          },
+          {
+            "fraction": 0.25,
+            "elapsedMs": 225.0,
+            "value": 2.8970450685906055
+          },
+          {
+            "fraction": 0.5,
+            "elapsedMs": 450.0,
+            "value": 4.138154942336837
+          },
+          {
+            "fraction": 0.6666666666666666,
+            "elapsedMs": 600.0,
+            "value": 4.646793712825499
+          },
+          {
+            "fraction": 0.75,
+            "elapsedMs": 675.0,
+            "value": 4.812430074894339
+          },
+          {
+            "fraction": 1,
+            "elapsedMs": 900.0,
+            "value": 5.0
+          }
+        ]
+      },
+      "shrink": {
+        "from": null,
+        "defaultFrom": 5.0,
+        "to": 0.75,
+        "durationMs": 400.0,
+        "easing": "QuadraticEase",
+        "mode": "EaseInOut",
+        "samples": [
+          {
+            "fraction": 0,
+            "elapsedMs": 0.0,
+            "value": 5.0
+          },
+          {
+            "fraction": 0.25,
+            "elapsedMs": 100.0,
+            "value": 4.46875
+          },
+          {
+            "fraction": 0.5,
+            "elapsedMs": 200.0,
+            "value": 2.875
+          },
+          {
+            "fraction": 0.6666666666666666,
+            "elapsedMs": 266.6666,
+            "value": 1.6944453888891244
+          },
+          {
+            "fraction": 0.75,
+            "elapsedMs": 300.0,
+            "value": 1.28125
+          },
+          {
+            "fraction": 1,
+            "elapsedMs": 400.0,
+            "value": 0.75
+          }
+        ]
+      },
+      "fade": null,
+      "bounce": {
+        "from": null,
+        "defaultFrom": 0.75,
+        "to": 1.2,
+        "durationMs": 150.0,
+        "easing": "PowerEase",
+        "mode": "EaseIn",
+        "samples": [
+          {
+            "fraction": 0,
+            "elapsedMs": 0.0,
+            "value": 0.75
+          },
+          {
+            "fraction": 0.25,
+            "elapsedMs": 37.5,
+            "value": 0.7606573821082763
+          },
+          {
+            "fraction": 0.5,
+            "elapsedMs": 75.0,
+            "value": 0.8192518732506515
+          },
+          {
+            "fraction": 0.6666666666666666,
+            "elapsedMs": 100.0,
+            "value": 0.9005795913942474
+          },
+          {
+            "fraction": 0.75,
+            "elapsedMs": 112.5,
+            "value": 0.9569559538198065
+          },
+          {
+            "fraction": 1,
+            "elapsedMs": 150.0,
+            "value": 1.2
+          }
+        ]
+      },
+      "final": {
+        "from": null,
+        "defaultFrom": 0.75,
+        "to": 0.5,
+        "durationMs": 200.0,
+        "easing": "PowerEase",
+        "mode": "EaseIn",
+        "samples": [
+          {
+            "fraction": 0,
+            "elapsedMs": 0.0,
+            "value": 0.75
+          },
+          {
+            "fraction": 0.25,
+            "elapsedMs": 50.0,
+            "value": 0.7440792321620687
+          },
+          {
+            "fraction": 0.5,
+            "elapsedMs": 100.0,
+            "value": 0.7115267370829714
+          },
+          {
+            "fraction": 0.6666666666666666,
+            "elapsedMs": 133.3333,
+            "value": 0.6663447279149751
+          },
+          {
+            "fraction": 0.75,
+            "elapsedMs": 150.0,
+            "value": 0.6350244701001075
+          },
+          {
+            "fraction": 1,
+            "elapsedMs": 200.0,
+            "value": 0.5
+          }
+        ]
+      },
+      "lastFade": {
+        "from": 1.0,
+        "defaultFrom": 1.0,
+        "to": 0.0,
+        "durationMs": 200.0,
+        "easing": "Linear",
+        "mode": null,
+        "samples": [
+          {
+            "fraction": 0,
+            "elapsedMs": 0.0,
+            "value": 1.0
+          },
+          {
+            "fraction": 0.25,
+            "elapsedMs": 50.0,
+            "value": 0.75
+          },
+          {
+            "fraction": 0.5,
+            "elapsedMs": 100.0,
+            "value": 0.5
+          },
+          {
+            "fraction": 0.6666666666666666,
+            "elapsedMs": 133.3333,
+            "value": 0.33333349999999995
+          },
+          {
+            "fraction": 0.75,
+            "elapsedMs": 150.0,
+            "value": 0.25
+          },
+          {
+            "fraction": 1,
+            "elapsedMs": 200.0,
+            "value": 0.0
+          }
+        ]
+      }
+    }
+  ]
+}

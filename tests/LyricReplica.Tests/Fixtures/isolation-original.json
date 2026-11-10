@@ -1,0 +1,579 @@
+[
+  {
+    "type": "Lyricify_for_Spotify.Effects.Isolation.IsolationEffect",
+    "guid": "789965fd-d3d0-35f5-8013-faab27c2ab7c",
+    "constantBytes": 88,
+    "fields": [
+      {
+        "name": "iResolution",
+        "type": "System.Numerics.Vector3",
+        "offset": 0
+      },
+      {
+        "name": "RandomValue1",
+        "type": "System.Single",
+        "offset": 12
+      },
+      {
+        "name": "color1",
+        "type": "System.Numerics.Vector3",
+        "offset": 16
+      },
+      {
+        "name": "RandomValue2",
+        "type": "System.Single",
+        "offset": 28
+      },
+      {
+        "name": "color2",
+        "type": "System.Numerics.Vector3",
+        "offset": 32
+      },
+      {
+        "name": "RandomValue3",
+        "type": "System.Single",
+        "offset": 44
+      },
+      {
+        "name": "color3",
+        "type": "System.Numerics.Vector3",
+        "offset": 48
+      },
+      {
+        "name": "iTime",
+        "type": "System.Single",
+        "offset": 60
+      },
+      {
+        "name": "color4",
+        "type": "System.Numerics.Vector3",
+        "offset": 64
+      },
+      {
+        "name": "Width",
+        "type": "System.Single",
+        "offset": 76
+      },
+      {
+        "name": "Height",
+        "type": "System.Single",
+        "offset": 80
+      },
+      {
+        "name": "EnableLightWave",
+        "type": "System.Int32",
+        "offset": 84
+      }
+    ],
+    "properties": [
+      {
+        "name": "RandomValue1",
+        "type": "System.Single",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "5"
+          },
+          {
+            "type": "System.Int32",
+            "value": "0"
+          }
+        ],
+        "named": [],
+        "default": 0.0
+      },
+      {
+        "name": "RandomValue2",
+        "type": "System.Single",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "5"
+          },
+          {
+            "type": "System.Int32",
+            "value": "1"
+          }
+        ],
+        "named": [],
+        "default": 0.0
+      },
+      {
+        "name": "RandomValue3",
+        "type": "System.Single",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "5"
+          },
+          {
+            "type": "System.Int32",
+            "value": "2"
+          }
+        ],
+        "named": [],
+        "default": 0.0
+      },
+      {
+        "name": "iTime",
+        "type": "System.Single",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "5"
+          },
+          {
+            "type": "System.Int32",
+            "value": "3"
+          }
+        ],
+        "named": [],
+        "default": 0.0
+      },
+      {
+        "name": "Width",
+        "type": "System.Single",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "5"
+          },
+          {
+            "type": "System.Int32",
+            "value": "4"
+          }
+        ],
+        "named": [],
+        "default": 1280.0
+      },
+      {
+        "name": "Height",
+        "type": "System.Single",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "5"
+          },
+          {
+            "type": "System.Int32",
+            "value": "5"
+          }
+        ],
+        "named": [],
+        "default": 720.0
+      },
+      {
+        "name": "EnableLightWave",
+        "type": "System.Boolean",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "2"
+          },
+          {
+            "type": "System.Int32",
+            "value": "6"
+          }
+        ],
+        "named": [],
+        "default": false
+      },
+      {
+        "name": "iResolution",
+        "type": "System.Numerics.Vector3",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "7"
+          },
+          {
+            "type": "System.Int32",
+            "value": "7"
+          }
+        ],
+        "named": [],
+        "default": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "Color1",
+        "type": "System.Numerics.Vector3",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "7"
+          },
+          {
+            "type": "System.Int32",
+            "value": "8"
+          }
+        ],
+        "named": [],
+        "default": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "Color2",
+        "type": "System.Numerics.Vector3",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "7"
+          },
+          {
+            "type": "System.Int32",
+            "value": "9"
+          }
+        ],
+        "named": [],
+        "default": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "Color3",
+        "type": "System.Numerics.Vector3",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "7"
+          },
+          {
+            "type": "System.Int32",
+            "value": "10"
+          }
+        ],
+        "named": [],
+        "default": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "Color4",
+        "type": "System.Numerics.Vector3",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "7"
+          },
+          {
+            "type": "System.Int32",
+            "value": "11"
+          }
+        ],
+        "named": [],
+        "default": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "originalConstructorCalled": true,
+    "graphicsDeviceCreated": false,
+    "windowShown": false
+  },
+  {
+    "type": "Lyricify_for_Spotify.Effects.Isolation.IsolationEffectWithDithering",
+    "guid": "277f941b-d20e-3a6e-a63e-192ab4d81866",
+    "constantBytes": 96,
+    "fields": [
+      {
+        "name": "Resolution",
+        "type": "System.Numerics.Vector2",
+        "offset": 0
+      },
+      {
+        "name": "RandomValue1",
+        "type": "System.Single",
+        "offset": 8
+      },
+      {
+        "name": "UseHSVBlending",
+        "type": "System.Int32",
+        "offset": 12
+      },
+      {
+        "name": "Color1",
+        "type": "System.Numerics.Vector3",
+        "offset": 16
+      },
+      {
+        "name": "RandomValue2",
+        "type": "System.Single",
+        "offset": 28
+      },
+      {
+        "name": "Color2",
+        "type": "System.Numerics.Vector3",
+        "offset": 32
+      },
+      {
+        "name": "RandomValue3",
+        "type": "System.Single",
+        "offset": 44
+      },
+      {
+        "name": "Color3",
+        "type": "System.Numerics.Vector3",
+        "offset": 48
+      },
+      {
+        "name": "iTime",
+        "type": "System.Single",
+        "offset": 60
+      },
+      {
+        "name": "Color4",
+        "type": "System.Numerics.Vector3",
+        "offset": 64
+      },
+      {
+        "name": "EnableLightWave",
+        "type": "System.Int32",
+        "offset": 76
+      },
+      {
+        "name": "Dimming",
+        "type": "System.Single",
+        "offset": 80
+      },
+      {
+        "name": "DitherStrength",
+        "type": "System.Single",
+        "offset": 84
+      },
+      {
+        "name": "Padding",
+        "type": "System.Numerics.Vector2",
+        "offset": 88
+      }
+    ],
+    "properties": [
+      {
+        "name": "RandomValue1",
+        "type": "System.Single",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "5"
+          },
+          {
+            "type": "System.Int32",
+            "value": "0"
+          }
+        ],
+        "named": [],
+        "default": 0.0
+      },
+      {
+        "name": "RandomValue2",
+        "type": "System.Single",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "5"
+          },
+          {
+            "type": "System.Int32",
+            "value": "1"
+          }
+        ],
+        "named": [],
+        "default": 0.0
+      },
+      {
+        "name": "RandomValue3",
+        "type": "System.Single",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "5"
+          },
+          {
+            "type": "System.Int32",
+            "value": "2"
+          }
+        ],
+        "named": [],
+        "default": 0.0
+      },
+      {
+        "name": "iTime",
+        "type": "System.Single",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "5"
+          },
+          {
+            "type": "System.Int32",
+            "value": "3"
+          }
+        ],
+        "named": [],
+        "default": 0.0
+      },
+      {
+        "name": "EnableLightWave",
+        "type": "System.Boolean",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "2"
+          },
+          {
+            "type": "System.Int32",
+            "value": "4"
+          }
+        ],
+        "named": [],
+        "default": false
+      },
+      {
+        "name": "Resolution",
+        "type": "System.Numerics.Vector2",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "6"
+          },
+          {
+            "type": "System.Int32",
+            "value": "5"
+          }
+        ],
+        "named": [],
+        "default": [
+          1280.0,
+          720.0
+        ]
+      },
+      {
+        "name": "Color1",
+        "type": "System.Numerics.Vector3",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "7"
+          },
+          {
+            "type": "System.Int32",
+            "value": "6"
+          }
+        ],
+        "named": [],
+        "default": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "Color2",
+        "type": "System.Numerics.Vector3",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "7"
+          },
+          {
+            "type": "System.Int32",
+            "value": "7"
+          }
+        ],
+        "named": [],
+        "default": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "Color3",
+        "type": "System.Numerics.Vector3",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "7"
+          },
+          {
+            "type": "System.Int32",
+            "value": "8"
+          }
+        ],
+        "named": [],
+        "default": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "Color4",
+        "type": "System.Numerics.Vector3",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "7"
+          },
+          {
+            "type": "System.Int32",
+            "value": "9"
+          }
+        ],
+        "named": [],
+        "default": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "Dimming",
+        "type": "System.Single",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "5"
+          },
+          {
+            "type": "System.Int32",
+            "value": "10"
+          }
+        ],
+        "named": [],
+        "default": 0.0
+      },
+      {
+        "name": "DitherStrength",
+        "type": "System.Single",
+        "constructor": [
+          {
+            "type": "Vortice.Direct2D1.PropertyType",
+            "value": "5"
+          },
+          {
+            "type": "System.Int32",
+            "value": "11"
+          }
+        ],
+        "named": [],
+        "default": 1.0
+      }
+    ],
+    "originalConstructorCalled": true,
+    "graphicsDeviceCreated": false,
+    "windowShown": false
+  }
+]

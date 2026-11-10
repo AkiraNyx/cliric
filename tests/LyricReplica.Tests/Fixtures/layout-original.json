@@ -1,0 +1,106 @@
+{
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "originalStartCalled": true,
+  "windowShown": false,
+  "scope": "Immediate alignment and transform origin only; standalone controls with timer stopped before delayed work",
+  "mobileFontResource": null,
+  "mobileFontError": "Exception calling \"Invoke\" with \"1\" argument(s): \"Object reference not set to an instance of an object.\"",
+  "cases": [
+    {
+      "rightFirst": false,
+      "forceLeft": false,
+      "alignment": null,
+      "result": "Left",
+      "originX": 0.1,
+      "originY": 0.5
+    },
+    {
+      "rightFirst": false,
+      "forceLeft": false,
+      "alignment": "Left",
+      "result": "Left",
+      "originX": 0.1,
+      "originY": 0.5
+    },
+    {
+      "rightFirst": false,
+      "forceLeft": false,
+      "alignment": "Right",
+      "result": "Right",
+      "originX": 0.9,
+      "originY": 0.5
+    },
+    {
+      "rightFirst": false,
+      "forceLeft": true,
+      "alignment": null,
+      "result": "Left",
+      "originX": 0.1,
+      "originY": 0.5
+    },
+    {
+      "rightFirst": false,
+      "forceLeft": true,
+      "alignment": "Left",
+      "result": "Left",
+      "originX": 0.1,
+      "originY": 0.5
+    },
+    {
+      "rightFirst": false,
+      "forceLeft": true,
+      "alignment": "Right",
+      "result": "Left",
+      "originX": 0.1,
+      "originY": 0.5
+    },
+    {
+      "rightFirst": true,
+      "forceLeft": false,
+      "alignment": null,
+      "result": "Right",
+      "originX": 0.9,
+      "originY": 0.5
+    },
+    {
+      "rightFirst": true,
+      "forceLeft": false,
+      "alignment": "Left",
+      "result": "Right",
+      "originX": 0.9,
+      "originY": 0.5
+    },
+    {
+      "rightFirst": true,
+      "forceLeft": false,
+      "alignment": "Right",
+      "result": "Left",
+      "originX": 0.1,
+      "originY": 0.5
+    },
+    {
+      "rightFirst": true,
+      "forceLeft": true,
+      "alignment": null,
+      "result": "Right",
+      "originX": 0.9,
+      "originY": 0.5
+    },
+    {
+      "rightFirst": true,
+      "forceLeft": true,
+      "alignment": "Left",
+      "result": "Right",
+      "originX": 0.9,
+      "originY": 0.5
+    },
+    {
+      "rightFirst": true,
+      "forceLeft": true,
+      "alignment": "Right",
+      "result": "Right",
+      "originX": 0.9,
+      "originY": 0.5
+    }
+  ]
+}

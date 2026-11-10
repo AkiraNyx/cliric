@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:p="clr-namespace:LyricReplica.App.Reference" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Foreground="#FFFFFFFF" FontSize="24">
+  <Grid x:Name="MainGrid">
+    <Grid.CacheMode>
+      <BitmapCache EnableClearType="True" RenderAtScale="1" />
+    </Grid.CacheMode>
+    <Grid.RenderTransform>
+      <TranslateTransform />
+    </Grid.RenderTransform>
+    <Grid.Children>
+      <Grid VerticalAlignment="Top" x:Name="GridInside">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.Children>
+          <Border Grid.ColumnSpan="3" Visibility="Collapsed" Opacity="0.0001" Background="#FFFFFFFF" p:RoundedClip.CornerRadius="15" x:Name="BorderBackground" />
+          <p:GridSpacing Grid.Column="2" Spacing="0.1" WidthBinding="{Binding ElementName=GridInside, Path=ActualWidth}" x:Name="GridForSpacing" />
+          <StackPanel Grid.Column="1" Opacity="0.5" Margin="20,15,20,15" x:Name="StackPanelLyrics">
+            <StackPanel.Children>
+              <TextBlock LineHeight="30" TextWrapping="Wrap" HorizontalAlignment="Left" x:Name="TextBlockLyrics">
+                <Run x:Name="RunWrittenBy">
+                  <DynamicResource ResourceKey="String.Page.AppleMusicLyrics.WrittenBy.Colon" />
+                  <Run.FontWeight>SemiBold</Run.FontWeight>
+                </Run>
+                <Run x:Name="RunWriters">Ryan Tedder<Run.FontWeight>Normal</Run.FontWeight></Run>
+              </TextBlock>
+            </StackPanel.Children>
+          </StackPanel>
+        </Grid.Children>
+      </Grid>
+    </Grid.Children>
+  </Grid>
+</UserControl>

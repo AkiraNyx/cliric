@@ -1,0 +1,134 @@
+[
+  {
+    "input": [
+      "(backing)"
+    ],
+    "recognized": true,
+    "text": "backing",
+    "words": [
+      {
+        "text": "backing",
+        "start": 1000,
+        "duration": 300
+      }
+    ]
+  },
+  {
+    "input": [
+      "(",
+      "backing",
+      ")"
+    ],
+    "recognized": true,
+    "text": "backing",
+    "words": [
+      {
+        "text": "",
+        "start": 1000,
+        "duration": 300
+      },
+      {
+        "text": "backing",
+        "start": 1300,
+        "duration": 300
+      },
+      {
+        "text": "",
+        "start": 1600,
+        "duration": 300
+      }
+    ]
+  },
+  {
+    "input": [
+      "（",
+      "和声",
+      "）"
+    ],
+    "recognized": true,
+    "text": "和声",
+    "words": [
+      {
+        "text": "",
+        "start": 1000,
+        "duration": 300
+      },
+      {
+        "text": "和声",
+        "start": 1300,
+        "duration": 300
+      },
+      {
+        "text": "",
+        "start": 1600,
+        "duration": 300
+      }
+    ]
+  },
+  {
+    "input": [
+      " (",
+      "hello ",
+      ") "
+    ],
+    "recognized": false,
+    "text": " (hello ) ",
+    "words": [
+      {
+        "text": " (",
+        "start": 1000,
+        "duration": 300
+      },
+      {
+        "text": "hello ",
+        "start": 1300,
+        "duration": 300
+      },
+      {
+        "text": ") ",
+        "start": 1600,
+        "duration": 300
+      }
+    ]
+  },
+  {
+    "input": [
+      "((backing))"
+    ],
+    "recognized": true,
+    "text": "(backing)",
+    "words": [
+      {
+        "text": "(backing)",
+        "start": 1000,
+        "duration": 300
+      }
+    ]
+  },
+  {
+    "input": [
+      "(",
+      "(back) ",
+      ")"
+    ],
+    "recognized": true,
+    "text": "(back)",
+    "words": [
+      {
+        "text": "",
+        "start": 1000,
+        "duration": 300
+      },
+      {
+        "text": "(back) ",
+        "start": 1300,
+        "duration": 300
+      },
+      {
+        "text": "",
+        "start": 1600,
+        "duration": 300
+      }
+    ]
+  }
+]

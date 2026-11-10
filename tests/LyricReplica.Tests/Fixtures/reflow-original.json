@@ -1,0 +1,1377 @@
+{
+  "sourceSha256": "A41071F2E206312D7D657859F4594D699D179C9166E3A50EDED4524CBD001A42",
+  "originalUpdateLayoutCalcCalled": true,
+  "windowShown": false,
+  "transportCommandsCalled": false,
+  "scope": "Synthetic TextSing reflow, mask presence/snapshot/clock identity; not full-page native geometry or pixels",
+  "cases": [
+    {
+      "scene": "same-count",
+      "fromWidth": 500,
+      "toWidth": 600,
+      "fontSize": 46,
+      "maskMode": "all",
+      "animate": false,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": true
+        }
+      ]
+    },
+    {
+      "scene": "same-count",
+      "fromWidth": 500,
+      "toWidth": 600,
+      "fontSize": 46,
+      "maskMode": "all",
+      "animate": false,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": true
+        }
+      ]
+    },
+    {
+      "scene": "same-count",
+      "fromWidth": 500,
+      "toWidth": 600,
+      "fontSize": 46,
+      "maskMode": "all",
+      "animate": true,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.3717467563333333,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": true
+        }
+      ]
+    },
+    {
+      "scene": "same-count",
+      "fromWidth": 500,
+      "toWidth": 600,
+      "fontSize": 46,
+      "maskMode": "all",
+      "animate": true,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37242699366666665,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": true
+        }
+      ]
+    },
+    {
+      "scene": "same-count",
+      "fromWidth": 500,
+      "toWidth": 600,
+      "fontSize": 46,
+      "maskMode": "first",
+      "animate": false,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": true
+        }
+      ]
+    },
+    {
+      "scene": "same-count",
+      "fromWidth": 500,
+      "toWidth": 600,
+      "fontSize": 46,
+      "maskMode": "first",
+      "animate": false,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": true
+        }
+      ]
+    },
+    {
+      "scene": "same-count",
+      "fromWidth": 500,
+      "toWidth": 600,
+      "fontSize": 46,
+      "maskMode": "first",
+      "animate": true,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.372292038,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": true
+        }
+      ]
+    },
+    {
+      "scene": "same-count",
+      "fromWidth": 500,
+      "toWidth": 600,
+      "fontSize": 46,
+      "maskMode": "first",
+      "animate": true,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.3723127786666667,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": true
+        }
+      ]
+    },
+    {
+      "scene": "same-count",
+      "fromWidth": 500,
+      "toWidth": 600,
+      "fontSize": 46,
+      "maskMode": "none",
+      "animate": false,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "same-count",
+      "fromWidth": 500,
+      "toWidth": 600,
+      "fontSize": 46,
+      "maskMode": "none",
+      "animate": false,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.0,
+          "opacity": 1.0,
+          "startAlpha": 47,
+          "endAlpha": 47,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "same-count",
+      "fromWidth": 500,
+      "toWidth": 600,
+      "fontSize": 46,
+      "maskMode": "none",
+      "animate": true,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "same-count",
+      "fromWidth": 500,
+      "toWidth": 600,
+      "fontSize": 46,
+      "maskMode": "none",
+      "animate": true,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.0,
+          "opacity": 1.0,
+          "startAlpha": 47,
+          "endAlpha": 47,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "split",
+      "fromWidth": 500,
+      "toWidth": 130,
+      "fontSize": 41,
+      "maskMode": "all",
+      "animate": false,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "split",
+      "fromWidth": 500,
+      "toWidth": 130,
+      "fontSize": 41,
+      "maskMode": "all",
+      "animate": false,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": true,
+          "progress": 0.0,
+          "opacity": 1.0,
+          "startAlpha": 47,
+          "endAlpha": 47,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "split",
+      "fromWidth": 500,
+      "toWidth": 130,
+      "fontSize": 41,
+      "maskMode": "all",
+      "animate": true,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "split",
+      "fromWidth": 500,
+      "toWidth": 130,
+      "fontSize": 41,
+      "maskMode": "all",
+      "animate": true,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": true,
+          "progress": 0.0,
+          "opacity": 1.0,
+          "startAlpha": 47,
+          "endAlpha": 47,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "split",
+      "fromWidth": 500,
+      "toWidth": 130,
+      "fontSize": 41,
+      "maskMode": "first",
+      "animate": false,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "split",
+      "fromWidth": 500,
+      "toWidth": 130,
+      "fontSize": 41,
+      "maskMode": "first",
+      "animate": false,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": true,
+          "progress": 0.0,
+          "opacity": 1.0,
+          "startAlpha": 47,
+          "endAlpha": 47,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "split",
+      "fromWidth": 500,
+      "toWidth": 130,
+      "fontSize": 41,
+      "maskMode": "first",
+      "animate": true,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "split",
+      "fromWidth": 500,
+      "toWidth": 130,
+      "fontSize": 41,
+      "maskMode": "first",
+      "animate": true,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": true,
+          "progress": 0.0,
+          "opacity": 1.0,
+          "startAlpha": 47,
+          "endAlpha": 47,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "split",
+      "fromWidth": 500,
+      "toWidth": 130,
+      "fontSize": 41,
+      "maskMode": "none",
+      "animate": false,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "split",
+      "fromWidth": 500,
+      "toWidth": 130,
+      "fontSize": 41,
+      "maskMode": "none",
+      "animate": false,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.0,
+          "opacity": 1.0,
+          "startAlpha": 47,
+          "endAlpha": 47,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": true,
+          "progress": 0.0,
+          "opacity": 1.0,
+          "startAlpha": 47,
+          "endAlpha": 47,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "split",
+      "fromWidth": 500,
+      "toWidth": 130,
+      "fontSize": 41,
+      "maskMode": "none",
+      "animate": true,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "split",
+      "fromWidth": 500,
+      "toWidth": 130,
+      "fontSize": 41,
+      "maskMode": "none",
+      "animate": true,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.0,
+          "opacity": 1.0,
+          "startAlpha": 47,
+          "endAlpha": 47,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": true,
+          "progress": 0.0,
+          "opacity": 1.0,
+          "startAlpha": 47,
+          "endAlpha": 47,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "merge",
+      "fromWidth": 130,
+      "toWidth": 500,
+      "fontSize": 41,
+      "maskMode": "all",
+      "animate": false,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "merge",
+      "fromWidth": 130,
+      "toWidth": 500,
+      "fontSize": 41,
+      "maskMode": "all",
+      "animate": false,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "merge",
+      "fromWidth": 130,
+      "toWidth": 500,
+      "fontSize": 41,
+      "maskMode": "all",
+      "animate": true,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "merge",
+      "fromWidth": 130,
+      "toWidth": 500,
+      "fontSize": 41,
+      "maskMode": "all",
+      "animate": true,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "merge",
+      "fromWidth": 130,
+      "toWidth": 500,
+      "fontSize": 41,
+      "maskMode": "first",
+      "animate": false,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "merge",
+      "fromWidth": 130,
+      "toWidth": 500,
+      "fontSize": 41,
+      "maskMode": "first",
+      "animate": false,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "merge",
+      "fromWidth": 130,
+      "toWidth": 500,
+      "fontSize": 41,
+      "maskMode": "first",
+      "animate": true,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "merge",
+      "fromWidth": 130,
+      "toWidth": 500,
+      "fontSize": 41,
+      "maskMode": "first",
+      "animate": true,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": true,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.37,
+          "opacity": 1.0,
+          "startAlpha": 211,
+          "endAlpha": 83,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "merge",
+      "fromWidth": 130,
+      "toWidth": 500,
+      "fontSize": 41,
+      "maskMode": "none",
+      "animate": false,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "merge",
+      "fromWidth": 130,
+      "toWidth": 500,
+      "fontSize": 41,
+      "maskMode": "none",
+      "animate": false,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.0,
+          "opacity": 1.0,
+          "startAlpha": 47,
+          "endAlpha": 47,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "merge",
+      "fromWidth": 130,
+      "toWidth": 500,
+      "fontSize": 41,
+      "maskMode": "none",
+      "animate": true,
+      "prepare": false,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    },
+    {
+      "scene": "merge",
+      "fromWidth": 130,
+      "toWidth": 500,
+      "fontSize": 41,
+      "maskMode": "none",
+      "animate": true,
+      "prepare": true,
+      "selectedAfter": 1,
+      "before": [
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        },
+        {
+          "hasMask": false,
+          "progress": 0,
+          "opacity": 0.1843137254901961,
+          "startAlpha": null,
+          "endAlpha": null,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ],
+      "after": [
+        {
+          "hasMask": true,
+          "progress": 0.0,
+          "opacity": 1.0,
+          "startAlpha": 47,
+          "endAlpha": 47,
+          "hasClock": false,
+          "sameBrush": false
+        }
+      ]
+    }
+  ]
+}

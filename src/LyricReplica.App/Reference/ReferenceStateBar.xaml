@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:p="clr-namespace:LyricReplica.App.Reference" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Focusable="True" FontWeight="Medium" FocusVisualStyle="{x:Null}" x:Class="LyricReplica.App.Reference.ReferenceStateBar">
+  <Viewbox>
+    <Grid Height="90" Width="800" Opacity="0.5" x:Name="Grid">
+      <Grid.Children>
+        <Grid VerticalAlignment="Center" Height="18" Margin="16,-40,16,0" x:Name="GridBorders">
+          <Grid.RenderTransform>
+            <ScaleTransform x:Name="GridBordersScaleTransform" />
+          </Grid.RenderTransform>
+          <Grid.Children>
+            <Border Background="#FFFFFFFF" Opacity="0.5" CornerRadius="10" x:Name="BorderBackground" />
+            <Grid ClipToBounds="True" HorizontalAlignment="Left" Margin="0,0,555,0" x:Name="GridPlayed">
+              <Grid.Children>
+                <Border Background="#FFFFFFFF" Opacity="1" CornerRadius="10" Width="{Binding ActualWidth, ElementName=BorderBackground}" x:Name="BorderPlayed" />
+              </Grid.Children>
+            </Grid>
+          </Grid.Children>
+        </Grid>
+        <Border VerticalAlignment="Center" Height="40" Margin="18,-40,18,0" Background="#FFFFFFFF" Opacity="0.00001" x:Name="BorderCover" />
+        <TextBlock Text="0:30" Margin="15.5,0,0,3" Opacity="0.5" FontSize="26" Foreground="#FFFFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Left" x:Name="TextBlockCurrentTime" />
+        <TextBlock Text="1:30" Margin="0,0,16.5,3" Opacity="0.5" FontSize="26" Foreground="#FFFFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Right" x:Name="TextBlockLeftTime" />
+        <p:AnimatedTimerReadout Time="0" Margin="15.5,0,0,3" Opacity="0.5" FontSize="26" Foreground="#FFFFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Left" x:Name="TimerViewCurrentTime" />
+        <p:AnimatedTimerReadout Time="0" Margin="0,0,16.5,3" Opacity="0.5" FontSize="26" Foreground="#FFFFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Right" x:Name="TimerViewLeftTime" />
+      </Grid.Children>
+    </Grid>
+  </Viewbox>
+</UserControl>
