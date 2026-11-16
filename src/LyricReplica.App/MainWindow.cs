@@ -60,7 +60,7 @@ public sealed partial class MainWindow : Window
     private TextBlock _smallTitle = new(), _smallArtist = new(), _status = new(), _fps = new();
     private BreathingDots _dots = new();
     private ReferenceStateBar _seek = new(), _seekVertical = new();
-    private readonly Border _queue = new(), _settings = new();
+    private readonly Border _queue = new();
     private FrameworkElement _magic = new Border();
     private UserControl? _credit;
     private MagicStripController _magicController = null!;
@@ -101,9 +101,10 @@ public sealed partial class MainWindow : Window
     public bool Portrait => _portrait;
     public string? BackgroundError => _background.LastError;
 
-    public MainWindow(string[] args)
+    public MainWindow(string[] args, bool hostedByPlayer = false)
     {
         _args = args;
+        _hostedByPlayer = hostedByPlayer;
         _sleepPrevention = args.Contains("--verify-offscreen") ? new(_ => throw new InvalidOperationException("Offscreen verification must not call the system execution-state API.")) : new();
         if (args.Contains("--self-test") || args.Contains("--verify-offscreen"))
         {
@@ -147,7 +148,9 @@ public sealed partial class MainWindow : Window
         _audio.MediaFailed += (_, e) => { _audioLoaded = false; Notify("音频无法播放：" + e.ErrorException.Message); App.Log(e.ErrorException.ToString()); };
         Loaded += OnLoaded;
         SizeChanged += (_, _) => _rebuildPending = true;
-        StateChanged += (_, _) => { if (_updatingWindowChrome) return; UpdateWindowChrome(); _rebuildPending = true; UpdateSleepRequest(); };
+        StateChanged += (_, _) => { if (_updatingWindowChrome) return; UpdateWindowChrome(); _rebuildPending = true; UpdateLyricsVisibility(); };
+        if (_hostedByPlayer)
+            IsVisibleChanged += (_, _) => UpdateLyricsVisibility();
         Unloaded += (_, _) => ReleaseSleepRequest();
         PreviewKeyDown += OnKey;
         Closed += OnClosed;
@@ -342,8 +345,6 @@ public sealed partial class MainWindow : Window
         queueDock.Children.Add(queueHeader);
         queueDock.Children.Add(new ScrollViewer { Content = _queueItems, VerticalScrollBarVisibility = ScrollBarVisibility.Auto });
         _root.Children.Add(_queue);
-        ConfigureOverlay(_settings, 335);
-        _root.Children.Add(_settings);
         ContextMenu = BuildContextMenu();
         ConnectTrackMenus();
     }
@@ -364,17 +365,11 @@ public sealed partial class MainWindow : Window
     private async void OnLoaded(object sender, RoutedEventArgs e)
     {
         UpdateSleepRequest();
-        _audio.Volume = _options.Volume;
-        await LoadSongAsync(0);
-        if (_disposed)
+        await StartPlaybackAsync();
+        if (_disposed || _lyricsLoaded)
             return;
-        _clock.Seek(8500);
+        _lyricsLoaded = true;
         _magicController.BeginTutorial(_wall.Elapsed.TotalMilliseconds);
-        CompositionTarget.Rendering += OnRendering;
-        if (_args.Length > 0 && !_args[0].StartsWith("--"))
-            ImportLyrics(_args[0]);
-        if (_args.Contains("--self-test"))
-            await RunSelfTestAsync();
     }
     public async Task LoadSongAsync(int index)
     {
@@ -411,6 +406,10 @@ public sealed partial class MainWindow : Window
         _resetWordRuns = true;
         _title.Text = _smallTitle.Text = _song.Title;
         _artist.Text = _smallArtist.Text = _song.Artist;
+        if (_netEaseActive)
+            await StopNetEaseAsync();
+        if (generation != _loadGeneration || _disposed)
+            return;
         BitmapSource cover;
         _hasExplicitArtwork = false;
         try
@@ -436,6 +435,8 @@ public sealed partial class MainWindow : Window
         _rebuildPending = true;
         RefreshQueue();
         UpdatePlayButtons();
+        if (!_hasExplicitArtwork && _netEaseTracks.TryGetValue(_song.Id, out var track) && track.CoverUrl.Length > 0)
+            _ = UpdateNetEaseCoverAsync(track.CoverUrl, generation);
     }
     private void OnRendering(object? sender, EventArgs e)
     {
@@ -443,6 +444,8 @@ public sealed partial class MainWindow : Window
             return;
         double now = _wall.Elapsed.TotalSeconds, dt = Math.Clamp(now - _lastWall, 0, .1);
         _lastWall = now;
+        if (_hostedByPlayer && !LyricsVisible)
+            return;
         _frameCount++;
         _magicController.AdvanceTutorial(now * 1000);
         _status.Visibility = now < _noticeUntil ? Visibility.Visible : Visibility.Collapsed;
@@ -451,14 +454,7 @@ public sealed partial class MainWindow : Window
             _rebuildPending = false;
             RebuildRows();
         }
-        double position = _clock.PositionMs;
-        if (_clock.IsPlaying && position >= _clock.DurationMs - .1 && _clock.DurationMs > 0)
-        {
-            EndTrack();
-            position = _clock.PositionMs;
-        }
-        if (_audioLoaded && _clock.IsPlaying && Math.Abs(_audio.Position.TotalMilliseconds - position) > 150)
-            _clock.Seek(_audio.Position.TotalMilliseconds);
+        double position = UpdatePlaybackPosition();
         _seek.IsRealTimeUpdate = _seekVertical.IsRealTimeUpdate = _options.RealtimeSeek;
         _seek.ReduceMotion = _seekVertical.ReduceMotion = _options.ReduceMotion;
         _seek.AnimatedTime = _seekVertical.AnimatedTime = _options.AnimatedTime;
@@ -839,6 +835,11 @@ public sealed partial class MainWindow : Window
                 await system.SeekAsync(Math.Clamp(ms, 0, _clock.DurationMs));
                 return;
             }
+            if (_netEaseTracks.ContainsKey(_song.Id))
+            {
+                await ControlNetEaseAsync("time-pos", Math.Clamp(ms, 0, _clock.DurationMs) / 1000);
+                return;
+            }
             _clock.Seek(ms);
             _manualUntil = 0;
             _anchor = -2;
@@ -866,6 +867,14 @@ public sealed partial class MainWindow : Window
                     await system.PlayAsync();
                 return;
             }
+            if (_netEaseTracks.TryGetValue(_song.Id, out var track))
+            {
+                if (_netEaseActive)
+                    await ControlNetEaseAsync("pause", _netEasePlayRequested);
+                else
+                    await StartNetEaseAsync(track);
+                return;
+            }
             if (_clock.IsPlaying)
             {
                 _clock.Pause();
@@ -885,15 +894,15 @@ public sealed partial class MainWindow : Window
     }
     private void UpdatePlayButtons()
     {
-        bool playing = _navigationRequest != 0 ? _navigationPlaying : _clock.IsPlaying;
+        bool playing = Playing;
         _reference.Get<ImageButton>("ImageClickablePauseButton").Visibility = playing ? Visibility.Visible : Visibility.Collapsed;
         _reference.Get<ImageButton>("ImageClickablePlayButton").Visibility = playing ? Visibility.Collapsed : Visibility.Visible;
         var shuffle = _reference.Get<ImageButton>("ImageClickableShuffleButton");
         var repeat = _reference.Get<ImageButton>("ImageClickableRepeatButton");
         shuffle.IconOpacity = _shuffle ? 1 : .3;
         repeat.IconOpacity = _repeat ? 1 : .3;
-        shuffle.IsEnabled = _system is null || _system.Connected && _remoteShuffle;
-        repeat.IsEnabled = _system is null || _system.Connected && _remoteRepeat;
+        shuffle.IsEnabled = CanShuffle;
+        repeat.IsEnabled = CanRepeat;
         ToolTipService.SetShowOnDisabled(shuffle, true);
         ToolTipService.SetShowOnDisabled(repeat, true);
         shuffle.ToolTip = shuffle.IsEnabled ? "随机播放" : "此媒体会话未提供随机播放控制";
@@ -901,7 +910,7 @@ public sealed partial class MainWindow : Window
         bool one = _system is null ? _repeat : _remoteRepeatMode == MediaPlaybackAutoRepeatMode.Track;
         repeat.ImageSource = (ImageSource)Application.Current.Resources[one ? "Apple.Music.RepeatOneButton" : "Apple.Music.RepeatButton"];
     }
-    private async void ToggleShuffle()
+    internal async void ToggleShuffle()
     {
         try
         {
@@ -915,7 +924,7 @@ public sealed partial class MainWindow : Window
         }
         catch (Exception e) { Notify(e.Message); App.Log(e.ToString()); }
     }
-    private async void ToggleRepeat()
+    internal async void ToggleRepeat()
     {
         try
         {
@@ -955,7 +964,7 @@ public sealed partial class MainWindow : Window
         _artworkScale.BeginAnimation(ScaleTransform.ScaleYProperty, animation);
         _coverPlaying = playing;
     }
-    private async void Next()
+    internal async void Next()
     {
         try
         {
@@ -968,7 +977,7 @@ public sealed partial class MainWindow : Window
         }
         catch (Exception e) { Notify(e.Message); App.Log(e.ToString()); }
     }
-    private async void Previous()
+    internal async void Previous()
     {
         try
         {
@@ -986,9 +995,9 @@ public sealed partial class MainWindow : Window
         }
         catch (Exception e) { Notify(e.Message); App.Log(e.ToString()); }
     }
-    private async Task NavigateLocalAsync(int index)
+    internal async Task NavigateLocalAsync(int index, bool startPlaying = false)
     {
-        bool playing = _navigationRequest != 0 ? _navigationPlaying : _clock.IsPlaying;
+        bool playing = startPlaying || (_navigationRequest != 0 ? _navigationPlaying : _clock.IsPlaying || _netEasePlayRequested);
         int generation = _loadGeneration + 1;
         _navigationRequest = generation;
         _navigationPlaying = playing;
@@ -999,9 +1008,14 @@ public sealed partial class MainWindow : Window
                 return;
             if (_navigationPlaying)
             {
-                _clock.Play();
-                if (_audioLoaded)
-                    _audio.Play();
+                if (_netEaseTracks.TryGetValue(_song.Id, out var track))
+                    await StartNetEaseAsync(track);
+                else
+                {
+                    _clock.Play();
+                    if (_audioLoaded)
+                        _audio.Play();
+                }
             }
         }
         finally { if (_navigationRequest == generation) { _navigationRequest = 0; _navigationPlaying = false; } if (!_disposed) UpdatePlayButtons(); }
@@ -1019,7 +1033,7 @@ public sealed partial class MainWindow : Window
         else
             Next();
     }
-    private void Favorite()
+    internal void Favorite()
     {
         if (!_favorites.Add(_song.Id))
             _favorites.Remove(_song.Id);
@@ -1030,7 +1044,6 @@ public sealed partial class MainWindow : Window
     private void ToggleQueue()
     {
         _queue.Visibility = _queue.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-        _settings.Visibility = Visibility.Collapsed;
         RefreshQueue();
     }
     private void RefreshQueue()
@@ -1060,24 +1073,44 @@ public sealed partial class MainWindow : Window
         }
         catch (Exception e) { Notify(e.Message); App.Log(e.ToString()); }
     }
-    private void OpenLyrics()
+    internal void OpenLyrics(Window? owner = null)
     {
         var dialog = new OpenFileDialog { Filter = "歌词|*.json;*.lrc;*.ttml;*.xml;*.txt|所有文件|*.*" };
-        if (ShowFileDialog(dialog))
-            ImportLyrics(dialog.FileName);
+        if (ShowFileDialog(dialog, owner))
+            ImportLyrics(dialog.FileName, owner is not null && _song.Lines.Count == 0 ? _song.AudioPath : null);
     }
-    public void ImportLyrics(string path)
+    public void ImportLyrics(string path) => ImportLyrics(path, null);
+    private void ImportLyrics(string path, string? fallbackAudio)
     {
-        Guard(() => { var song = LyricsFile.Load(path); _songs.Add(song); _ = LoadSongAsync(_songs.Count - 1); });
+        Guard(() =>
+        {
+            var song = LyricsFile.Load(path);
+            if (string.IsNullOrWhiteSpace(song.AudioPath))
+                song.AudioPath = fallbackAudio;
+            _songs.Add(song);
+            _ = LoadSongAsync(_songs.Count - 1);
+        });
     }
-    private void OpenAudio()
+    internal void OpenAudio(Window? owner = null, bool newTrack = false)
     {
         var dialog = new OpenFileDialog { Filter = "音频|*.mp3;*.wav;*.m4a;*.aac;*.wma;*.flac|所有文件|*.*" };
-        if (ShowFileDialog(dialog))
+        if (!ShowFileDialog(dialog, owner))
+            return;
+        if (newTrack)
+            _ = AddAudioTrackAsync(dialog.FileName);
+        else
             OpenAudioFile(dialog.FileName);
     }
-    private void OpenAudioFile(string path)
+    private async void OpenAudioFile(string path)
     {
+        if (_netEaseActive)
+        {
+            int generation = _loadGeneration;
+            await StopNetEaseAsync();
+            if (_disposed || generation != _loadGeneration)
+                return;
+        }
+        _netEaseTracks.Remove(_song.Id);
         _system?.Dispose();
         _system = null;
         _clock.Pause();
@@ -1089,10 +1122,10 @@ public sealed partial class MainWindow : Window
         _audio.Volume = _options.Volume;
         Notify(Path.GetFileName(path));
     }
-    private void OpenCover()
+    internal void OpenCover(Window? owner = null)
     {
         var dialog = new OpenFileDialog { Filter = "图片|*.png;*.jpg;*.jpeg;*.bmp;*.webp" };
-        if (ShowFileDialog(dialog))
+        if (ShowFileDialog(dialog, owner))
         {
             var cover = Artwork.Load(dialog.FileName);
             _song.CoverPath = dialog.FileName;
@@ -1101,14 +1134,14 @@ public sealed partial class MainWindow : Window
             _ = _background.SetArtworkAsync(cover, _song.Id + dialog.FileName);
         }
     }
-    private bool ShowFileDialog(OpenFileDialog dialog)
+    private bool ShowFileDialog(OpenFileDialog dialog, Window? owner = null)
     {
         if (_fileDialogOpen || _wall.Elapsed.TotalSeconds < _ignoreDialogMouseUntil)
             return false;
         _fileDialogOpen = true;
         try
         {
-            return dialog.ShowDialog(this) == true;
+            return dialog.ShowDialog(owner ?? this) == true;
         }
         finally { _fileDialogOpen = false; _ignoreDialogMouseUntil = _wall.Elapsed.TotalSeconds + .25; }
     }
@@ -1117,11 +1150,21 @@ public sealed partial class MainWindow : Window
         if (e.Data.GetData(DataFormats.FileDrop) is string[] paths && paths.Length > 0)
             ImportLyrics(paths[0]);
     }
-    private async void ConnectSystemMedia()
+    internal async void ConnectSystemMedia()
     {
         var connection = new SystemMediaConnection(Dispatcher);
         try
         {
+            if (_netEaseActive)
+            {
+                int generation = _loadGeneration;
+                await StopNetEaseAsync();
+                if (_disposed || generation != _loadGeneration)
+                {
+                    connection.Dispose();
+                    return;
+                }
+            }
             _audio.Stop();
             _audioLoaded = false;
             _system?.Dispose();
@@ -1245,7 +1288,7 @@ public sealed partial class MainWindow : Window
         }
         else if (key == Key.Escape)
         {
-            _settings.Visibility = _queue.Visibility = Visibility.Collapsed;
+            _queue.Visibility = Visibility.Collapsed;
             if (_fullscreen)
                 ToggleFullscreen();
         }
@@ -1313,11 +1356,11 @@ public sealed partial class MainWindow : Window
         menu.Opened += (_, _) => RefreshContextMenu();
         RefreshContextMenu();
         menu.Items.Add(new Separator());
-        Add("导入歌词…", OpenLyrics);
-        Add("打开本地音频…", OpenAudio);
+        Add("导入歌词…", () => OpenLyrics());
+        Add("打开本地音频…", () => OpenAudio());
         Add("连接系统媒体", ConnectSystemMedia);
         menu.Items.Add(new Separator());
-        Add("设置", ToggleSettings);
+        Add("Apple Music 歌词设置…", () => OpenLyricsSettings(this));
         Add("播放列表", ToggleQueue);
         Add("全屏  F11", ToggleFullscreen);
         Add("返回当前歌词", () => { _manualUntil = 0; _anchor = -2; });
@@ -1364,17 +1407,19 @@ public sealed partial class MainWindow : Window
         _reference.Get<TextBlock>("TextBlockGoToArtistContent").Text = _song.Artist;
         _reference.Get<TextBlock>("TextBlockGoToAlbumContent").Text = _song.Album;
     }
-    private void ToggleSettings()
+    internal void OpenLyricsSettings(Window owner)
     {
-        _settings.Visibility = _settings.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
         _queue.Visibility = Visibility.Collapsed;
-        if (_settings.Visibility != Visibility.Visible)
-        {
-            Guard(() => App.SaveOptions(_options));
-            return;
-        }
+        var window = new SettingsWindow(owner, "Apple Music 歌词设置", 570, 700);
         Populate();
-        void Populate() => _settings.Child = new ScrollViewer { VerticalScrollBarVisibility = ScrollBarVisibility.Auto, Content = new SettingsPanel(_options, Changed, () => Guard(() => { _options = new(); Changed(true); Populate(); Notify("已恢复默认设置"); }), Populate) };
+        window.ShowDialog();
+        void Populate() => window.SettingsContent = new SettingsPanel(_options, Changed, () => Guard(() =>
+        {
+            _options = new() { Volume = _options.Volume, RealtimeSeek = _options.RealtimeSeek };
+            Changed(true);
+            Populate();
+            Notify("已恢复默认歌词设置");
+        }), Populate);
         void Changed(bool background) => Guard(() =>
         {
             _options.Normalize();
@@ -1400,6 +1445,8 @@ public sealed partial class MainWindow : Window
             return;
         _disposed = true;
         CompositionTarget.Rendering -= OnRendering;
+        if (_netEaseActive)
+            _ = StopNetEaseAsync();
         _clock.Pause();
         _system?.Dispose();
         _audio.Close();
@@ -1417,7 +1464,7 @@ public sealed partial class MainWindow : Window
     }
     private void UpdateSleepRequest()
     {
-        if (!_sleepPrevention.Update(IsLoaded && !_disposed, _options.AppleMusicLyrics.PreventSleepFullscreenOnly, WindowState))
+        if (!_sleepPrevention.Update(IsLoaded && !_disposed && (!_hostedByPlayer || LyricsVisible), _options.AppleMusicLyrics.PreventSleepFullscreenOnly, WindowState))
             App.Log("Windows rejected the thread execution-state request.");
     }
     private void ReleaseSleepRequest()

@@ -28,6 +28,17 @@ internal static class SettingsPanelChecks
                 Walk(dependency);
         }
         check(fixture.RootElement.GetArrayLength() == 50, "original main settings control baseline");
+        check(!controls.ContainsKey("HostRealtimeSeek"), "player seek preference is separate from lyric settings");
+        var track = new NetEaseTrack("", 1, "Sample", "Artist", "Album", 30000, true, ClientSession: true);
+        var payload = JsonSerializer.SerializeToElement(new
+        {
+            lrc = new { lyric = "[00:01.00]line fallback" },
+            yrc = new { lyric = "[1000,900](1000,400,0)one (1400,500,0)two" },
+            tlyric = new { lyric = "[00:01.00]translation" }
+        });
+        var parsed = NetEaseMusic.ParseClientLyrics(track, payload).Lines.Single();
+        check(parsed.Text == "one two" && parsed.Words.Count == 2 && parsed.Words[1].StartMs == 1400 &&
+            parsed.Words[1].DurationMs == 500 && parsed.Translation == "translation", "NetEase YRC retains absolute word timings and aligned translation");
         var jsonOptions = new JsonSerializerOptions { NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals };
         foreach (var reference in fixture.RootElement.EnumerateArray())
         {

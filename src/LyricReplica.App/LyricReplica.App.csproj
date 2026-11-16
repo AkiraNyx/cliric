@@ -21,6 +21,7 @@
     <Resource Include="Assets/Fonts/*.otf" />
     <Resource Include="Assets/Fonts/*.ttf" />
     <Resource Include="Assets/Shaders/*.ps" />
+    <None Update="Media/NetEaseClient.cjs" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <EmbeddedResource Include="../../tests/LyricReplica.Tests/Fixtures/settings-controls-original.json" LogicalName="settings-controls-original.json" />
     <EmbeddedResource Include="../../tests/LyricReplica.Tests/Fixtures/plus-lighter-original.json" LogicalName="plus-lighter-original.json" />
     <EmbeddedResource Include="../../tests/LyricReplica.Tests/Fixtures/isolation-original.json" LogicalName="isolation-original.json" />

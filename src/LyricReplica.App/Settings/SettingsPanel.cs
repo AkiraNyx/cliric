@@ -85,13 +85,12 @@ public sealed class SettingsPanel : StackPanel
         var traditional = Check("ToggleSwitchEnableAppleMusicLyricsTraditional", "传统歌词页入口", _settings.EnableTraditionalEntry, v => _settings.EnableTraditionalEntry = v);
         traditional.IsEnabled = false;
         traditional.ToolTip = "独立工程提供当前歌词页；传统页入口属于原客户端。";
-        Heading("播放器设置");
+        Heading("歌词显示与播放体验");
         Check("HostTranslation", "显示翻译", options.Translation, v => options.Translation = v);
         Choice("ComboBoxLyricsRomajiMode", "音译显示", ["禁用", "翻译优先", "罗马音优先", "仅罗马音"], (int)options.RomajiOption, v => options.RomajiOption = (RomajiOptions)v);
         Check("HostEnableMultiLine", "允许同时高亮多行", options.EnableMultiLine, v => options.EnableMultiLine = v);
         Check("ToggleSwitchEnableColorfulEmoji", "翻译中的彩色 Emoji", options.EnableColorfulEmoji, v => options.EnableColorfulEmoji = v);
         Check("HostReduceMotion", "减少动态效果", options.ReduceMotion, v => options.ReduceMotion = v);
-        Check("HostRealtimeSeek", "拖动进度时实时提交", options.RealtimeSeek, v => options.RealtimeSeek = v);
         Check("HostTopmost", "窗口置顶", options.Topmost, v => options.Topmost = v);
         Check("HostLightTheme", "明亮背景", options.LightTheme, v => options.LightTheme = v, true);
         Check("HostAudioReactive", "背景随系统音频律动", options.AudioReactive, v => options.AudioReactive = v, true);

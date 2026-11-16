@@ -16,7 +16,7 @@ namespace LyricReplica.App;
 
 public sealed partial class MainWindow
 {
-    private async Task RunSelfTestAsync()
+    internal async Task RunSelfTestAsync()
     {
         File.Delete(Path.Combine(App.DataFolder, "self-test-failure.txt"));
         try
