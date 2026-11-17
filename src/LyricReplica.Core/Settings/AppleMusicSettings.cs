@@ -5,7 +5,7 @@ namespace LyricReplica.Core;
 // Settings keys, numeric enums and defaults come from the fixed 4.4.2 release contract.
 public enum BackgroundTypes
 {
-    Static = 0, Dynamic = 1, DynamicBeating = 2, DynamicIsolation = 3, AppleMusicOriginal = 4
+    Static = 0, Dynamic = 1, DynamicBeating = 2, DynamicIsolation = 3, AppleMusicOriginal = 4, LyricifyModern = 5
 }
 public enum IsolationPalettes
 {

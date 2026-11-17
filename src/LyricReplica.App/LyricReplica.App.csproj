@@ -17,7 +17,9 @@
     <ProjectReference Include="../../vendor/Lyricify-Backgrounds/Lyricify.Backgrounds.AppleMusicInspired.Ios.Wpf/Lyricify.Backgrounds.AppleMusicInspired.Ios.Wpf.csproj" />
     <ProjectReference Include="../../vendor/Lyricify-Backgrounds/Lyricify.Backgrounds.AppleMusicInspired.IosClassic.Wpf/Lyricify.Backgrounds.AppleMusicInspired.IosClassic.Wpf.csproj" />
     <None Include="../../vendor/Lyricify-Backgrounds/LICENSE.txt" Link="licenses/Lyricify-Backgrounds.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../vendor/Lyricify-Lyrics-Helper/LICENSE" Link="licenses/Lyricify-Lyrics-Helper.txt" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../../vendor/Wpf.Ui/LICENSE.txt" Link="licenses/Wpf.Ui.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../vendor/MiSans/LICENSE.pdf" Link="licenses/MiSans.pdf" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <Resource Include="Assets/Fonts/*.otf" />
     <Resource Include="Assets/Fonts/*.ttf" />
     <Resource Include="Assets/Shaders/*.ps" />

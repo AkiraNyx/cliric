@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using LyricReplica.Core;
 
 namespace LyricReplica.App;
@@ -14,7 +15,7 @@ internal static class SettingsPanelChecks
     {
         using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("settings-controls-original.json")!;
         using var fixture = JsonDocument.Parse(stream);
-        var options = new ViewOptions();
+        var options = new ViewOptions { AnimationSpeed = 1.234 };
         int changes = 0;
         var panel = new SettingsPanel(options, _ => changes++, () => { });
         var controls = new Dictionary<string, FrameworkElement>();
@@ -29,6 +30,18 @@ internal static class SettingsPanelChecks
         }
         check(fixture.RootElement.GetArrayLength() == 50, "original main settings control baseline");
         check(!controls.ContainsKey("HostRealtimeSeek"), "player seek preference is separate from lyric settings");
+        var speedEditor = (TextBox)controls["HostAnimationSpeedValue"];
+        speedEditor.RaiseEvent(new KeyboardFocusChangedEventArgs(Keyboard.PrimaryDevice, 0, speedEditor, null)
+        {
+            RoutedEvent = Keyboard.LostKeyboardFocusEvent
+        });
+        check(options.AnimationSpeed == 1.234 && changes == 0, "leaving an untouched numeric editor keeps the stored precision");
+        options.Background = BackgroundMode.ReferenceAppleMusic;
+        bool original = options.AppleMusicLyrics.Background == BackgroundTypes.AppleMusicOriginal;
+        options.Background = BackgroundMode.Modern;
+        check(original && options.AppleMusicLyrics.Background == BackgroundTypes.LyricifyModern,
+            "the 4.4.2 and open-source background modes persist as distinct selections");
+        options.Background = BackgroundMode.Static;
         var track = new NetEaseTrack("", 1, "Sample", "Artist", "Album", 30000, true, ClientSession: true);
         var payload = JsonSerializer.SerializeToElement(new
         {
@@ -39,6 +52,9 @@ internal static class SettingsPanelChecks
         var parsed = NetEaseMusic.ParseClientLyrics(track, payload).Lines.Single();
         check(parsed.Text == "one two" && parsed.Words.Count == 2 && parsed.Words[1].StartMs == 1400 &&
             parsed.Words[1].DurationMs == 500 && parsed.Translation == "translation", "NetEase YRC retains absolute word timings and aligned translation");
+        var alternative = NetEaseMusic.ParseClientLyrics(track, payload, useLyricifyParser: true).Lines.Single();
+        check(alternative.EndMs == parsed.EndMs && alternative.Words.Count == 2 && alternative.Translation == "translation",
+            "the selectable Lyricify parser preserves YRC header timing and translation");
         var jsonOptions = new JsonSerializerOptions { NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals };
         foreach (var reference in fixture.RootElement.EnumerateArray())
         {

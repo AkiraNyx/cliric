@@ -105,9 +105,11 @@ public sealed partial class MainWindow
         double interval = _groups[line + 1].StartMs - _groups[line].StartMs;
         return total > interval - 300 ? Math.Max(0, interval / (total + 350)) : 1;
     }
-    private bool RecentManualInView(int line, double now)
+    private bool RecentManualInView(int line, double now) => now - _lastManualScroll <= .5 && IsLyricLineInView(line);
+
+    private bool IsLyricLineInView(int line)
     {
-        if (now - _lastManualScroll > .5 || line < 0 || line >= _rows.Count)
+        if (line < 0 || line >= _rows.Count)
             return false;
         double top = _scroll.VerticalOffset - _linesPanel.Margin.Top, y = PullY(line);
         return y + PullNode(line).ActualHeight >= top + (_portrait ? 60 * _displayScale : 0) && y <= top + _scroll.ActualHeight - (_portrait && _verticalControlsShown ? _verticalControls.ActualHeight : 0);

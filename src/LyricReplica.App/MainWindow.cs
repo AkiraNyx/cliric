@@ -49,7 +49,7 @@ public sealed partial class MainWindow : Window
     private bool? _coverPlaying;
     private double _legacyTime;
     private ColumnDefinition _leftColumn = new() { Width = new GridLength(.82, GridUnitType.Star) };
-    private ScrollViewer _scroll = new() { VerticalScrollBarVisibility = ScrollBarVisibility.Hidden, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled, CanContentScroll = false, PanningMode = PanningMode.VerticalOnly };
+    private TouchScrollViewer _scroll = null!;
     private Panel _linesPanel = new StackPanel();
     private readonly List<RowSlot> _rows = [];
     private Viewbox _infoView = new() { Stretch = Stretch.Uniform, Margin = new Thickness(0, 70, 0, 60) };
@@ -70,11 +70,11 @@ public sealed partial class MainWindow : Window
     private readonly string[] _args;
     private bool _fileDialogOpen;
     private double _ignoreDialogMouseUntil;
-    private readonly List<Song> _songs = DemoSongs.Create();
+    private readonly List<Song> _songs;
     private List<DisplayLine> _groups = [];
     private readonly HashSet<string> _favorites = [];
-    private Song _song = new();
-    private int _songIndex, _anchor = -2, _frameCount, _lastFpsFrames, _loadGeneration;
+    private Song _song = new() { Title = "未播放", Artist = "", Untimed = true };
+    private int _songIndex = -1, _anchor = -2, _frameCount, _lastFpsFrames, _loadGeneration;
     private int _navigationRequest;
     private bool _navigationPlaying;
     private bool _resetWordRuns = true;
@@ -92,6 +92,7 @@ public sealed partial class MainWindow : Window
     private bool _hasExplicitArtwork;
     private bool _updatingWindowChrome;
     private bool _independentPresentation;
+    private readonly WindowChrome _lyricsChrome = new() { CaptionHeight = 0, ResizeBorderThickness = new Thickness(5), CornerRadius = new CornerRadius(0) };
     private FontFamily _font = new("Segoe UI");
     private readonly int _singOpacityDuration;
     public int RenderedFrameCount => _frameCount;
@@ -105,6 +106,7 @@ public sealed partial class MainWindow : Window
     {
         _args = args;
         _hostedByPlayer = hostedByPlayer;
+        _songs = args.Contains("--verify-offscreen") ? DemoSongs.Create() : [];
         _sleepPrevention = args.Contains("--verify-offscreen") ? new(_ => throw new InvalidOperationException("Offscreen verification must not call the system execution-state API.")) : new();
         if (args.Contains("--self-test") || args.Contains("--verify-offscreen"))
         {
@@ -119,12 +121,13 @@ public sealed partial class MainWindow : Window
         MinWidth = 490;
         MinHeight = 520;
         WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        WindowStyle = WindowStyle.None;
+        WindowStyle = hostedByPlayer ? WindowStyle.SingleBorderWindow : WindowStyle.None;
         ResizeMode = ResizeMode.CanResize;
         Background = Brushes.Black;
         Foreground = Brushes.White;
         FontFamily = new FontFamily("Segoe UI, Microsoft YaHei UI");
-        WindowChrome.SetWindowChrome(this, new WindowChrome { CaptionHeight = 0, ResizeBorderThickness = new Thickness(5), CornerRadius = new CornerRadius(0) });
+        if (!hostedByPlayer)
+            WindowChrome.SetWindowChrome(this, _lyricsChrome);
         Topmost = _options.Topmost;
         ReferenceMenus.UpdateTheme(_options.LightTheme);
         BuildResources();
@@ -133,6 +136,8 @@ public sealed partial class MainWindow : Window
         _background.Fault += message => { UpdateIndependentPresentation(false); App.Log("Background: " + message); Notify("背景渲染器切换到兼容模式"); };
         _audio.MediaOpened += (_, _) =>
         {
+            _audioOpening = false;
+            UpdatePlaybackAvailability();
             if (_audio.NaturalDuration.HasTimeSpan)
             {
                 double p = _clock.PositionMs;
@@ -145,7 +150,16 @@ public sealed partial class MainWindow : Window
             }
         };
         _audio.MediaEnded += (_, _) => { if (!_suppressMediaEnded) EndTrack(); };
-        _audio.MediaFailed += (_, e) => { _audioLoaded = false; Notify("音频无法播放：" + e.ErrorException.Message); App.Log(e.ErrorException.ToString()); };
+        _audio.MediaFailed += (_, e) =>
+        {
+            if (!_audioOpening && !_audioLoaded)
+                return;
+            _audioOpening = _audioLoaded = false;
+            _clock.Pause();
+            UpdatePlayButtons();
+            Notify("音频无法播放：" + e.ErrorException.Message);
+            App.Log(e.ErrorException.ToString());
+        };
         Loaded += OnLoaded;
         SizeChanged += (_, _) => _rebuildPending = true;
         StateChanged += (_, _) => { if (_updatingWindowChrome) return; UpdateWindowChrome(); _rebuildPending = true; UpdateLyricsVisibility(); };
@@ -157,6 +171,8 @@ public sealed partial class MainWindow : Window
         PreviewMouseUp += (_, e) => { if (_wall.Elapsed.TotalSeconds < _ignoreDialogMouseUntil) e.Handled = true; };
         AllowDrop = true;
         Drop += OnDrop;
+        if (_hostedByPlayer)
+            BuildShell();
     }
 
     private void BuildResources()
@@ -186,8 +202,29 @@ public sealed partial class MainWindow : Window
         if (_updatingWindowChrome)
             return;
         bool maximized = WindowState == WindowState.Maximized;
-        WindowChrome.GetWindowChrome(this).ResizeBorderThickness = new Thickness(maximized ? 0 : 5);
-        bool fixedSize = maximized && _options.Background == BackgroundMode.Modern && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer;
+        bool libraryFrame = _hostedByPlayer && !_lyricsShown;
+        if (libraryFrame)
+        {
+            UpdateIndependentPresentation(false);
+            WindowStyle = WindowStyle.SingleBorderWindow;
+            ResizeMode = ResizeMode.CanResize;
+            if (WindowChrome.GetWindowChrome(this) != _libraryChrome)
+                WindowChrome.SetWindowChrome(this, _libraryChrome);
+            if (!maximized)
+                _shell.Margin = default;
+            double headerBottom = _library!.TitleBar.Height + _shell.Margin.Top;
+            _libraryChrome.GlassFrameThickness = new Thickness(0, headerBottom, 0, 0);
+            _libraryChrome.CaptionHeight = Math.Max(0, headerBottom - _libraryChrome.ResizeBorderThickness.Top);
+            _library.UpdateMaximizeCaption(maximized);
+            Topmost = !maximized && _options.Topmost;
+            return;
+        }
+
+        WindowStyle = WindowStyle.None;
+        if (WindowChrome.GetWindowChrome(this) != _lyricsChrome)
+            WindowChrome.SetWindowChrome(this, _lyricsChrome);
+        _lyricsChrome.ResizeBorderThickness = new Thickness(maximized ? 0 : 5);
+        bool fixedSize = maximized && BackgroundView.SupportsIndependent(_options.Background) && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer;
         if (fixedSize && ResizeMode != ResizeMode.NoResize)
         {
             _updatingWindowChrome = true;
@@ -201,35 +238,30 @@ public sealed partial class MainWindow : Window
         }
         else
             ResizeMode = fixedSize ? ResizeMode.NoResize : ResizeMode.CanResize;
-        if (ResizeMode != ResizeMode.NoResize)
+        if (WindowState is WindowState.Normal or WindowState.Maximized)
         {
-            if (WindowState == WindowState.Normal)
-            {
-                _root.Margin = new Thickness(0);
-                Topmost = _options.Topmost;
-            }
-            else if (WindowState == WindowState.Maximized)
-            {
-                _root.Margin = new Thickness(6);
-                Topmost = false;
-            }
+            ((FrameworkElement)Content).Margin = new Thickness(maximized && !fixedSize ? 6 : 0);
+            Topmost = !maximized && _options.Topmost;
         }
         UpdateIndependentPresentation(_background.IndependentRendererActive && _background.RendererReady);
+        if (!_independentPresentation)
+            _lyricsChrome.ClearValue(WindowChrome.GlassFrameThicknessProperty);
     }
     private void UpdateIndependentPresentation(bool ready)
     {
         if (_disposed)
             return;
-        bool transparent = ready && WindowState == WindowState.Maximized && _options.Background == BackgroundMode.Modern && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && !_options.ReduceMotion;
+        bool transparent = ready && (!_hostedByPlayer || _lyricsShown) && WindowState == WindowState.Maximized && BackgroundView.SupportsIndependent(_options.Background) && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && !_options.ReduceMotion;
         if (_independentPresentation == transparent)
             return;
         _independentPresentation = transparent;
         Background = _background.Background = transparent ? Brushes.Transparent : Brushes.Black;
-        var chrome = WindowChrome.GetWindowChrome(this);
+        if (_hostedByPlayer)
+            _shell.Background = Background;
         if (transparent)
-            chrome.GlassFrameThickness = new Thickness(-1);
+            _lyricsChrome.GlassFrameThickness = new Thickness(-1);
         else
-            chrome.ClearValue(WindowChrome.GlassFrameThicknessProperty);
+            _lyricsChrome.ClearValue(WindowChrome.GlassFrameThicknessProperty);
         if (PresentationSource.FromVisual(this) is HwndSource source && source.CompositionTarget is { } target)
             target.BackgroundColor = transparent ? Colors.Transparent : Colors.Black;
     }
@@ -252,7 +284,8 @@ public sealed partial class MainWindow : Window
         _stage = _reference.Get<Grid>("MainGrid");
         _leftColumn = _reference.Get<ColumnDefinition>("ColumnDefinitionLeftSide");
         _lyricHost = _reference.Get<Grid>("GridLyrics");
-        _scroll = _reference.Get<ScrollViewer>("ScrollViewerLyrics");
+        _scroll = _reference.Get<TouchScrollViewer>("ScrollViewerLyrics");
+        _scroll.WheelMotionReduced = () => _options.ReduceMotion;
         _linesPanel = _reference.Get<Panel>("StackPanelLyrics");
         _infoView = _reference.Get<Viewbox>("ViewboxSongInfo");
         _smallInfo = _reference.Get<Viewbox>("ViewboxSongInfoSmall");
@@ -323,9 +356,19 @@ public sealed partial class MainWindow : Window
         _reference.Get<ContextMenu>("MenuThreeDot").Closed += (_, _) => { foreach (var drag in _buttonDrags) drag.Reset(); };
         _reference.Get<Grid>("GridArtwork").RenderTransform = _artworkScale;
         _artwork.MouseLeftButtonUp += (_, _) => OpenCover();
-        _scroll.PreviewMouseWheel += (_, e) => { SetVerticalControls(e.Delta > 0); ManualScroll(); };
-        _scroll.PreviewTouchDown += (_, e) => { _touchStart = e.GetTouchPoint(_scroll).Position; ManualScroll(); };
-        _scroll.PreviewTouchMove += (_, e) => { double delta = e.GetTouchPoint(_scroll).Position.Y - _touchStart.Y; if (delta > 150) SetVerticalControls(true); else if (delta < -150) SetVerticalControls(false); };
+        _scroll.PreviewMouseWheel += (_, e) =>
+        {
+            if ((Keyboard.Modifiers & ModifierKeys.Control) != 0)
+            {
+                ChangeZoom(e.Delta > 0);
+                e.Handled = true;
+                return;
+            }
+            SetVerticalControls(e.Delta > 0);
+            ManualScroll();
+        };
+        _scroll.PreviewTouchDown += (_, e) => { _scroll.StopWheelAnimation(); _touchStart = e.GetTouchPoint(_scroll).Position; ManualScroll(); };
+        _scroll.PreviewTouchMove += (_, e) => { ManualScroll(); double delta = e.GetTouchPoint(_scroll).Position.Y - _touchStart.Y; if (delta > 150) SetVerticalControls(true); else if (delta < -150) SetVerticalControls(false); };
         _lyricHost.SizeChanged += (_, _) => _rebuildPending = true;
         _magicController = new MagicStripController(_reference, () => WindowState == WindowState.Maximized, () => _options.ReduceMotion, ExecuteMagic, () => _options.AppleMusicLyrics, () => Guard(() => App.SaveOptions(_options)));
         _reference.Get<Grid>("GridMagicButton").MouseLeftButtonDown += (_, e) => { if (!e.Handled && e.ClickCount == 1 && e.LeftButton == MouseButtonState.Pressed) Guard(DragMove); };
@@ -366,14 +409,16 @@ public sealed partial class MainWindow : Window
     {
         UpdateSleepRequest();
         await StartPlaybackAsync();
-        if (_disposed || _lyricsLoaded)
+        if (_disposed || _lyricsLoaded || _hostedByPlayer)
             return;
         _lyricsLoaded = true;
         _magicController.BeginTutorial(_wall.Elapsed.TotalMilliseconds);
     }
-    public async Task LoadSongAsync(int index)
+    public Task LoadSongAsync(int index) => WhilePlaybackLoadsAsync(() => LoadSongCoreAsync(index));
+
+    private async Task LoadSongCoreAsync(int index)
     {
-        if (_disposed)
+        if (_disposed || _songs.Count == 0)
             return;
         _dots.StopPlayback();
         StopArtworkVideo();
@@ -391,7 +436,7 @@ public sealed partial class MainWindow : Window
         _suppressMediaEnded = true;
         _audio.Stop();
         _audio.Close();
-        _audioLoaded = false;
+        _audioOpening = _audioLoaded = false;
         _suppressMediaEnded = false;
         _songIndex = (index % _songs.Count + _songs.Count) % _songs.Count;
         _song = _songs[_songIndex];
@@ -431,7 +476,7 @@ public sealed partial class MainWindow : Window
         if (generation != _loadGeneration || _disposed)
             return;
         if (!string.IsNullOrWhiteSpace(_song.AudioPath) && File.Exists(_song.AudioPath))
-            OpenAudioFile(_song.AudioPath);
+            await OpenAudioFileAsync(_song.AudioPath);
         _rebuildPending = true;
         RefreshQueue();
         UpdatePlayButtons();
@@ -444,7 +489,7 @@ public sealed partial class MainWindow : Window
             return;
         double now = _wall.Elapsed.TotalSeconds, dt = Math.Clamp(now - _lastWall, 0, .1);
         _lastWall = now;
-        if (_hostedByPlayer && !LyricsVisible)
+        if (_hostedByPlayer && (!LyricsVisible || _lyricsEntering))
             return;
         _frameCount++;
         _magicController.AdvanceTutorial(now * 1000);
@@ -515,11 +560,13 @@ public sealed partial class MainWindow : Window
         bool breathingNow = gap is not null && !_song.Untimed && (animationTime is null || _dots.PlaybackActive);
         bool breathingChanged = _breathing != breathingNow;
         _breathing = breathingNow;
-        if (now >= _manualUntil && (anchor != _anchor || breathingChanged || slotChange || _manualUntil > 0))
+        bool resumeOnVisibleLine = _manualUntil > 0 && anchor != _anchor && !breathingNow && IsLyricLineInView(anchor);
+        bool scrollInputActive = _scroll.IsWheelAnimating || _scroll.AreAnyTouchesOver || _seekVertical.Dragging;
+        if (!scrollInputActive && (now >= _manualUntil || resumeOnVisibleLine) && (anchor != _anchor || breathingChanged || slotChange || _manualUntil > 0))
         {
             _anchor = anchor;
             _manualUntil = 0;
-            Follow(anchor, breathingNow);
+            Follow(anchor, breathingNow, allowPulling: !resumeOnVisibleLine || now - _lastManualScroll > .5);
         }
         if (_autoScrolling)
         {
@@ -584,6 +631,7 @@ public sealed partial class MainWindow : Window
         _reference.View.FontFamily = _font;
         _seek.FontFamily = _options.AppleMusicLyrics.FontPreset == FontPresets.SFPro ? ReferencePageView.AppleTextFont() : _font;
         _seekVertical.FontFamily = _font;
+        _seek.FontWeight = _options.Bold ? FontWeights.Bold : FontWeights.Medium;
         _reference.ApplyMobileInfoStyle(_options.AppleMusicLyrics.IosStylePreset);
         foreach (var menu in _reference.Elements.OfType<ContextMenu>())
             menu.FontFamily = _font;
@@ -693,7 +741,7 @@ public sealed partial class MainWindow : Window
         else
             maskHost.OpacityMask = null;
         bool sourceBackground = _options.Background is BackgroundMode.Static or BackgroundMode.Legacy or BackgroundMode.DynamicBeating || _options.ReduceMotion;
-        bool independent = _options.Background == BackgroundMode.Modern && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && WindowState == WindowState.Maximized;
+        bool independent = BackgroundView.SupportsIndependent(_options.Background) && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && WindowState == WindowState.Maximized;
         _blend.Update(_options.AppleMusicLyrics.EnablePlusLighter && !independent, _options.AppleMusicLyrics.PlusLighterEffectPreset, sourceBackground ? _reference.Get<Viewbox>("ViewboxBackground") : _background, !sourceBackground);
         // Follow reads the new row offsets in this same rendering callback.
         _scroll.UpdateLayout();
@@ -711,7 +759,7 @@ public sealed partial class MainWindow : Window
             mask.GradientStops[3].Offset = _verticalControlsShown ? 1 - (_verticalControls.ActualHeight - 5) / height : 1;
         }
     }
-    private void Follow(int index, bool breathing = false)
+    private void Follow(int index, bool breathing = false, bool allowPulling = true)
     {
         if (_song.Untimed)
             return;
@@ -771,7 +819,7 @@ public sealed partial class MainWindow : Window
             _scroll.ScrollToVerticalOffset(_scrollTo);
             return;
         }
-        if (!_options.ReduceMotion && index >= 0 && index < _rows.Count && (breathing || _options.AppleMusicLyrics.PullingEffect))
+        if (allowPulling && !_options.ReduceMotion && index >= 0 && index < _rows.Count && (breathing || _options.AppleMusicLyrics.PullingEffect))
         {
             ApplyPulling(_scrollTo, index, breathing, transition);
             return;
@@ -786,8 +834,11 @@ public sealed partial class MainWindow : Window
     {
         _pointerAtScroll = Mouse.GetPosition(_reference.View);
         _lastManualScroll = _wall.Elapsed.TotalSeconds;
+        bool firstInput = _manualUntil <= _lastManualScroll;
         _manualUntil = _lastManualScroll + _options.AutoResumeSeconds;
         _autoScrolling = false;
+        if (!firstInput)
+            return;
         _dots.SuspendForManualScroll();
         for (int i = 0; i < PullCount; i++)
             AnimatePull(i, 0, 0, Motion.ScrollDurationMs(_options.AppleMusicLyrics, _pageKaraoke) * _options.AnimationSpeed, 0, (false, .2));
@@ -797,7 +848,10 @@ public sealed partial class MainWindow : Window
         switch (action)
         {
             case MagicAction.Close:
-                Close();
+                if (_hostedByPlayer)
+                    ShowLibrary();
+                else
+                    Close();
                 break;
             case MagicAction.Maximize:
                 WindowState = WindowState.Maximized;
@@ -851,12 +905,8 @@ public sealed partial class MainWindow : Window
     }
     public async void TogglePlay()
     {
-        if (_navigationRequest != 0)
-        {
-            _navigationPlaying = !_navigationPlaying;
-            UpdatePlayButtons();
+        if (PlaybackLoading || !CanControlPlayback)
             return;
-        }
         try
         {
             if (_system is { } system)
@@ -894,6 +944,7 @@ public sealed partial class MainWindow : Window
     }
     private void UpdatePlayButtons()
     {
+        UpdatePlaybackAvailability();
         bool playing = Playing;
         _reference.Get<ImageButton>("ImageClickablePauseButton").Visibility = playing ? Visibility.Visible : Visibility.Collapsed;
         _reference.Get<ImageButton>("ImageClickablePlayButton").Visibility = playing ? Visibility.Collapsed : Visibility.Visible;
@@ -973,7 +1024,8 @@ public sealed partial class MainWindow : Window
                 await system.NextAsync();
                 return;
             }
-            await NavigateLocalAsync(_shuffle ? Random.Shared.Next(_songs.Count) : _songIndex + 1);
+            if (_songs.Count > 0)
+                await NavigateLocalAsync(_shuffle ? Random.Shared.Next(_songs.Count) : _songIndex + 1);
         }
         catch (Exception e) { Notify(e.Message); App.Log(e.ToString()); }
     }
@@ -997,6 +1049,8 @@ public sealed partial class MainWindow : Window
     }
     internal async Task NavigateLocalAsync(int index, bool startPlaying = false)
     {
+        if (_songs.Count == 0)
+            return;
         bool playing = startPlaying || (_navigationRequest != 0 ? _navigationPlaying : _clock.IsPlaying || _netEasePlayRequested);
         int generation = _loadGeneration + 1;
         _navigationRequest = generation;
@@ -1060,7 +1114,7 @@ public sealed partial class MainWindow : Window
             _queueItems.Children.Add(item);
         }
     }
-    private void Notify(string text)
+    internal void Notify(string text)
     {
         _status.Text = text;
         _noticeUntil = _wall.Elapsed.TotalSeconds + 3;
@@ -1084,24 +1138,27 @@ public sealed partial class MainWindow : Window
     {
         Guard(() =>
         {
-            var song = LyricsFile.Load(path);
+            var song = LyricsFile.Load(path, _options.UseLyricifyParser);
             if (string.IsNullOrWhiteSpace(song.AudioPath))
                 song.AudioPath = fallbackAudio;
             _songs.Add(song);
             _ = LoadSongAsync(_songs.Count - 1);
         });
     }
-    internal void OpenAudio(Window? owner = null, bool newTrack = false)
+    internal async void OpenAudio(Window? owner = null, bool newTrack = false)
     {
         var dialog = new OpenFileDialog { Filter = "音频|*.mp3;*.wav;*.m4a;*.aac;*.wma;*.flac|所有文件|*.*" };
         if (!ShowFileDialog(dialog, owner))
             return;
-        if (newTrack)
+        if (newTrack || _songIndex < 0)
             _ = AddAudioTrackAsync(dialog.FileName);
         else
-            OpenAudioFile(dialog.FileName);
+        {
+            try { await WhilePlaybackLoadsAsync(() => OpenAudioFileAsync(dialog.FileName)); }
+            catch (Exception e) { Notify(e.Message); App.Log(e.ToString()); }
+        }
     }
-    private async void OpenAudioFile(string path)
+    private async Task OpenAudioFileAsync(string path)
     {
         if (_netEaseActive)
         {
@@ -1117,8 +1174,13 @@ public sealed partial class MainWindow : Window
         _clock.Seek(0);
         UpdatePlayButtons();
         _song.AudioPath = path;
-        _audio.Open(new Uri(Path.GetFullPath(path)));
-        _audioLoaded = true;
+        _audioOpening = _audioLoaded = true;
+        try { _audio.Open(new Uri(Path.GetFullPath(path))); }
+        catch
+        {
+            _audioOpening = _audioLoaded = false;
+            throw;
+        }
         _audio.Volume = _options.Volume;
         Notify(Path.GetFileName(path));
     }
@@ -1166,7 +1228,7 @@ public sealed partial class MainWindow : Window
                 }
             }
             _audio.Stop();
-            _audioLoaded = false;
+            _audioOpening = _audioLoaded = false;
             _system?.Dispose();
             _system = connection;
             _remoteShuffle = _remoteRepeat = _shuffle = _repeat = false;
@@ -1183,7 +1245,12 @@ public sealed partial class MainWindow : Window
     {
         if (_disposed || !ReferenceEquals(_system, connection))
             return;
-        if (!string.Equals(snapshot.Title.Trim(), _song.Title.Trim(), StringComparison.OrdinalIgnoreCase))
+        if (_songIndex < 0)
+        {
+            _song.Title = snapshot.Title;
+            _song.Artist = snapshot.Artist;
+        }
+        else if (!string.Equals(snapshot.Title.Trim(), _song.Title.Trim(), StringComparison.OrdinalIgnoreCase))
         {
             _clock.Pause();
             _dots.StopPlayback();
@@ -1253,6 +1320,12 @@ public sealed partial class MainWindow : Window
     }
     private void OnKey(object sender, KeyEventArgs e)
     {
+        if (_hostedByPlayer && !_lyricsShown)
+        {
+            if (HandleLibraryKey(e))
+                e.Handled = true;
+            return;
+        }
         if (HandleKey(e.Key, Keyboard.Modifiers, e.OriginalSource is TextBox))
             e.Handled = true;
     }
@@ -1288,9 +1361,12 @@ public sealed partial class MainWindow : Window
         }
         else if (key == Key.Escape)
         {
-            _queue.Visibility = Visibility.Collapsed;
-            if (_fullscreen)
+            if (_queue.Visibility == Visibility.Visible)
+                _queue.Visibility = Visibility.Collapsed;
+            else if (_fullscreen)
                 ToggleFullscreen();
+            else if (_hostedByPlayer)
+                ShowLibrary();
         }
         else
             return false;
@@ -1360,11 +1436,14 @@ public sealed partial class MainWindow : Window
         Add("打开本地音频…", () => OpenAudio());
         Add("连接系统媒体", ConnectSystemMedia);
         menu.Items.Add(new Separator());
-        Add("Apple Music 歌词设置…", () => OpenLyricsSettings(this));
+        Add("Apple Music 歌词设置…", OpenLyricsSettings);
         Add("播放列表", ToggleQueue);
         Add("全屏  F11", ToggleFullscreen);
         Add("返回当前歌词", () => { _manualUntil = 0; _anchor = -2; });
-        Add("关闭", Close);
+        if (_hostedByPlayer)
+            Add("返回资料库  Esc", ShowLibrary);
+        else
+            Add("关闭", Close);
         return menu;
         void Add(string title, Action action)
         {
@@ -1406,38 +1485,6 @@ public sealed partial class MainWindow : Window
         _reference.Get<MenuItem>("MenuItemDeleteFromLibrary").Visibility = IsHearted ? Visibility.Visible : Visibility.Collapsed;
         _reference.Get<TextBlock>("TextBlockGoToArtistContent").Text = _song.Artist;
         _reference.Get<TextBlock>("TextBlockGoToAlbumContent").Text = _song.Album;
-    }
-    internal void OpenLyricsSettings(Window owner)
-    {
-        _queue.Visibility = Visibility.Collapsed;
-        var window = new SettingsWindow(owner, "Apple Music 歌词设置", 570, 700);
-        Populate();
-        window.ShowDialog();
-        void Populate() => window.SettingsContent = new SettingsPanel(_options, Changed, () => Guard(() =>
-        {
-            _options = new() { Volume = _options.Volume, RealtimeSeek = _options.RealtimeSeek };
-            Changed(true);
-            Populate();
-            Notify("已恢复默认歌词设置");
-        }), Populate);
-        void Changed(bool background) => Guard(() =>
-        {
-            _options.Normalize();
-            ReferenceMenus.UpdateTheme(_options.LightTheme);
-            Topmost = _options.Topmost;
-            _audio.Volume = _options.Volume;
-            UpdateWindowChrome();
-            UpdateSleepRequest();
-            if (background)
-            {
-                UpdateIndependentPresentation(false);
-                _ = _background.SetModeAsync(_options.Background, _options, true);
-            }
-            App.SaveOptions(_options);
-            _rebuildPending = true;
-            _resetWordRuns = true;
-            _anchor = -2;
-        });
     }
     private void OnClosed(object? sender, EventArgs e)
     {

@@ -35,6 +35,9 @@ public partial class ReferenceStateBar : UserControl
     {
         get; set;
     }
+    private RectangleGeometry? _shellFill;
+    private (int Current, int Remaining, bool Rolling)? _shellReadout;
+    private bool ShellInteraction => _shellFill is not null;
     private bool _animatedTime = true;
     public bool AnimatedTime
     {
@@ -63,17 +66,63 @@ public partial class ReferenceStateBar : UserControl
     {
         InitializeComponent();
         BorderCover.MouseEnter += (_, _) => AnimateHeight(2);
-        BorderCover.MouseLeave += (_, _) => { AnimateHeight(1); if (Dragging) Commit(); };
-        BorderCover.MouseLeftButtonDown += (_, e) => { BorderCover.CaptureMouse(); Focus(); BeginPreview(e.GetPosition(BorderCover).X); e.Handled = true; };
+        BorderCover.MouseLeave += (_, _) =>
+        {
+            if (ShellInteraction && Dragging)
+                return;
+            AnimateHeight(1);
+            if (Dragging)
+                Commit();
+        };
+        BorderCover.MouseLeftButtonDown += (_, e) =>
+        {
+            if (!BorderCover.CaptureMouse() && ShellInteraction)
+                return;
+            Focus();
+            BeginPreview(e.GetPosition(BorderCover).X);
+            e.Handled = true;
+        };
         BorderCover.MouseMove += (_, e) => { if (Dragging) Preview(e.GetPosition(BorderCover).X); };
         BorderCover.MouseLeftButtonUp += (_, e) => { if (Dragging) { Preview(e.GetPosition(BorderCover).X); Commit(); e.Handled = true; } };
         BorderCover.LostMouseCapture += (_, _) => { if (Dragging) CancelPreview(); };
         PreviewKeyDown += (_, e) => { if (e.Key == Key.Escape && Dragging) { CancelPreview(); e.Handled = true; } else if (e.Key is Key.Left or Key.Right) { SeekRequested?.Invoke(Math.Clamp(CurrentTime + (e.Key == Key.Left ? -5000 : 5000), 0, TotalTime)); e.Handled = true; } };
         UpdateTime();
     }
+
+    internal void UseShellLayout()
+    {
+        _shellFill = new RectangleGeometry();
+        BorderCover.Margin = GridBorders.Margin;
+        GridPlayed.Margin = new Thickness(0);
+        GridPlayed.HorizontalAlignment = HorizontalAlignment.Stretch;
+        GridPlayed.Clip = _shellFill;
+        GridBorders.SizeChanged += (_, _) => UpdateTime();
+        UpdateTime();
+    }
+
+    internal void SetShellReducedMotion(bool reduced)
+    {
+        if (ReduceMotion == reduced)
+            return;
+        ReduceMotion = reduced;
+        if (reduced)
+        {
+            ShellTransitions.Set(this, ElasticOffsetProperty, 0);
+            ShellTransitions.Set(GridBordersScaleTransform, ScaleTransform.ScaleYProperty, 1);
+        }
+        UpdateTime();
+    }
+
     private void AnimateHeight(double value)
     {
-        GridBorders.RenderTransformOrigin = new Point(.5, .5);
+        if (ShellInteraction)
+        {
+            ShellTransitions.To(GridBordersScaleTransform, ScaleTransform.ScaleYProperty, !ReduceMotion && value > 1 ? 1.25 : 1,
+                MotionTokens.SeekHover, ReduceMotion);
+            return;
+        }
+        if (!ShellInteraction)
+            GridBorders.RenderTransformOrigin = new Point(.5, .5);
         if (GridBorders.RenderTransform is not ScaleTransform scale)
         {
             scale = new ScaleTransform();
@@ -114,12 +163,17 @@ public partial class ReferenceStateBar : UserControl
     }
     private void Preview(double x)
     {
-        var frame = SeekMotion.Preview(x, GridBorders.ActualWidth, TotalTime);
+        var frame = SeekMotion.Preview(x, ShellInteraction ? BorderCover.ActualWidth : GridBorders.ActualWidth, TotalTime);
         _preview = frame.TimeMs;
         _elasticSide = frame.Elastic == 0 ? null : frame.Elastic > 0;
-        BeginAnimation(ElasticOffsetProperty, null);
-        ElasticOffset = frame.Elastic;
-        ApplyElastic();
+        if (ShellInteraction)
+            ShellTransitions.Set(this, ElasticOffsetProperty, ReduceMotion ? 0 : Math.Clamp(frame.Elastic, -36, 36));
+        else
+        {
+            BeginAnimation(ElasticOffsetProperty, null);
+            ElasticOffset = frame.Elastic;
+            ApplyElastic();
+        }
         SetCurrentValue(CurrentTimeProperty, frame.TimeMs);
         if (IsRealTimeUpdate)
             SeekRequested?.Invoke(_preview);
@@ -136,6 +190,13 @@ public partial class ReferenceStateBar : UserControl
     }
     private void ResetElastic()
     {
+        if (ShellInteraction)
+        {
+            ShellTransitions.To(this, ElasticOffsetProperty, 0, MotionTokens.SeekRelease, ReduceMotion);
+            if (!BorderCover.IsMouseOver)
+                AnimateHeight(1);
+            return;
+        }
         if (ReduceMotion)
         {
             BeginAnimation(ElasticOffsetProperty, null);
@@ -147,6 +208,12 @@ public partial class ReferenceStateBar : UserControl
     }
     private void ApplyElastic()
     {
+        if (ShellInteraction)
+        {
+            GridBorders.RenderTransformOrigin = new Point(ElasticOffset < 0 ? 1 : 0, .5);
+            GridBordersScaleTransform.ScaleX = 1 + Math.Abs(ElasticOffset) / Math.Max(1, GridBorders.ActualWidth);
+            return;
+        }
         if (GridBorders is not null)
             GridBorders.Margin = _elasticSide == false ? new Thickness(16 + ElasticOffset, -40, 16, 0) : _elasticSide == true ? new Thickness(16, -40, 16 - ElasticOffset, 0) : new Thickness(16, -40, 16, 0);
     }
@@ -168,10 +235,20 @@ public partial class ReferenceStateBar : UserControl
         if (GridPlayed is null || TextBlockCurrentTime is null)
             return;
         double fraction = TotalTime <= 0 ? 1 : Math.Min((double)CurrentTime / TotalTime, 1);
-        GridPlayed.Margin = new Thickness(0, 0, (1 - fraction) * GridBorders.ActualWidth, 0);
+        bool rolling = _animatedTime && Math.Max(CurrentTime, TotalTime) < 6000000;
+        if (_shellFill is { } fill)
+        {
+            fill.Rect = new Rect(0, 0, Math.Clamp(fraction, 0, 1) * GridBorders.ActualWidth, GridBorders.ActualHeight);
+            rolling &= !ReduceMotion;
+            var readout = (CurrentTime / 1000, Math.Max(0, TotalTime - CurrentTime) / 1000, rolling);
+            if (_shellReadout == readout)
+                return;
+            _shellReadout = readout;
+        }
+        else
+            GridPlayed.Margin = new Thickness(0, 0, (1 - fraction) * GridBorders.ActualWidth, 0);
         TextBlockCurrentTime.Text = Timeline.Format(CurrentTime);
         TextBlockLeftTime.Text = TotalTime <= 0 ? "-0:00" : "-" + Timeline.Format(Math.Max(1, TotalTime - CurrentTime));
-        bool rolling = _animatedTime && Math.Max(CurrentTime, TotalTime) < 6000000;
         TimerViewCurrentTime.Animate = TimerViewLeftTime.Animate = rolling && !ReduceMotion;
         TextBlockCurrentTime.Opacity = TextBlockLeftTime.Opacity = rolling ? 0 : .5;
         TimerViewCurrentTime.Opacity = TimerViewLeftTime.Opacity = rolling ? .5 : 0;

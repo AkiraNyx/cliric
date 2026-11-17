@@ -17,12 +17,15 @@ public sealed partial class MainWindow
         _options.ReduceMotion = false;
         Width = 1240;
         Height = 820;
-        foreach (var mode in new[] { BackgroundMode.Isolation, BackgroundMode.Modern })
+        var modes = new List<BackgroundMode> { BackgroundMode.Isolation, BackgroundMode.Modern };
+        if (ReferenceAppleMusicBackground.Available)
+            modes.Add(BackgroundMode.ReferenceAppleMusic);
+        foreach (var mode in modes)
         {
             _options.Background = mode;
             await _background.SetModeAsync(mode, _options, true);
             _rebuildPending = true;
-            await WaitForRenderer();
+            await WaitForRenderer(requireReadyEvent: mode != BackgroundMode.ReferenceAppleMusic);
             Capture(Path.Combine(folder, "native-" + mode + ".png"));
             results.Add(new
             {
@@ -34,22 +37,24 @@ public sealed partial class MainWindow
             });
         }
         _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer = true;
-        WindowState = WindowState.Maximized;
-        await _background.SetModeAsync(BackgroundMode.Modern, _options, true);
+        ToggleFullscreen();
+        await _background.SetModeAsync(_options.Background, _options, true);
         _rebuildPending = true;
         await WaitForRenderer();
         if (!_background.IndependentRendererActive || ResizeMode != ResizeMode.NoResize)
             throw new InvalidOperationException("The independent background host did not enter the native NoResize path.");
         var target = ((HwndSource)PresentationSource.FromVisual(this)).CompositionTarget;
         var foreground = new RenderTargetBitmap(8, 8, 96, 96, PixelFormats.Pbgra32);
-        foreground.Render(_root);
+        foreground.Render(_hostedByPlayer ? _shell : _root);
         var pixel = new byte[4];
         foreground.CopyPixels(new Int32Rect(1, 1, 1, 1), pixel, 4, 0);
-        if (!_independentPresentation || ((SolidColorBrush)Background).Color.A != 0 || ((SolidColorBrush)_background.Background).Color.A != 0 || target.BackgroundColor.A != 0 || pixel[3] != 0)
+        bool shellTransparent = !_hostedByPlayer || ((SolidColorBrush)_shell.Background).Color.A == 0;
+        if (!_independentPresentation || !shellTransparent || ((SolidColorBrush)Background).Color.A != 0 || ((SolidColorBrush)_background.Background).Color.A != 0 || target.BackgroundColor.A != 0 || pixel[3] != 0)
             throw new InvalidOperationException($"Independent foreground state: enabled={_independentPresentation}, window={Background}, control={_background.Background}, target={target.BackgroundColor}, pixelAlpha={pixel[3]}, frames={_frameCount}.");
         results.Add(new
         {
             mode = "independent",
+            rendererMode = _options.Background.ToString(),
             ready = _background.RendererReady,
             error = _background.LastError,
             frames = _frameCount,
@@ -61,7 +66,7 @@ public sealed partial class MainWindow
         _options.Background = BackgroundMode.Legacy;
         UpdateWindowChrome();
         await _background.SetModeAsync(BackgroundMode.Legacy, _options, true);
-        WindowState = WindowState.Normal;
+        ToggleFullscreen();
         if (_independentPresentation || ((SolidColorBrush)Background).Color.A != 255 || ((SolidColorBrush)_background.Background).Color.A != 255)
             throw new InvalidOperationException("Leaving independent rendering did not restore an opaque foreground surface.");
         File.WriteAllText(Path.Combine(folder, "native-backgrounds.json"), JsonSerializer.Serialize(new
@@ -73,14 +78,14 @@ public sealed partial class MainWindow
             originalCompared = false,
             results
         }, LyricsFile.JsonOptions));
-        async Task WaitForRenderer()
+        async Task WaitForRenderer(bool requireReadyEvent = true)
         {
             await Task.Delay(200);
-            for (int i = 0; i < 100 && (!_background.RendererReady || _background.IndependentRendererActive && !_independentPresentation) && _background.LastError is null; i++)
+            for (int i = 0; requireReadyEvent && i < 100 && (!_background.RendererReady || _background.IndependentRendererActive && !_independentPresentation) && _background.LastError is null; i++)
                 await Task.Delay(50);
             if (_background.LastError is { } error)
                 throw new InvalidOperationException(error);
-            if (!_background.RendererReady)
+            if (requireReadyEvent && !_background.RendererReady)
                 throw new InvalidOperationException("Native background did not present its first frame within 5 seconds.");
         }
     }

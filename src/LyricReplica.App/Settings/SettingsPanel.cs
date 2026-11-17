@@ -1,4 +1,5 @@
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Text.Json;
@@ -13,6 +14,8 @@ public sealed class SettingsPanel : StackPanel
     private readonly Action<bool> _changed;
     private readonly List<ComboBox> _styleOptions = [];
     private ComboBox _style = null!;
+    private readonly CheckBox _audioReactive;
+    private readonly TextBlock _backgroundAudioNote = new() { TextWrapping = TextWrapping.Wrap, Margin = new Thickness(2, 0, 2, 8), Opacity = .7 };
     private bool _updating;
     private readonly Dictionary<string, FrameworkElement> _conditional = [];
     public SettingsPanel(ViewOptions options, Action<bool> changed, Action reset, Action? reload = null)
@@ -21,11 +24,13 @@ public sealed class SettingsPanel : StackPanel
         _settings = options.AppleMusicLyrics;
         _changed = changed;
         Heading("歌词设置");
-        Choice("ComboBoxAppleMusicLyricsBackground", "背景", ["静态", "动态", "动态律动", "动态流动", "Apple Music 原版"], (int)_settings.Background, i => _settings.Background = (BackgroundTypes)i, true);
+        Choice("HostLyricsParser", "歌词解析方式（下次载入生效）", ["内置解析器", "Lyricify Lyrics Helper（试验）"],
+            options.UseLyricifyParser ? 1 : 0, i => options.UseLyricifyParser = i == 1);
+        Choice("ComboBoxAppleMusicLyricsBackground", "背景", ["静态", "动态", "动态律动", "动态流动", "Apple Music 原版（4.4.2）", "Lyricify 现代（开源）"], (int)_settings.Background, i => _settings.Background = (BackgroundTypes)i, true);
         _conditional["independent"] = Check("ToggleSwitchAppleMusicLyricsIndependentBackgroundRendering", "独立渲染背景", _settings.EnableIndependentBackgroundRenderer, v => _settings.EnableIndependentBackgroundRenderer = v, true);
         _conditional["palette"] = Choice("ComboBoxAppleMusicLyricsBackground_Isolation_Palette", "取色算法", ["自动", "KMeans", "OctTree", "MedianCut 1", "MedianCut 2"], (int)_settings.BackgroundDynamicIsolationPalettes, i => _settings.BackgroundDynamicIsolationPalettes = (IsolationPalettes)i, true);
         Check("ToggleSwitchAppleMusicLyricsBlurLyrics", "歌词模糊", _settings.BlurLyrics, v => _settings.BlurLyrics = v);
-        _conditional["blur"] = Slider("SliderAppleMusicLyricsBlurLevel", "模糊程度", 1, 9, _settings.BlurLevel * 5, v => _settings.BlurLevel = v / 5);
+        _conditional["blur"] = Slider("SliderAppleMusicLyricsBlurLevel", "模糊程度", 1, 9, _settings.BlurLevel * 5, 1, v => _settings.BlurLevel = v / 5);
         Check("ToggleSwitchAppleMusicLyricsDisableBlurAtLyricsLineMouseOver", "鼠标悬停时取消模糊", _settings.DisableBlurAtLyricsLineMouseOver, v => _settings.DisableBlurAtLyricsLineMouseOver = v);
         Check("ToggleSwitchAppleMusicLyricsBoldText", "粗体文字", _settings.BoldText, v => _settings.BoldText = v);
         Choice("ComboBoxAppleMusicLyricsFontPreset", "字体预设", ["默认", "Spotify Mix", "Spotify Circular", "SF Pro", "自定义"], (int)_settings.FontPreset, i => _settings.FontPreset = (FontPresets)i);
@@ -93,14 +98,15 @@ public sealed class SettingsPanel : StackPanel
         Check("HostReduceMotion", "减少动态效果", options.ReduceMotion, v => options.ReduceMotion = v);
         Check("HostTopmost", "窗口置顶", options.Topmost, v => options.Topmost = v);
         Check("HostLightTheme", "明亮背景", options.LightTheme, v => options.LightTheme = v, true);
-        Check("HostAudioReactive", "背景随系统音频律动", options.AudioReactive, v => options.AudioReactive = v, true);
+        _audioReactive = Check("HostAudioReactive", "背景随系统音频律动", options.AudioReactive, v => options.AudioReactive = v, true);
+        Children.Add(_backgroundAudioNote);
         Check("HostMarquee", "曲目信息滚动", _settings.EnableTrackInfoMarquee, v => _settings.EnableTrackInfoMarquee = v);
         Check("HostArtworkEnter", "封面进入动画", _settings.AnimationArtworkEnter, v => _settings.AnimationArtworkEnter = v);
         Check("HostDynamicArtwork", "动态封面视频", _settings.EnableDynamicArtwork, v => _settings.EnableDynamicArtwork = v);
         Check("HostChineseEasing", "中文扫光缓动", _settings.KaraokeChineseRollingEasing, v => _settings.KaraokeChineseRollingEasing = v);
-        Slider("HostTimelineOffset", "歌词提前量 / ms", -1000, 1000, options.TimelineOffsetMs - LyricsPreparation.TimelineCompensationMs, v => options.TimelineOffsetMs = Math.Round(v) + LyricsPreparation.TimelineCompensationMs);
-        Slider("HostAnimationSpeed", "动画时长倍率", .25, 3, options.AnimationSpeed, v => options.AnimationSpeed = v);
-        Slider("HostResume", "手动滚动恢复 / 秒", 1, 30, options.AutoResumeSeconds, v => options.AutoResumeSeconds = v);
+        Slider("HostTimelineOffset", "歌词提前量 / ms", -1000, 1000, options.TimelineOffsetMs - LyricsPreparation.TimelineCompensationMs, 0, v => options.TimelineOffsetMs = v + LyricsPreparation.TimelineCompensationMs);
+        Slider("HostAnimationSpeed", "动画时长倍率", .25, 3, options.AnimationSpeed, 2, v => options.AnimationSpeed = v);
+        Slider("HostResume", "手动滚动恢复 / 秒", 1, 30, options.AutoResumeSeconds, 1, v => options.AutoResumeSeconds = v);
         var advanced = new StackPanel();
         var editor = new TextBox { Text = JsonSerializer.Serialize(_settings, LyricsFile.JsonOptions), AcceptsReturn = true, AcceptsTab = true, Height = 220, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto, FontFamily = new FontFamily("Consolas"), Margin = new Thickness(0, 8, 0, 4) };
         var error = new TextBlock { Foreground = Brushes.Salmon, TextWrapping = TextWrapping.Wrap };
@@ -135,21 +141,52 @@ public sealed class SettingsPanel : StackPanel
     }
     private ComboBox Choice(string name, string label, string[] choices, int selected, Action<int> set, bool background = false)
     {
-        var heading = new TextBlock { Text = label, Foreground = Brushes.White, Margin = new Thickness(0, 12, 0, 5) };
-        Children.Add(heading);
-        var combo = new ComboBox { Name = name, ItemsSource = choices, SelectedIndex = selected, Tag = heading };
+        var combo = new ComboBox { Name = name, ItemsSource = choices, SelectedIndex = selected, VerticalAlignment = VerticalAlignment.Center };
+        AutomationProperties.SetName(combo, label);
+        combo.Tag = AddSettingRow(label, combo);
         combo.SelectionChanged += (_, _) => { if (_updating || combo.SelectedIndex < 0) return; set(combo.SelectedIndex); Change(background); };
-        Children.Add(combo);
         return combo;
     }
-    private Slider Slider(string name, string label, double min, double max, double current, Action<double> set)
+    private Slider Slider(string name, string label, double min, double max, double current, int decimals, Action<double> set)
     {
-        var labelView = new TextBlock { Text = $"{label}  {current:0.##}", Foreground = Brushes.White, Margin = new Thickness(0, 12, 0, 5) };
-        Children.Add(labelView);
-        var slider = new Slider { Name = name, Minimum = min, Maximum = max, Value = current, Tag = labelView };
-        slider.ValueChanged += (_, _) => { set(slider.Value); labelView.Text = $"{label}  {slider.Value:0.##}"; Change(); };
-        Children.Add(slider);
+        double step = Math.Pow(10, -decimals);
+        var slider = new ShellSlider
+        {
+            Name = name, Minimum = min, Maximum = max, Value = current,
+            IsSnapToTickEnabled = true, TickFrequency = step, SmallChange = step, LargeChange = 10 * step,
+            VerticalAlignment = VerticalAlignment.Center
+        };
+        var editor = new TextBox
+        {
+            Name = name + "Value", Width = 64, Margin = new Thickness(12, 0, 0, 0), Padding = new Thickness(7, 4, 7, 4),
+            VerticalAlignment = VerticalAlignment.Center, TextAlignment = TextAlignment.Right
+        };
+        AutomationProperties.SetName(slider, label);
+        AutomationProperties.SetName(editor, label + "数值");
+        var field = new DockPanel();
+        DockPanel.SetDock(editor, Dock.Right);
+        field.Children.Add(editor);
+        field.Children.Add(slider);
+        slider.Tag = AddSettingRow(label, field);
+        slider.ValueChanged += (_, _) => { set(Math.Round(slider.Value, decimals)); Change(); };
+        slider.AttachValueEditor(editor, decimals);
         return slider;
+    }
+
+    private Grid AddSettingRow(string label, FrameworkElement field)
+    {
+        var row = new Grid { Margin = new Thickness(0, 5, 0, 5) };
+        row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
+        row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(3, GridUnitType.Star) });
+        row.Children.Add(new TextBlock
+        {
+            Text = label, TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center,
+            Margin = new Thickness(0, 0, 16, 0)
+        });
+        Grid.SetColumn(field, 1);
+        row.Children.Add(field);
+        Children.Add(row);
+        return row;
     }
     private static Button Button(string name, string text, Action action)
     {
@@ -177,11 +214,26 @@ public sealed class SettingsPanel : StackPanel
     }
     private void UpdateConditionalVisibility()
     {
+        bool ios = _settings.Background == BackgroundTypes.LyricifyModern ||
+            _settings.Background == BackgroundTypes.AppleMusicOriginal && ReferenceAppleMusicBackground.Available;
+        _audioReactive.IsEnabled = ios && !_options.ReduceMotion;
+        _backgroundAudioNote.Text = _settings.Background switch
+        {
+            BackgroundTypes.Static => "静态使用封面模糊图，背景保持静止。",
+            BackgroundTypes.Dynamic => "动态使用封面图层按固定轨迹移动，当前没有接入系统音频。",
+            BackgroundTypes.DynamicBeating => "原版依赖曲目的节拍分析数据。当前音源没有提供该数据，此模式暂按「动态」轨迹播放。",
+            BackgroundTypes.DynamicIsolation => "动态流动根据封面取色生成流动网格，当前没有接入系统音频。",
+            BackgroundTypes.AppleMusicOriginal when !ios => "缺少本地 Lyricify 4.4.2 发布组件，选择此项时使用兼容背景。",
+            BackgroundTypes.AppleMusicOriginal => "使用本地 Lyricify 4.4.2 随包发布的背景渲染组件。",
+            _ => "使用当前构建的 Lyricify Backgrounds 开源现代渲染器。"
+        };
+        if (ios)
+            _backgroundAudioNote.Text += _options.ReduceMotion ? "关闭减少动态效果后可启用系统音频律动。" : "支持系统音频低频律动。";
         foreach (var (key, element) in _conditional)
         {
             bool visible = key switch
             {
-                "independent" => _settings.Background == BackgroundTypes.AppleMusicOriginal,
+                "independent" => ios,
                 "palette" => _settings.Background == BackgroundTypes.DynamicIsolation,
                 "blur" => _settings.BlurLyrics,
                 "font" => _settings.FontPreset == FontPresets.Custom,

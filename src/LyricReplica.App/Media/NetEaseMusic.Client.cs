@@ -15,6 +15,16 @@ internal static partial class NetEaseMusic
     private static string? _clientPipe;
 
     public static bool HasClientSession => File.Exists(SessionFile);
+    internal sealed record ClientAccount(string Name, string AvatarUrl);
+    internal sealed record ClientPlaylist(long Id, string Name, string CoverUrl);
+
+    public static void ForgetClientSession() => File.Delete(SessionFile);
+
+    public static async Task<string[]> ReadClientQualityAsync(NetEaseTrack track, CancellationToken token)
+    {
+        var response = await RunClientAsync(new { operation = "quality", id = track.OriginalId, cookie = ReadClientCookie() }, token);
+        return response.GetProperty("levels").EnumerateArray().Select(level => level.GetString() ?? "").ToArray();
+    }
 
     public static async Task<(string Key, byte[] Image)> CreateClientQrAsync(CancellationToken token)
     {
@@ -49,10 +59,36 @@ internal static partial class NetEaseMusic
     public static async Task<NetEaseTrack[]> SearchClientAsync(string keyword, CancellationToken token)
     {
         var response = await RunClientAsync(new { operation = "search", keyword, cookie = ReadClientCookie() }, token);
-        if (!response.TryGetProperty("result", out var result) || result.ValueKind != JsonValueKind.Object)
-            throw new InvalidOperationException("网易云客户端搜索未返回结果，请检查登录状态。");
-        if (!result.TryGetProperty("songs", out var songs) || songs.ValueKind != JsonValueKind.Array)
-            return [];
+        return ParseClientTracks(response);
+    }
+
+    public static async Task<ClientAccount?> ReadClientAccountAsync(CancellationToken token)
+    {
+        var response = await RunClientAsync(new { operation = "account", cookie = ReadClientCookie() }, token);
+        return IsTrue(response, "signedIn") ? new ClientAccount(ReadText(response, "name"), ReadText(response, "avatarUrl")) : null;
+    }
+
+    public static async Task<ClientPlaylist[]> ReadClientRecommendationsAsync(CancellationToken token)
+    {
+        var response = await RunClientAsync(new { operation = "recommendations", cookie = ReadClientCookie() }, token);
+        return response.GetProperty("playlists").EnumerateArray()
+            .Where(item => item.TryGetProperty("id", out var id) && id.TryGetInt64(out long value) && value > 0)
+            .Select(item => new ClientPlaylist(item.GetProperty("id").GetInt64(), ReadText(item, "name"), ReadText(item, "coverUrl"))).ToArray();
+    }
+
+    public static async Task<(NetEaseTrack[] Tracks, int? NextOffset)> ReadClientLibraryAsync(string operation, long id, int offset, CancellationToken token)
+    {
+        var response = await RunClientAsync(new { operation, id, offset, cookie = ReadClientCookie() }, token);
+        int? nextOffset = response.TryGetProperty("nextOffset", out var next) && next.ValueKind == JsonValueKind.Number &&
+            next.TryGetInt32(out int value) && value > offset ? value : null;
+        return (ParseClientTracks(response), nextOffset);
+    }
+
+    internal static NetEaseTrack[] ParseClientTracks(JsonElement response)
+    {
+        if (!response.TryGetProperty("songs", out var songs) || songs.ValueKind != JsonValueKind.Array)
+            throw new InvalidOperationException("网易云未返回歌曲列表，请检查登录状态。");
+        response.TryGetProperty("rights", out var rights);
         var tracks = new List<NetEaseTrack>();
         foreach (var item in songs.EnumerateArray())
         {
@@ -62,22 +98,26 @@ internal static partial class NetEaseMusic
             string artist = item.TryGetProperty("ar", out var artists) && artists.ValueKind == JsonValueKind.Array
                 ? string.Join(" / ", artists.EnumerateArray().Select(value => ReadText(value, "name"))) : "";
             item.TryGetProperty("al", out var album);
+            string access = ReadText(rights, originalId.ToString(System.Globalization.CultureInfo.InvariantCulture));
             tracks.Add(new NetEaseTrack("", originalId, ReadText(item, "name"), artist,
-                ReadText(album, "name"), durationMs, true, ClientSession: true, CoverUrl: ReadText(album, "picUrl")));
+                ReadText(album, "name"), durationMs, access is not ("preview" or "unavailable"),
+                ClientSession: true, CoverUrl: ReadText(album, "picUrl"), ClientRights: access));
         }
         return tracks.ToArray();
     }
 
-    private static async Task<Song> LoadClientLyricsAsync(NetEaseTrack track, CancellationToken token)
+    private static async Task<Song> LoadClientLyricsAsync(NetEaseTrack track, CancellationToken token, bool useLyricifyParser)
     {
         var response = await RunClientAsync(new { operation = "lyrics", id = track.OriginalId }, token);
-        return ParseClientLyrics(track, response);
+        return ParseClientLyrics(track, response, useLyricifyParser);
     }
 
-    internal static Song ParseClientLyrics(NetEaseTrack track, JsonElement response)
+    internal static Song ParseClientLyrics(NetEaseTrack track, JsonElement response, bool useLyricifyParser = false)
     {
-        var song = LyricsFile.ParseLrc(LyricText("lrc"));
-        var timed = YrcLyrics.Parse(LyricText("yrc"));
+        Func<string, Song> parseLrc = useLyricifyParser ? LyricifyParser.ParseLrc : LyricsFile.ParseLrc;
+        Func<string, List<LyricLine>> parseYrc = useLyricifyParser ? LyricifyParser.ParseYrc : YrcLyrics.Parse;
+        var song = parseLrc(LyricText("lrc"));
+        var timed = parseYrc(LyricText("yrc"));
         if (timed.Count > 0)
         {
             song.Lines = timed;
@@ -97,8 +137,8 @@ internal static partial class NetEaseMusic
 
         void AttachText(string wordKey, string lineKey, Action<LyricLine, string> assign)
         {
-            var wordLines = YrcLyrics.Parse(LyricText(wordKey)).ToLookup(line => line.StartMs);
-            var lineLyrics = LyricsFile.ParseLrc(LyricText(lineKey));
+            var wordLines = parseYrc(LyricText(wordKey)).ToLookup(line => line.StartMs);
+            var lineLyrics = parseLrc(LyricText(lineKey));
             var lineTimes = lineLyrics.Lines.ToLookup(line => line.StartMs);
             foreach (var line in song.Lines)
             {
@@ -110,9 +150,9 @@ internal static partial class NetEaseMusic
         }
     }
 
-    private static async Task StartClientPlaybackAsync(NetEaseTrack track, double volume, CancellationToken token)
+    private static async Task<string> StartClientPlaybackAsync(NetEaseTrack track, double volume, string level, CancellationToken token, double positionMs, bool playing)
     {
-        var audio = await RunClientAsync(new { operation = "audio", id = track.OriginalId, cookie = ReadClientCookie() }, token);
+        var audio = await RunClientAsync(new { operation = "audio", id = track.OriginalId, level, cookie = ReadClientCookie() }, token);
         if (IsTrue(audio, "preview"))
             throw new InvalidOperationException("网易云只返回了试听片段，当前账号没有取得完整音源。");
         if (!audio.TryGetProperty("code", out var code) || !code.TryGetInt32(out int status) || status != 200 ||
@@ -145,8 +185,11 @@ internal static partial class NetEaseMusic
                         if (state.DurationMs + Math.Max(2500, track.DurationMs * .02) < track.DurationMs)
                             throw new InvalidOperationException("网易云返回的音频短于该曲目的完整时长。");
                         await SetAsync("volume", volume * 100, startup.Token);
-                        await SetAsync("pause", false, startup.Token);
-                        return;
+                        if (positionMs > 0)
+                            await SetAsync("time-pos", Math.Clamp(positionMs, 0, state.DurationMs) / 1000, startup.Token);
+                        if (playing)
+                            await SetAsync("pause", false, startup.Token);
+                        return ReadText(audio, "level");
                     }
                 }
                 catch (IOException) when (!startup.IsCancellationRequested) { }

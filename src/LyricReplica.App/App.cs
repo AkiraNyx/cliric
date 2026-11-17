@@ -77,11 +77,10 @@ public sealed class App : Application
         }
         app.DispatcherUnhandledException += (_, e) => { Log(e.Exception.ToString()); if (args.Contains("--self-test")) { app.Shutdown(1); return; } MessageBox.Show(e.Exception.Message, "LyricReplica", MessageBoxButton.OK, MessageBoxImage.Error); e.Handled = true; };
         LoadResources(app);
-        var lyrics = new MainWindow(args, hostedByPlayer: true);
-        var player = new PlayerWindow(lyrics, args.Contains("--self-test"));
-        app.MainWindow = player;
+        var window = new MainWindow(args, hostedByPlayer: true);
+        app.MainWindow = window;
         app.ShutdownMode = ShutdownMode.OnMainWindowClose;
-        return app.Run(player);
+        return app.Run(window);
     }
     private static void LoadResources(Application app)
     {

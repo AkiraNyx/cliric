@@ -16,6 +16,33 @@ namespace LyricReplica.App;
 
 public sealed partial class MainWindow
 {
+    internal async Task SeedDemoTracksForVerificationAsync()
+    {
+        _songs.AddRange(DemoSongs.Create());
+        await LoadSongAsync(0);
+        _clock.Seek(8500);
+    }
+
+    internal async Task CheckPlaybackLoadingAsync(Func<bool> controlsEnabled)
+    {
+        var release = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var task = WhilePlaybackLoadsAsync(() => release.Task);
+        bool wasPlaying = Playing;
+        try
+        {
+            TogglePlay();
+            if (!PlaybackLoading || controlsEnabled() || Playing != wasPlaying)
+                throw new InvalidOperationException("Playback controls and shortcuts must be inactive while loading.");
+        }
+        finally
+        {
+            release.SetResult();
+            await task;
+        }
+        if (PlaybackLoading || !controlsEnabled())
+            throw new InvalidOperationException("Playback controls did not recover after loading.");
+    }
+
     internal async Task RunSelfTestAsync()
     {
         File.Delete(Path.Combine(App.DataFolder, "self-test-failure.txt"));
@@ -63,6 +90,8 @@ public sealed partial class MainWindow
             if (!_rows.Any(r => r.Backgrounds.Count > 0))
                 throw new Exception("Background vocals missing");
             await CheckNativeBackgroundsAsync(folder);
+            if (_args.Contains("--compare-backgrounds"))
+                await CompareIosBackgroundsAsync(folder);
             int videoArgument = Array.IndexOf(_args, "--video-fixture");
             if (videoArgument >= 0 && videoArgument + 1 < _args.Length)
                 await CheckNativeArtworkVideoAsync(_args[videoArgument + 1], folder);
@@ -336,6 +365,33 @@ public sealed partial class MainWindow
                     string mobileFont = mobile.HasValue ? ReferencePageView.AppleTextFont().Source : family;
                     Check(_smallTitle.FontFamily.Source == mobileFont && _smallArtist.FontFamily.Source == mobileFont, "mobile layout font override and default inheritance follow original resource 60148 " + preset + " / " + mobile);
                 }
+            var timeReadouts = new FrameworkElement[]
+            {
+                _seek.TextBlockCurrentTime, _seek.TextBlockLeftTime, _seek.TimerViewCurrentTime, _seek.TimerViewLeftTime,
+                _seekVertical.TextBlockCurrentTime, _seekVertical.TextBlockLeftTime, _seekVertical.TimerViewCurrentTime, _seekVertical.TimerViewLeftTime
+            };
+            bool originalBold = _options.Bold;
+            _options.AppleMusicLyrics.FontPreset = FontPresets.SpotifyCircular;
+            TextOptions.SetTextFormattingMode(_reference.View, TextFormattingMode.Display);
+            TextOptions.SetTextRenderingMode(_reference.View, TextRenderingMode.ClearType);
+            TextOptions.SetTextHintingMode(_reference.View, TextHintingMode.Fixed);
+            foreach (bool bold in new[] { true, false })
+            {
+                _options.Bold = bold;
+                RebuildRows();
+                Layout();
+                FontWeight weight = bold ? FontWeights.Bold : FontWeights.Medium;
+                Check(timeReadouts.All(readout => (FontWeight)readout.GetValue(TextBlock.FontWeightProperty) == weight &&
+                    ((FontFamily)readout.GetValue(TextBlock.FontFamilyProperty)).Source == _font.Source &&
+                    TextOptions.GetTextFormattingMode(readout) == TextFormattingMode.Ideal &&
+                    TextOptions.GetTextRenderingMode(readout) == TextRenderingMode.Auto &&
+                    TextOptions.GetTextHintingMode(readout) == TextHintingMode.Auto),
+                    "lyric elapsed and remaining time keep the preset typography with a " + weight + " weight inside a display-formatted host");
+            }
+            _reference.View.ClearValue(TextOptions.TextFormattingModeProperty);
+            _reference.View.ClearValue(TextOptions.TextRenderingModeProperty);
+            _reference.View.ClearValue(TextOptions.TextHintingModeProperty);
+            _options.Bold = originalBold;
             _options.AppleMusicLyrics.FontPreset = originalFontPreset;
             _options.AppleMusicLyrics.FontFamily = originalFontFamily;
             _options.AppleMusicLyrics.IosStylePreset = originalMobileStyle;
@@ -712,12 +768,13 @@ public sealed partial class MainWindow
             Check(_song.Id == "demo-syllable" && _clock.IsPlaying, "stale navigation cannot pause the current track");
             var thirdNavigation = NavigateLocalAsync(0);
             var fourthNavigation = NavigateLocalAsync(1);
+            Check(PlaybackLoading && Playing, "a pending track change retains the existing playback request");
             TogglePlay();
             held.Complete(3);
             await fourthNavigation;
             held.Complete(2);
             await thirdNavigation;
-            Check(_song.Id == "demo-duet" && !_clock.IsPlaying, "pause during navigation is preserved by late completions");
+            Check(_song.Id == "demo-duet" && _clock.IsPlaying && !PlaybackLoading, "blocking a toggle during navigation preserves the requested playback and releases the controls");
             sessionField.SetValue(_background, null);
             held.Dispose();
             var closedBackground = new BackgroundView();

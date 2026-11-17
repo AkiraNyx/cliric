@@ -5,4 +5,7 @@
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../vendor/Lyricify-Lyrics-Helper/Lyricify.Lyrics.Helper/Lyricify.Lyrics.Helper.csproj" />
+  </ItemGroup>
 </Project>

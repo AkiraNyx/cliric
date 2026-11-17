@@ -1,13 +1,50 @@
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Shell;
+using System.Windows.Interop;
 using LyricReplica.Core;
 
 namespace LyricReplica.App;
 
 public sealed partial class MainWindow
 {
+    internal bool IsNativeWindowInsideWorkArea()
+    {
+        var hwnd = new WindowInteropHelper(this).Handle;
+        var info = new MonitorInfo { Size = Marshal.SizeOf<MonitorInfo>() };
+        const int extendedFrameBounds = 9;
+        if (!GetMonitorInfo(MonitorFromWindow(hwnd, 2), ref info) ||
+            DwmGetWindowAttribute(hwnd, extendedFrameBounds, out var bounds, Marshal.SizeOf<ScreenRect>()) != 0)
+            return false;
+        return bounds.Left >= info.Work.Left - 1 && bounds.Top >= info.Work.Top - 1 &&
+            bounds.Right <= info.Work.Right + 1 && bounds.Bottom <= info.Work.Bottom + 1;
+    }
+
+    internal int GetMaximizeCaptionHit()
+    {
+        if (_library?.MaximizeWindowButton is not { IsVisible: true } button)
+            return 0;
+        return GetNativeHit(button.PointToScreen(new Point(button.ActualWidth / 2, button.ActualHeight / 2)));
+    }
+
+    internal int GetNativeHit(Point screen)
+    {
+        const int nonClientHitTest = 0x0084;
+        int position = ((int)screen.X & 0xffff) | ((int)screen.Y << 16);
+        return SendMessage(new WindowInteropHelper(this).Handle, nonClientHitTest, IntPtr.Zero, (IntPtr)position).ToInt32();
+    }
+
+    [DllImport("dwmapi.dll")]
+    private static extern int DwmGetWindowAttribute(IntPtr window, int attribute, out ScreenRect value, int size);
+
+    [DllImport("user32.dll")]
+    private static extern IntPtr MonitorFromWindow(IntPtr window, uint flags);
+
+    [DllImport("user32.dll", EntryPoint = "SendMessageW")]
+    private static extern IntPtr SendMessage(IntPtr window, int message, IntPtr wParam, IntPtr lParam);
+
     private async Task CheckNativeWindowAsync(string folder)
     {
         double width = Width, height = Height;

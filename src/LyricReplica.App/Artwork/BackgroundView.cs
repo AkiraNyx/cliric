@@ -38,7 +38,7 @@ public sealed class BackgroundView : Grid, IDisposable
         get; private set;
     }
     public bool RendererReady => _session?.IsReady ?? true;
-    internal bool IndependentRendererActive => _independent && _session is IndependentAppleMusicIosBackground;
+    internal bool IndependentRendererActive => _independent && _session is not null;
     public event Action? Ready;
     public event Action<string>? Fault;
 
@@ -93,7 +93,7 @@ public sealed class BackgroundView : Grid, IDisposable
         if (_mode == mode && !force)
             return;
         int generation = ++_generation;
-        _independent = mode == BackgroundMode.Modern && options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && Window.GetWindow(this)?.WindowState == WindowState.Maximized;
+        _independent = SupportsIndependent(mode) && options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && Window.GetWindow(this)?.WindowState == WindowState.Maximized;
         _mode = mode;
         ++_paletteGeneration;
         _session?.Dispose();
@@ -103,26 +103,15 @@ public sealed class BackgroundView : Grid, IDisposable
         _renderView = null;
         Children.Clear();
         LastError = null;
-        if (mode is BackgroundMode.Modern or BackgroundMode.Classic)
+        if (mode is BackgroundMode.ReferenceAppleMusic or BackgroundMode.Modern or BackgroundMode.Classic)
         {
             try
             {
                 FrameworkElement view;
-                if (mode == BackgroundMode.Modern)
+                if (SupportsIndependent(mode))
                 {
-                    var settings = GetIosSettings(options);
-                    if (_independent)
-                    {
-                        var bg = new IndependentAppleMusicIosBackground(settings, lightTheme: options.LightTheme);
-                        _session = bg;
-                        view = bg;
-                    }
-                    else
-                    {
-                        var bg = new AppleMusicIosBackground(settings, lightTheme: options.LightTheme);
-                        _session = bg;
-                        view = bg;
-                    }
+                    _session = CreateIosSession(mode, GetIosSettings(options), options.LightTheme, _independent);
+                    view = (FrameworkElement)_session;
                 }
                 else
                 {
@@ -157,6 +146,16 @@ public sealed class BackgroundView : Grid, IDisposable
         else
             Children.Add(new Border { Background = new SolidColorBrush(Color.FromRgb(26, 26, 26)) });
     }
+
+    internal static bool SupportsIndependent(BackgroundMode mode) => mode is BackgroundMode.ReferenceAppleMusic or BackgroundMode.Modern;
+
+    internal static IBackgroundSession CreateIosSession(BackgroundMode mode, AppleMusicIosBackgroundSettings settings,
+        bool lightTheme, bool independent, int presetSlot = -1) =>
+        mode == BackgroundMode.ReferenceAppleMusic
+            ? ReferenceAppleMusicBackground.Create(settings, lightTheme, independent, presetSlot)
+            : independent
+                ? new IndependentAppleMusicIosBackground(settings, lightTheme, presetSlot: presetSlot)
+                : new AppleMusicIosBackground(settings, lightTheme, presetSlot: presetSlot);
     private async Task UpdateIsolationPaletteAsync()
     {
         var renderer = _isolation;
@@ -218,7 +217,7 @@ public sealed class BackgroundView : Grid, IDisposable
     }
     public void Update(bool playing, bool portrait, bool visible, ViewOptions options, double elapsed)
     {
-        bool independent = _mode == BackgroundMode.Modern && options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && Window.GetWindow(this)?.WindowState == WindowState.Maximized;
+        bool independent = SupportsIndependent(_mode) && options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && Window.GetWindow(this)?.WindowState == WindowState.Maximized;
         if (independent != _independent)
         {
             _ = SetModeAsync(_mode, options, true);

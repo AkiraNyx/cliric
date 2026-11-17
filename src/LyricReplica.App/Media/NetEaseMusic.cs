@@ -9,9 +9,10 @@ using LyricReplica.Core;
 
 namespace LyricReplica.App;
 
-internal sealed record NetEaseTrack(string Id, long OriginalId, string Title, string Artist, string Album, double DurationMs, bool Playable, bool ClientSession = false, string CoverUrl = "")
+internal sealed record NetEaseTrack(string Id, long OriginalId, string Title, string Artist, string Album, double DurationMs, bool Playable, bool ClientSession = false, string CoverUrl = "", string ClientRights = "")
 {
-    public string Availability => ClientSession ? "播放时检查账号权限" : Playable ? "可播放" : "当前授权不可播";
+    public string Availability => ClientRights == "preview" ? "仅试听" : !Playable ? "当前授权不可播" :
+        !ClientSession || ClientRights == "full" ? "可播放" : "权限未确认";
 }
 
 internal static partial class NetEaseMusic
@@ -57,14 +58,15 @@ internal static partial class NetEaseMusic
         return Artwork.Decode(image.ToArray());
     }
 
-    public static async Task<Song> LoadLyricsAsync(NetEaseTrack track, CancellationToken cancellationToken)
+    public static async Task<Song> LoadLyricsAsync(NetEaseTrack track, CancellationToken cancellationToken, bool useLyricifyParser = false)
     {
         if (track.ClientSession)
-            return await LoadClientLyricsAsync(track, cancellationToken);
+            return await LoadClientLyricsAsync(track, cancellationToken, useLyricifyParser);
         var response = await RunAsync(cancellationToken, "song", "lyric", "--songId", track.Id);
         var data = response.TryGetProperty("data", out var payload) ? payload : default;
         string lyric = ReadText(data, "lyric");
-        var song = LyricsFile.ParseLrc(string.IsNullOrWhiteSpace(lyric) ? ReadText(data, "txtLyric") : lyric);
+        Func<string, Song> parseLrc = useLyricifyParser ? LyricifyParser.ParseLrc : LyricsFile.ParseLrc;
+        var song = parseLrc(string.IsNullOrWhiteSpace(lyric) ? ReadText(data, "txtLyric") : lyric);
         ApplySecondary(ReadText(data, "transLyric"), (line, value) => line.Translation = value);
         ApplySecondary(ReadText(data, "romalrc"), (line, value) => line.Romanization = value);
         song.Id = $"netease-{track.OriginalId}";
@@ -79,7 +81,7 @@ internal static partial class NetEaseMusic
         {
             if (string.IsNullOrWhiteSpace(text))
                 return;
-            var secondary = LyricsFile.ParseLrc(text);
+            var secondary = parseLrc(text);
             if (secondary.Untimed)
                 return;
             var lines = secondary.Lines.ToLookup(line => line.StartMs);
@@ -89,13 +91,10 @@ internal static partial class NetEaseMusic
         }
     }
 
-    public static async Task StartAsync(NetEaseTrack track, double volume, CancellationToken cancellationToken)
+    public static async Task<string> StartAsync(NetEaseTrack track, double volume, string quality, CancellationToken cancellationToken, double positionMs, bool playing)
     {
         if (track.ClientSession)
-        {
-            await StartClientPlaybackAsync(track, volume, cancellationToken);
-            return;
-        }
+            return await StartClientPlaybackAsync(track, volume, quality, cancellationToken, positionMs, playing);
         if (!track.Playable)
             throw new InvalidOperationException("网易云当前授权不允许播放这首歌。");
         string mpvDirectory = Path.Combine(ToolRoot, "mpv");
@@ -123,7 +122,7 @@ internal static partial class NetEaseMusic
                     if (await ReadPlaybackAsync(startup.Token) is { DurationMs: > 0, Ended: false })
                     {
                         await SetAsync("volume", volume * 100, startup.Token);
-                        return;
+                        return "";
                     }
                 }
                 catch (IOException) when (!startup.IsCancellationRequested) { }

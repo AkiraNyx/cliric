@@ -56,9 +56,12 @@ public sealed class ArtworkImage : Image
     }
 }
 
-public sealed class TouchScrollViewer : ScrollViewer
+public sealed class TouchScrollViewer : ShellScrollViewer
 {
     public bool IsInertiaEnabled { get; set; } = true;
+    internal Func<bool> WheelMotionReduced { get; set; } = () => false;
+    protected override bool ReduceWheelMotion => WheelMotionReduced();
+    protected override double WheelLineHeight => 16;
     public TouchScrollViewer()
     {
         IsManipulationEnabled = true;

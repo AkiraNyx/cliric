@@ -15,6 +15,7 @@ namespace Lyricify.Backgrounds.AppleMusicInspired.Windows.Rendering
     /// </summary>
     public sealed class AppleMusicSpectrumAnalysis
     {
+        public const string DisabledAudioEndpoint = "Lyricify.Backgrounds.NoAudioCapture";
         private const int FftExponent = 12;
         private const int FftLength = 1 << FftExponent;
         private const int FastFftExponent = 11;
@@ -132,6 +133,8 @@ namespace Lyricify.Backgrounds.AppleMusicInspired.Windows.Rendering
 
         public void Start()
         {
+            if (GetRequestedAudioEndpointId() == DisabledAudioEndpoint)
+                return;
             int generation;
             lock (_captureGate)
             {

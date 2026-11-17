@@ -161,7 +161,7 @@ public enum MotionPreset
 }
 public enum BackgroundMode
 {
-    Modern, Classic, Legacy, Solid, Static, DynamicBeating, Isolation
+    Modern, Classic, Legacy, Solid, Static, DynamicBeating, Isolation, ReferenceAppleMusic
 }
 public enum RomajiOptions
 {
@@ -170,6 +170,7 @@ public enum RomajiOptions
 
 public sealed class ViewOptions
 {
+    public bool UseLyricifyParser { get; set; }
     public AppleMusicSettings AppleMusicLyrics { get; set; } = new();
     public bool Translation { get; set; } = true;
     public RomajiOptions RomajiOption
@@ -258,6 +259,7 @@ public sealed class ViewOptions
     }
     public double AutoResumeSeconds { get; set; } = 10;
     public double Volume { get; set; } = .7;
+    public string NetEaseQuality { get; set; } = "standard";
     [JsonIgnore]
     public MotionPreset Preset
     {
@@ -267,8 +269,24 @@ public sealed class ViewOptions
     [JsonIgnore]
     public BackgroundMode Background
     {
-        get => AppleMusicLyrics.Background switch { BackgroundTypes.Dynamic => BackgroundMode.Legacy, BackgroundTypes.DynamicBeating => BackgroundMode.DynamicBeating, BackgroundTypes.DynamicIsolation => BackgroundMode.Isolation, BackgroundTypes.AppleMusicOriginal => BackgroundMode.Modern, _ => BackgroundMode.Static };
-        set => AppleMusicLyrics.Background = value switch { BackgroundMode.Legacy => BackgroundTypes.Dynamic, BackgroundMode.DynamicBeating => BackgroundTypes.DynamicBeating, BackgroundMode.Isolation => BackgroundTypes.DynamicIsolation, BackgroundMode.Modern or BackgroundMode.Classic => BackgroundTypes.AppleMusicOriginal, _ => BackgroundTypes.Static };
+        get => AppleMusicLyrics.Background switch
+        {
+            BackgroundTypes.Dynamic => BackgroundMode.Legacy,
+            BackgroundTypes.DynamicBeating => BackgroundMode.DynamicBeating,
+            BackgroundTypes.DynamicIsolation => BackgroundMode.Isolation,
+            BackgroundTypes.AppleMusicOriginal => BackgroundMode.ReferenceAppleMusic,
+            BackgroundTypes.LyricifyModern => BackgroundMode.Modern,
+            _ => BackgroundMode.Static
+        };
+        set => AppleMusicLyrics.Background = value switch
+        {
+            BackgroundMode.Legacy => BackgroundTypes.Dynamic,
+            BackgroundMode.DynamicBeating => BackgroundTypes.DynamicBeating,
+            BackgroundMode.Isolation => BackgroundTypes.DynamicIsolation,
+            BackgroundMode.ReferenceAppleMusic => BackgroundTypes.AppleMusicOriginal,
+            BackgroundMode.Modern or BackgroundMode.Classic => BackgroundTypes.LyricifyModern,
+            _ => BackgroundTypes.Static
+        };
     }
     [JsonIgnore]
     public string FontFamily
@@ -283,6 +301,8 @@ public sealed class ViewOptions
 
     public void Normalize()
     {
+        if (NetEaseQuality is not ("standard" or "higher" or "exhigh" or "lossless" or "hires" or "jyeffect" or "sky" or "jymaster" or "vivid"))
+            NetEaseQuality = "standard";
         AppleMusicLyrics ??= new();
         AppleMusicLyrics.BackgroundAppleMusicOriginal ??= new();
         AppleMusicLyrics.BuggyAppleOptions ??= new();

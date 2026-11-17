@@ -311,7 +311,9 @@
                 </GroupBox>
               </Grid.Children>
             </Grid>
-            <p:ReferenceStateBar TotalTime="1000" CurrentTime="10" Height="40" VerticalAlignment="Top" Margin="53.5,10,53.5,0" p:InputMap.ValueChanged="AppleMusicPlayerStateBar_ValueChanged" x:Name="AppleMusicPlayerStateBar" />
+            <p:ReferenceStateBar TotalTime="1000" CurrentTime="10" Height="40" VerticalAlignment="Top" Margin="53.5,10,53.5,0"
+                                 TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto" TextOptions.TextHintingMode="Auto"
+                                 p:InputMap.ValueChanged="AppleMusicPlayerStateBar_ValueChanged" x:Name="AppleMusicPlayerStateBar" />
             <Grid Margin="12.5,5,14,-10" Visibility="Visible" x:Name="GridHorizontalControls">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.75*" />
@@ -369,7 +371,12 @@
               <Viewbox Margin="20,0,20,30" x:Name="ViewboxVerticalControls">
                 <StackPanel Margin="0,0,0,50">
                   <StackPanel.Children>
-                    <p:ReferenceStateBar ForceWidth="700" Height="40" VerticalAlignment="Top" Margin="-7,0,-7,0" TotalTime="{Binding ElementName=AppleMusicPlayerStateBar, Path=TotalTime, Mode=TwoWay}" CurrentTime="{Binding ElementName=AppleMusicPlayerStateBar, Path=CurrentTime, Mode=TwoWay}" FontWeight="{Binding ElementName=AppleMusicPlayerStateBar, Path=FontWeight}" p:InputMap.ValueChanged="AppleMusicPlayerStateBar_ValueChanged" x:Name="AppleMusicPlayerStateBarVertical" />
+                    <p:ReferenceStateBar ForceWidth="700" Height="40" VerticalAlignment="Top" Margin="-7,0,-7,0"
+                                         TotalTime="{Binding ElementName=AppleMusicPlayerStateBar, Path=TotalTime, Mode=TwoWay}"
+                                         CurrentTime="{Binding ElementName=AppleMusicPlayerStateBar, Path=CurrentTime, Mode=TwoWay}"
+                                         FontWeight="{Binding ElementName=AppleMusicPlayerStateBar, Path=FontWeight}"
+                                         TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto" TextOptions.TextHintingMode="Auto"
+                                         p:InputMap.ValueChanged="AppleMusicPlayerStateBar_ValueChanged" x:Name="AppleMusicPlayerStateBarVertical" />
                     <Grid Margin="0,30,0,-10" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
                       <Grid.RenderTransform>
                         <ScaleTransform ScaleX="1.4" ScaleY="1.4" />
