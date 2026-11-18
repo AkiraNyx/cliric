@@ -12,6 +12,7 @@ internal static class MotionTokens
     private static readonly IEasingFunction Emphasis = Freeze(new PowerEase { Power = 4, EasingMode = EasingMode.EaseOut });
 
     internal static readonly MotionTiming PageEnter = new(250, Freeze(new QuadraticEase { EasingMode = EasingMode.EaseOut }));
+    internal static readonly MotionTiming LyricsPage = new(250, Move);
     internal static readonly MotionTiming PopupEnter = new(200, Enter);
     internal static readonly MotionTiming PopupExit = new(150, Exit);
     internal static readonly MotionTiming PressIn = new(85, Enter);

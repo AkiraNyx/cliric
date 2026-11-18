@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shell;
 using System.Windows.Threading;
@@ -14,23 +15,24 @@ using LyricReplica.App.Reference;
 
 namespace LyricReplica.App;
 
-/// <summary>
-/// One window for the whole app: the library sits underneath and the lyric page slides up over it.
-/// The lyric page keeps its original root so its own checks and captures are unchanged.
-/// </summary>
 public sealed partial class MainWindow
 {
+    private static readonly DependencyProperty LyricsProgressProperty = DependencyProperty.Register(
+        nameof(LyricsProgress), typeof(double), typeof(MainWindow),
+        new PropertyMetadata(0d, (window, change) => ((MainWindow)window).SetPageBlend((double)change.NewValue)));
     private readonly Grid _shell = new();
-    private readonly TranslateTransform _lyricsSlide = new();
+    private readonly Border _backdropNeutral = new() { IsHitTestVisible = false };
+    private readonly Border _backdropShade = new() { Background = Brushes.Black, IsHitTestVisible = false };
+    private readonly BlurEffect _libraryBlur = new() { RenderingBias = RenderingBias.Performance };
+    private readonly BlurEffect _lyricsBlur = new() { RenderingBias = RenderingBias.Performance };
     private readonly WindowChrome _libraryChrome = new() { UseAeroCaptionButtons = false };
     private LibraryView? _library;
+    private Viewbox? _shellLegacyBackdrop;
     private bool _lyricsShown, _lyricsEntering, _stoppingForClose;
-    private int _lyricsTransition;
     private double _lastVolumeSent;
 
     internal bool LyricsShown => _lyricsShown;
-    internal bool ReduceMotion => _options.ReduceMotion;
-    internal double LyricsOffset => _lyricsSlide.Y;
+    internal double LyricsProgress => (double)GetValue(LyricsProgressProperty);
 
     private void BuildShell()
     {
@@ -39,12 +41,24 @@ public sealed partial class MainWindow
         _root.ContextMenu = menu;
         Content = null;
         _library = new LibraryView(this, _args.Contains("--self-test"));
-        _root.RenderTransform = _lyricsSlide;
+        _root.Background = Brushes.Transparent;
         _root.Visibility = Visibility.Hidden;
         _shell.Background = Brushes.Black;
         _shell.ClipToBounds = true;
+        _root.Children.Remove(_background);
+        _shellLegacyBackdrop = _reference.Get<Viewbox>("ViewboxBackground");
+        _stage.Children.Remove(_shellLegacyBackdrop);
+        // The relocated backdrop still binds to the artwork and blur names in the lyric page.
+        NameScope.SetNameScope(_shell, NameScope.GetNameScope(_reference.View));
+        _shellLegacyBackdrop.IsHitTestVisible = false;
+        _backdropNeutral.Background = (Brush)_library.FindResource("Shell.Background");
+        _shell.Children.Add(_background);
+        _shell.Children.Add(_shellLegacyBackdrop);
+        _shell.Children.Add(_backdropNeutral);
+        _shell.Children.Add(_backdropShade);
         _shell.Children.Add(_library);
         _shell.Children.Add(_root);
+        SetPageBlend(0);
         Content = _shell;
         Title = "LyricReplica";
         MinWidth = 500;
@@ -72,8 +86,8 @@ public sealed partial class MainWindow
         const int ncMouseLeave = 0x02A2;
         const int mouseMove = 0x0200;
         const int maxButton = 9;
-        if (_lyricsShown || _library is not { } library)
-            return IntPtr.Zero;
+        if (_lyricsShown || _fullscreen || _library is not { } library)
+            return ConstrainMaximizedLibrary(hwnd, message, wParam, lParam, ref handled);
 
         if (message == ncHitTest && library.MaximizeWindowButton is { IsLoaded: true, IsVisible: true, IsEnabled: true } button)
         {
@@ -111,7 +125,7 @@ public sealed partial class MainWindow
         const int ncCalcSize = 0x0083;
         const int redraw = 0x0300;
         const uint nearestMonitor = 2;
-        if (_lyricsShown || message != ncCalcSize || !IsZoomed(hwnd))
+        if (_fullscreen || message != ncCalcSize || !IsZoomed(hwnd))
             return IntPtr.Zero;
 
         var client = Marshal.PtrToStructure<ScreenRect>(lParam);
@@ -162,15 +176,8 @@ public sealed partial class MainWindow
             return;
         if (_lyricsShown)
             return;
-        int transition = ++_lyricsTransition;
-        bool wasHidden = _root.Visibility != Visibility.Visible;
         _lyricsShown = true;
         UpdateWindowChrome();
-        if (wasHidden)
-        {
-            _shell.UpdateLayout();
-            ShellMotion.To(_lyricsSlide, TranslateTransform.YProperty, Math.Max(1, _shell.ActualHeight), 0);
-        }
         _lyricsEntering = false;
         _root.Visibility = Visibility.Visible;
         _root.IsHitTestVisible = true;
@@ -184,14 +191,8 @@ public sealed partial class MainWindow
         }
         _root.UpdateLayout();
         OnRendering(null, EventArgs.Empty);
-        _lyricsEntering = !ReduceMotion;
-        ShellMotion.To(_lyricsSlide, TranslateTransform.YProperty, 0, 360, ShellMotion.Out, completed: () =>
-        {
-            if (transition != _lyricsTransition || _disposed)
-                return;
-            _lyricsEntering = false;
-            _library.Visibility = Visibility.Hidden;
-        });
+        _lyricsEntering = !ShellTransitions.GetReducedMotion(_library);
+        AnimatePageBlend(animate: true);
         Focus();
     }
 
@@ -201,7 +202,6 @@ public sealed partial class MainWindow
     {
         if (_library is null || _disposed || !_lyricsShown)
             return;
-        int transition = ++_lyricsTransition;
         _lyricsShown = false;
         _lyricsEntering = false;
         _queue.Visibility = Visibility.Collapsed;
@@ -210,21 +210,54 @@ public sealed partial class MainWindow
                 popup.IsOpen = false;
         _root.IsHitTestVisible = false;
         _scroll.StopWheelAnimation();
-        if (_fullscreen)
-            ToggleFullscreen();
         UpdateLyricsVisibility();
-        UpdateIndependentPresentation(false);
         UpdateWindowChrome();
         _library.Visibility = Visibility.Visible;
         _library.IsHitTestVisible = true;
         _library.Pause(false);
-        _shell.UpdateLayout();
-        double height = Math.Max(1, _shell.ActualHeight);
-        ShellMotion.To(_lyricsSlide, TranslateTransform.YProperty, height, animate ? 260 : 0, ShellMotion.Out, completed: () =>
+        AnimatePageBlend(animate);
+    }
+
+    private void AnimatePageBlend(bool animate)
+    {
+        bool showLyrics = _lyricsShown;
+        ShellTransitions.To(this, LyricsProgressProperty, showLyrics ? 1 : 0, MotionTokens.LyricsPage,
+            immediate: !animate || ShellTransitions.GetReducedMotion(_library!), completed: () =>
+            {
+                _lyricsEntering = false;
+                if (_disposed)
+                    return;
+                if (showLyrics)
+                    _library!.Visibility = Visibility.Hidden;
+                else
+                {
+                    _root.Visibility = Visibility.Hidden;
+                    // Complete the blend in one viewport before restoring explicit fullscreen.
+                    if (_fullscreen)
+                        ToggleFullscreen();
+                }
+            });
+    }
+
+    private void SetPageBlend(double progress)
+    {
+        double libraryOpacity = 1 - progress;
+        _backdropNeutral.Opacity = .58 * libraryOpacity;
+        _backdropShade.Opacity = .18 * libraryOpacity;
+        SetPagePose(_library!, _libraryBlur, libraryOpacity);
+        SetPagePose(_root, _lyricsBlur, progress);
+
+        static void SetPagePose(UIElement page, BlurEffect blur, double opacity)
         {
-            if (transition == _lyricsTransition)
-                _root.Visibility = Visibility.Hidden;
-        });
+            page.Opacity = opacity;
+            if (opacity is > .01 and < .99)
+            {
+                blur.Radius = 7 * (1 - opacity);
+                page.Effect = blur;
+            }
+            else
+                page.Effect = null;
+        }
     }
 
     internal void OpenLyricsSettings()

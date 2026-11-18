@@ -60,7 +60,6 @@ public sealed partial class LibraryView : UserControl
     {
         _lyrics = lyrics;
         _selfTest = selfTest;
-        ShellMotion.Reduced = () => _lyrics.ReduceMotion;
         _systemAnimationsEnabled = _selfTest || SystemParameters.ClientAreaAnimation;
         FontFamily = MiSansTypography.Family;
         InitializeComponent();

@@ -3,13 +3,60 @@ using System.Text.Json;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
+using System.Windows.Shell;
 using LyricReplica.Core;
+using LyricReplica.App.Reference;
 
 namespace LyricReplica.App;
 
 public sealed partial class MainWindow
 {
+    internal async Task VerifyPageBlendAsync(string folder)
+    {
+        var backdrop = _shellLegacyBackdrop!;
+        var chrome = WindowChrome.GetWindowChrome(this);
+        var viewport = _shell.RenderSize;
+        var crop = BackdropBounds();
+        double time = _legacyTime;
+        if (backdrop.Parent != _shell || _background.Parent != _shell ||
+            !ReferenceEquals(_reference.Get<ArtworkImage>("WebImageBackground").Source, _artwork.Source) ||
+            _backdropNeutral.Opacity <= 0 || _backdropShade.Opacity <= 0)
+            throw new InvalidOperationException("The two pages must share the active artwork and backdrop.");
+
+        ShowLyrics();
+        await Task.Delay(100);
+        double progress = LyricsProgress;
+        if (progress is <= .02 or >= .99 ||
+            _library!.Effect is not BlurEffect { Radius: > 0 } || _root.Effect is not BlurEffect { Radius: > 0 } ||
+            Math.Abs(_library.Opacity + _root.Opacity - 1) > .001 ||
+            _backdropNeutral.Opacity is <= 0 or >= .58 || _backdropShade.Opacity is <= 0 or >= .18 ||
+            _legacyTime <= time || crop != BackdropBounds() || viewport != _shell.RenderSize ||
+            !ReferenceEquals(chrome, WindowChrome.GetWindowChrome(this)))
+            throw new InvalidOperationException($"The page blend must advance both Gaussian fades and the same backdrop in a fixed viewport. Progress={progress:F3}.");
+        CaptureShell(Path.Combine(folder, "lyrics-transition.png"));
+        progress = LyricsProgress;
+        ShowLibrary();
+        if (Math.Abs(progress - LyricsProgress) > .025)
+            throw new InvalidOperationException("Reversing the page blend must continue from its current progress.");
+        await Task.Delay(300);
+        if (LyricsProgress != 0 || _root.IsVisible || !_library.IsVisible || _library.Effect is not null)
+            throw new InvalidOperationException("Returning must settle on the sharp library surface.");
+        CaptureShell(Path.Combine(folder, "player-shared-background.png"));
+
+        ShowLyrics();
+        await Task.Delay(300);
+        if (LyricsProgress != 1 || !_root.IsVisible || _library.IsVisible || _root.Effect is not null ||
+            _backdropNeutral.Opacity != 0 || _backdropShade.Opacity != 0 || viewport != _shell.RenderSize)
+            throw new InvalidOperationException("The settled lyric page must show the unfiltered shared backdrop.");
+        CaptureShell(Path.Combine(folder, "lyrics-shared-background.png"));
+        ShowLibrary();
+        await Task.Delay(300);
+
+        Rect BackdropBounds() => backdrop.TransformToVisual(_shell).TransformBounds(new Rect(backdrop.RenderSize));
+    }
+
     private async Task CheckNativeBackgroundsAsync(string folder)
     {
         File.Delete(Path.Combine(folder, "native-backgrounds.json"));
@@ -37,6 +84,24 @@ public sealed partial class MainWindow
             });
         }
         _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer = true;
+        if (_hostedByPlayer)
+        {
+            WindowState = WindowState.Maximized;
+            await WaitForRenderer();
+            var renderer = _background.Children[0];
+            var size = _shell.RenderSize;
+            ShowLibrary();
+            await Task.Delay(300);
+            if (!_independentPresentation || !_library!.IsVisible || WindowState != WindowState.Maximized ||
+                !ReferenceEquals(renderer, _background.Children[0]) || _shell.RenderSize != size)
+                throw new InvalidOperationException("Returning while maximized must preserve the same native background and viewport.");
+            ShowLyrics();
+            await Task.Delay(300);
+            if (!_independentPresentation || !_root.IsVisible || WindowState != WindowState.Maximized ||
+                !ReferenceEquals(renderer, _background.Children[0]) || _shell.RenderSize != size)
+                throw new InvalidOperationException("Opening lyrics while maximized must preserve the same native background and viewport.");
+            WindowState = WindowState.Normal;
+        }
         ToggleFullscreen();
         await _background.SetModeAsync(_options.Background, _options, true);
         _rebuildPending = true;

@@ -261,7 +261,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Border Grid.Row="1" Background="{StaticResource Shell.Background}" />
+            <Border Grid.Row="1" Background="#35161616" />
             <local:ShellScrollViewer x:Name="HomePage" Grid.Row="1" Style="{StaticResource PageScroller}" Visibility="Visible" ScrollChanged="OnPageScrolled">
                 <StackPanel x:Name="HomeContent" Margin="40,16,40,36">
                     <Border x:Name="HomeTitleSlot" Style="{StaticResource PageTitleSlot}" />
@@ -460,7 +460,7 @@
                 </Grid>
             </local:ShellScrollViewer>
 
-            <Grid x:Name="TitleBar" Height="44" Background="{StaticResource Shell.Background}">
+            <Grid x:Name="TitleBar" Height="44" Background="#74161616">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -577,7 +577,7 @@
         </Grid>
 
         <!-- Now playing bar -->
-        <Border x:Name="PlaybackBar" Grid.Row="1" Grid.ColumnSpan="2" Background="#121214" BorderBrush="{StaticResource Shell.Stroke}" local:ShellTransitions.PlaybackFeedback="True"
+        <Border x:Name="PlaybackBar" Grid.Row="1" Grid.ColumnSpan="2" Background="#CF121214" BorderBrush="{StaticResource Shell.Stroke}" local:ShellTransitions.PlaybackFeedback="True"
                 BorderThickness="0,1,0,0" Padding="16,10,16,6">
             <Grid x:Name="PlaybackLayout">
                 <Grid.RowDefinitions>

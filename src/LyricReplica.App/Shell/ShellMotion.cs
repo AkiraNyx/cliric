@@ -17,42 +17,6 @@ public static class ShellAssist
     public static void SetCornerRadius(DependencyObject element, CornerRadius value) => element.SetValue(CornerRadiusProperty, value);
 }
 
-/// <summary>The existing slide into and out of the lyrics page.</summary>
-internal static class ShellMotion
-{
-    public static readonly IEasingFunction Out = Frozen(new PowerEase { Power = 3, EasingMode = EasingMode.EaseOut });
-
-    public static Func<bool> Reduced { get; set; } = () => false;
-
-    public static void To(IAnimatable target, DependencyProperty property, double to, double ms, IEasingFunction? easing = null, double delayMs = 0, double? from = null, Action? completed = null)
-    {
-        if (Reduced() || ms <= 0)
-        {
-            target.BeginAnimation(property, null);
-            ((DependencyObject)target).SetValue(property, to);
-            completed?.Invoke();
-            return;
-        }
-        var animation = new DoubleAnimation(to, TimeSpan.FromMilliseconds(ms))
-        {
-            EasingFunction = easing ?? Out,
-            BeginTime = TimeSpan.FromMilliseconds(delayMs),
-            FillBehavior = FillBehavior.HoldEnd
-        };
-        if (from is { } start)
-            animation.From = start;
-        if (completed is not null)
-            animation.Completed += (_, _) => completed();
-        target.BeginAnimation(property, animation);
-    }
-
-    private static IEasingFunction Frozen(EasingFunctionBase easing)
-    {
-        easing.Freeze();
-        return easing;
-    }
-}
-
 public class ShellScrollViewer : ScrollViewer
 {
     private double? _wheelTarget;

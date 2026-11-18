@@ -57,7 +57,7 @@ public sealed partial class MainWindow
         {
             _options.Topmost = true;
             Topmost = true;
-            WindowState = WindowState.Maximized;
+            ToggleFullscreen();
             await Task.Delay(200);
             var bounds = new
             {
@@ -83,9 +83,9 @@ public sealed partial class MainWindow
             await Task.Delay(200);
             if (WindowState != WindowState.Maximized || ResizeMode != ResizeMode.NoResize)
                 throw new InvalidOperationException("Independent maximized mode did not enter NoResize.");
-            WindowState = WindowState.Normal;
+            ToggleFullscreen();
             await Task.Delay(200);
-            if (!Topmost || ResizeMode != ResizeMode.CanResize || WindowChrome.GetWindowChrome(this).ResizeBorderThickness != new Thickness(5) || _root.Margin != new Thickness(0) || Math.Abs(ActualWidth - width) > 1 || Math.Abs(ActualHeight - height) > 1)
+            if (!Topmost || ResizeMode != ResizeMode.CanResize || WindowChrome.GetWindowChrome(this) != (_hostedByPlayer ? _libraryChrome : _lyricsChrome) || _root.Margin != new Thickness(0) || Math.Abs(ActualWidth - width) > 1 || Math.Abs(ActualHeight - height) > 1)
                 throw new InvalidOperationException("Restoring the native window did not recover its size, pinning and resize border.");
             File.WriteAllText(report, JsonSerializer.Serialize(new
             {
@@ -100,6 +100,6 @@ public sealed partial class MainWindow
                 scope = "Native primary-monitor client bounds and resize-mode transitions; physical multi-monitor/taskbar comparison remains separate."
             }, LyricsFile.JsonOptions));
         }
-        finally { _options.Background = background; _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer = independent; _options.Topmost = pinned; WindowState = WindowState.Normal; UpdateWindowChrome(); Width = width; Height = height; }
+        finally { _options.Background = background; _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer = independent; _options.Topmost = pinned; if (_fullscreen) ToggleFullscreen(); WindowState = WindowState.Normal; UpdateWindowChrome(); Width = width; Height = height; }
     }
 }

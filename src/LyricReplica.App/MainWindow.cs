@@ -202,10 +202,8 @@ public sealed partial class MainWindow : Window
         if (_updatingWindowChrome)
             return;
         bool maximized = WindowState == WindowState.Maximized;
-        bool libraryFrame = _hostedByPlayer && !_lyricsShown;
-        if (libraryFrame)
+        if (_hostedByPlayer && !_fullscreen)
         {
-            UpdateIndependentPresentation(false);
             WindowStyle = WindowStyle.SingleBorderWindow;
             ResizeMode = ResizeMode.CanResize;
             if (WindowChrome.GetWindowChrome(this) != _libraryChrome)
@@ -213,10 +211,11 @@ public sealed partial class MainWindow : Window
             if (!maximized)
                 _shell.Margin = default;
             double headerBottom = _library!.TitleBar.Height + _shell.Margin.Top;
-            _libraryChrome.GlassFrameThickness = new Thickness(0, headerBottom, 0, 0);
-            _libraryChrome.CaptionHeight = Math.Max(0, headerBottom - _libraryChrome.ResizeBorderThickness.Top);
-            _library.UpdateMaximizeCaption(maximized);
+            _libraryChrome.CaptionHeight = _lyricsShown ? 0 : Math.Max(0, headerBottom - _libraryChrome.ResizeBorderThickness.Top);
+            _library!.UpdateMaximizeCaption(maximized);
             Topmost = !maximized && _options.Topmost;
+            UpdateIndependentPresentation(_background.IndependentRendererActive && _background.RendererReady);
+            UpdateGlassFrame();
             return;
         }
 
@@ -244,24 +243,34 @@ public sealed partial class MainWindow : Window
             Topmost = !maximized && _options.Topmost;
         }
         UpdateIndependentPresentation(_background.IndependentRendererActive && _background.RendererReady);
-        if (!_independentPresentation)
+        UpdateGlassFrame();
+    }
+
+    private void UpdateGlassFrame()
+    {
+        if (_hostedByPlayer && !_fullscreen)
+        {
+            _libraryChrome.GlassFrameThickness = _independentPresentation ? new Thickness(-1) :
+                new Thickness(0, _library!.TitleBar.Height + _shell.Margin.Top, 0, 0);
+        }
+        else if (_independentPresentation)
+            _lyricsChrome.GlassFrameThickness = new Thickness(-1);
+        else
             _lyricsChrome.ClearValue(WindowChrome.GlassFrameThicknessProperty);
     }
+
     private void UpdateIndependentPresentation(bool ready)
     {
         if (_disposed)
             return;
-        bool transparent = ready && (!_hostedByPlayer || _lyricsShown) && WindowState == WindowState.Maximized && BackgroundView.SupportsIndependent(_options.Background) && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && !_options.ReduceMotion;
+        bool transparent = ready && WindowState == WindowState.Maximized && BackgroundView.SupportsIndependent(_options.Background) && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && !_options.ReduceMotion;
         if (_independentPresentation == transparent)
             return;
         _independentPresentation = transparent;
         Background = _background.Background = transparent ? Brushes.Transparent : Brushes.Black;
         if (_hostedByPlayer)
             _shell.Background = Background;
-        if (transparent)
-            _lyricsChrome.GlassFrameThickness = new Thickness(-1);
-        else
-            _lyricsChrome.ClearValue(WindowChrome.GlassFrameThicknessProperty);
+        UpdateGlassFrame();
         if (PresentationSource.FromVisual(this) is HwndSource source && source.CompositionTarget is { } target)
             target.BackgroundColor = transparent ? Colors.Transparent : Colors.Black;
     }
@@ -501,8 +510,12 @@ public sealed partial class MainWindow : Window
             return;
         double now = _wall.Elapsed.TotalSeconds, dt = Math.Clamp(now - _lastWall, 0, .1);
         _lastWall = now;
-        if (_hostedByPlayer && (!LyricsVisible || _lyricsEntering))
-            return;
+        if (_hostedByPlayer)
+        {
+            UpdateBackground(dt);
+            if (!LyricsVisible || _lyricsEntering)
+                return;
+        }
         _frameCount++;
         _magicController.AdvanceTutorial(now * 1000);
         _status.Visibility = now < _noticeUntil ? Visibility.Visible : Visibility.Collapsed;
@@ -591,18 +604,8 @@ public sealed partial class MainWindow : Window
             else
                 _scroll.SetFrameOffset(_scrollFrom + (_scrollTo - _scrollFrom) * ScrollEase(p, _scrollTransition));
         }
-        bool sourceLegacy = _options.Background is BackgroundMode.Static or BackgroundMode.Legacy or BackgroundMode.DynamicBeating || _options.ReduceMotion;
-        _reference.SetLegacyVisible(sourceLegacy);
-        if (sourceLegacy)
-        {
-            if (!_options.ReduceMotion && IsVisible && WindowState != WindowState.Minimized)
-                _legacyTime += dt;
-            int rate = Math.Clamp(_options.AppleMusicLyrics.BackgroundDynamicFrameRate, 1, 120);
-            _reference.UpdateLegacy(Math.Floor(_legacyTime * rate) / rate, _options.LightTheme, _options.Background == BackgroundMode.Static || _options.ReduceMotion);
-        }
-        _background.Update(_clock.IsPlaying, _portrait, IsVisible && WindowState != WindowState.Minimized, _options, dt);
-        UpdateIndependentPresentation(_background.IndependentRendererActive && _background.RendererReady);
-        _background.Visibility = sourceLegacy ? Visibility.Hidden : Visibility.Visible;
+        if (!_hostedByPlayer)
+            UpdateBackground(dt);
         UpdateArtworkScale();
         UpdateArtworkVideo();
         _reference.Get<Border>("BorderFpsOverlay").Visibility = _options.ShowFps ? Visibility.Visible : Visibility.Collapsed;
@@ -613,12 +616,38 @@ public sealed partial class MainWindow : Window
             _lastFpsFrames = _frameCount;
         }
     }
+
+    private bool UseReferenceBackdrop =>
+        _options.Background is BackgroundMode.Static or BackgroundMode.Legacy or BackgroundMode.DynamicBeating || _options.ReduceMotion;
+
+    private void UpdateBackground(double elapsed)
+    {
+        bool visible = IsVisible && WindowState != WindowState.Minimized;
+        bool portrait = _hostedByPlayer ? IsPortrait(_shell.ActualWidth, _shell.ActualHeight) : _portrait;
+        bool legacy = UseReferenceBackdrop;
+        _reference.SetLegacyVisible(legacy);
+        if (legacy)
+        {
+            if (_shellLegacyBackdrop is { } shared)
+                shared.Margin = portrait ? new Thickness(-6, 0, -6, 0) : default;
+            if (!_options.ReduceMotion && visible)
+                _legacyTime += elapsed;
+            int rate = Math.Clamp(_options.AppleMusicLyrics.BackgroundDynamicFrameRate, 1, 120);
+            _reference.UpdateLegacy(Math.Floor(_legacyTime * rate) / rate, _options.LightTheme, _options.Background == BackgroundMode.Static || _options.ReduceMotion);
+        }
+        _background.Update(_clock.IsPlaying, portrait, visible, _options, elapsed);
+        UpdateIndependentPresentation(_background.IndependentRendererActive && _background.RendererReady);
+        _background.Visibility = legacy ? Visibility.Hidden : Visibility.Visible;
+    }
+
+    private static bool IsPortrait(double width, double height) => height / Math.Max(1, width) > .85;
+
     private void RebuildRows()
     {
         if (!_args.Contains("--verify-offscreen"))
             _dots.RestartForLayout();
         double pageWidth = _reference.View.ActualWidth, pageHeight = _reference.View.ActualHeight;
-        _portrait = pageHeight / Math.Max(1, pageWidth) > .85;
+        _portrait = IsPortrait(pageWidth, pageHeight);
         bool compact = _portrait;
         bool empty = _song.Lines.Count == 0;
         _leftColumn.Width = compact && !empty ? new GridLength(0) : new GridLength(.82, GridUnitType.Star);
@@ -763,7 +792,7 @@ public sealed partial class MainWindow : Window
         }
         else
             maskHost.OpacityMask = null;
-        bool sourceBackground = _options.Background is BackgroundMode.Static or BackgroundMode.Legacy or BackgroundMode.DynamicBeating || _options.ReduceMotion;
+        bool sourceBackground = UseReferenceBackdrop;
         bool independent = BackgroundView.SupportsIndependent(_options.Background) && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && WindowState == WindowState.Maximized;
         _blend.Update(_options.AppleMusicLyrics.EnablePlusLighter && !independent, _options.AppleMusicLyrics.PlusLighterEffectPreset, sourceBackground ? _reference.Get<Viewbox>("ViewboxBackground") : _background, !sourceBackground);
         // Follow reads the new row offsets in this same rendering callback.
@@ -1352,6 +1381,7 @@ public sealed partial class MainWindow : Window
             _restoreState = WindowState;
             WindowState = WindowState.Normal;
             _fullscreen = true;
+            UpdateWindowChrome();
             WindowState = WindowState.Maximized;
         }
         else

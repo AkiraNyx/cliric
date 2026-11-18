@@ -30,6 +30,22 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="CapsuleTool" TargetType="ToggleButton" BasedOn="{StaticResource CapsuleToggle}">
+            <Setter Property="Width" Value="48" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Foreground" Value="{DynamicResource CapsuleControlText}" />
+        </Style>
+        <Style x:Key="ToolLabel" TargetType="player:MiSansLabel" BasedOn="{StaticResource Shell.Caption}">
+            <Setter Property="Foreground" Value="{DynamicResource CapsuleCaption}" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="ToolHeading" TargetType="player:MiSansLabel" BasedOn="{StaticResource Shell.Heading}">
+            <Setter Property="Foreground" Value="{DynamicResource CapsuleControlText}" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Margin" Value="0,0,0,12" />
+        </Style>
     </Window.Resources>
     <lg:GlassScene x:Name="Root" ClipToBounds="True" lg:GlassScene.Appearance="Dark">
         <lg:GlassScene.Content>
@@ -136,17 +152,28 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="36" />
                 </Grid.ColumnDefinitions>
-                <DockPanel x:Name="TrackStamp" Margin="0,0,8,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Rectangle DockPanel.Dock="Left" Width="34" Height="34" RadiusX="6" RadiusY="6" Margin="0,0,10,0">
-                        <Rectangle.Fill><ImageBrush x:Name="MiniCover" Stretch="UniformToFill" /></Rectangle.Fill>
-                    </Rectangle>
-                    <StackPanel VerticalAlignment="Center">
-                        <player:MiSansLabel x:Name="CapsuleTitle" FontSize="15" FontWeight="{DynamicResource Shell.SemiboldWeight}"
-                                            Foreground="{DynamicResource CapsuleControlText}" TextTrimming="CharacterEllipsis" />
-                        <player:MiSansLabel x:Name="CapsuleArtist" Style="{StaticResource Shell.Caption}"
-                                            Foreground="{DynamicResource CapsuleCaption}" Margin="0,1,0,0" />
-                    </StackPanel>
-                </DockPanel>
+                <ToggleButton x:Name="TrackStamp" Style="{StaticResource CapsuleToggle}" Click="ToggleTool"
+                              Tag="{Binding ElementName=TrackOptions}" Height="42" Padding="3,0" Margin="0,0,8,0"
+                              HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Stretch"
+                              AutomationProperties.Name="曲目操作" AutomationProperties.HelpText="查看收藏和更多操作">
+                    <DockPanel>
+                        <Rectangle DockPanel.Dock="Left" Width="34" Height="34" RadiusX="6" RadiusY="6" Margin="0,0,8,0">
+                            <Rectangle.Fill><ImageBrush x:Name="MiniCover" Stretch="UniformToFill" /></Rectangle.Fill>
+                        </Rectangle>
+                        <StackPanel VerticalAlignment="Center">
+                            <player:MiSansLabel x:Name="CapsuleTitle" FontSize="15" FontWeight="{DynamicResource Shell.SemiboldWeight}"
+                                                Foreground="{DynamicResource CapsuleControlText}" TextTrimming="CharacterEllipsis" />
+                            <DockPanel Margin="0,1,0,0">
+                                <TextBlock DockPanel.Dock="Right" Text="&#xE712;" Style="{StaticResource Shell.Glyph}"
+                                           FontSize="10" Margin="4,0,0,0" Foreground="{DynamicResource CapsuleCaption}" />
+                                <TextBlock x:Name="FavoriteMark" DockPanel.Dock="Right" Text="&#xEB52;" Style="{StaticResource Shell.Glyph}"
+                                           FontSize="10" Margin="4,0,0,0" Foreground="{DynamicResource CapsuleFocusBrush}" Visibility="Collapsed" />
+                                <player:MiSansLabel x:Name="CapsuleArtist" Style="{StaticResource Shell.Caption}"
+                                                    Foreground="{DynamicResource CapsuleCaption}" />
+                            </DockPanel>
+                        </StackPanel>
+                    </DockPanel>
+                </ToggleButton>
                 <Grid x:Name="SeekSlot" Grid.Column="1" HorizontalAlignment="Center" Width="0" Opacity="0" Visibility="Hidden" IsHitTestVisible="False">
                     <Grid.Clip><RectangleGeometry x:Name="SeekClip" /></Grid.Clip>
                     <reference:ReferenceStateBar x:Name="Seek" HorizontalAlignment="Right" VerticalAlignment="Center" Height="36" Margin="8,0,10,0"
@@ -174,5 +201,84 @@
                 </ToggleButton>
             </Grid>
         </Grid>
+        <Border x:Name="ToolGroup" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,16,16"
+                Width="156" Height="54" CornerRadius="27" BorderThickness="1" BorderBrush="{StaticResource Shell.Stroke}"
+                Background="{DynamicResource CapsuleUtilityBrush}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ToggleButton x:Name="SoundTool" Style="{StaticResource CapsuleTool}" Click="ToggleTool" Tag="{Binding ElementName=SoundOptions}"
+                              ToolTip="声音" AutomationProperties.Name="声音">
+                    <StackPanel>
+                        <TextBlock Text="&#xE995;" Style="{StaticResource Shell.Glyph}" />
+                        <player:MiSansLabel Text="声音" Style="{StaticResource ToolLabel}" />
+                    </StackPanel>
+                </ToggleButton>
+                <ToggleButton x:Name="QueueTool" Style="{StaticResource CapsuleTool}" Click="ToggleTool" Tag="{Binding ElementName=QueueOptions}"
+                              ToolTip="播放队列" AutomationProperties.Name="播放队列">
+                    <StackPanel>
+                        <TextBlock Text="&#xE8FD;" Style="{StaticResource Shell.Glyph}" />
+                        <player:MiSansLabel Text="队列" Style="{StaticResource ToolLabel}" />
+                    </StackPanel>
+                </ToggleButton>
+                <ToggleButton x:Name="LyricsTool" Style="{StaticResource CapsuleTool}" Click="ToggleTool" Tag="{Binding ElementName=LyricOptions}"
+                              ToolTip="歌词" AutomationProperties.Name="歌词">
+                    <StackPanel>
+                        <TextBlock Text="&#xE8F2;" Style="{StaticResource Shell.Glyph}" />
+                        <player:MiSansLabel Text="歌词" Style="{StaticResource ToolLabel}" />
+                    </StackPanel>
+                </ToggleButton>
+            </StackPanel>
+        </Border>
+        <Border x:Name="ToolFlyout" Width="272" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="16,0,0,78"
+                CornerRadius="14" Padding="14" Background="{DynamicResource CapsulePanelBrush}" BorderThickness="1"
+                BorderBrush="{StaticResource Shell.Stroke}" Visibility="Collapsed" Focusable="False">
+            <Grid>
+                <StackPanel x:Name="SoundOptions" Visibility="Collapsed">
+                    <player:MiSansLabel Text="声音" Style="{StaticResource ToolHeading}" />
+                    <DockPanel>
+                        <player:MiSansLabel Text="{Binding Value, ElementName=DemoVolume, StringFormat={}{0:0}%}"
+                                            DockPanel.Dock="Right" Width="40" Foreground="{DynamicResource CapsuleControlText}" />
+                        <player:ShellSlider x:Name="DemoVolume" Maximum="100" Value="40" IsMoveToPointEnabled="True"
+                                            AutomationProperties.Name="音量" ValueChanged="ChangeVolume" Margin="0,0,10,0" />
+                    </DockPanel>
+                    <player:MiSansLabel Text="当前音质 · WAV 16 kHz" Foreground="{DynamicResource CapsuleCaption}" Margin="0,12,0,0" />
+                </StackPanel>
+                <StackPanel x:Name="QueueOptions" Visibility="Collapsed">
+                    <player:MiSansLabel Text="播放队列" Style="{StaticResource ToolHeading}" />
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                        <ToggleButton x:Name="ShuffleMode" Content="随机播放" Style="{StaticResource CapsuleToggle}" Margin="0,0,6,0" Click="ChangeShuffle"
+                                      Foreground="{DynamicResource CapsuleControlText}" />
+                        <Button x:Name="RepeatModeButton" Content="循环关闭" Click="ChangeRepeat" Foreground="{DynamicResource CapsuleControlText}" />
+                    </StackPanel>
+                    <ListBox x:Name="QueueTracks" SelectionChanged="SelectQueueTrack" Background="Transparent" BorderThickness="0"
+                             Foreground="{DynamicResource CapsuleControlText}" ItemContainerStyle="{StaticResource Shell.Row}"
+                             AutomationProperties.Name="演示播放队列">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel Margin="8,6">
+                                    <player:MiSansLabel DockPanel.Dock="Right" Text="{Binding Duration}" Style="{StaticResource Shell.Caption}"
+                                                        Foreground="{DynamicResource CapsuleCaption}" Margin="8,0,0,0" />
+                                    <player:MiSansLabel Text="{Binding Title}" TextTrimming="CharacterEllipsis" />
+                                </DockPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+                <StackPanel x:Name="LyricOptions" Visibility="Collapsed">
+                    <player:MiSansLabel Text="歌词" Style="{StaticResource ToolHeading}" />
+                    <player:MiSansLabel x:Name="LyricTitle" FontWeight="{DynamicResource Shell.SemiboldWeight}"
+                                        Foreground="{DynamicResource CapsuleControlText}" Margin="0,0,0,8" />
+                    <TextBlock x:Name="DemoLyrics" Foreground="{DynamicResource CapsuleCaption}" TextWrapping="Wrap"
+                               LineHeight="24" />
+                </StackPanel>
+                <StackPanel x:Name="TrackOptions" Visibility="Collapsed">
+                    <player:MiSansLabel x:Name="TrackOptionTitle" Style="{StaticResource ToolHeading}" TextTrimming="CharacterEllipsis" />
+                    <ToggleButton x:Name="FavoriteToggle" Click="ChangeFavorite" Content="收藏" Style="{StaticResource CapsuleToggle}"
+                                  Foreground="{DynamicResource CapsuleControlText}" HorizontalContentAlignment="Left" />
+                    <Button x:Name="CopyTitleButton" Click="CopyTitle" Content="复制曲名" HorizontalContentAlignment="Left" Foreground="{DynamicResource CapsuleControlText}" />
+                    <Button x:Name="CompactSound" Click="OpenCompactSound" Content="声音" HorizontalContentAlignment="Left"
+                            Foreground="{DynamicResource CapsuleControlText}" Visibility="Collapsed" />
+                </StackPanel>
+            </Grid>
+        </Border>
     </lg:GlassScene>
 </Window>

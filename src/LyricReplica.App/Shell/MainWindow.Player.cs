@@ -97,7 +97,8 @@ public sealed partial class MainWindow
             return;
         if (_hostedByPlayer && !LyricsVisible)
         {
-            _background.Update(_clock.IsPlaying, _portrait, false, _options, 0);
+            if (!IsVisible || WindowState == WindowState.Minimized)
+                UpdateBackground(0);
             StopArtworkVideo();
         }
         UpdateSleepRequest();

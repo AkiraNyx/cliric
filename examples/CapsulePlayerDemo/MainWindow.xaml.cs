@@ -21,9 +21,9 @@ namespace CapsulePlayerDemo;
 
 public partial class MainWindow : Window
 {
-    private const double CompactWidth = 384, ExpandedWidth = 664, CompactHeight = 54;
-    private const double MinimumSeekWidth = 320, TrackTextSpace = 112;
-    private sealed record DemoTrack(string Title, string Artist, string Duration, BitmapSource Cover, Uri Audio, double DurationMs);
+    private const double CompactWidth = 384, ExpandedWidth = 704, CompactHeight = 54;
+    private const double MinimumSeekWidth = 320, TrackTextSpace = 144;
+    private sealed record DemoTrack(string Title, string Artist, string Duration, BitmapSource Cover, Uri Audio, double DurationMs, string Lyrics);
 
     private readonly MediaPlayer _audio = new();
     private readonly DispatcherTimer _clock = new() { Interval = TimeSpan.FromMilliseconds(80) };
@@ -62,13 +62,13 @@ public partial class MainWindow : Window
         string assetDirectory = Path.Combine(AppContext.BaseDirectory, "DemoMedia");
         var info = new[]
         {
-            ("沿光而行", "Lyric Lab", 36000d),
-            ("回声之间", "Voice A / Voice B", 32000d),
-            ("Slow Motion", "Lyric Lab", 44000d)
+            ("沿光而行", "Lyric Lab", 36000d, "雨还在，敲着海岸\n天亮以前，沿光而行\n总会看见新的天色"),
+            ("回声之间", "Voice A / Voice B", 32000d, "让声音穿过空房间\n在回声之间\n我听见你慢慢走远"),
+            ("Slow Motion", "Lyric Lab", 44000d, "The streetlights drift away\nWe take the long way home\nLet the morning come in slow")
         };
         _tracks = info.Select((item, index) => new DemoTrack(item.Item1, item.Item2, Timeline.Format(item.Item3),
-            Artwork.Create(index), new Uri(Path.Combine(assetDirectory, $"track-{index + 1}.wav")), item.Item3)).ToArray();
-        _audio.Volume = .4;
+            Artwork.Create(index), new Uri(Path.Combine(assetDirectory, $"track-{index + 1}.wav")), item.Item3, item.Item4)).ToArray();
+        _audio.Volume = DemoVolume.Value / 100;
         _audio.MediaOpened += (_, _) =>
         {
             _ready = true;
@@ -76,7 +76,7 @@ public partial class MainWindow : Window
             if (_playing)
                 _audio.Play();
         };
-        _audio.MediaEnded += (_, _) => SelectTrack(1);
+        _audio.MediaEnded += (_, _) => SelectTrack(1, atEnd: true);
         _audio.MediaFailed += (_, _) =>
         {
             _ready = false;
@@ -85,7 +85,7 @@ public partial class MainWindow : Window
             UpdatePlayIcon();
         };
         _clock.Tick += (_, _) => RefreshClock();
-        Tracks.ItemsSource = _tracks;
+        QueueTracks.ItemsSource = Tracks.ItemsSource = _tracks;
         Tracks.SelectedIndex = 0;
         UpdatePlayIcon();
         Root.SizeChanged += (_, _) => ArrangeCapsule();
@@ -112,6 +112,11 @@ public partial class MainWindow : Window
             SystemParameters.StaticPropertyChanged -= OnSystemPreferencesChanged;
         };
         PreviewKeyDown += OnPreviewKeyDown;
+        PreviewMouseDown += (_, _) =>
+        {
+            if (_toolAnchor is not null && !ToolFlyout.IsMouseOver && !ToolGroup.IsMouseOver && !TrackStamp.IsMouseOver)
+                CloseToolFlyout();
+        };
     }
 
     private void OnTrackSelected(object sender, SelectionChangedEventArgs e)
@@ -124,6 +129,10 @@ public partial class MainWindow : Window
         HeroTitle.Text = CapsuleTitle.Text = track.Title;
         HeroArtist.Text = CapsuleArtist.Text = track.Artist;
         TrackStamp.ToolTip = $"{track.Title}\n{track.Artist}";
+        QueueTracks.SelectedItem = track;
+        TrackOptionTitle.Text = LyricTitle.Text = track.Title;
+        DemoLyrics.Text = track.Lyrics;
+        UpdateFavorite();
         CurrentCover.ImageSource = MiniCover.ImageSource = track.Cover;
         ApplyCoverTint(track.Cover);
         Seek.CancelPreview();
@@ -198,12 +207,35 @@ public partial class MainWindow : Window
 
     private void Previous(object sender, RoutedEventArgs e) => SelectTrack(-1);
     private void Next(object sender, RoutedEventArgs e) => SelectTrack(1);
-    private void SelectTrack(int offset) => Tracks.SelectedIndex = (Tracks.SelectedIndex + offset + _tracks.Length) % _tracks.Length;
+    private void SelectTrack(int offset, bool atEnd = false)
+    {
+        if (QueueTracks.ItemsSource is not DemoTrack[] order || Tracks.SelectedItem is not DemoTrack track)
+            return;
+        int next = Array.IndexOf(order, track) + offset;
+        if (atEnd && _repeatMode == DemoRepeat.Track)
+        {
+            _audio.Position = TimeSpan.Zero;
+            _audio.Play();
+        }
+        else if (atEnd && next >= order.Length && _repeatMode == DemoRepeat.Off)
+        {
+            _playing = false;
+            _audio.Position = TimeSpan.Zero;
+            UpdatePlayIcon();
+        }
+        else
+            Tracks.SelectedItem = order[(next + order.Length) % order.Length];
+    }
 
     private void OnPreviewKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key == Key.Escape && Seek.Dragging)
             Seek.CancelPreview();
+        else if (e.Key == Key.Escape && _toolAnchor is { } anchor)
+        {
+            CloseToolFlyout();
+            anchor.Focus();
+        }
         else if (e.Key == Key.Escape && Expanded)
             ShapeButton.IsChecked = false;
         else if (e.Key == Key.Space && !e.IsRepeat && e.KeyboardDevice.Modifiers == ModifierKeys.None &&
@@ -291,7 +323,7 @@ public partial class MainWindow : Window
         if (available <= 0)
             return;
 
-        double expandedWidth = Math.Min(available, ExpandedWidth);
+        double expandedWidth = Math.Clamp(available - 2 * (ArrangeTools(available) + ToolGap), 1, ExpandedWidth);
         double buttons = PreviousButton.Width + PlayButton.Width + PlayButton.Margin.Left + PlayButton.Margin.Right +
             NextButton.Width + Transport.Margin.Left + Transport.Margin.Right + ShapeButton.Width;
         if (!double.IsFinite(buttons))
@@ -306,7 +338,7 @@ public partial class MainWindow : Window
         Seek.Width = Math.Max(MinimumSeekWidth, seekWidth);
         SeekSlot.Width = _seekFits ? seekWidth + seekMargins : 0;
         SeekSlot.Height = Seek.Height;
-        TrackStamp.MaxWidth = Math.Max(34, Math.Min(Math.Min(available, CompactWidth) - fixedWidth,
+        TrackStamp.MaxWidth = Math.Max(42, Math.Min(Math.Min(expandedWidth, CompactWidth) - fixedWidth,
             expandedWidth - fixedWidth - SeekSlot.Width));
         PresentCapsule();
     }
@@ -325,8 +357,8 @@ public partial class MainWindow : Window
             ShadeBounds.RadiusX = ShadeBounds.RadiusY = bounds.Height / 2 - 1;
             _trackShift.X = inset;
             _transportShift.X = -inset;
-            ShapeArrow.Angle = 180 * progress;
         }
+        ShapeArrow.Angle = 180 * progress;
         double trim = Math.Min(inset, SeekSlot.Width / 2);
         SeekClip.Rect = new Rect(trim, 0, Math.Max(0, SeekSlot.Width - 2 * trim), Seek.Height);
         SeekSlot.Opacity = PreviousSlot.Opacity = Math.Clamp(_details.Value, 0, 1);
@@ -371,6 +403,8 @@ public partial class MainWindow : Window
         Resources["CapsuleControlText"] = text;
         Resources["CapsuleCaption"] = contrast ? text : new SolidColorBrush(Color.FromRgb(225, 229, 240));
         Resources["CapsuleFocusBrush"] = contrast ? SystemColors.HighlightBrush : (Brush)FindResource("Shell.Accent");
+        Resources["CapsuleUtilityBrush"] = contrast ? SystemColors.WindowBrush : new SolidColorBrush(Color.FromArgb(120, 29, 32, 39));
+        Resources["CapsulePanelBrush"] = contrast ? SystemColors.WindowBrush : (Brush)FindResource("Shell.Surface");
         GlassShade.Visibility = contrast ? Visibility.Collapsed : Visibility.Visible;
         ShellPlaybackControls.ApplyPalette(PreviousButton, PlayButton, NextButton, _playing);
         Seek.ApplyShellPalette();
@@ -507,6 +541,7 @@ public partial class MainWindow : Window
             if (!_ready || GlassColor.Color == original || CapsuleTitle.Text != _tracks[1].Title || MiniCover.ImageSource != _tracks[1].Cover)
                 throw new InvalidOperationException("Selecting a track must change both audio and the capsule tint.");
             await CaptureAsync("capsule-expanded.png");
+            await VerifyToolsAsync();
             double wideWidth = Width;
             Width = MinWidth;
             Height = MinHeight;
@@ -515,14 +550,25 @@ public partial class MainWindow : Window
             if (!Expanded || Seek.IsVisible || Seek.IsTabStop || SeekSlot.IsHitTestVisible || Math.Abs(_capsuleBounds.Height - CompactHeight) > .7)
                 throw new InvalidOperationException("An expanded narrow capsule must keep one row and hide the seek control.");
             await CaptureAsync("capsule-narrow.png");
+            if (SoundTool.IsVisible || !QueueTool.IsVisible || !LyricsTool.IsVisible)
+                throw new InvalidOperationException("The narrow tool group must keep direct queue and lyric actions.");
+            ClickTool(TrackStamp);
+            await Dispatcher.Yield(DispatcherPriority.ApplicationIdle);
+            if (!CompactSound.IsVisible)
+                throw new InvalidOperationException("The narrow track menu must expose the sound controls.");
+            ClickTool(CompactSound);
+            if (!SoundOptions.IsVisible)
+                throw new InvalidOperationException("The compact sound entry must open the same audio settings.");
+            CloseToolFlyout();
             PressEscape();
             await Task.Delay(300);
-            if (Expanded || Math.Abs(_capsuleBounds.Width - CompactWidth) > .7 || Seek.IsVisible || PreviousButton.IsVisible)
+            if (Expanded || Math.Abs(_capsuleBounds.Width - Math.Min(CompactWidth, Capsule.Width)) > .7 ||
+                ShapeArrow.Angle != 0 || Seek.IsVisible || PreviousButton.IsVisible)
                 throw new InvalidOperationException("The narrow capsule must collapse back to the compact layout.");
             bool reduced = ShellTransitions.GetReducedMotion(this);
             ApplyReducedMotion(true);
             toggle.Toggle();
-            if (_capsuleBounds.Width <= CompactWidth || Seek.IsVisible || PreviousSlot.Opacity != 1 || _shapeRendering)
+            if (ShapeArrow.Angle != 180 || Seek.IsVisible || PreviousSlot.Opacity != 1 || _shapeRendering)
                 throw new InvalidOperationException("Reduced motion must reveal the expanded controls immediately.");
             Width = wideWidth;
             await Dispatcher.Yield(DispatcherPriority.ApplicationIdle);
@@ -541,7 +587,7 @@ public partial class MainWindow : Window
                 [$"Material: {GlassScene.GetMaterial(CapsuleGlass)}", $"Live render mode: {CapsuleGlass.Mode}",
                  $"Layout resizes during the morph: {layoutResizes}",
                  "Motion: M3 Standard default spatial (700, 0.9) and fast effects (3800, 1.0)",
-                 "Passed: glass geometry without relayout, pointer isolation, shared hover, interrupted press, playback, seek fades, scrolling, reversal, UI Automation, Escape, single-row resize, reduced motion and transparency",
+                 "Passed: glass geometry without relayout, pointer isolation, playback feedback, seek fades, reversal, responsive centered capsule, audio/queue/lyric actions, reduced motion and transparency",
                  "PNG capture: software fallback", GlassDiagnostics.Describe()]);
             Application.Current.Shutdown(0);
         }
@@ -550,6 +596,38 @@ public partial class MainWindow : Window
             File.WriteAllText(Path.Combine(AppContext.BaseDirectory, "verification-failure.txt"), error.ToString());
             Application.Current.Shutdown(1);
         }
+    }
+
+    private static void ClickTool(ButtonBase button) => button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent, button));
+
+    private async Task VerifyToolsAsync()
+    {
+        ClickTool(SoundTool);
+        DemoVolume.Value = 32;
+        if (!SoundOptions.IsVisible || _audio.Volume != .32 || SoundTool.IsChecked != true)
+            throw new InvalidOperationException("The sound tool must control the active demo audio.");
+        DemoVolume.Value = 0;
+        ClickTool(QueueTool);
+        QueueTracks.SelectedIndex = 2;
+        ShuffleMode.IsChecked = true;
+        ClickTool(ShuffleMode);
+        ClickTool(RepeatModeButton);
+        if (!QueueOptions.IsVisible || SoundOptions.IsVisible || !ReferenceEquals(QueueTracks.Items[0], _tracks[2]) ||
+            Tracks.SelectedIndex != 2 || _repeatMode != DemoRepeat.Queue)
+            throw new InvalidOperationException("The queue tool must select tracks and expose the active playback order.");
+        await Task.Delay(220);
+        await CaptureAsync("capsule-tools.png");
+        ClickTool(LyricsTool);
+        if (!LyricOptions.IsVisible || QueueOptions.IsVisible || DemoLyrics.Text != _tracks[2].Lyrics)
+            throw new InvalidOperationException("The lyrics tool must show the active demo track.");
+        ClickTool(TrackStamp);
+        ClickTool(FavoriteToggle);
+        if (!TrackOptions.IsVisible || !FavoriteMark.IsVisible || FavoriteToggle.IsChecked != true)
+            throw new InvalidOperationException("The track menu must reflect its favorite state on the capsule.");
+        PressEscape();
+        await Task.Delay(180);
+        if (ToolFlyout.IsVisible || TrackStamp.IsChecked == true || !Expanded)
+            throw new InvalidOperationException("Escape must close the tool before collapsing the capsule.");
     }
 
     private void PressEscape() => RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, PresentationSource.FromVisual(this), 0, Key.Escape)
@@ -562,6 +640,10 @@ public partial class MainWindow : Window
         var capsule = Capsule.TransformToVisual(Root).TransformBounds(_capsuleBounds);
         if (capsule.Bottom >= Root.ActualHeight || capsule.Left <= 0 || GlassScene.FindScene(CapsuleGlass) != Root)
             throw new InvalidOperationException("The capsule must fit inside its glass scene with space below.");
+        var tools = ToolGroup.TransformToVisual(Root).TransformBounds(new Rect(ToolGroup.RenderSize));
+        if (Math.Abs(capsule.Left + capsule.Right - Root.ActualWidth) > 1.5 || tools.Left - capsule.Right < ToolGap - 1.5 ||
+            tools.Right > Root.ActualWidth || Math.Abs(capsule.Bottom - tools.Bottom) > 1)
+            throw new InvalidOperationException("The separate tool group must fit beside the centered capsule.");
         var blankGlass = Root.InputHitTest(new Point((capsule.Left + capsule.Right) / 2, capsule.Bottom - 3));
         var corner = Root.InputHitTest(new Point(capsule.Left + 1, capsule.Top + 1));
         if (blankGlass != Capsule || (corner is DependencyObject target && (target == Capsule || Capsule.IsAncestorOf(target))))

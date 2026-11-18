@@ -364,23 +364,12 @@ public sealed partial class LibraryView
             assertions++;
             await VerifyShellMotionAsync(folder);
             assertions++;
-            _lyrics.ShowLyrics();
-            await Task.Delay(90);
-            double moving = _lyrics.LyricsOffset;
-            _lyrics.CaptureShell(Path.Combine(folder, "lyrics-transition.png"));
-            await Task.Delay(400);
-            if (moving <= 1 || moving >= ActualHeight || Math.Abs(_lyrics.LyricsOffset) > .5 || Visibility != Visibility.Hidden)
-                throw new InvalidOperationException($"Lyrics must slide over the library: {moving} mid-way, {_lyrics.LyricsOffset} at rest.");
-            _lyrics.ShowLibrary();
-            await Task.Delay(320);
-            if (_lyrics.LyricsOffset < ActualHeight - 1 || Visibility != Visibility.Visible || Math.Abs(Opacity - 1) > .01)
-                throw new InvalidOperationException("Returning must slide the lyrics away and restore the library.");
+            await _lyrics.VerifyPageBlendAsync(folder);
             assertions++;
             _lyrics.ShowLyrics();
-            await Task.Delay(400);
             _lyrics.OpenLyricsSettings();
             await Idle();
-            if (_lyrics.LyricsShown || !SettingsPage.IsVisible || _lyrics.LyricsOffset < ActualHeight - 1 ||
+            if (_lyrics.LyricsShown || !SettingsPage.IsVisible || _lyrics.LyricsProgress != 0 ||
                 !SettingsPage.IsAncestorOf(LyricsSettingsHeading) || SettingsPage.VerticalOffset <= 0)
                 throw new InvalidOperationException("Lyrics settings must replace the lyric layer immediately and scroll to its own section.");
             assertions++;
