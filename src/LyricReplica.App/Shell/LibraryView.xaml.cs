@@ -46,9 +46,14 @@ public sealed partial class LibraryView : UserControl
     private bool _syncingVolume;
     private bool _captionPressed;
     private double _unmutedVolume = .8;
+    private string _searchTitle = "搜索", _playlistTitle = "";
     private bool MotionReduced => ShellTransitions.GetReducedMotion(this);
+    internal bool IsSeeking => Progress.Dragging;
 
-    private sealed record TrackRow(Song Track, int Number, ImageSource? Artwork, string Duration, bool IsCurrent);
+    private sealed record TrackRow(Song Track, int Number, Lazy<ImageSource?> Thumbnail, string Duration, bool IsCurrent)
+    {
+        public ImageSource? Artwork => Thumbnail.Value;
+    }
 
     internal LibraryView(MainWindow lyrics, bool selfTest)
     {
@@ -67,11 +72,9 @@ public sealed partial class LibraryView : UserControl
         AccountPopup.CustomPopupPlacementCallback = (popup, target, _) => PlaceShellPopup(AccountButton, popup, target, above: false);
         QueuePopup.CustomPopupPlacementCallback = (popup, target, _) => PlaceShellPopup(QueueButton, popup, target, above: true);
         LibraryRoot.IsEnabled = false;
-        Progress.Grid.Opacity = 1;
-        Progress.BorderPlayed.Background = (Brush)FindResource("Shell.Primary");
+        ShellPlaybackControls.Initialize(PreviousButton, PlayButton, NextButton);
         Progress.UseShellLayout();
-        Progress.FocusVisualStyle = (Style)FindResource("Shell.KeyboardFocus");
-        Progress.SeekRequested += lyrics.Seek;
+        Progress.SeekRequested += position => lyrics.SeekFromPlayer(position, Progress.Dragging);
         _refresh.Tick += (_, _) =>
         {
             UpdateMotionPreference();
@@ -146,7 +149,7 @@ public sealed partial class LibraryView : UserControl
 
     private void OnSystemMotionChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (_selfTest || e.PropertyName != nameof(SystemParameters.ClientAreaAnimation))
+        if (_selfTest || e.PropertyName is not (nameof(SystemParameters.ClientAreaAnimation) or nameof(SystemParameters.HighContrast)))
             return;
         if (Dispatcher.CheckAccess())
             Apply();
@@ -157,6 +160,12 @@ public sealed partial class LibraryView : UserControl
         {
             if (_lifetime.IsCancellationRequested)
                 return;
+            if (e.PropertyName == nameof(SystemParameters.HighContrast))
+            {
+                ShellPlaybackControls.ApplyPalette(PreviousButton, PlayButton, NextButton, _lyrics.Playing);
+                Progress.ApplyShellPalette();
+                return;
+            }
             _systemAnimationsEnabled = SystemParameters.ClientAreaAnimation;
             UpdateMotionPreference();
         }
@@ -171,16 +180,21 @@ public sealed partial class LibraryView : UserControl
         if (reduced)
         {
             _page.FinishWheelAnimation();
+            if (QueuePopup.IsOpen)
+                QueueScroller?.FinishWheelAnimation();
             ShellTransitions.Settle(Dispatcher);
         }
         Progress.SetShellReducedMotion(reduced);
+        UpdatePageTitle();
     }
 
     internal void UpdatePlaybackAvailability()
     {
         bool loading = _lyrics.PlaybackLoading;
         bool controls = _lyrics.CanControlPlayback;
-        PlayButton.IsEnabled = HeroPlay.IsEnabled = controls && !loading;
+        PlayButton.IsEnabled = HeroPlay.IsEnabled = (controls || _lyrics.Playlist.Count > 0) && !loading;
+        LyricsButton.IsEnabled = _lyrics.CanOpenLyrics;
+        LyricsButton.ToolTip = !controls ? "先添加或选择曲目" : loading ? "正在加载曲目…" : "打开 Apple Music 歌词";
         PreviousButton.IsEnabled = NextButton.IsEnabled = controls;
         Progress.IsEnabled = controls && _lyrics.Clock.DurationMs > 0;
         FavoriteButton.IsEnabled = _lyrics.TrackIndex >= 0;
@@ -203,7 +217,7 @@ public sealed partial class LibraryView : UserControl
         HeroSource.Text = !_lyrics.CanControlPlayback ? "" : string.IsNullOrWhiteSpace(song.Album) ? _lyrics.PlaybackSource : $"{song.Album} · {_lyrics.PlaybackSource}";
         bool qualityVisible = _lyrics.ClientTrack is not null && UseClientSession;
         NetEaseQualityButton.Visibility = qualityVisible ? Visibility.Visible : Visibility.Collapsed;
-        PlaybackSideColumn.MinWidth = IsCompact ? (qualityVisible ? 180 : 132) : (qualityVisible ? 320 : 264);
+        UpdatePlaybackSideColumn(qualityVisible);
         NetEaseQualityButton.Content = IsNarrow ? "音质" : QualityName(_lyrics.ActualNetEaseQuality) ?? "音质";
         NetEaseQualityButton.ToolTip = QualityName(_lyrics.ActualNetEaseQuality) is { } actual ? $"当前音质 · {actual}" : "网易云音质";
         if (artworkChanged)
@@ -216,14 +230,11 @@ public sealed partial class LibraryView : UserControl
         HeroEqualizer.IsActive = playing;
         if (_displayedPlaying != playing)
         {
-            if (_displayedPlaying.HasValue && PlayGlyph.IsVisible)
-                ShellTransitions.Reveal(PlayGlyph, .48, 0, MotionTokens.PlaybackState, MotionReduced);
+            var glyph = ShellPlaybackControls.SetPlaying(PlayButton, playing, _displayedPlaying.HasValue, MotionReduced);
             _displayedPlaying = playing;
             string label = playing ? "暂停" : "播放";
-            PlayGlyph.SetResourceReference(Image.SourceProperty, playing ? "Apple.Music.PauseButton" : "Apple.Music.PlayButton");
-            HeroPlayGlyph.OpacityMask = new ImageBrush((ImageSource)FindResource(playing ? "Apple.Music.PauseButton" : "Apple.Music.PlayButton"));
+            HeroPlayGlyph.OpacityMask = new ImageBrush(glyph);
             HeroPlayText.Text = label;
-            AutomationProperties.SetName(PlayButton, label);
             AutomationProperties.SetName(HeroPlay, label);
         }
         HeroEqualizer.Visibility = HeroLabel.Visibility = _lyrics.CanControlPlayback ? Visibility.Visible : Visibility.Collapsed;
@@ -260,12 +271,13 @@ public sealed partial class LibraryView : UserControl
             PlaylistCount.Text = $"{_trackCount} 首歌曲";
             _activeTrack = _lyrics.TrackIndex;
             var rows = _lyrics.Playlist.Select((track, index) =>
-                new TrackRow(track, index + 1, Thumbnail(track, index), Duration(track.DurationMs), index == _activeTrack && ReferenceEquals(track, song))).ToArray();
+                new TrackRow(track, index + 1, new(() => Thumbnail(track, index)), Duration(track.DurationMs),
+                    index == _activeTrack && ReferenceEquals(track, song))).ToArray();
             int selection = Array.FindIndex(rows, row => ReferenceEquals(row.Track, selectedTrack));
             TrackList.ItemsSource = rows;
             TrackList.SelectedIndex = selection >= 0 ? selection : _activeTrack;
         }
-        if (activeChanged || trackChanged)
+        if (trackChanged)
             Progress.CancelPreview();
         Progress.IsRealTimeUpdate = _lyrics.Options.RealtimeSeek;
         if (Progress.AnimatedTime != _lyrics.Options.AnimatedTime)
@@ -277,7 +289,9 @@ public sealed partial class LibraryView : UserControl
     {
         if (_artworkCache.TryGetValue(track.Id, out var cached))
             return cached;
-        return track.Id.StartsWith("demo-", StringComparison.Ordinal) ? _artworkCache[track.Id] = Artwork.Create(index) : null;
+        if (track.Id.StartsWith("demo-", StringComparison.Ordinal))
+            return _artworkCache[track.Id] = Artwork.Create(index);
+        return _lyrics.QueueCoverUrl(track) is { } url ? Thumbnail(url) : null;
     }
 
     private static string Duration(double ms) => ms is > 0 and < 86_400_000
@@ -318,6 +332,14 @@ public sealed partial class LibraryView : UserControl
 
     internal void ShowNotice(string text) => _lyrics.Notify(text);
 
+    private void UpdatePlaybackSideColumn(bool qualityVisible)
+    {
+        PlaybackSideColumn.Width = qualityVisible ? GridLength.Auto : new GridLength(1, GridUnitType.Star);
+        PlaybackSideColumn.MinWidth = IsCompact ? 132 : 264;
+    }
+
+    private Image PlayGlyph => (Image)PlayButton.Content;
+
     private void UpdateLayoutMode(double width)
     {
         IsCompact = width < 1000;
@@ -334,13 +356,15 @@ public sealed partial class LibraryView : UserControl
         double content = Math.Max(0, width - SidebarColumn.Width.Value - 80);
         RecommendedPlaylists.Tag = Math.Clamp((int)(content / 162), 2, 6);
         VolumeSlider.Visibility = width < 1000 ? Visibility.Collapsed : Visibility.Visible;
-        HeroArt.Width = HeroArt.Height = IsNarrow ? 132 : 184;
-        Hero.MinHeight = IsNarrow ? 184 : 236;
+        HeroArt.Width = HeroArt.Height = width < 600 ? 104 : IsNarrow ? 132 : 184;
+        HeroContent.Margin = new Thickness(IsNarrow ? 18 : 22);
+        HeroText.Margin = new Thickness(IsNarrow ? 16 : 24, 0, 0, 0);
+        Hero.MinHeight = IsNarrow ? 168 : 228;
         HeroTitle.FontSize = IsNarrow ? 24 : 32;
         HeroSource.Visibility = IsNarrow ? Visibility.Collapsed : Visibility.Visible;
         foreach (var page in new[] { HomeContent, SearchContent, PlaylistContent, SettingsContent })
             page.Margin = new Thickness(IsNarrow ? 24 : 40, 16, IsNarrow ? 24 : 40, 36);
-        UpdateTitleInset(width);
+        UpdatePageTitle();
     }
 
     private void OnHeroSizeChanged(object sender, SizeChangedEventArgs e) =>
@@ -355,7 +379,7 @@ public sealed partial class LibraryView : UserControl
     }
     private void ShowSearchPage(object sender, RoutedEventArgs e)
     {
-        if (!_searchBusy && SearchHeading.Text != "搜索")
+        if (!_searchBusy && _searchTitle != "搜索")
             ResetNetEaseResults("搜索");
         ShowPage(SearchPage, animate: e is not KeyEventArgs);
         SearchQuery.Focus();
@@ -376,7 +400,10 @@ public sealed partial class LibraryView : UserControl
         if (page == _page && navigation == _activeNavigation)
             return;
         if (_page == PlaylistPage && page != PlaylistPage)
+        {
             CancelPlaylistLoad();
+            _playPlaylistRequest?.Cancel();
+        }
         double travel = navigation.TranslatePoint(new Point(), Sidebar).Y < _activeNavigation.TranslatePoint(new Point(), Sidebar).Y
             ? -MotionTokens.PageTravel : MotionTokens.PageTravel;
         _activeNavigation.Tag = false;
@@ -390,26 +417,57 @@ public sealed partial class LibraryView : UserControl
         page.Visibility = Visibility.Visible;
         if (page == SettingsPage)
             SettingsRealtimeSeek.IsChecked = _lyrics.Options.RealtimeSeek;
-        TitleText.Text = page == HomePage ? "主页" : page == SearchPage ? "搜索" : page == PlaylistPage ? PlaylistHeading.Text : "设置";
-        UpdateTitleInset(ActualWidth);
-        UpdateTitleVisibility(page.VerticalOffset);
-        ShellTransitions.Reveal((Panel)page.Content, MotionTokens.PageStartOpacity, travel, MotionTokens.PageEnter, !animate || MotionReduced);
+        var content = (Panel)page.Content;
+        ShellTransitions.Reveal(content, MotionTokens.PageStartOpacity, travel, MotionTokens.PageEnter, !animate || MotionReduced);
+        TitleText.SetBinding(OpacityProperty, new Binding(nameof(Opacity)) { Source = content });
+        BindingOperations.SetBinding(PageTitleEntrance, TranslateTransform.YProperty, new Binding("RenderTransform.Y") { Source = content });
+        UpdatePageTitle();
+        Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(UpdatePageTitle));
     }
 
     private void OnPageScrolled(object sender, ScrollChangedEventArgs e)
     {
-        if (ReferenceEquals(sender, _page) && ReferenceEquals(e.OriginalSource, sender) && e.VerticalChange != 0)
-            UpdateTitleVisibility(e.VerticalOffset);
+        if (ReferenceEquals(sender, _page) && ReferenceEquals(e.OriginalSource, sender))
+            UpdatePageTitle();
     }
 
-    private void UpdateTitleVisibility(double offset) => TitleText.Visibility = offset >= 52 ? Visibility.Visible : Visibility.Hidden;
+    private void OnTitleSizeChanged(object sender, SizeChangedEventArgs e) => UpdatePageTitle();
 
-    private void UpdateTitleInset(double width)
+    private void UpdatePageTitle()
     {
-        double inset = IsNarrow ? 24 : 40;
-        if (_page == SettingsPage)
-            inset = Math.Max(inset, (width - SidebarColumn.Width.Value - SettingsContent.MaxWidth) / 2);
-        TitleText.Margin = new Thickness(inset, 0, 16, 0);
+        if (_page is null || TitleLayer is null || TitleDock is null)
+            return;
+        var (slot, text) = _page == HomePage ? (HomeTitleSlot, "主页") : _page == SearchPage ? (SearchTitleSlot, _searchTitle) :
+            _page == PlaylistPage ? (PlaylistTitleSlot, _playlistTitle) : (SettingsTitleSlot, "设置");
+        TitleText.Text = text;
+        TitleText.TextWrapping = _page == PlaylistPage ? TextWrapping.Wrap : TextWrapping.NoWrap;
+        double edge = TitleBar.ActualHeight;
+        if (slot.ActualWidth <= 0 || edge <= 0)
+        {
+            TitleText.Visibility = Visibility.Hidden;
+            return;
+        }
+        TitleText.MaxWidth = slot.ActualWidth;
+        double height = TitleText.ActualHeight;
+        if (height <= 0)
+            return;
+        DockedTitleClip.Rect = new Rect(0, 0, TitleDock.ActualWidth, edge);
+        BodyTitleClip.Rect = new Rect(0, edge, TitleLayer.ActualWidth, Math.Max(0, TitleLayer.ActualHeight - edge));
+        var origin = slot.TranslatePoint(new Point(), TitleLayer);
+        if (_page.Content is UIElement { RenderTransform: TranslateTransform shift })
+            origin.Y -= shift.Y;
+
+        double compact = Math.Min(14 / TitleText.FontSize, (edge - 10) / height);
+        double top = (edge - height * compact) / 2;
+        double progress = Math.Clamp((edge - origin.Y) / (2 * (edge - top)), 0, 1);
+        if (MotionReduced)
+            progress = origin.Y < edge ? 1 : 0;
+        double eased = progress * progress * (3 - 2 * progress);
+        double left = _page == SettingsPage ? origin.X : IsNarrow ? 24 : 40;
+        PageTitleScale.ScaleX = PageTitleScale.ScaleY = 1 + (compact - 1) * eased;
+        PageTitleOffset.X = origin.X + (left - origin.X) * eased;
+        PageTitleOffset.Y = progress == 0 ? origin.Y : edge + (top - edge) * progress * (2 - progress);
+        TitleText.Visibility = Visibility.Visible;
     }
 
     private void MinimizeWindow(object sender, RoutedEventArgs e) => SystemCommands.MinimizeWindow(_lyrics);
@@ -495,15 +553,28 @@ public sealed partial class LibraryView : UserControl
 
     private async void PlaySelectedTrack(object sender, MouseButtonEventArgs e)
     {
-        if (e.OriginalSource is DependencyObject source &&
-            ItemsControl.ContainerFromElement(TrackList, source) is ListBoxItem { DataContext: TrackRow row })
-            await SwitchTrackAsync(row);
+        if (e.ChangedButton != MouseButton.Left || e.OriginalSource is not DependencyObject source ||
+            ItemsControl.ContainerFromElement(TrackList, source) is not ListBoxItem { DataContext: TrackRow row } container)
+            return;
+        for (DependencyObject? element = source; element is not null && element != container; element = VisualTreeHelper.GetParent(element))
+            if (element is ButtonBase)
+                return;
+        await SwitchTrackAsync(row);
     }
 
     private async void PlayQueueTrack(object sender, RoutedEventArgs e)
     {
         if (sender is Button { DataContext: TrackRow row })
             await SwitchTrackAsync(row);
+    }
+
+    private async void RemoveQueueTrack(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button { DataContext: TrackRow row })
+            return;
+        try { await _lyrics.RemoveQueueEntryAsync(row.Track); }
+        catch (Exception error) { ShowNotice(error.Message); }
+        RefreshPlayer();
     }
 
     private async void OnTrackListKeyDown(object sender, KeyEventArgs e)
@@ -624,10 +695,13 @@ public sealed partial class LibraryView : UserControl
     {
         if (!QueuePopup.IsOpen)
         {
+            QueueScroller?.StopWheelAnimation();
             QueueButton.SetCurrentValue(ToggleButton.IsCheckedProperty, false);
             ShellTransitions.PrepareReveal(QueueSurface, 1, 0);
         }
     }
+
+    private ShellScrollViewer? QueueScroller => TrackList.Template.FindName("QueueScroller", TrackList) as ShellScrollViewer;
 
     private void OnQueueKeyDown(object sender, KeyEventArgs e)
     {

@@ -90,24 +90,28 @@
                 <Setter Property="Focusable" Value="False" />
                 <Setter Property="Visibility" Value="Collapsed" />
             </Style>
+            <Style x:Key="PageTitleSlot" TargetType="Border">
+                <Setter Property="Height" Value="{Binding ActualHeight, ElementName=TitleText}" />
+                <EventSetter Event="SizeChanged" Handler="OnTitleSizeChanged" />
+            </Style>
             <ControlTemplate x:Key="BareList" TargetType="ListBox">
                 <ItemsPresenter />
             </ControlTemplate>
             <DataTemplate x:Key="NetEaseTrackRow">
-                <Grid x:Name="ResultRow">
+                <Grid x:Name="ResultRow" Background="Transparent" MouseRightButtonUp="OpenSongQueueMenu">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="56" />
                         <ColumnDefinition Width="1.4*" />
                         <ColumnDefinition Width="{Binding AlbumColumn, RelativeSource={RelativeSource AncestorType=local:LibraryView}}" />
                         <ColumnDefinition Width="Auto" SharedSizeGroup="Availability" />
-                        <ColumnDefinition Width="56" />
+                        <ColumnDefinition Width="Auto" MinWidth="56" SharedSizeGroup="TrackDuration" />
                         <ColumnDefinition Width="44" />
                     </Grid.ColumnDefinitions>
                     <Grid Width="44" Height="44" HorizontalAlignment="Left">
-                        <Border CornerRadius="6" Background="{StaticResource Shell.SurfaceRaised}">
+                        <Border CornerRadius="8" Background="{StaticResource Shell.SurfaceRaised}">
                             <Image Source="{DynamicResource Apple.Music.Song}" Width="20" Height="20" Opacity="0.4" />
                         </Border>
-                        <Rectangle RadiusX="6" RadiusY="6">
+                        <Rectangle RadiusX="8" RadiusY="8">
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="{Binding Artwork}" Stretch="UniformToFill" />
                             </Rectangle.Fill>
@@ -115,17 +119,20 @@
                     </Grid>
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                         <local:MiSansLabel Text="{Binding Track.Title}" FontWeight="{DynamicResource Shell.SemiboldWeight}" TextTrimming="CharacterEllipsis" />
-                        <local:MiSansLabel Text="{Binding Track.Artist}" Style="{StaticResource Shell.Caption}" Margin="0,3,0,0" />
+                        <local:MiSansLabel Text="{Binding Track.Artist}" Style="{StaticResource Shell.Caption}" Margin="0,2,0,0" />
                     </StackPanel>
                     <local:MiSansLabel Grid.Column="2" Text="{Binding Track.Album}" Style="{StaticResource Shell.Caption}" FontSize="13" VerticalAlignment="Center" Margin="12,0,0,0" />
-                    <Border Grid.Column="3" CornerRadius="9" Padding="8,2" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" Background="#1AFFFFFF">
+                    <Border Grid.Column="3" CornerRadius="7" Padding="8,3" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" Background="#1AFFFFFF">
                         <local:MiSansLabel Text="{Binding Track.Availability}" FontSize="11" Foreground="{StaticResource Shell.Secondary}" />
                     </Border>
-                    <local:MiSansLabel Grid.Column="4" Text="{Binding Duration}" Style="{StaticResource Shell.Caption}" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                    <local:MiSansLabel x:Name="DurationLabel" Grid.Column="4" Text="{Binding Duration}" Style="{StaticResource Shell.Caption}" FontSize="12" TextTrimming="None"
+                                      VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,4,0" />
                     <Button x:Name="RowPlay" Grid.Column="5" Style="{StaticResource Shell.IconButton}" Width="32" Height="32" Opacity="0"
                             Click="PlaySearchResultButton" Tag="{Binding}" ToolTip="播放" AutomationProperties.Name="播放"
                             HorizontalAlignment="Right" IsEnabled="{Binding Track.Playable}">
-                        <Image Source="{DynamicResource Apple.Music.PlayButton}" Width="22" Height="22" Margin="2,0,0,0" />
+                        <Image Source="{DynamicResource Apple.Music.PlayButton}" Width="22" Height="22">
+                            <Image.RenderTransform><TranslateTransform X="1" /></Image.RenderTransform>
+                        </Image>
                     </Button>
                 </Grid>
                 <DataTemplate.Triggers>
@@ -257,11 +264,11 @@
             <Border Grid.Row="1" Background="{StaticResource Shell.Background}" />
             <local:ShellScrollViewer x:Name="HomePage" Grid.Row="1" Style="{StaticResource PageScroller}" Visibility="Visible" ScrollChanged="OnPageScrolled">
                 <StackPanel x:Name="HomeContent" Margin="40,16,40,36">
-                    <local:MiSansLabel Style="{StaticResource Shell.PageTitle}" Text="主页" />
+                    <Border x:Name="HomeTitleSlot" Style="{StaticResource PageTitleSlot}" />
 
-                    <Grid x:Name="Hero" MinHeight="236" Margin="0,22,0,36" SizeChanged="OnHeroSizeChanged">
+                    <Grid x:Name="Hero" MinHeight="228" Margin="0,20,0,28" SizeChanged="OnHeroSizeChanged">
                         <Rectangle Fill="{StaticResource Shell.Surface}" />
-                        <Grid Margin="26">
+                        <Grid x:Name="HeroContent" Margin="22">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
@@ -278,7 +285,7 @@
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Grid>
-                            <StackPanel x:Name="HeroText" Grid.Column="1" Margin="28,0,0,0" VerticalAlignment="Center">
+                            <StackPanel x:Name="HeroText" Grid.Column="1" Margin="24,0,0,0" VerticalAlignment="Center">
                                 <StackPanel Orientation="Horizontal">
                                     <local:EqualizerBars x:Name="HeroEqualizer" BarBrush="{StaticResource Shell.Accent}" Margin="0,0,8,1" VerticalAlignment="Center" />
                                     <local:MiSansLabel x:Name="HeroLabel" Text="正在播放" FontSize="12" FontWeight="{DynamicResource Shell.SemiboldWeight}" Foreground="{StaticResource Shell.Accent}" />
@@ -302,14 +309,14 @@
                         </Grid>
                     </Grid>
 
-                    <local:MiSansLabel Style="{StaticResource Shell.Heading}" Text="网易云音乐" Margin="0,0,0,12" />
-                    <WrapPanel>
-                        <Button Style="{StaticResource Shell.Pill}" local:ShellAssist.CornerRadius="9" Click="OpenNetEaseLibrary" Tag="daily" Content="每日推荐" Margin="0,0,8,8" />
-                    </WrapPanel>
+                    <DockPanel Margin="0,0,0,16" LastChildFill="True">
+                        <Button DockPanel.Dock="Right" Style="{StaticResource Shell.Pill}" Click="OpenNetEaseLibrary" Tag="daily" Content="每日推荐" />
+                        <local:MiSansLabel Style="{StaticResource Shell.Heading}" Text="网易云音乐" VerticalAlignment="Center" />
+                    </DockPanel>
 
-                    <local:MiSansLabel Style="{StaticResource Shell.Heading}" Text="推荐歌单" FontSize="17" Margin="0,14,0,0" />
+                    <local:MiSansLabel Style="{StaticResource Shell.Heading}" Text="推荐歌单" FontSize="17" Margin="0,4,0,0" />
                     <local:MiSansLabel x:Name="RecommendedStatus" Style="{StaticResource Shell.Caption}" Margin="0,12,0,0" TextWrapping="Wrap" Visibility="Collapsed" />
-                    <ItemsControl x:Name="RecommendedPlaylists" Tag="4" Margin="-6,14,-6,0" Focusable="False">
+                    <ItemsControl x:Name="RecommendedPlaylists" Tag="4" Margin="-10,12,-10,0" Focusable="False">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="{Binding Tag, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
@@ -344,17 +351,17 @@
 
             <local:ShellScrollViewer x:Name="SearchPage" Grid.Row="1" Style="{StaticResource PageScroller}" ScrollChanged="OnPageScrolled">
                 <StackPanel x:Name="SearchContent" Margin="40,16,40,36">
-                    <local:MiSansLabel x:Name="SearchHeading" Style="{StaticResource Shell.PageTitle}" Text="搜索" />
+                    <Border x:Name="SearchTitleSlot" Style="{StaticResource PageTitleSlot}" />
                     <local:MiSansLabel x:Name="SearchSubtitle" Style="{StaticResource Shell.Caption}" FontSize="13" Margin="2,6,0,0" TextWrapping="Wrap" />
-                    <TextBox x:Name="SearchQuery" Style="{StaticResource Shell.SearchBox}" Height="46" FontSize="16" Margin="0,20,0,0"
+                    <TextBox x:Name="SearchQuery" Style="{StaticResource Shell.SearchBox}" Height="46" FontSize="16" Margin="0,18,0,0"
                              Tag="歌曲、艺人或专辑" KeyDown="OnSearchQueryKeyDown" AutomationProperties.Name="歌名或艺人" />
 
 
 
-                    <StackPanel x:Name="SearchState" Orientation="Horizontal" Margin="2,22,0,10">
-                        <local:Spinner x:Name="SearchSpinner" Width="16" Height="16" Margin="0,0,10,0" Visibility="Collapsed" />
+                    <DockPanel x:Name="SearchState" Margin="0,16,0,10">
+                        <local:Spinner x:Name="SearchSpinner" DockPanel.Dock="Left" Width="16" Height="16" Margin="0,0,8,0" Visibility="Collapsed" />
                         <local:MiSansLabel x:Name="SearchStatus" Style="{StaticResource Shell.Caption}" FontSize="13" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
-                    </StackPanel>
+                    </DockPanel>
                     <ListBox x:Name="SearchResults" ItemTemplate="{StaticResource NetEaseTrackRow}" Template="{StaticResource BareList}" Grid.IsSharedSizeScope="True" ItemContainerStyle="{StaticResource Shell.Row}"
                              VirtualizingPanel.IsVirtualizing="False" Background="Transparent" BorderThickness="0"
                              MouseDoubleClick="PlaySearchResult" KeyDown="OnSearchResultsKeyDown" AutomationProperties.Name="搜索结果">
@@ -372,12 +379,16 @@
                                 <ImageBrush x:Name="PlaylistCover" Stretch="UniformToFill" />
                             </Rectangle.Fill>
                         </Rectangle>
-                        <local:MiSansLabel x:Name="PlaylistHeading" Style="{StaticResource Shell.PageTitle}" TextWrapping="Wrap" VerticalAlignment="Center" />
+                        <StackPanel VerticalAlignment="Center">
+                            <Border x:Name="PlaylistTitleSlot" Style="{StaticResource PageTitleSlot}" />
+                            <Button x:Name="PlaylistPlayButton" Content="播放歌单" Style="{StaticResource Shell.PrimaryPill}"
+                                    Click="PlayPlaylist" IsEnabled="False" HorizontalAlignment="Left" Margin="0,10,0,0" />
+                        </StackPanel>
                     </DockPanel>
-                    <StackPanel Orientation="Horizontal" Margin="2,22,0,10">
-                        <local:Spinner x:Name="PlaylistSpinner" Width="16" Height="16" Margin="0,0,10,0" Visibility="Collapsed" />
+                    <DockPanel Margin="0,18,0,10">
+                        <local:Spinner x:Name="PlaylistSpinner" DockPanel.Dock="Left" Width="16" Height="16" Margin="0,0,8,0" Visibility="Collapsed" />
                         <local:MiSansLabel x:Name="PlaylistStatus" Style="{StaticResource Shell.Caption}" FontSize="13" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
-                    </StackPanel>
+                    </DockPanel>
                     <ListBox x:Name="PlaylistTracks" ItemTemplate="{StaticResource NetEaseTrackRow}" Template="{StaticResource BareList}"
                              Grid.IsSharedSizeScope="True" ItemContainerStyle="{StaticResource Shell.Row}" Background="Transparent" BorderThickness="0"
                              MouseDoubleClick="PlaySearchResult" KeyDown="OnSearchResultsKeyDown" AutomationProperties.Name="歌单曲目" />
@@ -388,8 +399,8 @@
 
             <local:ShellScrollViewer x:Name="SettingsPage" Grid.Row="1" Style="{StaticResource PageScroller}" ScrollChanged="OnPageScrolled">
                 <Grid>
-                <StackPanel x:Name="SettingsContent" MaxWidth="960" Margin="40,16,40,36">
-                    <local:MiSansLabel Style="{StaticResource Shell.PageTitle}" Text="设置" Margin="0,0,0,22" />
+                <StackPanel x:Name="SettingsContent" MaxWidth="760" Margin="40,16,40,36">
+                    <Border x:Name="SettingsTitleSlot" Style="{StaticResource PageTitleSlot}" Margin="0,0,0,22" />
                     <local:MiSansLabel Style="{StaticResource Shell.Heading}" FontSize="17" Text="播放" Margin="2,0,0,10" />
                     <Border Style="{StaticResource Card}">
                         <StackPanel>
@@ -455,7 +466,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <local:MiSansLabel x:Name="TitleText" Text="主页" FontWeight="{DynamicResource Shell.SemiboldWeight}" FontSize="14" Margin="40,0,16,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Visibility="Hidden" />
+                <Border x:Name="TitleDock" SizeChanged="OnTitleSizeChanged" IsHitTestVisible="False" />
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                     <ToggleButton x:Name="AccountButton" Style="{StaticResource Shell.Toggle}" Height="32" MaxWidth="132" Padding="9,4"
                             Margin="0,0,8,0" shell:WindowChrome.IsHitTestVisibleInChrome="True"
@@ -483,6 +494,26 @@
                         <TextBlock Style="{StaticResource Shell.Glyph}" Text="&#xE8BB;" FontSize="11" />
                     </Button>
                 </StackPanel>
+            </Grid>
+
+            <Grid x:Name="TitleLayer" Grid.RowSpan="2" IsHitTestVisible="False" Panel.ZIndex="1" SizeChanged="OnTitleSizeChanged">
+                <Grid.Clip>
+                    <GeometryGroup FillRule="Nonzero">
+                        <RectangleGeometry x:Name="DockedTitleClip" />
+                        <RectangleGeometry x:Name="BodyTitleClip" />
+                    </GeometryGroup>
+                </Grid.Clip>
+                <local:MiSansLabel x:Name="TitleText" Text="主页" Style="{StaticResource Shell.PageTitle}"
+                                  HorizontalAlignment="Left" VerticalAlignment="Top" SizeChanged="OnTitleSizeChanged"
+                                  TextTrimming="CharacterEllipsis" Visibility="Hidden" AutomationProperties.HeadingLevel="Level1">
+                    <local:MiSansLabel.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform x:Name="PageTitleScale" />
+                            <TranslateTransform x:Name="PageTitleOffset" />
+                            <TranslateTransform x:Name="PageTitleEntrance" />
+                        </TransformGroup>
+                    </local:MiSansLabel.RenderTransform>
+                </local:MiSansLabel>
             </Grid>
 
             <Popup x:Name="AccountPopup" Placement="Custom" PlacementTarget="{Binding ElementName=AccountButton}"
@@ -574,7 +605,7 @@
                     </Grid>
                     <StackPanel x:Name="NowText" Grid.Column="1" VerticalAlignment="Center" Margin="12,0,6,0">
                         <local:MiSansLabel x:Name="TrackTitle" FontWeight="{DynamicResource Shell.SemiboldWeight}" TextTrimming="CharacterEllipsis" />
-                        <local:MiSansLabel x:Name="TrackArtist" Style="{StaticResource Shell.Caption}" Margin="0,3,0,0" />
+                        <local:MiSansLabel x:Name="TrackArtist" Style="{StaticResource Shell.Caption}" Margin="0,2,0,0" />
                     </StackPanel>
                     <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
                         <Button x:Name="FavoriteButton" Style="{StaticResource Shell.IconButton}" Width="32" Height="32" Click="ToggleFavorite"
@@ -593,16 +624,9 @@
                         <Button x:Name="ShuffleButton" Style="{StaticResource Shell.ModeButton}" Click="ToggleShuffle" ToolTip="随机播放" AutomationProperties.Name="随机播放" Margin="0,0,10,0">
                             <Image Source="{DynamicResource Apple.Music.ShuffleButton}" Width="24" Height="24" />
                         </Button>
-                        <Button x:Name="PreviousButton" Style="{StaticResource Shell.IconButton}" Click="PreviousTrack" ToolTip="上一首" AutomationProperties.Name="上一首">
-                            <Image Source="{DynamicResource Apple.Music.PreviousButton}" Width="28" Height="28" />
-                        </Button>
-                        <Button x:Name="PlayButton" Style="{StaticResource Shell.IconButton}" Click="TogglePlayback" Width="46" Height="46" Margin="10,0"
-                                ToolTip="播放" ToolTipService.ShowOnDisabled="True" AutomationProperties.Name="播放">
-                            <Image x:Name="PlayGlyph" Source="{DynamicResource Apple.Music.PlayButton}" Width="36" Height="36" />
-                        </Button>
-                        <Button x:Name="NextButton" Style="{StaticResource Shell.IconButton}" Click="NextTrack" ToolTip="下一首" AutomationProperties.Name="下一首">
-                            <Image Source="{DynamicResource Apple.Music.NextButton}" Width="28" Height="28" />
-                        </Button>
+                        <Button x:Name="PreviousButton" Click="PreviousTrack" ToolTip="上一首" AutomationProperties.Name="上一首" />
+                        <Button x:Name="PlayButton" Click="TogglePlayback" ToolTip="播放" ToolTipService.ShowOnDisabled="True" AutomationProperties.Name="播放" />
+                        <Button x:Name="NextButton" Click="NextTrack" ToolTip="下一首" AutomationProperties.Name="下一首" />
                         <Button x:Name="RepeatButton" Style="{StaticResource Shell.ModeButton}" Click="ToggleRepeat" ToolTip="循环播放" AutomationProperties.Name="循环播放" Margin="10,0,0,0">
                             <Image x:Name="RepeatGlyph" Source="{DynamicResource Apple.Music.RepeatButton}" Width="24" Height="24" />
                         </Button>
@@ -625,7 +649,8 @@
                                   Click="ToggleQueuePopup" ToolTip="播放队列" AutomationProperties.Name="播放队列">
                         <TextBlock Style="{StaticResource Shell.Glyph}" Text="&#xE90B;" />
                     </ToggleButton>
-                    <Button x:Name="LyricsButton" Style="{StaticResource Shell.Pill}" Click="OpenLyricsPage" ToolTip="打开 Apple Music 歌词" AutomationProperties.Name="打开 Apple Music 歌词">
+                    <Button x:Name="LyricsButton" Style="{StaticResource Shell.Pill}" Click="OpenLyricsPage" ToolTip="打开 Apple Music 歌词"
+                            ToolTipService.ShowOnDisabled="True" AutomationProperties.Name="打开 Apple Music 歌词">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="{DynamicResource Apple.Quote}" Width="17" Height="17" />
                             <local:MiSansLabel Text="歌词" Margin="7,0,0,0" Style="{StaticResource RoomyOnly}" />
@@ -638,7 +663,7 @@
         <Popup x:Name="QueuePopup" Placement="Custom" PlacementTarget="{Binding ElementName=QueueButton}"
                StaysOpen="True" AllowsTransparency="True" Opened="OnQueuePopupOpened" Closed="OnQueuePopupClosed" PopupAnimation="None">
             <Border x:Name="QueueSurface" Background="{StaticResource Shell.Surface}" BorderBrush="{StaticResource Shell.Stroke}"
-                    BorderThickness="1" CornerRadius="12" Padding="14" Width="400" RenderOptions.ClearTypeHint="Enabled" PreviewKeyDown="OnQueueKeyDown">
+                    BorderThickness="1" CornerRadius="12" Padding="14" Width="428" RenderOptions.ClearTypeHint="Enabled" PreviewKeyDown="OnQueueKeyDown">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="4,0,0,9">
                         <local:MiSansLabel Style="{StaticResource Shell.Heading}" FontSize="18" Text="播放队列" />
@@ -646,9 +671,17 @@
                     </StackPanel>
                     <local:MiSansLabel x:Name="QueueEmpty" Style="{StaticResource Shell.Caption}" Text="播放队列为空"
                                Margin="4,6,4,10" Visibility="{Binding HasItems, ElementName=TrackList, Converter={x:Static local:LibraryView.CollapsedWhenTrue}}" />
-                    <ListBox x:Name="TrackList" Tag="{Binding IsPlaybackActive, ElementName=ShellView}" ItemContainerStyle="{StaticResource Shell.Row}"
-                             MaxHeight="320" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" BorderThickness="0"
+                    <ListBox x:Name="TrackList" Tag="{Binding IsPlaybackActive, ElementName=ShellView}" ItemContainerStyle="{StaticResource Shell.Row}" Grid.IsSharedSizeScope="True"
+                             MaxHeight="320" VirtualizingPanel.ScrollUnit="Pixel" VirtualizingPanel.VirtualizationMode="Recycling"
                              MouseDoubleClick="PlaySelectedTrack" KeyDown="OnTrackListKeyDown" AutomationProperties.Name="播放队列">
+                        <ListBox.Template>
+                            <ControlTemplate TargetType="ListBox">
+                                <local:ShellScrollViewer x:Name="QueueScroller" CanContentScroll="True" Focusable="False"
+                                                         HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                    <ItemsPresenter />
+                                </local:ShellScrollViewer>
+                            </ControlTemplate>
+                        </ListBox.Template>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -657,18 +690,18 @@
                                         <ColumnDefinition Width="52" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="72" />
-                                        <ColumnDefinition Width="44" />
-                                        <ColumnDefinition Width="36" />
+                                        <ColumnDefinition Width="Auto" MinWidth="44" SharedSizeGroup="QueueDuration" />
+                                        <ColumnDefinition Width="68" />
                                     </Grid.ColumnDefinitions>
                                     <local:MiSansLabel x:Name="Number" Text="{Binding Number}" Foreground="{StaticResource Shell.Tertiary}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <local:EqualizerBars x:Name="Playing" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                          BarBrush="{StaticResource Shell.Accent}"
                                                          IsActive="{Binding Tag, RelativeSource={RelativeSource AncestorType=ListBox}}" />
                                     <Grid Grid.Column="1" Width="44" Height="44" HorizontalAlignment="Left">
-                                        <Border CornerRadius="6" Background="{StaticResource Shell.SurfaceRaised}">
+                                        <Border CornerRadius="8" Background="{StaticResource Shell.SurfaceRaised}">
                                             <Image Source="{DynamicResource Apple.Music.Song}" Width="20" Height="20" Opacity="0.4" />
                                         </Border>
-                                        <Rectangle RadiusX="6" RadiusY="6">
+                                        <Rectangle RadiusX="8" RadiusY="8">
                                             <Rectangle.Fill>
                                                 <ImageBrush ImageSource="{Binding Artwork}" Stretch="UniformToFill" />
                                             </Rectangle.Fill>
@@ -676,15 +709,25 @@
                                     </Grid>
                                     <StackPanel Grid.Column="2" VerticalAlignment="Center">
                                         <local:MiSansLabel x:Name="Title" Text="{Binding Track.Title}" FontWeight="{DynamicResource Shell.SemiboldWeight}" TextTrimming="CharacterEllipsis" />
-                                        <local:MiSansLabel Text="{Binding Track.Artist}" Style="{StaticResource Shell.Caption}" Margin="0,3,0,0" />
+                                        <local:MiSansLabel Text="{Binding Track.Artist}" Style="{StaticResource Shell.Caption}" Margin="0,2,0,0" />
                                     </StackPanel>
                                     <local:MiSansLabel Grid.Column="3" Text="{Binding Track.Album}" Style="{StaticResource Shell.Caption}" FontSize="13" VerticalAlignment="Center" Margin="12,0,0,0" />
-                                    <local:MiSansLabel Grid.Column="4" Text="{Binding Duration}" Style="{StaticResource Shell.Caption}" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,4,0" />
-                                    <Button x:Name="QueueTrackPlay" Grid.Column="5" Style="{StaticResource Shell.IconButton}" Width="32" Height="32"
-                                            Click="PlayQueueTrack" ToolTip="播放"
-                                            AutomationProperties.Name="{Binding Track.Title, StringFormat='播放 {0}'}">
-                                        <Image Source="{DynamicResource Apple.Music.PlayButton}" Width="22" Height="22" Margin="2,0,0,0" />
-                                    </Button>
+                                    <local:MiSansLabel Grid.Column="4" Text="{Binding Duration}" Style="{StaticResource Shell.Caption}" FontSize="13" TextTrimming="None"
+                                                      VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,4,0" />
+                                    <StackPanel Grid.Column="5" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                        <Button x:Name="QueueTrackPlay" Style="{StaticResource Shell.IconButton}" Width="32" Height="32"
+                                                Click="PlayQueueTrack" ToolTip="播放"
+                                                AutomationProperties.Name="{Binding Track.Title, StringFormat='播放 {0}'}">
+                                            <Image Source="{DynamicResource Apple.Music.PlayButton}" Width="22" Height="22">
+                                                <Image.RenderTransform><TranslateTransform X="1" /></Image.RenderTransform>
+                                            </Image>
+                                        </Button>
+                                        <Button x:Name="QueueTrackRemove" Style="{StaticResource Shell.IconButton}" Width="32" Height="32"
+                                                Click="RemoveQueueTrack" ToolTip="移除"
+                                                AutomationProperties.Name="{Binding Track.Title, StringFormat='从队列移除 {0}'}">
+                                            <TextBlock Style="{StaticResource Shell.Glyph}" Text="&#xE711;" FontSize="11" />
+                                        </Button>
+                                    </StackPanel>
                                 </Grid>
                                 <DataTemplate.Triggers>
                                     <DataTrigger Binding="{Binding IsCurrent}" Value="True">

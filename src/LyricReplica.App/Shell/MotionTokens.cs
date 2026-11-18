@@ -23,7 +23,7 @@ internal static class MotionTokens
     internal static readonly MotionTiming Toggle = new(160, Move);
     internal static readonly MotionTiming NoticeEnter = new(190, Emphasis);
     internal static readonly MotionTiming NoticeExit = new(135, Exit);
-    internal static readonly MotionTiming SeekHover = new(120, Enter);
+    internal static readonly MotionTiming SeekHover = new(170, Enter);
     internal static readonly MotionTiming SeekRelease = new(185, Enter);
 
     internal const double PageTravel = 12;

@@ -115,9 +115,9 @@ public sealed partial class LibraryView
 
     private void ResetNetEaseResults(string heading)
     {
-        SearchHeading.Text = heading;
+        _searchTitle = heading;
         if (_page == SearchPage)
-            TitleText.Text = heading;
+            UpdatePageTitle();
         SearchResults.ItemsSource = null;
         SearchStatus.Text = "";
         SearchPage.ScrollToHome();
@@ -180,15 +180,17 @@ public sealed partial class LibraryView
     private async Task OpenPlaylistAsync(string heading, string operation, long id, ImageSource? cover)
     {
         CancelPlaylistLoad();
-        PlaylistHeading.Text = heading;
+        _libraryOperation = null;
+        _playlistTitle = heading;
         PlaylistCover.ImageSource = cover;
         PlaylistArtwork.Visibility = cover is null ? Visibility.Collapsed : Visibility.Visible;
         PlaylistTracks.ItemsSource = null;
         MoreNetEaseTracks.Visibility = Visibility.Collapsed;
         _nextLibraryOffset = null;
+        UpdatePlaylistPlayAvailability();
         PlaylistPage.ScrollToHome();
         ShowPage(PlaylistPage, liked: operation == "liked");
-        TitleText.Text = heading;
+        UpdatePageTitle();
         if (!UseClientSession)
         {
             PlaylistStatus.Text = "请在标题栏的账号面板登录网易云音乐。";
@@ -282,6 +284,73 @@ public sealed partial class LibraryView
     {
         MoreNetEaseTracks.IsEnabled = !loading && !_searchBusy;
         PlaylistSpinner.Visibility = loading ? Visibility.Visible : Visibility.Collapsed;
+        UpdatePlaylistPlayAvailability();
+    }
+
+    private void UpdatePlaylistPlayAvailability() => PlaylistPlayButton.IsEnabled =
+        _libraryOperation is not null && UseClientSession && !_searchBusy && _playlistLoad is null &&
+        (_nextLibraryOffset.HasValue || PlaylistTracks.Items.OfType<SearchRow>().Any(row => row.Track.Playable));
+
+    private async void PlayPlaylist(object sender, RoutedEventArgs e)
+    {
+        if (!PlaylistPlayButton.IsEnabled || _libraryOperation is not { } operation)
+            return;
+        long id = _libraryPlaylistId;
+        long selection = _lyrics.QueueSelection;
+        int? offset = _nextLibraryOffset;
+        var tracks = PlaylistTracks.Items.OfType<SearchRow>().Select(row => row.Track).ToList();
+        using var request = CancellationTokenSource.CreateLinkedTokenSource(_lifetime.Token);
+        _playPlaylistRequest = request;
+        try
+        {
+            await RunSearchAsync("正在读取完整歌单…", _ => _lyrics.WhilePlaybackLoadsAsync(async () =>
+            {
+                while (offset is { } start)
+                {
+                    var page = await NetEaseMusic.ReadClientLibraryAsync(operation, id, start, request.Token);
+                    request.Token.ThrowIfCancellationRequested();
+                    if (selection != _lyrics.QueueSelection)
+                    {
+                        PlaylistStatus.Text = $"已加载 {PlaylistTracks.Items.Count} 首";
+                        return;
+                    }
+                    tracks.AddRange(page.Tracks);
+                    offset = page.NextOffset;
+                }
+                bool started = await _lyrics.PlayNetEasePlaylistAsync(tracks, selection, request.Token);
+                request.Token.ThrowIfCancellationRequested();
+                RefreshPlayer();
+                PlaylistStatus.Text = started ? $"播放队列 · {_lyrics.Playlist.Count} 首歌曲" : $"已加载 {PlaylistTracks.Items.Count} 首";
+            }), playlist: true, cancellationToken: request.Token);
+        }
+        finally
+        {
+            _playPlaylistRequest = null;
+            if (request.IsCancellationRequested)
+                PlaylistStatus.Text = $"已加载 {PlaylistTracks.Items.Count} 首";
+        }
+    }
+
+    private CancellationTokenSource? _playPlaylistRequest;
+
+    private void OpenSongQueueMenu(object sender, MouseButtonEventArgs e)
+    {
+        if (sender is not FrameworkElement { DataContext: SearchRow { Track: var track } } row)
+            return;
+        e.Handled = true;
+        var menu = new ContextMenu { PlacementTarget = row, Placement = PlacementMode.MousePoint };
+        Reference.ReferenceMenus.Apply(menu);
+        foreach (bool next in new[] { true, false })
+        {
+            var item = new MenuItem { Header = next ? "插播" : "添加至队列末尾", IsEnabled = track.Playable };
+            item.Click += (_, _) =>
+            {
+                _lyrics.QueueNetEase(track, next);
+                RefreshPlayer();
+            };
+            menu.Items.Add(item);
+        }
+        OpenShellMenu(menu);
     }
 
     private void ShowNetEaseTracks(NetEaseTrack[] tracks, ListBox? list = null, bool append = false)
@@ -328,13 +397,15 @@ public sealed partial class LibraryView
         }
         await RunSearchAsync($"正在载入《{row.Track.Title}》…", async token =>
         {
-            await _lyrics.PlayNetEaseAsync(row.Track, token);
+            bool started = await _lyrics.PlayNetEaseAsync(row.Track, token);
             RefreshPlayer();
-            (playlist ? PlaylistStatus : SearchStatus).Text = $"正在播放《{row.Track.Title}》";
+            (playlist ? PlaylistStatus : SearchStatus).Text = started ? $"正在播放《{row.Track.Title}》" :
+                $"已加载 {(playlist ? PlaylistTracks : SearchResults).Items.Count} 首";
         }, playlist);
     }
 
-    private async Task RunSearchAsync(string message, Func<CancellationToken, Task> action, bool playlist = false)
+    private async Task RunSearchAsync(string message, Func<CancellationToken, Task> action, bool playlist = false,
+        CancellationToken cancellationToken = default)
     {
         var status = playlist ? PlaylistStatus : SearchStatus;
         var spinner = playlist ? PlaylistSpinner : SearchSpinner;
@@ -346,10 +417,11 @@ public sealed partial class LibraryView
         _searchBusy = true;
         SearchQuery.IsEnabled = LoginButton.IsEnabled = false;
         MoreNetEaseTracks.IsEnabled = LogoutButton.IsEnabled = false;
+        UpdatePlaylistPlayAvailability();
         spinner.Visibility = Visibility.Visible;
         status.Text = message;
-        try { await action(_lifetime.Token); }
-        catch (OperationCanceledException) when (_lifetime.IsCancellationRequested) { }
+        try { await action(cancellationToken.CanBeCanceled ? cancellationToken : _lifetime.Token); }
+        catch (OperationCanceledException) when (_lifetime.IsCancellationRequested || cancellationToken.IsCancellationRequested) { }
         catch (Exception exception) { status.Text = exception.Message; }
         finally
         {
@@ -357,6 +429,7 @@ public sealed partial class LibraryView
             SearchQuery.IsEnabled = LoginButton.IsEnabled = true;
             MoreNetEaseTracks.IsEnabled = _playlistLoad is null;
             LogoutButton.IsEnabled = true;
+            UpdatePlaylistPlayAvailability();
             spinner.Visibility = Visibility.Collapsed;
         }
     }
@@ -537,6 +610,7 @@ public sealed partial class LibraryView
         PlaylistTracks.ItemsSource = null;
         _nextLibraryOffset = null;
         MoreNetEaseTracks.Visibility = Visibility.Collapsed;
+        UpdatePlaylistPlayAvailability();
         ResetNetEaseResults("搜索");
         UpdateAccountState();
     }

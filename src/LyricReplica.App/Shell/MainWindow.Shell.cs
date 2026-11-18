@@ -158,7 +158,7 @@ public sealed partial class MainWindow
 
     internal void ShowLyrics()
     {
-        if (_library is null || _disposed)
+        if (_library is null || _disposed || !CanOpenLyrics)
             return;
         if (_lyricsShown)
             return;

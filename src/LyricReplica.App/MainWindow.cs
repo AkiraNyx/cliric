@@ -75,7 +75,7 @@ public sealed partial class MainWindow : Window
     private readonly HashSet<string> _favorites = [];
     private Song _song = new() { Title = "未播放", Artist = "", Untimed = true };
     private int _songIndex = -1, _anchor = -2, _frameCount, _lastFpsFrames, _loadGeneration;
-    private int _navigationRequest;
+    private long _navigationRequest;
     private bool _navigationPlaying;
     private bool _resetWordRuns = true;
     private long _renderedGeneration = -1;
@@ -414,20 +414,31 @@ public sealed partial class MainWindow : Window
         _lyricsLoaded = true;
         _magicController.BeginTutorial(_wall.Elapsed.TotalMilliseconds);
     }
-    public Task LoadSongAsync(int index) => WhilePlaybackLoadsAsync(() => LoadSongCoreAsync(index));
+    public Task LoadSongAsync(int index)
+    {
+        _navigationRequest = 0;
+        _navigationPlaying = false;
+        _pendingQueueEntry = null;
+        return LoadSongAsync(index, ++_queueSelection, _queueLifetime.Token);
+    }
 
-    private async Task LoadSongCoreAsync(int index)
+    private Task LoadSongAsync(int index, long selection, CancellationToken token) =>
+        WhilePlaybackLoadsAsync(() => LoadSongCoreAsync(index, selection, token));
+
+    private async Task LoadSongCoreAsync(int index, long selection, CancellationToken token)
     {
         if (_disposed || _songs.Count == 0)
             return;
+        var requested = _songs[(index % _songs.Count + _songs.Count) % _songs.Count];
+        int generation = _loadGeneration;
+        using var load = CancellationTokenSource.CreateLinkedTokenSource(token, _queueLifetime.Token);
+        await PrepareQueuedLyricsAsync(requested, load.Token);
+        if (_disposed || selection != _queueSelection || generation != _loadGeneration || (index = _songs.IndexOf(requested)) < 0)
+            return;
+        load.Token.ThrowIfCancellationRequested();
         _dots.StopPlayback();
         StopArtworkVideo();
-        int generation = ++_loadGeneration;
-        if (_navigationRequest != generation)
-        {
-            _navigationRequest = 0;
-            _navigationPlaying = false;
-        }
+        generation = ++_loadGeneration;
         _seek.CancelPreview();
         _seekVertical.CancelPreview();
         _system?.Dispose();
@@ -438,8 +449,9 @@ public sealed partial class MainWindow : Window
         _audio.Close();
         _audioOpening = _audioLoaded = false;
         _suppressMediaEnded = false;
-        _songIndex = (index % _songs.Count + _songs.Count) % _songs.Count;
-        _song = _songs[_songIndex];
+        _songIndex = index;
+        _song = requested;
+        _playNext.Remove(requested);
         _scroll.ScrollToVerticalOffset(0);
         _autoScrolling = false;
         IsHearted = _favorites.Contains(_song.Id);
@@ -669,7 +681,10 @@ public sealed partial class MainWindow : Window
         {
             var host = new StackPanel();
             bool duetInset = _options.Duet && _song.Lines.Any(x => x.AlignLeft == false);
-            var main = new LyricRow(data.Main, data.Right, false, width - 16.4 * scale, scale, _font, _options, duetInset, portrait: _portrait, karaoke: karaoke, haveRomanization: _song.Lines.Any(l => l.Romanization.Length > 0));
+            bool useFractionalLift = WindowState == WindowState.Normal && !_fullscreen;
+            var main = new LyricRow(data.Main, data.Right, false, width - 16.4 * scale, scale, _font, _options, duetInset,
+                portrait: _portrait, karaoke: karaoke, haveRomanization: _song.Lines.Any(l => l.Romanization.Length > 0))
+            { UseFractionalLift = useFractionalLift };
             main.SeekRequested += value => Seek(value);
             main.HoverAllowed = () => _pointerAtScroll is not { } point || Mouse.GetPosition(_reference.View) != point;
             main.AnimationClockNow = () => _wall.Elapsed.TotalMilliseconds;
@@ -700,7 +715,15 @@ public sealed partial class MainWindow : Window
             void AddBacking(LyricLine line)
             {
                 bool above = _options.AppleMusicLyrics.BackgroundVocalsNativePosition && line.StartMs < data.Main.StartMs;
-                var row = new LyricRow(line, data.Right, true, main.TextWidth, scale, _font, _options, duetInset, above, _portrait, karaoke, haveRomanization: _song.Lines.Any(l => l.Romanization.Length > 0)) { BackgroundOverlap = overlap, OpacityTransition = main.OpacityTransition, BackgroundExitTransition = rowIndex < groups.Count ? LineMotion.PageTransition(groups, rowIndex, karaoke, _options.AppleMusicLyrics) : (false, .2), SingOpacityDuration = _singOpacityDuration };
+                var row = new LyricRow(line, data.Right, true, main.TextWidth, scale, _font, _options, duetInset, above, _portrait, karaoke,
+                    haveRomanization: _song.Lines.Any(l => l.Romanization.Length > 0))
+                {
+                    UseFractionalLift = useFractionalLift,
+                    BackgroundOverlap = overlap,
+                    OpacityTransition = main.OpacityTransition,
+                    BackgroundExitTransition = rowIndex < groups.Count ? LineMotion.PageTransition(groups, rowIndex, karaoke, _options.AppleMusicLyrics) : (false, .2),
+                    SingOpacityDuration = _singOpacityDuration
+                };
                 main.AddBackground(row, above);
                 backingRows.Add(row);
             }
@@ -905,10 +928,16 @@ public sealed partial class MainWindow : Window
     }
     public async void TogglePlay()
     {
-        if (PlaybackLoading || !CanControlPlayback)
+        if (PlaybackLoading)
             return;
         try
         {
+            if (!CanControlPlayback)
+            {
+                if (_system is null && _songs.Count > 0)
+                    await NavigateLocalAsync(0, startPlaying: true);
+                return;
+            }
             if (_system is { } system)
             {
                 if (_clock.IsPlaying)
@@ -1024,8 +1053,11 @@ public sealed partial class MainWindow : Window
                 await system.NextAsync();
                 return;
             }
-            if (_songs.Count > 0)
-                await NavigateLocalAsync(_shuffle ? Random.Shared.Next(_songs.Count) : _songIndex + 1);
+            if (_songs.Count == 0)
+                return;
+            if (_pendingQueueEntry is { } skipped)
+                _playNext.Remove(skipped);
+            await NavigateLocalAsync(NextQueueIndex());
         }
         catch (Exception e) { Notify(e.Message); App.Log(e.ToString()); }
     }
@@ -1047,23 +1079,27 @@ public sealed partial class MainWindow : Window
         }
         catch (Exception e) { Notify(e.Message); App.Log(e.ToString()); }
     }
-    internal async Task NavigateLocalAsync(int index, bool startPlaying = false)
+    internal async Task NavigateLocalAsync(int index, bool startPlaying = false, CancellationToken token = default)
     {
-        if (_songs.Count == 0)
+        if (_songs.Count == 0 || _disposed)
             return;
         bool playing = startPlaying || (_navigationRequest != 0 ? _navigationPlaying : _clock.IsPlaying || _netEasePlayRequested);
+        var requested = _songs[(index % _songs.Count + _songs.Count) % _songs.Count];
+        long selection = ++_queueSelection;
         int generation = _loadGeneration + 1;
-        _navigationRequest = generation;
+        _navigationRequest = selection;
         _navigationPlaying = playing;
+        _pendingQueueEntry = requested;
         try
         {
-            await LoadSongAsync(index);
-            if (_disposed || generation != _loadGeneration)
+            await LoadSongAsync(index, selection, token);
+            if (_disposed || selection != _queueSelection || generation != _loadGeneration || _songIndex < 0 ||
+                !ReferenceEquals(requested, _song) || token.IsCancellationRequested)
                 return;
             if (_navigationPlaying)
             {
                 if (_netEaseTracks.TryGetValue(_song.Id, out var track))
-                    await StartNetEaseAsync(track);
+                    await StartNetEaseAsync(track, token);
                 else
                 {
                     _clock.Play();
@@ -1072,11 +1108,21 @@ public sealed partial class MainWindow : Window
                 }
             }
         }
-        finally { if (_navigationRequest == generation) { _navigationRequest = 0; _navigationPlaying = false; } if (!_disposed) UpdatePlayButtons(); }
+        finally
+        {
+            if (_navigationRequest == selection)
+            {
+                _navigationRequest = 0;
+                _navigationPlaying = false;
+                _pendingQueueEntry = null;
+            }
+            if (!_disposed)
+                UpdatePlayButtons();
+        }
     }
     private void EndTrack()
     {
-        if (!_clock.IsPlaying || _system is not null)
+        if (!_clock.IsPlaying || _system is not null || PlaybackLoading)
             return;
         if (_repeat)
         {
@@ -1103,6 +1149,8 @@ public sealed partial class MainWindow : Window
     private void RefreshQueue()
     {
         _queueItems.Children.Clear();
+        if (_queue.Visibility != Visibility.Visible)
+            return;
         for (int i = 0; i < _songs.Count; i++)
         {
             int index = i;
@@ -1491,6 +1539,7 @@ public sealed partial class MainWindow : Window
         if (_disposed)
             return;
         _disposed = true;
+            _queueLifetime.Cancel();
         CompositionTarget.Rendering -= OnRendering;
         if (_netEaseActive)
             _ = StopNetEaseAsync();

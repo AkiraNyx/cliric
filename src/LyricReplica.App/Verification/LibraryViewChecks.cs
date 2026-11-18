@@ -19,11 +19,20 @@ public sealed partial class LibraryView
 {
     private async Task VerifyPlayerAsync()
     {
+        if (Environment.GetCommandLineArgs().Contains("--lyric-lift-test"))
+        {
+            await _lyrics.VerifyWindowedLyricLiftAsync();
+            _lyrics.Close();
+            return;
+        }
         int assertions = 0;
         VerifyPlayerTypography();
         assertions++;
         if (_lyrics.Playlist.Count != 0 || TrackList.Items.Count != 0 || _lyrics.TrackIndex != -1 || PlayButton.IsEnabled)
             throw new InvalidOperationException("The standard player must start with an empty queue and disabled play control.");
+        _lyrics.ShowLyrics();
+        if (LyricsButton.IsEnabled || _lyrics.LyricsShown)
+            throw new InvalidOperationException("An empty player must keep the lyrics entry disabled.");
         Click(QueueButton);
         await Idle();
         if (!QueuePopup.IsOpen || !QueueEmpty.IsVisible || !HomePage.IsVisible)
@@ -59,6 +68,12 @@ public sealed partial class LibraryView
         await Task.Delay(100);
         if (_lyrics.LyricsShown || Visibility != Visibility.Visible || !clock.IsPlaying || clock.PositionMs <= beforeHide)
             throw new InvalidOperationException("Returning to the library must leave playback running.");
+        assertions++;
+        if (MainWindow.PlayerSeekTarget(60000, 60000, preview: true).HasValue ||
+            MainWindow.PlayerSeekTarget(60000, 59200, preview: true).HasValue ||
+            MainWindow.PlayerSeekTarget(60000, 59200, preview: false) is not 59080 ||
+            MainWindow.PlayerSeekTarget(17000, 60000, preview: true) is not 17000)
+            throw new InvalidOperationException("Realtime mpv previews must leave a safe EOF margin and use the live duration.");
         assertions++;
 
         Click(PlayButton);
@@ -96,6 +111,7 @@ public sealed partial class LibraryView
         await Settle();
         if (Descendants(SearchResults).OfType<ListBoxItem>().Count() != 4)
             throw new InvalidOperationException("Search results must render as rows on the search page.");
+        await VerifyPlaybackMetadataAsync(results, folder);
         assertions++;
         CapturePlayer(folder, "player-search-results.png");
         SearchResults.ItemsSource = null;
@@ -163,7 +179,7 @@ public sealed partial class LibraryView
             Click(NavLiked);
             await Idle();
             if (!PlaylistPage.IsVisible || NavLiked.Tag is not true || NavHome.Tag is true ||
-                PlaylistHeading.Text != "我喜欢的音乐" || NavRecent.IsEnabled || NavDownloads.IsEnabled)
+                TitleText.Text != "我喜欢的音乐" || NavRecent.IsEnabled || NavDownloads.IsEnabled)
                 throw new InvalidOperationException("The NetEase sidebar entry must open the existing liked playlist. Reserved entries must stay disabled.");
             assertions++;
         }
@@ -173,6 +189,92 @@ public sealed partial class LibraryView
             ShowPage(HomePage, animate: false);
         }
         await VerifyPlaylistCancellationAsync(results[0], results[1]);
+        assertions++;
+        if (!results[0].Playable || !results[3].Playable)
+            throw new InvalidOperationException("The queue fixture must contain two eligible tracks.");
+        int oldCount = _lyrics.Playlist.Count;
+        var previousSong = _lyrics.CurrentSong;
+        _lyrics.QueueNetEase(results[0], next: false);
+        var appended = _lyrics.Playlist[^1];
+        var queuedTrack = results[3] with { CoverUrl = "https://p1.music.126.net/fixture.png" };
+        _lyrics.QueueNetEase(queuedTrack, next: true);
+        var inserted = _lyrics.Playlist[1];
+        if (_lyrics.Playlist.Count != oldCount + 2 || _lyrics.Playlist[^1] != appended ||
+            _lyrics.NextQueueIndex() != 1 || _lyrics.CurrentSong != previousSong || _lyrics.QueueCoverUrl(inserted) != queuedTrack.CoverUrl)
+            throw new InvalidOperationException("Appending and playing next must preserve the song, order and unplayed cover URL.");
+        await _lyrics.RemoveQueueEntryAsync(inserted);
+        await _lyrics.RemoveQueueEntryAsync(appended);
+        if (_lyrics.Playlist.Count != oldCount || _lyrics.CurrentSong != previousSong || _lyrics.TrackIndex != 0)
+            throw new InvalidOperationException("Removing inactive entries must preserve playback.");
+        assertions++;
+
+        bool reducedTitle = _lyrics.Options.ReduceMotion;
+        _lyrics.Options.ReduceMotion = false;
+        UpdateMotionPreference();
+        try
+        {
+            ShowPage(SettingsPage, animate: false);
+            await Idle();
+            double titleSize = TitleText.FontSize;
+            double startY = PageTitleOffset.Y;
+            if (!TitleText.IsVisible || TitleText.Text != "设置" || SettingsTitleSlot.ActualHeight != TitleText.ActualHeight ||
+                PageTitleScale.ScaleX != 1 || startY < TitleBar.ActualHeight)
+                throw new InvalidOperationException("The single title must start over its reserved space in the page.");
+            SettingsPage.ScrollToVerticalOffset(42);
+            await Idle();
+            double middleY = PageTitleOffset.Y;
+            if (SettingsContent.MaxWidth != 760 || !TitleText.IsVisible || TitleText.Opacity != 1 ||
+                PageTitleScale.ScaleX <= 14 / titleSize || PageTitleScale.ScaleX >= .96 || middleY >= startY)
+                throw new InvalidOperationException("The settings title must shrink progressively inside the narrower content column.");
+            CapturePlayer(folder, "player-title-moving.png");
+            SettingsPage.ScrollToEnd();
+            await Idle();
+            if (!TitleText.IsVisible || TitleText.FontSize != titleSize || Math.Abs(PageTitleScale.ScaleX * titleSize - 14) > .001 ||
+                PageTitleOffset.Y >= middleY || PageTitleOffset.X != SettingsTitleSlot.TranslatePoint(new Point(), TitleLayer).X)
+                throw new InvalidOperationException("The same title must dock at 14 DIP and stay aligned with the settings column.");
+            CapturePlayer(folder, "player-title-docked.png");
+            SettingsPage.ScrollToVerticalOffset(0);
+            await Idle();
+            if (!TitleText.IsVisible || PageTitleScale.ScaleX != 1 || Math.Abs(PageTitleOffset.Y - startY) > .01)
+                throw new InvalidOperationException("Scrolling back must restore the large title.");
+
+            if (SystemParameters.WheelScrollLines != 0)
+            {
+                var queue = (TrackRow[])TrackList.ItemsSource;
+                TrackList.ItemsSource = Enumerable.Range(0, 16).Select(i => queue[i % queue.Length] with { Number = i + 1 }).ToArray();
+                Click(QueueButton);
+                await Idle();
+                var scroller = QueueScroller ?? throw new InvalidOperationException("Queue must use the smooth scroll viewer.");
+                scroller.RaiseEvent(new MouseWheelEventArgs(Mouse.PrimaryDevice, 0, -120) { RoutedEvent = Mouse.MouseWheelEvent });
+                if (!scroller.IsWheelAnimating || scroller.VerticalOffset != 0)
+                    throw new InvalidOperationException("Queue scrolling must animate from its current position.");
+                await Settle();
+                if (scroller.VerticalOffset <= 0)
+                    throw new InvalidOperationException("Queue wheel motion must move the visible list.");
+                Click(QueueButton);
+                TrackList.ItemsSource = queue;
+            }
+
+            var seekScale = Progress.GridBordersScaleTransform;
+            Progress.BorderCover.RaiseEvent(new MouseEventArgs(Mouse.PrimaryDevice, 0) { RoutedEvent = Mouse.MouseEnterEvent });
+            if (!seekScale.HasAnimatedProperties || seekScale.ScaleY >= 1.55)
+                throw new InvalidOperationException("Seek hover must animate from the current thickness.");
+            await Settle();
+            if (Math.Abs(seekScale.ScaleY - 1.55) > .001 || Progress.BorderBackground.Opacity <= .5)
+                throw new InvalidOperationException("Seek hover must settle on a stronger track.");
+            Progress.BorderCover.RaiseEvent(new MouseEventArgs(Mouse.PrimaryDevice, 0) { RoutedEvent = Mouse.MouseLeaveEvent });
+            if (!seekScale.HasAnimatedProperties || seekScale.ScaleY <= 1)
+                throw new InvalidOperationException("Leaving the seek bar must smoothly reverse its hover.");
+            await Settle();
+            if (seekScale.ScaleY != 1 || Progress.BorderBackground.Opacity != .5)
+                throw new InvalidOperationException("Seek hover must finish at the idle appearance.");
+        }
+        finally
+        {
+            _lyrics.Options.ReduceMotion = reducedTitle;
+            UpdateMotionPreference();
+        }
+        ShowPage(HomePage, animate: false);
         assertions++;
 
         double width = _lyrics.Width, height = _lyrics.Height;
@@ -307,7 +409,81 @@ public sealed partial class LibraryView
             _lyrics.Close();
             return;
         }
+        if (Environment.GetCommandLineArgs().Contains("--queue-test"))
+        {
+            await VerifyQueueRemovalAsync();
+            _lyrics.Close();
+            return;
+        }
         await _lyrics.RunSelfTestAsync();
+    }
+
+    private async Task VerifyQueueRemovalAsync()
+    {
+        _lyrics.ShowLibrary();
+        var active = _lyrics.CurrentSong;
+        int index = _lyrics.TrackIndex;
+        var successor = _lyrics.Playlist[index + 1];
+        await _lyrics.RemoveQueueEntryAsync(active);
+        if (!ReferenceEquals(_lyrics.CurrentSong, successor) || _lyrics.Playing)
+            throw new InvalidOperationException("Removing a paused song must select its successor without resuming playback.");
+        foreach (var song in _lyrics.Playlist.Reverse().ToArray())
+            await _lyrics.RemoveQueueEntryAsync(song);
+        _lyrics.ShowLyrics();
+        if (_lyrics.Playlist.Count != 0 || _lyrics.TrackIndex != -1 || _lyrics.LyricsShown)
+            throw new InvalidOperationException("Removing the last song must restore the empty player.");
+        var first = new NetEaseTrack("", 95, "第一首", "测试艺人", "测试歌单", 4000, true, ClientSession: true);
+        var second = first with { OriginalId = 96, Title = "第二首" };
+        var loaded = new Song { Id = "netease-95", Title = first.Title, Artist = first.Artist, DurationMs = 4000 };
+        _lyrics.ReplaceNetEaseQueue([first, second, first], 0, loaded);
+        if (_lyrics.Playlist.Count != 3 || !ReferenceEquals(_lyrics.Playlist[0], loaded) ||
+            _lyrics.Playlist[1].Id != "netease-96" || _lyrics.Playlist[2].Id != "netease-95" ||
+            ReferenceEquals(_lyrics.Playlist[0], _lyrics.Playlist[2]))
+            throw new InvalidOperationException("Playing a whole list must replace the queue and keep distinct entries in playlist order.");
+    }
+
+    private async Task VerifyPlaybackMetadataAsync(NetEaseTrack[] tracks, string folder)
+    {
+        var original = ReadTypographyControls();
+        double width = _lyrics.Width;
+        _refresh.Stop();
+        try
+        {
+            ApplyPlayerTypography(new PlayerTypography(490, 0));
+            double[] durations = [279_000, 233_000, 268_000, 3_723_000];
+            ShowNetEaseTracks(tracks.Select((track, i) => track with { DurationMs = durations[i] }).ToArray());
+            _lyrics.Width = 1032;
+            await Idle();
+            var labels = Descendants(SearchResults).OfType<MiSansLabel>().Where(label => label.Name == "DurationLabel").ToArray();
+            if (labels.Length != durations.Length || labels.Any(label => label.TextTrimming != TextTrimming.None || !Fits(label)))
+                throw new InvalidOperationException("All track durations must fit at variable MiSans weights, including hour-long tracks.");
+
+            NetEaseQualityButton.Content = QualityName("jymaster");
+            NetEaseQualityButton.Visibility = Visibility.Visible;
+            UpdatePlaybackSideColumn(qualityVisible: true);
+            await Idle();
+            var quality = Descendants(NetEaseQualityButton).OfType<MiSansLabel>().Single(label => label.Text == "超清母带");
+            var qualityBounds = NetEaseQualityButton.TransformToAncestor(PlaybackLayout).TransformBounds(new Rect(NetEaseQualityButton.RenderSize));
+            double sideStart = PlaybackLayout.ActualWidth - PlaybackSideColumn.ActualWidth;
+            if (!VolumeSlider.IsVisible || !Fits(quality) || qualityBounds.Left < sideStart - .6)
+                throw new InvalidOperationException("The full quality label must fit its playback column with volume controls visible.");
+            CapturePlayer(folder, "player-metadata.png");
+        }
+        finally
+        {
+            _lyrics.Width = width;
+            ApplyPlayerTypography(original);
+            ShowNetEaseTracks(tracks);
+            RefreshPlayer();
+            _refresh.Start();
+        }
+
+        static bool Fits(MiSansLabel label)
+        {
+            var size = MiSansRenderer.Measure(label.Text, label.FontSize, label.FontWeight.ToOpenTypeWeight(), MiSansTypography.GetFeatures(label),
+                new Size(double.PositiveInfinity, double.PositiveInfinity), label.TextWrapping, TextTrimming.None);
+            return label.ActualWidth + .01 >= size.Width;
+        }
     }
 
     private static void Click(ButtonBase button) => button.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent, button));

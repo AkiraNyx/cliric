@@ -16,6 +16,8 @@ namespace LyricReplica.App;
 public sealed class LyricRow : Grid
 {
     private static readonly double[] BlurRadii = [0, 7, 12, 16, 16];
+    private static readonly BitmapCache FractionalLiftCache = MotionTokens.Freeze(new BitmapCache { SnapsToDevicePixels = false });
+    internal bool UseFractionalLift { get; init; }
     private sealed record Glyph(TextBlock View, ScaleTransform Scale, TranslateTransform Move, int Index, int Count)
     {
         public double PrepareFromY
@@ -43,7 +45,7 @@ public sealed class LyricRow : Grid
             get; set;
         }
     }
-    private sealed record FloatView(TranslateTransform Move, double Start, double Duration, bool Syllable)
+    private sealed record FloatView(TextBlock View, TranslateTransform Move, double Start, double Duration, bool Syllable)
     {
         public double PrepareFromY
         {
@@ -444,7 +446,7 @@ public sealed class LyricRow : Grid
                     Canvas.SetLeft(view, left);
                     Canvas.SetTop(view, (h - span.Size.Height) / 2);
                     wordCanvas.Children.Add(view);
-                    floats.Add(new(move, start, duration, syllable));
+                    floats.Add(new(view, move, start, duration, syllable));
                 }
             }
             views.Add(new WordView(span.Index, span.Word, x - side, span.Size.Width, span.Size.InkWidth, glyphs, wordCanvas, floats));
@@ -590,6 +592,19 @@ public sealed class LyricRow : Grid
             }
         }
     }
+    private void SetWordLift(TextBlock view, TranslateTransform move, double lift, bool enabled, bool active)
+    {
+        if (UseFractionalLift)
+        {
+            bool moving = enabled && (active || lift != move.Y);
+            if (moving && view.CacheMode is null)
+                view.CacheMode = FractionalLiftCache;
+            else if (!moving && ReferenceEquals(view.CacheMode, FractionalLiftCache))
+                view.CacheMode = null;
+        }
+        move.Y = lift;
+    }
+
     private bool ChineseSweep() => _options.AppleMusicLyrics.KaraokeChineseRollingEasing && _line.Text.Any(c => c is >= '\u4e00' and <= '\u9fff') && !_line.Text.Any(c => c is >= '\u3040' and <= '\u30ff');
     public void Update(double time, double rowTime, bool active, int distance, double activationStart, double activationEnd, long generation = 0, double? animationTimeMs = null)
     {
@@ -853,7 +868,8 @@ public sealed class LyricRow : Grid
                         value = held;
                     if (resetStopping && floating.ResetFromY is { } resetFrom)
                         value = ResetY(resetFrom);
-                    floating.Move.Y = active ? value : past ? FloatingMotion.LineReturn(effectTime - stopTime, value, _options.AnimationSpeed, ios) : 0;
+                    double lift = active ? value : past ? FloatingMotion.LineReturn(effectTime - stopTime, value, _options.AnimationSpeed, ios) : 0;
+                    SetWordLift(floating.View, floating.Move, lift, floatingEnabled, active);
                 }
                 foreach (var glyph in view.Glyphs)
                 {
@@ -894,7 +910,7 @@ public sealed class LyricRow : Grid
                     }
                     glyph.Scale.ScaleX = state.Item1;
                     glyph.Scale.ScaleY = state.Item1;
-                    glyph.Move.Y = state.Item2;
+                    SetWordLift(glyph.View, glyph.Move, state.Item2, floatingEnabled, active);
                     if (_options.Preset == MotionPreset.Android)
                         ApplyGlow(glyph.View, view.Host, state.Glow, 9);
                     (double Scale, double Y, double Glow) Pose(double at, double stoppedAtMs = double.PositiveInfinity)

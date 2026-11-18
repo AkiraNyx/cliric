@@ -65,7 +65,7 @@ public partial class ReferenceStateBar : UserControl
     public ReferenceStateBar()
     {
         InitializeComponent();
-        BorderCover.MouseEnter += (_, _) => AnimateHeight(2);
+        BorderCover.MouseEnter += (_, e) => { if (!ShellInteraction || e.StylusDevice is null) AnimateHeight(2); };
         BorderCover.MouseLeave += (_, _) =>
         {
             if (ShellInteraction && Dragging)
@@ -92,12 +92,25 @@ public partial class ReferenceStateBar : UserControl
     internal void UseShellLayout()
     {
         _shellFill = new RectangleGeometry();
+        Grid.Opacity = 1;
+        FocusVisualStyle = (Style)FindResource("Shell.KeyboardFocus");
+        ApplyShellPalette();
         BorderCover.Margin = GridBorders.Margin;
         GridPlayed.Margin = new Thickness(0);
         GridPlayed.HorizontalAlignment = HorizontalAlignment.Stretch;
         GridPlayed.Clip = _shellFill;
+        GridBorders.RenderTransformOrigin = new Point(.5, .5);
         GridBorders.SizeChanged += (_, _) => UpdateTime();
         UpdateTime();
+    }
+
+    internal void ApplyShellPalette()
+    {
+        Brush text = SystemParameters.HighContrast ? SystemColors.ControlTextBrush : Brushes.White;
+        BorderPlayed.Background = SystemParameters.HighContrast ? text : (Brush)FindResource("Shell.Primary");
+        BorderBackground.Background = text;
+        TextBlockCurrentTime.Foreground = TextBlockLeftTime.Foreground = text;
+        TimerViewCurrentTime.Foreground = TimerViewLeftTime.Foreground = text;
     }
 
     internal void SetShellReducedMotion(bool reduced)
@@ -106,10 +119,8 @@ public partial class ReferenceStateBar : UserControl
             return;
         ReduceMotion = reduced;
         if (reduced)
-        {
             ShellTransitions.Set(this, ElasticOffsetProperty, 0);
-            ShellTransitions.Set(GridBordersScaleTransform, ScaleTransform.ScaleYProperty, 1);
-        }
+        AnimateHeight(BorderCover.IsMouseOver || Dragging ? 2 : 1);
         UpdateTime();
     }
 
@@ -117,7 +128,10 @@ public partial class ReferenceStateBar : UserControl
     {
         if (ShellInteraction)
         {
-            ShellTransitions.To(GridBordersScaleTransform, ScaleTransform.ScaleYProperty, !ReduceMotion && value > 1 ? 1.25 : 1,
+            bool focused = value > 1;
+            ShellTransitions.To(GridBordersScaleTransform, ScaleTransform.ScaleYProperty, focused && !ReduceMotion ? 1.55 : 1,
+                MotionTokens.SeekHover, ReduceMotion);
+            ShellTransitions.To(BorderBackground, OpacityProperty, focused ? .72 : .5,
                 MotionTokens.SeekHover, ReduceMotion);
             return;
         }

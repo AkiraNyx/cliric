@@ -42,8 +42,13 @@ public sealed class MiSansLabel : Control
             label.Visibility = UseNative ? Visibility.Collapsed : Visibility.Visible;
         if (!UseNative)
             return base.MeasureOverride(constraint);
-        return string.IsNullOrEmpty(Text) ? new Size() :
-            MiSansRenderer.Measure(Text, FontSize, Weight, Features, constraint, TextWrapping, TextTrimming);
+        if (string.IsNullOrEmpty(Text))
+            return new Size();
+        var size = MiSansRenderer.Measure(Text, FontSize, Weight, Features, constraint, TextWrapping, TextTrimming);
+        var dpi = VisualTreeHelper.GetDpi(this);
+        // Reserve the full advance before WPF rounds the layout bounds to device pixels.
+        return new Size(Math.Min(constraint.Width, Math.Ceiling(size.Width * dpi.DpiScaleX) / dpi.DpiScaleX),
+            Math.Min(constraint.Height, Math.Ceiling(size.Height * dpi.DpiScaleY) / dpi.DpiScaleY));
     }
 
     protected override void OnRender(DrawingContext context)
@@ -64,7 +69,10 @@ public sealed class MiSansLabel : Control
     {
         base.OnDpiChanged(oldDpi, newDpi);
         if (UseNative)
+        {
+            InvalidateMeasure();
             InvalidateVisual();
+        }
     }
 
     protected override AutomationPeer OnCreateAutomationPeer() => new LabelPeer(this);

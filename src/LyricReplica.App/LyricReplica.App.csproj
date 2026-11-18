@@ -10,6 +10,7 @@
     <Version>0.1.0</Version>
   </PropertyGroup>
   <ItemGroup>
+    <InternalsVisibleTo Include="CapsulePlayerDemo" />
     <PackageReference Include="Vortice.Direct2D1" Version="3.2.0" />
     <PackageReference Include="Emoji.Wpf" Version="0.3.4" Aliases="emoji" />
     <Reference Include="ColorThief.Netstandard.v20"><HintPath>../../vendor/ColorThief/ColorThief.Netstandard.v20.dll</HintPath><Private>true</Private></Reference>
