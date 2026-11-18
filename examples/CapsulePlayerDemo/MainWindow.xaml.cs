@@ -22,6 +22,7 @@ namespace CapsulePlayerDemo;
 public partial class MainWindow : Window
 {
     private const double CompactWidth = 384, ExpandedWidth = 664, CompactHeight = 54;
+    private const double MinimumSeekWidth = 320, TrackTextSpace = 112;
     private sealed record DemoTrack(string Title, string Artist, string Duration, BitmapSource Cover, Uri Audio, double DurationMs);
 
     private readonly MediaPlayer _audio = new();
@@ -41,7 +42,7 @@ public partial class MainWindow : Window
         .CreateDelegate<Action<GlassLens, Rect?>>();
     private readonly TranslateTransform _trackShift = new(), _transportShift = new();
     private Rect _capsuleBounds = Rect.Empty;
-    private bool _stacked;
+    private bool _seekFits;
     private bool _shapeRendering;
     private TimeSpan? _lastShapeFrame;
 
@@ -228,8 +229,7 @@ public partial class MainWindow : Window
                 ShapeButton.Focus();
         }
 
-        SeekSlot.IsHitTestVisible = PreviousSlot.IsHitTestVisible = expanded;
-        Seek.IsTabStop = PreviousButton.IsTabStop = expanded;
+        PreviousSlot.IsHitTestVisible = PreviousButton.IsTabStop = expanded;
         double target = expanded ? 1 : 0;
         if (immediate || ShellTransitions.GetReducedMotion(this) || WindowState == WindowState.Minimized)
         {
@@ -291,21 +291,22 @@ public partial class MainWindow : Window
             return;
 
         double expandedWidth = Math.Min(available, ExpandedWidth);
-        _stacked = expandedWidth < 656;
-        Capsule.Width = expandedWidth;
-        Capsule.Height = CompactHeight + (_stacked ? Seek.Height : 0);
-        Grid.SetRow(SeekSlot, _stacked ? 1 : 0);
-        Grid.SetColumn(SeekSlot, _stacked ? 0 : 1);
-        Grid.SetColumnSpan(SeekSlot, _stacked ? 4 : 1);
-        Seek.Width = _stacked ? expandedWidth - 60 : 320;
-        SeekSlot.Width = Seek.Width + Seek.Margin.Left + Seek.Margin.Right;
-        SeekSlot.Height = Seek.Height;
-        PreviousSlot.Width = PreviousButton.Width;
         double buttons = PreviousButton.Width + PlayButton.Width + PlayButton.Margin.Left + PlayButton.Margin.Right +
             NextButton.Width + Transport.Margin.Left + Transport.Margin.Right + ShapeButton.Width;
-        if (double.IsFinite(buttons))
-            TrackStamp.MaxWidth = _stacked ? Math.Max(34, Math.Min(available, CompactWidth) - buttons -
-                CapsuleContent.Margin.Left - CapsuleContent.Margin.Right - TrackStamp.Margin.Right) : double.PositiveInfinity;
+        if (!double.IsFinite(buttons))
+            return;
+
+        Capsule.Width = expandedWidth;
+        PreviousSlot.Width = PreviousButton.Width;
+        double fixedWidth = buttons + CapsuleContent.Margin.Left + CapsuleContent.Margin.Right + TrackStamp.Margin.Right;
+        double seekMargins = Seek.Margin.Left + Seek.Margin.Right;
+        double seekWidth = expandedWidth - fixedWidth - TrackTextSpace - seekMargins;
+        _seekFits = seekWidth >= MinimumSeekWidth;
+        Seek.Width = Math.Max(MinimumSeekWidth, seekWidth);
+        SeekSlot.Width = _seekFits ? seekWidth + seekMargins : 0;
+        SeekSlot.Height = Seek.Height;
+        TrackStamp.MaxWidth = Math.Max(34, Math.Min(Math.Min(available, CompactWidth) - fixedWidth,
+            expandedWidth - fixedWidth - SeekSlot.Width));
         PresentCapsule();
     }
 
@@ -313,8 +314,7 @@ public partial class MainWindow : Window
     {
         double progress = Math.Clamp(_shape.Value, 0, 1);
         double inset = Math.Max(0, Capsule.Width - CompactWidth) * (1 - progress) / 2;
-        double lower = Math.Max(0, Capsule.Height - CompactHeight) * (1 - progress);
-        var bounds = new Rect(inset, lower, Capsule.Width - 2 * inset, Capsule.Height - lower);
+        var bounds = new Rect(inset, 0, Capsule.Width - 2 * inset, CompactHeight);
         if (_capsuleBounds != bounds)
         {
             _capsuleBounds = bounds;
@@ -323,15 +323,22 @@ public partial class MainWindow : Window
             ShadeBounds.RadiusX = ShadeBounds.RadiusY = bounds.Height / 2 - 1;
             _trackShift.X = inset;
             _transportShift.X = -inset;
-            _trackShift.Y = _transportShift.Y = lower;
-            double trim = Math.Min(inset, SeekSlot.Width / 2);
-            SeekClip.Rect = _stacked
-                ? new Rect(0, lower, SeekSlot.Width, Math.Max(0, Seek.Height - lower))
-                : new Rect(trim, 0, Math.Max(0, SeekSlot.Width - 2 * trim), Seek.Height);
             ShapeArrow.Angle = 180 * progress;
         }
+        double trim = Math.Min(inset, SeekSlot.Width / 2);
+        SeekClip.Rect = new Rect(trim, 0, Math.Max(0, SeekSlot.Width - 2 * trim), Seek.Height);
         SeekSlot.Opacity = PreviousSlot.Opacity = Math.Clamp(_details.Value, 0, 1);
-        SeekSlot.Visibility = PreviousSlot.Visibility = Expanded || _shapeRendering ? Visibility.Visible : Visibility.Hidden;
+        bool controlsVisible = Expanded || _shapeRendering;
+        PreviousSlot.Visibility = controlsVisible ? Visibility.Visible : Visibility.Hidden;
+        bool seekVisible = _seekFits && controlsVisible && Seek.Width - 2 * trim >= MinimumSeekWidth;
+        if (!seekVisible && SeekSlot.Visibility == Visibility.Visible)
+        {
+            Seek.CancelPreview();
+            if (Seek.IsKeyboardFocusWithin)
+                ShapeButton.Focus();
+        }
+        SeekSlot.Visibility = seekVisible ? Visibility.Visible : Visibility.Hidden;
+        SeekSlot.IsHitTestVisible = Seek.IsTabStop = seekVisible && Expanded;
     }
 
     private void OnSystemPreferencesChanged(object? sender, PropertyChangedEventArgs e)
@@ -386,7 +393,7 @@ public partial class MainWindow : Window
             var first = await CaptureAsync("capsule-preview.png");
             if (Math.Abs(_capsuleBounds.Width - CompactWidth) > .7 || Math.Abs(_capsuleBounds.Height - CompactHeight) > .7 ||
                 Seek.IsVisible || Seek.IsTabStop || PreviousButton.IsTabStop || PlayButton.Content is not Image { Source: not null } ||
-                !ReferenceEquals(PlayButton.Style, FindResource("Shell.PlaybackButton")))
+                !ReferenceEquals(PlayButton.Style, FindResource("Shell.IconButton")))
                 throw new InvalidOperationException("The compact bar must use the regular playback controls at 384 × 54 DIP.");
             var original = GlassColor.Color;
             var surface = Capsule.TranslatePoint(_capsuleBounds.TopLeft, Root);
@@ -403,8 +410,8 @@ public partial class MainWindow : Window
             if (PlayButton.Template.FindName("Label", PlayButton) is not ContentPresenter label ||
                 PlayButton.Template.FindName("Hover", PlayButton) is not Border hover || !ShellTransitions.GetPlaybackFeedback(label))
                 throw new InvalidOperationException("The capsule playback button must use the player feedback template.");
-            if (!SystemParameters.HighContrast && (hover.Background is not SolidColorBrush plate || plate.Color != Color.FromRgb(38, 38, 40)))
-                throw new InvalidOperationException($"The hover plate must match the player's composited color, style brush {ShellAssist.GetHoverBrush(PlayButton)}, drawn brush {hover.Background}.");
+            if (hover.Background is not SolidColorBrush plate || plate.Color.A != 0x16)
+                throw new InvalidOperationException("The hover layer must retain the shared translucent brush.");
             ShellTransitions.SetHoverOpacity(hover, 1);
             ShellTransitions.SetPressPose(label, true);
             await Task.Delay(190);
@@ -462,10 +469,13 @@ public partial class MainWindow : Window
             if (!_ready || GlassColor.Color == original || CapsuleTitle.Text != _tracks[1].Title || MiniCover.ImageSource != _tracks[1].Cover)
                 throw new InvalidOperationException("Selecting a track must change both audio and the capsule tint.");
             await CaptureAsync("capsule-expanded.png");
+            double wideWidth = Width;
             Width = MinWidth;
             Height = MinHeight;
             await Task.Delay(350);
             UpdateLayout();
+            if (!Expanded || Seek.IsVisible || Seek.IsTabStop || SeekSlot.IsHitTestVisible || Math.Abs(_capsuleBounds.Height - CompactHeight) > .7)
+                throw new InvalidOperationException("An expanded narrow capsule must keep one row and hide the seek control.");
             await CaptureAsync("capsule-narrow.png");
             PressEscape();
             await Task.Delay(300);
@@ -474,8 +484,12 @@ public partial class MainWindow : Window
             bool reduced = ShellTransitions.GetReducedMotion(this);
             ApplyReducedMotion(true);
             toggle.Toggle();
-            if (_capsuleBounds.Width <= CompactWidth || SeekSlot.Opacity != 1 || PreviousSlot.Opacity != 1 || _shapeRendering)
+            if (_capsuleBounds.Width <= CompactWidth || Seek.IsVisible || PreviousSlot.Opacity != 1 || _shapeRendering)
                 throw new InvalidOperationException("Reduced motion must reveal the expanded controls immediately.");
+            Width = wideWidth;
+            await Dispatcher.Yield(DispatcherPriority.ApplicationIdle);
+            if (!Expanded || !Seek.IsVisible || !Seek.IsTabStop || Seek.ActualWidth < MinimumSeekWidth - .7)
+                throw new InvalidOperationException("Widening an expanded capsule must restore a full-size seek control.");
             toggle.Toggle();
             ApplyReducedMotion(reduced);
 
@@ -489,7 +503,7 @@ public partial class MainWindow : Window
                 [$"Material: {GlassScene.GetMaterial(CapsuleGlass)}", $"Live render mode: {CapsuleGlass.Mode}",
                  $"Layout resizes during the morph: {layoutResizes}",
                  "Motion: M3 Standard default spatial (700, 0.9) and fast effects (3800, 1.0)",
-                 "Passed: shared button hover and press, playback, shared seek hover, scrolling, reversal, UI Automation, Escape, narrow layout, reduced motion and transparency",
+                 "Passed: translucent shared hover, playback, seek, scrolling, reversal, UI Automation, Escape, single-row resize, reduced motion and transparency",
                  "PNG capture: software fallback", GlassDiagnostics.Describe()]);
             Application.Current.Shutdown(0);
         }
@@ -514,7 +528,10 @@ public partial class MainWindow : Window
         var options = ShapeButton.TransformToVisual(CapsuleContent).TransformBounds(new Rect(ShapeButton.RenderSize));
         var stamp = TrackStamp.TransformToVisual(CapsuleContent).TransformBounds(new Rect(TrackStamp.RenderSize));
         var progress = Seek.IsVisible ? Seek.TransformToVisual(CapsuleContent).TransformBounds(new Rect(Seek.RenderSize)) : Rect.Empty;
-        if (transport.IntersectsWith(options) || stamp.IntersectsWith(transport) ||
+        var contentBounds = Capsule.TransformToVisual(CapsuleContent).TransformBounds(_capsuleBounds);
+        contentBounds.Inflate(.7, .7);
+        if (!contentBounds.Contains(stamp) || !contentBounds.Contains(options) || !contentBounds.Contains(transport) ||
+            transport.IntersectsWith(options) || stamp.IntersectsWith(transport) ||
             (Seek.IsVisible && (progress.IntersectsWith(stamp) || progress.IntersectsWith(transport) || Seek.ActualWidth < 319)))
             throw new InvalidOperationException("Playback and shape controls must fit without overlap.");
         var image = new RenderTargetBitmap((int)Root.ActualWidth, (int)Root.ActualHeight, 96, 96, PixelFormats.Pbgra32);

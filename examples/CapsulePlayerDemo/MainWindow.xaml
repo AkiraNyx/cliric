@@ -111,10 +111,6 @@
                 <Border.Background><SolidColorBrush x:Name="GlassColor" Color="Transparent" /></Border.Background>
             </Border>
             <Grid x:Name="CapsuleContent" Margin="10,0,8,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="54" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />

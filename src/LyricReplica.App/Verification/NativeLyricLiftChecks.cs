@@ -24,9 +24,9 @@ public sealed partial class MainWindow
         await Task.Delay(400);
 
         var word = WordEdgeChecks.Find(_rows[0].Main).OfType<TextBlock>()
-            .First(text => text.RenderTransform is TranslateTransform or TransformGroup);
-        int automaticPixels = FractionalImages(word, cache: false);
-        int cachedPixels = FractionalImages(word, cache: true);
+            .First(text => text.Text.Any(Timeline.IsHan) && text.RenderTransform is TranslateTransform or TransformGroup);
+        int automaticPixels = FractionalImages(word, 0);
+        int cachedPixels = FractionalImages(word, 1.5);
         var poses = new HashSet<double>();
         List<double> work = [], intervals = [];
         TimeSpan? previousFrame = null;
@@ -44,13 +44,13 @@ public sealed partial class MainWindow
         }
         string folder = Path.Combine(App.DataFolder, "verification");
         Directory.CreateDirectory(folder);
-        bool liveUsesCache = word.CacheMode is BitmapCache;
-        bool passed = work.Count >= 10 && poses.Count > 4 && liveUsesCache && cachedPixels > automaticPixels;
+        double? liveRenderAtScale = (word.CacheMode as BitmapCache)?.RenderAtScale;
+        bool passed = work.Count >= 10 && poses.Count > 4 && liveRenderAtScale == 1.5 && cachedPixels > automaticPixels;
         File.WriteAllText(Path.Combine(folder, "windowed-lyric-lift.json"), JsonSerializer.Serialize(new
         {
             passed, assemblySha256 = App.AssemblySha256,
             window = new { ActualWidth, ActualHeight, WindowState }, frames = work.Count, repeatedFrames,
-            distinctLiftPositions = poses.Count, automaticPixels, cachedPixels, liveUsesCache,
+            distinctLiftPositions = poses.Count, automaticPixels, cachedPixels, liveRenderAtScale,
             medianFrameIntervalMs = Percentile(intervals, .5), p95FrameIntervalMs = Percentile(intervals, .95),
             p95UpdateMs = Percentile(work, .95), maxUpdateMs = work.DefaultIfEmpty().Max()
         }, LyricsFile.JsonOptions));
@@ -81,7 +81,7 @@ public sealed partial class MainWindow
         return values[(int)Math.Round((values.Count - 1) * rank)];
     }
 
-    private static int FractionalImages(TextBlock original, bool cache)
+    private static int FractionalImages(TextBlock original, double renderAtScale)
     {
         var offset = new TranslateTransform(6, 8);
         var text = new TextBlock
@@ -90,8 +90,8 @@ public sealed partial class MainWindow
             Foreground = Brushes.White, SnapsToDevicePixels = original.SnapsToDevicePixels, RenderTransform = offset
         };
         TextOptions.SetTextFormattingMode(text, TextOptions.GetTextFormattingMode(original));
-        if (cache)
-            text.CacheMode = new BitmapCache { SnapsToDevicePixels = false };
+        if (renderAtScale > 0)
+            text.CacheMode = new BitmapCache { SnapsToDevicePixels = false, RenderAtScale = renderAtScale };
         var surface = new Canvas { Width = 240, Height = 100 };
         surface.Children.Add(text);
         surface.Measure(new Size(240, 100));

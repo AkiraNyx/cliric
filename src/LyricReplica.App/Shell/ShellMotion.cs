@@ -15,11 +15,6 @@ public static class ShellAssist
         "CornerRadius", typeof(CornerRadius), typeof(ShellAssist), new PropertyMetadata(new CornerRadius(8)));
     public static CornerRadius GetCornerRadius(DependencyObject element) => (CornerRadius)element.GetValue(CornerRadiusProperty);
     public static void SetCornerRadius(DependencyObject element, CornerRadius value) => element.SetValue(CornerRadiusProperty, value);
-
-    public static readonly DependencyProperty HoverBrushProperty = DependencyProperty.RegisterAttached(
-        "HoverBrush", typeof(Brush), typeof(ShellAssist), new PropertyMetadata(null));
-    public static Brush? GetHoverBrush(DependencyObject element) => (Brush?)element.GetValue(HoverBrushProperty);
-    public static void SetHoverBrush(DependencyObject element, Brush? value) => element.SetValue(HoverBrushProperty, value);
 }
 
 /// <summary>The existing slide into and out of the lyrics page.</summary>

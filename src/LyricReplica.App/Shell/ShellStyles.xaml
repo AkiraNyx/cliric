@@ -77,7 +77,6 @@
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource Shell.KeyboardFocus}" />
         <Setter Property="local:ShellAssist.CornerRadius" Value="8" />
-        <Setter Property="local:ShellAssist.HoverBrush" Value="{StaticResource Shell.ControlHover}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ButtonBase">
@@ -86,7 +85,7 @@
                                 Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}" />
                         <Border x:Name="Hover" CornerRadius="{TemplateBinding local:ShellAssist.CornerRadius}"
-                                Background="{TemplateBinding local:ShellAssist.HoverBrush}" Opacity="0" />
+                                Background="{StaticResource Shell.ControlHover}" Opacity="0" />
                         <ContentPresenter x:Name="Label" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" RenderTransformOrigin="0.5,0.5"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -132,9 +131,6 @@
         <Setter Property="Height" Value="36" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="local:ShellAssist.CornerRadius" Value="18" />
-    </Style>
-    <Style x:Key="Shell.PlaybackButton" TargetType="Button" BasedOn="{StaticResource Shell.IconButton}">
-        <Setter Property="local:ShellAssist.HoverBrush" Value="#262628" />
     </Style>
     <Style x:Key="Shell.ModeButton" TargetType="Button" BasedOn="{StaticResource Shell.IconButton}">
         <Setter Property="Opacity" Value="0.55" />

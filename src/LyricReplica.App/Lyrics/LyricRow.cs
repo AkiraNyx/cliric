@@ -17,8 +17,9 @@ public sealed class LyricRow : Grid
 {
     private static readonly double[] BlurRadii = [0, 7, 12, 16, 16];
     private static readonly BitmapCache FractionalLiftCache = MotionTokens.Freeze(new BitmapCache { SnapsToDevicePixels = false });
+    private static readonly BitmapCache HanLiftCache = MotionTokens.Freeze(new BitmapCache { SnapsToDevicePixels = false, RenderAtScale = 1.5 });
     internal bool UseFractionalLift { get; init; }
-    private sealed record Glyph(TextBlock View, ScaleTransform Scale, TranslateTransform Move, int Index, int Count)
+    private sealed record Glyph(TextBlock View, ScaleTransform Scale, TranslateTransform Move, int Index, int Count, BitmapCache LiftCache)
     {
         public double PrepareFromY
         {
@@ -45,7 +46,7 @@ public sealed class LyricRow : Grid
             get; set;
         }
     }
-    private sealed record FloatView(TextBlock View, TranslateTransform Move, double Start, double Duration, bool Syllable)
+    private sealed record FloatView(TextBlock View, TranslateTransform Move, double Start, double Duration, bool Syllable, BitmapCache LiftCache)
     {
         public double PrepareFromY
         {
@@ -410,7 +411,7 @@ public sealed class LyricRow : Grid
                     var view = Text(c, _fontSize, _options.Bold ? FontWeights.Heavy : FontWeights.Bold);
                     view.MinHeight = minimumHeight;
                     if (_options.AppleMusicLyrics.EnablePlusLighter)
-                        view.CacheMode = new BitmapCache();
+                        view.CacheMode = FractionalLiftCache;
                     var scale = new ScaleTransform(1, 1);
                     var move = new TranslateTransform();
                     var transforms = new TransformGroup();
@@ -421,7 +422,7 @@ public sealed class LyricRow : Grid
                     Canvas.SetLeft(view, advance - step);
                     Canvas.SetTop(view, (h - measured.Height) / 2);
                     wordCanvas.Children.Add(view);
-                    glyphs.Add(new Glyph(view, scale, move, i - start, count));
+                    glyphs.Add(new Glyph(view, scale, move, i - start, count, Timeline.IsHan(c[0]) ? HanLiftCache : FractionalLiftCache));
                 }
             }
             else
@@ -446,7 +447,7 @@ public sealed class LyricRow : Grid
                     Canvas.SetLeft(view, left);
                     Canvas.SetTop(view, (h - span.Size.Height) / 2);
                     wordCanvas.Children.Add(view);
-                    floats.Add(new(view, move, start, duration, syllable));
+                    floats.Add(new(view, move, start, duration, syllable, text.Any(Timeline.IsHan) ? HanLiftCache : FractionalLiftCache));
                 }
             }
             views.Add(new WordView(span.Index, span.Word, x - side, span.Size.Width, span.Size.InkWidth, glyphs, wordCanvas, floats));
@@ -592,15 +593,15 @@ public sealed class LyricRow : Grid
             }
         }
     }
-    private void SetWordLift(TextBlock view, TranslateTransform move, double lift, bool enabled, bool active)
+    private void SetWordLift(TextBlock view, TranslateTransform move, double lift, BitmapCache liftCache, bool enabled, bool active,
+        bool keepBitmap = false)
     {
-        if (UseFractionalLift)
+        if (UseFractionalLift || keepBitmap)
         {
-            bool moving = enabled && (active || lift != move.Y);
-            if (moving && view.CacheMode is null)
-                view.CacheMode = FractionalLiftCache;
-            else if (!moving && ReferenceEquals(view.CacheMode, FractionalLiftCache))
-                view.CacheMode = null;
+            bool moving = UseFractionalLift && enabled && (active || lift != move.Y);
+            BitmapCache? cache = moving || (keepBitmap && active) ? liftCache : keepBitmap ? FractionalLiftCache : null;
+            if (!ReferenceEquals(view.CacheMode, cache))
+                view.CacheMode = cache;
         }
         move.Y = lift;
     }
@@ -869,7 +870,7 @@ public sealed class LyricRow : Grid
                     if (resetStopping && floating.ResetFromY is { } resetFrom)
                         value = ResetY(resetFrom);
                     double lift = active ? value : past ? FloatingMotion.LineReturn(effectTime - stopTime, value, _options.AnimationSpeed, ios) : 0;
-                    SetWordLift(floating.View, floating.Move, lift, floatingEnabled, active);
+                    SetWordLift(floating.View, floating.Move, lift, floating.LiftCache, floatingEnabled, active);
                 }
                 foreach (var glyph in view.Glyphs)
                 {
@@ -910,7 +911,8 @@ public sealed class LyricRow : Grid
                     }
                     glyph.Scale.ScaleX = state.Item1;
                     glyph.Scale.ScaleY = state.Item1;
-                    SetWordLift(glyph.View, glyph.Move, state.Item2, floatingEnabled, active);
+                    SetWordLift(glyph.View, glyph.Move, state.Item2, glyph.LiftCache, floatingEnabled, active,
+                        keepBitmap: _options.AppleMusicLyrics.EnablePlusLighter);
                     if (_options.Preset == MotionPreset.Android)
                         ApplyGlow(glyph.View, view.Host, state.Glow, 9);
                     (double Scale, double Y, double Glow) Pose(double at, double stoppedAtMs = double.PositiveInfinity)
