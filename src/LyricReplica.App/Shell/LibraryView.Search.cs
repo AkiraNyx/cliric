@@ -179,6 +179,10 @@ public sealed partial class LibraryView
 
     private async Task OpenPlaylistAsync(string heading, string operation, long id, ImageSource? cover)
     {
+        if (_page == PlaylistPage && _libraryOperation == operation && _libraryPlaylistId == id &&
+            (_playlistLoad is not null || _suspendedPlaylistOffset.HasValue || PlaylistTracks.ItemsSource is not null))
+            return;
+
         CancelPlaylistLoad();
         _libraryOperation = null;
         _playlistTitle = heading;

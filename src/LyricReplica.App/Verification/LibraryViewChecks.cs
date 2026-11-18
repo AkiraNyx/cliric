@@ -599,6 +599,10 @@ public sealed partial class LibraryView
             oldToken = token;
             return pending.Task;
         });
+        Click(NavLiked);
+        await Idle();
+        if (oldToken.IsCancellationRequested || PlaylistSpinner.Visibility != Visibility.Visible)
+            throw new InvalidOperationException("Re-selecting the open library must retain its current request.");
         ShowPage(SearchPage, animate: false);
         if (!oldToken.IsCancellationRequested || PlaylistSpinner.Visibility != Visibility.Collapsed)
             throw new InvalidOperationException("Leaving the playlist must cancel its active request.");
@@ -613,6 +617,12 @@ public sealed partial class LibraryView
         await current;
         if (PlaylistTracks.Items.Count != 1 || ((SearchRow)PlaylistTracks.Items[0]).Track != newTrack || PlaylistSpinner.Visibility != Visibility.Collapsed)
             throw new InvalidOperationException("Returning to the playlist must display the latest request.");
+        var loaded = PlaylistTracks.ItemsSource;
+        PlaylistTracks.SelectedIndex = 0;
+        Click(NavLiked);
+        await Idle();
+        if (!ReferenceEquals(loaded, PlaylistTracks.ItemsSource) || PlaylistTracks.SelectedIndex != 0)
+            throw new InvalidOperationException("Re-selecting a loaded library must retain its rows and selection.");
         PlaylistTracks.ItemsSource = null;
         ShowPage(HomePage, animate: false);
     }

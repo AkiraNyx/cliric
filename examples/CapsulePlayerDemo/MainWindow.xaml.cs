@@ -36,10 +36,10 @@ public partial class MainWindow : Window
     private static readonly SpringOptions SpatialSpring = new(Math.Tau / Math.Sqrt(700), 1 - .9);
     private static readonly SpringOptions EffectsSpring = new(Math.Tau / Math.Sqrt(3800), 0);
     private readonly Spring _shape = new(0, SpatialSpring), _details = new(0, EffectsSpring);
-    // shortcut: The pinned glass renderer exposes its outline hook internally, replace this when it becomes public.
-    private static readonly Action<GlassLens, Rect?> SetGlassShape = typeof(GlassLens)
-        .GetMethod("SetShape", BindingFlags.Instance | BindingFlags.NonPublic)!
-        .CreateDelegate<Action<GlassLens, Rect?>>();
+    // shortcut: The pinned renderer exposes geometry-only updates internally, replace with a public API when available.
+    private static readonly Action<GlassLens, Rect> UpdateGlassConstants = typeof(GlassLens)
+        .GetMethod("UpdateShaderConstants", BindingFlags.Instance | BindingFlags.NonPublic)!
+        .CreateDelegate<Action<GlassLens, Rect>>();
     private readonly TranslateTransform _trackShift = new(), _transportShift = new();
     private Rect _capsuleBounds = Rect.Empty;
     private bool _seekFits;
@@ -89,6 +89,7 @@ public partial class MainWindow : Window
         Tracks.SelectedIndex = 0;
         UpdatePlayIcon();
         Root.SizeChanged += (_, _) => ArrangeCapsule();
+        CapsuleGlass.LayoutUpdated += (_, _) => ApplyGlassOptics();
         StateChanged += (_, _) =>
         {
             if (WindowState == WindowState.Minimized)
@@ -318,7 +319,8 @@ public partial class MainWindow : Window
         if (_capsuleBounds != bounds)
         {
             _capsuleBounds = bounds;
-            SetGlassShape(CapsuleGlass, bounds);
+            CapsuleOutline.Rect = bounds;
+            ApplyGlassOptics();
             ShadeBounds.Rect = new Rect(bounds.Left + 1, bounds.Top + 1, Math.Max(0, bounds.Width - 2), bounds.Height - 2);
             ShadeBounds.RadiusX = ShadeBounds.RadiusY = bounds.Height / 2 - 1;
             _trackShift.X = inset;
@@ -339,6 +341,12 @@ public partial class MainWindow : Window
         }
         SeekSlot.Visibility = seekVisible ? Visibility.Visible : Visibility.Hidden;
         SeekSlot.IsHitTestVisible = Seek.IsTabStop = seekVisible && Expanded && Seek.Width - 2 * trim >= MinimumSeekWidth;
+    }
+
+    private void ApplyGlassOptics()
+    {
+        if (CapsuleGlass.Mode == GlassLensMode.Shader && !_capsuleBounds.IsEmpty)
+            UpdateGlassConstants(CapsuleGlass, _capsuleBounds);
     }
 
     private void OnSystemPreferencesChanged(object? sender, PropertyChangedEventArgs e)
@@ -362,6 +370,7 @@ public partial class MainWindow : Window
         Brush text = contrast ? SystemColors.ControlTextBrush : (Brush)FindResource("Shell.Primary");
         Resources["CapsuleControlText"] = text;
         Resources["CapsuleCaption"] = contrast ? text : new SolidColorBrush(Color.FromRgb(225, 229, 240));
+        Resources["CapsuleFocusBrush"] = contrast ? SystemColors.HighlightBrush : (Brush)FindResource("Shell.Accent");
         GlassShade.Visibility = contrast ? Visibility.Collapsed : Visibility.Visible;
         ShellPlaybackControls.ApplyPalette(PreviousButton, PlayButton, NextButton, _playing);
         Seek.ApplyShellPalette();
@@ -387,6 +396,15 @@ public partial class MainWindow : Window
             await Task.Delay(420);
             UpdateLayout();
             var mode = CapsuleGlass.Mode;
+            if (mode == GlassLensMode.Shader)
+            {
+                var wider = _capsuleBounds;
+                wider.Inflate(2, 0);
+                UpdateGlassConstants(CapsuleGlass, wider);
+                if (!CapsuleGlass.IsMeasureValid || !CapsuleGlass.IsArrangeValid)
+                    throw new InvalidOperationException("Updating the glass geometry must leave the lens layout valid.");
+                ApplyGlassOptics();
+            }
             if (new ToggleButtonAutomationPeer(ShapeButton).GetPattern(PatternInterface.Toggle) is not IToggleProvider toggle ||
                 toggle.ToggleState != ToggleState.Off)
                 throw new InvalidOperationException("The playback disclosure must expose its collapsed state to UI Automation.");
@@ -420,10 +438,16 @@ public partial class MainWindow : Window
                 throw new InvalidOperationException("The shared playback template must apply its hover and press states.");
             ShellTransitions.SetHoverOpacity(hover, 0);
             ShellTransitions.SetPressPose(label, false);
+            await Task.Delay(40);
+            double returningScale = scale.ScaleX;
+            ShellTransitions.SetPressPose(label, true);
+            if (Math.Abs(scale.ScaleX - returningScale) > .02)
+                throw new InvalidOperationException("Pressing during release must continue from the current pose.");
+            ShellTransitions.SetPressPose(label, false);
             PlayButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent, PlayButton));
             await Task.Delay(300);
-            if (!_ready || !_playing || _audio.Position <= TimeSpan.Zero)
-                throw new InvalidOperationException("The demo audio must play and advance.");
+            if (!_ready || !_playing || _audio.Position <= TimeSpan.Zero || Math.Abs(scale.ScaleX - 1) > .001)
+                throw new InvalidOperationException("The demo audio must advance and the button must return to its resting pose.");
             int layoutResizes = 0;
             bool seekFadedIn = false, seekFadedOut = false;
             void CountResize(object sender, SizeChangedEventArgs e) => layoutResizes++;
@@ -517,7 +541,7 @@ public partial class MainWindow : Window
                 [$"Material: {GlassScene.GetMaterial(CapsuleGlass)}", $"Live render mode: {CapsuleGlass.Mode}",
                  $"Layout resizes during the morph: {layoutResizes}",
                  "Motion: M3 Standard default spatial (700, 0.9) and fast effects (3800, 1.0)",
-                 "Passed: translucent shared hover, playback, seek fades, scrolling, reversal, UI Automation, Escape, single-row resize, reduced motion and transparency",
+                 "Passed: glass geometry without relayout, pointer isolation, shared hover, interrupted press, playback, seek fades, scrolling, reversal, UI Automation, Escape, single-row resize, reduced motion and transparency",
                  "PNG capture: software fallback", GlassDiagnostics.Describe()]);
             Application.Current.Shutdown(0);
         }
@@ -538,6 +562,10 @@ public partial class MainWindow : Window
         var capsule = Capsule.TransformToVisual(Root).TransformBounds(_capsuleBounds);
         if (capsule.Bottom >= Root.ActualHeight || capsule.Left <= 0 || GlassScene.FindScene(CapsuleGlass) != Root)
             throw new InvalidOperationException("The capsule must fit inside its glass scene with space below.");
+        var blankGlass = Root.InputHitTest(new Point((capsule.Left + capsule.Right) / 2, capsule.Bottom - 3));
+        var corner = Root.InputHitTest(new Point(capsule.Left + 1, capsule.Top + 1));
+        if (blankGlass != Capsule || (corner is DependencyObject target && (target == Capsule || Capsule.IsAncestorOf(target))))
+            throw new InvalidOperationException("Blank glass must intercept input within the rounded capsule outline.");
         var transport = Transport.TransformToVisual(CapsuleContent).TransformBounds(new Rect(Transport.RenderSize));
         var options = ShapeButton.TransformToVisual(CapsuleContent).TransformBounds(new Rect(ShapeButton.RenderSize));
         var stamp = TrackStamp.TransformToVisual(CapsuleContent).TransformBounds(new Rect(TrackStamp.RenderSize));
