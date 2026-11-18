@@ -19,7 +19,7 @@ internal static class ShellPlaybackControls
 
         static void SetButtonIcon(Button button, double size)
         {
-            button.SetResourceReference(FrameworkElement.StyleProperty, "Shell.IconButton");
+            button.SetResourceReference(FrameworkElement.StyleProperty, "Shell.PlaybackButton");
             ShellTransitions.SetPlaybackFeedback(button, true);
             button.Content = new Image { Width = size, Height = size };
         }
@@ -52,6 +52,7 @@ internal static class ShellPlaybackControls
         var source = (ImageSource)button.FindResource(resource);
         if (SystemParameters.HighContrast)
         {
+            ShellAssist.SetHoverBrush(button, (Brush)button.FindResource("Shell.ControlHover"));
             var drawing = new DrawingGroup { OpacityMask = new ImageBrush(source) };
             drawing.Children.Add(new GeometryDrawing(SystemColors.ControlTextBrush, null,
                 new RectangleGeometry(new Rect(0, 0, source.Width, source.Height))));
@@ -59,7 +60,10 @@ internal static class ShellPlaybackControls
             image.Source = new DrawingImage(drawing);
         }
         else
+        {
+            button.ClearValue(ShellAssist.HoverBrushProperty);
             image.SetResourceReference(Image.SourceProperty, resource);
+        }
         return source;
     }
 }

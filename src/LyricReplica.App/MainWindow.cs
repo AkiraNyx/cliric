@@ -585,11 +585,11 @@ public sealed partial class MainWindow : Window
             double p = (now - _scrollStart) / _scrollDuration;
             if (p >= 1)
             {
-                _scroll.ScrollToVerticalOffset(_scrollTo);
+                _scroll.SetFrameOffset(_scrollTo);
                 _autoScrolling = false;
             }
             else
-                _scroll.ScrollToVerticalOffset(_scrollFrom + (_scrollTo - _scrollFrom) * ScrollEase(p, _scrollTransition));
+                _scroll.SetFrameOffset(_scrollFrom + (_scrollTo - _scrollFrom) * ScrollEase(p, _scrollTransition));
         }
         bool sourceLegacy = _options.Background is BackgroundMode.Static or BackgroundMode.Legacy or BackgroundMode.DynamicBeating || _options.ReduceMotion;
         _reference.SetLegacyVisible(sourceLegacy);

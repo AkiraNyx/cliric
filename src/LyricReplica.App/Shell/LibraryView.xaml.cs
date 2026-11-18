@@ -45,6 +45,7 @@ public sealed partial class LibraryView : UserControl
     private bool _systemAnimationsEnabled;
     private bool _syncingVolume;
     private bool _captionPressed;
+    private bool _queueExpanded;
     private double _unmutedVolume = .8;
     private string _searchTitle = "搜索", _playlistTitle = "";
     private bool MotionReduced => ShellTransitions.GetReducedMotion(this);
@@ -69,6 +70,7 @@ public sealed partial class LibraryView : UserControl
         _activeNavigation = NavHome;
         // Leave room inside the Popup HWND for the entrance without moving the resting anchor.
         AccountSurface.Margin = new Thickness(0, MotionTokens.PopupTravel, 0, 0);
+        QueueSurface.Margin = new Thickness(0, 0, 0, MotionTokens.PopupTravel);
         AccountPopup.CustomPopupPlacementCallback = (popup, target, _) => PlaceShellPopup(AccountButton, popup, target, above: false);
         QueuePopup.CustomPopupPlacementCallback = (popup, target, _) => PlaceShellPopup(QueueButton, popup, target, above: true);
         LibraryRoot.IsEnabled = false;
@@ -104,6 +106,7 @@ public sealed partial class LibraryView : UserControl
         {
             SystemParameters.StaticPropertyChanged -= OnSystemMotionChanged;
             CompositionTarget.Rendering -= PlayAccountEntrance;
+            CompositionTarget.Rendering -= PlayQueueEntrance;
             _refresh.Stop();
             _page.StopWheelAnimation();
             _lifetime.Cancel();
@@ -644,7 +647,7 @@ public sealed partial class LibraryView : UserControl
     private void CloseShellPopups()
     {
         CloseAccount(animate: false);
-        QueuePopup.IsOpen = false;
+        CloseQueue(animate: false);
         if (_shellMenu is { } menu)
             menu.IsOpen = false;
     }
@@ -658,7 +661,7 @@ public sealed partial class LibraryView : UserControl
         var dpi = VisualTreeHelper.GetDpi(this);
         double left = origin.X + 8 * dpi.DpiScaleX, top = origin.Y + 8 * dpi.DpiScaleY;
         double x = Math.Clamp(position.X + target.Width - popup.Width, left, Math.Max(left, end.X - 8 * dpi.DpiScaleX - popup.Width));
-        double desiredY = above ? position.Y - popup.Height - 6 * dpi.DpiScaleY :
+        double desiredY = above ? position.Y - popup.Height + (MotionTokens.PopupTravel - 6) * dpi.DpiScaleY :
             position.Y + target.Height + (6 - MotionTokens.PopupTravel) * dpi.DpiScaleY;
         double y = Math.Clamp(desiredY, top, Math.Max(top, end.Y - 8 * dpi.DpiScaleY - popup.Height));
         return [new CustomPopupPlacement(new Point(x - position.X, y - position.Y), PopupPrimaryAxis.None)];
@@ -668,35 +671,77 @@ public sealed partial class LibraryView : UserControl
     {
         if (_accountExpanded && !AccountButton.IsMouseOver && !AccountSurface.IsMouseOver)
             CloseAccount(animate: true);
-        if (QueuePopup.IsOpen && !QueueButton.IsMouseOver && !QueueSurface.IsMouseOver)
-            QueuePopup.IsOpen = false;
+        if (_queueExpanded && !QueueButton.IsMouseOver && !QueueSurface.IsMouseOver)
+            CloseQueue(animate: true);
     }
 
     private void ToggleQueuePopup(object sender, RoutedEventArgs e)
     {
-        if (QueuePopup.IsOpen)
+        if (_queueExpanded)
         {
-            QueuePopup.IsOpen = false;
+            CloseQueue(animate: true);
             return;
         }
         CloseAccount(animate: false);
-        ShellTransitions.PrepareReveal(QueueSurface, MotionReduced ? 1 : .45, 0);
+        _queueExpanded = true;
         QueueButton.SetCurrentValue(ToggleButton.IsCheckedProperty, true);
+        QueueSurface.IsHitTestVisible = true;
+        if (QueuePopup.IsOpen)
+        {
+            ShellTransitions.PlayReveal(QueueSurface, MotionTokens.PopupEnter, MotionReduced);
+            return;
+        }
+        ShellTransitions.PrepareReveal(QueueSurface, MotionReduced ? 1 : MotionTokens.PopupStartOpacity,
+            MotionReduced ? 0 : MotionTokens.PopupTravel);
         QueuePopup.IsOpen = true;
     }
 
     private void OnQueuePopupOpened(object? sender, EventArgs e)
     {
-        if (QueuePopup.IsOpen)
+        if (!QueuePopup.IsOpen || MotionReduced)
+            return;
+        CompositionTarget.Rendering -= PlayQueueEntrance;
+        CompositionTarget.Rendering += PlayQueueEntrance;
+    }
+
+    private void PlayQueueEntrance(object? sender, EventArgs e)
+    {
+        CompositionTarget.Rendering -= PlayQueueEntrance;
+        if (QueuePopup.IsOpen && _queueExpanded)
             ShellTransitions.PlayReveal(QueueSurface, MotionTokens.PopupEnter, MotionReduced);
+    }
+
+    private void CloseQueue(bool animate)
+    {
+        if (!_queueExpanded && (animate || !QueuePopup.IsOpen))
+            return;
+        _queueExpanded = false;
+        QueueButton.SetCurrentValue(ToggleButton.IsCheckedProperty, false);
+        QueueScroller?.StopWheelAnimation();
+        CompositionTarget.Rendering -= PlayQueueEntrance;
+        if (!animate || MotionReduced || !QueuePopup.IsOpen)
+        {
+            QueuePopup.IsOpen = false;
+            return;
+        }
+        QueueSurface.IsHitTestVisible = false;
+        if (QueueSurface.RenderTransform is TranslateTransform shift)
+            ShellTransitions.To(shift, TranslateTransform.YProperty, MotionTokens.PopupTravel, MotionTokens.PopupExit);
+        ShellTransitions.To(QueueSurface, OpacityProperty, 0, MotionTokens.PopupExit, completed: () =>
+        {
+            if (!_queueExpanded)
+                QueuePopup.IsOpen = false;
+        });
     }
 
     private void OnQueuePopupClosed(object? sender, EventArgs e)
     {
         if (!QueuePopup.IsOpen)
         {
+            _queueExpanded = false;
             QueueScroller?.StopWheelAnimation();
             QueueButton.SetCurrentValue(ToggleButton.IsCheckedProperty, false);
+            CompositionTarget.Rendering -= PlayQueueEntrance;
             ShellTransitions.PrepareReveal(QueueSurface, 1, 0);
         }
     }
@@ -707,7 +752,7 @@ public sealed partial class LibraryView : UserControl
     {
         if (e.Key != Key.Escape)
             return;
-        QueuePopup.IsOpen = false;
+        CloseQueue(animate: true);
         QueueButton.Focus();
         e.Handled = true;
     }

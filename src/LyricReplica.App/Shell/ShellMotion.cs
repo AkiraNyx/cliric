@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -14,6 +15,11 @@ public static class ShellAssist
         "CornerRadius", typeof(CornerRadius), typeof(ShellAssist), new PropertyMetadata(new CornerRadius(8)));
     public static CornerRadius GetCornerRadius(DependencyObject element) => (CornerRadius)element.GetValue(CornerRadiusProperty);
     public static void SetCornerRadius(DependencyObject element, CornerRadius value) => element.SetValue(CornerRadiusProperty, value);
+
+    public static readonly DependencyProperty HoverBrushProperty = DependencyProperty.RegisterAttached(
+        "HoverBrush", typeof(Brush), typeof(ShellAssist), new PropertyMetadata(null));
+    public static Brush? GetHoverBrush(DependencyObject element) => (Brush?)element.GetValue(HoverBrushProperty);
+    public static void SetHoverBrush(DependencyObject element, Brush? value) => element.SetValue(HoverBrushProperty, value);
 }
 
 /// <summary>The existing slide into and out of the lyrics page.</summary>
@@ -56,7 +62,9 @@ public class ShellScrollViewer : ScrollViewer
 {
     private double? _wheelTarget;
     private double _wheelOffset;
+    private double _lastWheelOffset;
     private TimeSpan _lastWheelFrame;
+    private long _lastWheelTick;
     internal bool IsWheelAnimating => _wheelTarget.HasValue;
     protected virtual bool ReduceWheelMotion => ShellTransitions.GetReducedMotion(this);
     protected virtual double WheelLineHeight => 24;
@@ -80,8 +88,9 @@ public class ShellScrollViewer : ScrollViewer
             return;
         if (_wheelTarget is null)
         {
-            _wheelOffset = VerticalOffset;
+            _wheelOffset = _lastWheelOffset = VerticalOffset;
             _lastWheelFrame = TimeSpan.Zero;
+            _lastWheelTick = Stopwatch.GetTimestamp();
             CompositionTarget.Rendering += OnWheelFrame;
         }
         _wheelTarget = target;
@@ -91,16 +100,31 @@ public class ShellScrollViewer : ScrollViewer
     {
         if (_wheelTarget is not { } target || e is not RenderingEventArgs frame || frame.RenderingTime == _lastWheelFrame)
             return;
-        double seconds = _lastWheelFrame == TimeSpan.Zero ? 1d / 60 : (frame.RenderingTime - _lastWheelFrame).TotalSeconds;
+        long now = Stopwatch.GetTimestamp();
+        double seconds = Stopwatch.GetElapsedTime(_lastWheelTick, now).TotalSeconds;
+        _lastWheelTick = now;
         _lastWheelFrame = frame.RenderingTime;
         target = Math.Clamp(target, 0, ScrollableHeight);
         _wheelOffset += (target - _wheelOffset) * (1 - Math.Exp(-22 * Math.Max(0, seconds)));
-        if (Math.Abs(_wheelOffset - target) < .5)
+        double pixel = 1 / VisualTreeHelper.GetDpi(this).DpiScaleY;
+        if (Math.Abs(_wheelOffset - target) < .5 * pixel)
         {
-            _wheelOffset = target;
             StopWheelAnimation();
+            SetFrameOffset(target);
         }
-        ScrollToVerticalOffset(_wheelOffset);
+        else if (Math.Abs(_wheelOffset - _lastWheelOffset) >= .5 * pixel)
+        {
+            _lastWheelOffset = _wheelOffset;
+            SetFrameOffset(_wheelOffset);
+        }
+    }
+
+    internal void SetFrameOffset(double offset)
+    {
+        if (ScrollInfo is { } info)
+            info.SetVerticalOffset(offset);
+        else
+            ScrollToVerticalOffset(offset);
     }
 
     protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
@@ -122,7 +146,7 @@ public class ShellScrollViewer : ScrollViewer
         if (_wheelTarget is not { } target)
             return;
         StopWheelAnimation();
-        ScrollToVerticalOffset(Math.Clamp(target, 0, ScrollableHeight));
+        SetFrameOffset(Math.Clamp(target, 0, ScrollableHeight));
     }
 }
 

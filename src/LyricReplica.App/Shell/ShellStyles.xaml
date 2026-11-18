@@ -8,6 +8,7 @@
     <SolidColorBrush x:Key="Shell.Surface" Color="#222222" />
     <SolidColorBrush x:Key="Shell.SurfaceRaised" Color="#2B2B2B" />
     <SolidColorBrush x:Key="Shell.Stroke" Color="#1CFFFFFF" />
+    <SolidColorBrush x:Key="Shell.ControlHover" Color="#16FFFFFF" />
     <SolidColorBrush x:Key="Shell.Primary" Color="#F5F5F7" />
     <SolidColorBrush x:Key="Shell.Secondary" Color="#B4B4B4" />
     <SolidColorBrush x:Key="Shell.Tertiary" Color="#929292" />
@@ -76,15 +77,16 @@
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource Shell.KeyboardFocus}" />
         <Setter Property="local:ShellAssist.CornerRadius" Value="8" />
+        <Setter Property="local:ShellAssist.HoverBrush" Value="{StaticResource Shell.ControlHover}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ButtonBase">
                     <Grid x:Name="Root" Background="Transparent">
-                        <Border x:Name="Surface" CornerRadius="{Binding (local:ShellAssist.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
+                        <Border x:Name="Surface" CornerRadius="{TemplateBinding local:ShellAssist.CornerRadius}"
                                 Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}" />
-                        <Border x:Name="Hover" CornerRadius="{Binding (local:ShellAssist.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
-                                Background="#16FFFFFF" Opacity="0" />
+                        <Border x:Name="Hover" CornerRadius="{TemplateBinding local:ShellAssist.CornerRadius}"
+                                Background="{TemplateBinding local:ShellAssist.HoverBrush}" Opacity="0" />
                         <ContentPresenter x:Name="Label" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" RenderTransformOrigin="0.5,0.5"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -130,6 +132,9 @@
         <Setter Property="Height" Value="36" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="local:ShellAssist.CornerRadius" Value="18" />
+    </Style>
+    <Style x:Key="Shell.PlaybackButton" TargetType="Button" BasedOn="{StaticResource Shell.IconButton}">
+        <Setter Property="local:ShellAssist.HoverBrush" Value="#262628" />
     </Style>
     <Style x:Key="Shell.ModeButton" TargetType="Button" BasedOn="{StaticResource Shell.IconButton}">
         <Setter Property="Opacity" Value="0.55" />

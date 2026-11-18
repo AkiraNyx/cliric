@@ -512,7 +512,7 @@ public sealed partial class LibraryView
 
         UpdateAccountState();
         _accountExpanded = true;
-        QueuePopup.IsOpen = false;
+        CloseQueue(animate: false);
         AccountButton.SetCurrentValue(ToggleButton.IsCheckedProperty, true);
         AccountSurface.IsHitTestVisible = true;
         if (AccountPopup.IsOpen)

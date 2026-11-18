@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ApplicationManifest>../../src/LyricReplica.App/app.manifest</ApplicationManifest>
+    <RestoreAdditionalProjectSources>$(MSBuildThisFileDirectory)../../tools/capsule-preview-packages;$(RestoreAdditionalProjectSources)</RestoreAdditionalProjectSources>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/LyricReplica.App/LyricReplica.App.csproj" />
+    <PackageReference Include="LiquidGlassEngineering.Wpf" Version="1.0.2" GeneratePathProperty="true" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(PkgLiquidGlassEngineering_Wpf)' != ''">
+    <None Include="$(PkgLiquidGlassEngineering_Wpf)/LICENSE;$(PkgLiquidGlassEngineering_Wpf)/NOTICE.md"
+          Link="licenses/LiquidGlassEngineering/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

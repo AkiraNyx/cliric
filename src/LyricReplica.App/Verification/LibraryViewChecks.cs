@@ -640,6 +640,18 @@ public sealed partial class LibraryView
         if (AccountPopup.IsOpen || AccountButton.IsChecked == true ||
             !accountCloseTrace.Any(frame => frame.Opacity is > .15 and < .9 && frame.TranslateY < -.5))
             throw new InvalidOperationException("Account dismissal must render an intermediate frame and remove the popup.");
+        var queueTrace = await TraceEntranceAsync(QueueSurface, () => Click(QueueButton));
+        CheckEntrance(queueTrace, "Queue popup", .52, 6);
+        Click(QueueButton);
+        await Task.Delay(30);
+        if (!QueuePopup.IsOpen || QueueButton.IsChecked == true || QueueSurface.IsHitTestVisible)
+            throw new InvalidOperationException("Queue dismissal must keep the animation visible and release its input.");
+        var reopenedQueue = await TraceEntranceAsync(QueueSurface, () => Click(QueueButton));
+        if (!QueuePopup.IsOpen || QueueButton.IsChecked != true || reopenedQueue.LastOrDefault()?.Opacity != 1)
+            throw new InvalidOperationException("The queue must reopen from its current position during dismissal.");
+        var queueCloseTrace = await TraceEntranceAsync(QueueSurface, () => Click(QueueButton));
+        if (QueuePopup.IsOpen || !queueCloseTrace.Any(frame => frame.Opacity is > .15 and < .9 && frame.TranslateY > .5))
+            throw new InvalidOperationException("Queue dismissal must animate back toward its trigger and close.");
         ShowPage(HomePage, animate: false);
         var pageTrace = await TraceEntranceAsync(SearchContent, () => ShowPage(SearchPage));
         CheckEntrance(pageTrace, "Lower sidebar page", .86, 8);

@@ -1,0 +1,160 @@
+<Window x:Class="CapsulePlayerDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:player="clr-namespace:LyricReplica.App;assembly=LyricReplica"
+        xmlns:reference="clr-namespace:LyricReplica.App.Reference;assembly=LyricReplica"
+        xmlns:lg="https://liquid-glass-engineering.vercel.app/wpf"
+        Title="胶囊播放栏演示" Width="1120" Height="710" MinWidth="540" MinHeight="450"
+        WindowStartupLocation="CenterScreen" Background="#171719" Foreground="#F4F3F5"
+        FontSize="14" FontWeight="330" UseLayoutRounding="True" SnapsToDevicePixels="True"
+        TextOptions.TextRenderingMode="Grayscale" TextOptions.TextHintingMode="Animated">
+    <Window.Resources>
+        <SolidColorBrush x:Key="Secondary" Color="#BDB8C3" />
+        <SolidColorBrush x:Key="CapsuleControlText" Color="#F5F5F7" />
+        <SolidColorBrush x:Key="CapsuleCaption" Color="#E1E5F0" />
+    </Window.Resources>
+    <lg:GlassScene x:Name="Root" ClipToBounds="True" lg:GlassScene.Appearance="Dark">
+        <lg:GlassScene.Content>
+            <player:ShellScrollViewer x:Name="Scene" Background="#171719" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Margin="36,28,36,112" MaxWidth="1000">
+                    <TextBlock Text="播放栏演示" FontSize="32" FontWeight="630" Margin="0,0,0,18" />
+                    <Border CornerRadius="18" Padding="24">
+                        <Border.Background>
+                            <LinearGradientBrush x:Name="SceneTint" StartPoint="0,1" EndPoint="1,0">
+                                <GradientStop Color="#202025" Offset="0" />
+                                <GradientStop x:Name="SceneColor" Color="#3B2844" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <DockPanel>
+                            <Border DockPanel.Dock="Right" Width="116" Height="116" CornerRadius="12" Margin="18,0,0,0"
+                                    Background="#322E38" ClipToBounds="True">
+                                <Rectangle RadiusX="12" RadiusY="12">
+                                    <Rectangle.Fill><ImageBrush x:Name="CurrentCover" Stretch="UniformToFill" /></Rectangle.Fill>
+                                </Rectangle>
+                            </Border>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock x:Name="HeroTitle" FontSize="30" FontWeight="630" TextTrimming="CharacterEllipsis" />
+                                <TextBlock x:Name="HeroArtist" Foreground="{StaticResource Secondary}" Margin="0,6,0,0" />
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
+                    <TextBlock Text="播放队列" FontSize="20" FontWeight="520" Margin="0,28,0,10" />
+                    <ListBox x:Name="Tracks" BorderThickness="0" Background="Transparent" Foreground="#F4F3F5"
+                             SelectionChanged="OnTrackSelected" AutomationProperties.Name="演示曲目" Margin="-6,0">
+                        <ListBox.Template>
+                            <ControlTemplate TargetType="ListBox"><ItemsPresenter /></ControlTemplate>
+                        </ListBox.Template>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate><UniformGrid Columns="2" /></ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Margin" Value="6,0,6,12" />
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource Shell.KeyboardFocus}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <Grid>
+                                                <ContentPresenter />
+                                                <Border x:Name="Selection" BorderBrush="#DEEEFAFF" BorderThickness="1" CornerRadius="15"
+                                                        IsHitTestVisible="False" Opacity="0" />
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Selection" Property="Opacity" Value=".42" />
+                                                </Trigger>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter TargetName="Selection" Property="Opacity" Value="1" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="334">
+                                    <Rectangle RadiusX="15" RadiusY="15">
+                                        <Rectangle.Fill><ImageBrush ImageSource="{Binding Cover}" Stretch="UniformToFill" /></Rectangle.Fill>
+                                    </Rectangle>
+                                    <Border VerticalAlignment="Top" CornerRadius="15,15,0,0" Padding="16,14,16,22">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="#970D101A" Offset="0" />
+                                                <GradientStop Color="#000D101A" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        <DockPanel>
+                                            <TextBlock DockPanel.Dock="Right" Text="{Binding Duration}" Foreground="#E4E5ED"
+                                                       VerticalAlignment="Top" Margin="12,2,0,0" Typography.NumeralAlignment="Tabular" />
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Title}" FontSize="18" FontWeight="630" TextTrimming="CharacterEllipsis" />
+                                                <TextBlock Text="{Binding Artist}" FontSize="12" Foreground="#DBDCE8" Margin="0,3,0,0" />
+                                            </StackPanel>
+                                        </DockPanel>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </player:ShellScrollViewer>
+        </lg:GlassScene.Content>
+        <Grid x:Name="Capsule" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="16,0,16,16"
+              Width="384" Height="54" player:ShellTransitions.PlaybackFeedback="True">
+            <lg:GlassLens x:Name="CapsuleGlass" Radius="capsule" Refraction="40.5" lg:GlassScene.Material="Clear"
+                          Focusable="False" IsHitTestVisible="False" />
+            <Border x:Name="GlassShade" IsHitTestVisible="False">
+                <Border.Clip><RectangleGeometry x:Name="ShadeBounds" /></Border.Clip>
+                <Border.Background><SolidColorBrush x:Name="GlassColor" Color="Transparent" /></Border.Background>
+            </Border>
+            <Grid x:Name="CapsuleContent" Margin="10,0,8,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="54" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="36" />
+                </Grid.ColumnDefinitions>
+                <DockPanel x:Name="TrackStamp" Margin="0,0,8,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Rectangle DockPanel.Dock="Left" Width="34" Height="34" RadiusX="6" RadiusY="6" Margin="0,0,10,0">
+                        <Rectangle.Fill><ImageBrush x:Name="MiniCover" Stretch="UniformToFill" /></Rectangle.Fill>
+                    </Rectangle>
+                    <StackPanel VerticalAlignment="Center">
+                        <player:MiSansLabel x:Name="CapsuleTitle" FontSize="15" FontWeight="{DynamicResource Shell.SemiboldWeight}"
+                                            Foreground="{DynamicResource CapsuleControlText}" TextTrimming="CharacterEllipsis" />
+                        <player:MiSansLabel x:Name="CapsuleArtist" Style="{StaticResource Shell.Caption}"
+                                            Foreground="{DynamicResource CapsuleCaption}" Margin="0,1,0,0" />
+                    </StackPanel>
+                </DockPanel>
+                <Grid x:Name="SeekSlot" Grid.Column="1" HorizontalAlignment="Center" Width="0" Opacity="0" Visibility="Hidden" IsHitTestVisible="False">
+                    <Grid.Clip><RectangleGeometry x:Name="SeekClip" /></Grid.Clip>
+                    <reference:ReferenceStateBar x:Name="Seek" HorizontalAlignment="Right" VerticalAlignment="Center" Height="36" Margin="8,0,10,0"
+                                                 IsTabStop="False" AutomationProperties.Name="播放进度" />
+                </Grid>
+                <StackPanel x:Name="Transport" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,2,0">
+                    <Grid x:Name="PreviousSlot" Width="0" Opacity="0" Visibility="Hidden" IsHitTestVisible="False">
+                        <Button x:Name="PreviousButton" Click="Previous" HorizontalAlignment="Right"
+                                IsTabStop="False" ToolTip="上一首" AutomationProperties.Name="上一首" />
+                    </Grid>
+                    <Button x:Name="PlayButton" Click="TogglePlay" ToolTip="播放" ToolTipService.ShowOnDisabled="True" AutomationProperties.Name="播放" />
+                    <Button x:Name="NextButton" Click="Next" ToolTip="下一首" AutomationProperties.Name="下一首" />
+                </StackPanel>
+                <ToggleButton x:Name="ShapeButton" Grid.Column="3" Checked="OnShapeChanged" Unchecked="OnShapeChanged"
+                              Style="{StaticResource Shell.Toggle}" Width="36" Height="36" Padding="0"
+                              VerticalAlignment="Center" ToolTip="展开播放栏"
+                              AutomationProperties.Name="完整播放控件">
+                    <TextBlock Text="&#xE70E;" Style="{StaticResource Shell.Glyph}" Foreground="{DynamicResource CapsuleControlText}"
+                               FontSize="13" RenderTransformOrigin=".5,.5">
+                        <TextBlock.RenderTransform><RotateTransform x:Name="ShapeArrow" /></TextBlock.RenderTransform>
+                    </TextBlock>
+                </ToggleButton>
+            </Grid>
+        </Grid>
+    </lg:GlassScene>
+</Window>
