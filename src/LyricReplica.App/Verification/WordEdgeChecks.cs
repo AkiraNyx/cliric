@@ -13,6 +13,7 @@ internal static class WordEdgeChecks
 {
     public static void Run(Action<bool, string> check, string folder)
     {
+        CheckHanStrokeWeight(check);
         var cjkFamily = LyricReplica.App.Reference.ReferencePageView.FontFor(FontPresets.SpotifyMix);
         var cjkText = new FormattedText("让人难忘", System.Globalization.CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(cjkFamily, FontStyles.Normal, FontWeights.Bold, FontStretches.Normal), 41, Brushes.White, 1);
         var cjkRow = new LyricRow(new()
@@ -381,6 +382,49 @@ internal static class WordEdgeChecks
             check(target.Effect is null, "stopped emphasis releases its effect after the fade: " + preset);
         }
     }
+    private static void CheckHanStrokeWeight(Action<bool, string> check)
+    {
+        foreach (var wrapping in new[] { TextWrapping.NoWrap, TextWrapping.Wrap })
+        {
+            var baseline = Sample("薄雾越过森林", FontWeights.Bold, wrapping, refined: false);
+            var refined = Sample("薄雾越过森林", FontWeights.Bold, wrapping, refined: true);
+            check(baseline.Size == refined.Size && refined.Ink > baseline.Ink * .87 && refined.Ink < baseline.Ink * .98,
+                $"Han lyric strokes lighten while native layout stays identical, {wrapping}, ink {baseline.Ink} to {refined.Ink}");
+        }
+        check(Sample("Light through the trees", FontWeights.Bold, TextWrapping.NoWrap, refined: true) ==
+              Sample("Light through the trees", FontWeights.Bold, TextWrapping.NoWrap, refined: false) &&
+              Sample("薄雾越过森林", FontWeights.Heavy, TextWrapping.NoWrap, refined: true) ==
+              Sample("薄雾越过森林", FontWeights.Heavy, TextWrapping.NoWrap, refined: false),
+            "Latin lyrics and the explicit extra-bold weight retain their native ink");
+
+        static (Size Size, long Ink) Sample(string text, FontWeight weight, TextWrapping wrapping, bool refined)
+        {
+            TextBlock block = refined ? new LyricTextBlock() : new TextBlock();
+            block.Text = text;
+            block.FontFamily = new FontFamily("Microsoft YaHei UI");
+            block.FontSize = 39;
+            block.FontWeight = weight;
+            block.Foreground = Brushes.White;
+            block.TextWrapping = wrapping;
+            double width = wrapping == TextWrapping.Wrap ? 180 : 500;
+            block.MaxWidth = width;
+            var surface = new Canvas();
+            surface.Children.Add(block);
+            surface.Measure(new Size(width, 112));
+            surface.Arrange(new Rect(0, 0, width, 112));
+            if (block is LyricTextBlock lyric)
+                lyric.ApplyHanContour();
+            surface.UpdateLayout();
+            var image = new RenderTargetBitmap((int)(width * 1.25), 140, 120, 120, PixelFormats.Pbgra32);
+            image.Render(surface);
+            byte[] pixels = Pixels(image);
+            long ink = 0;
+            for (int i = 3; i < pixels.Length; i += 4)
+                ink += pixels[i];
+            return (block.DesiredSize, ink);
+        }
+    }
+
     internal static IEnumerable<DependencyObject> Find(DependencyObject node)
     {
         yield return node;

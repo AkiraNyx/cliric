@@ -324,7 +324,7 @@ public sealed class LyricRow : Grid
             ((MenuItem)_view.FindName(name)).Visibility = _options.Translation && HaveAnyTranslation ? Visibility.Visible : Visibility.Collapsed;
     }
 
-    private TextBlock Text(string value, double size, FontWeight weight) => new()
+    private TextBlock Text(string value, double size, FontWeight weight) => new LyricTextBlock
     {
         Text = value,
         FontSize = size,

@@ -45,12 +45,13 @@ public sealed partial class MainWindow
         string folder = Path.Combine(App.DataFolder, "verification");
         Directory.CreateDirectory(folder);
         double? liveRenderAtScale = (word.CacheMode as BitmapCache)?.RenderAtScale;
-        bool passed = work.Count >= 10 && poses.Count > 4 && liveRenderAtScale == 1.5 && cachedPixels > automaticPixels;
+        bool liveHanContour = word is LyricTextBlock && word.Clip is GeometryGroup;
+        bool passed = work.Count >= 10 && poses.Count > 4 && liveHanContour && liveRenderAtScale == 1.5 && cachedPixels > automaticPixels;
         File.WriteAllText(Path.Combine(folder, "windowed-lyric-lift.json"), JsonSerializer.Serialize(new
         {
             passed, assemblySha256 = App.AssemblySha256,
             window = new { ActualWidth, ActualHeight, WindowState }, frames = work.Count, repeatedFrames,
-            distinctLiftPositions = poses.Count, automaticPixels, cachedPixels, liveRenderAtScale,
+            distinctLiftPositions = poses.Count, automaticPixels, cachedPixels, liveRenderAtScale, liveHanContour,
             medianFrameIntervalMs = Percentile(intervals, .5), p95FrameIntervalMs = Percentile(intervals, .95),
             p95UpdateMs = Percentile(work, .95), maxUpdateMs = work.DefaultIfEmpty().Max()
         }, LyricsFile.JsonOptions));

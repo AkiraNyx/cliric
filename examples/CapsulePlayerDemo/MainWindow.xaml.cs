@@ -330,7 +330,7 @@ public partial class MainWindow : Window
         SeekSlot.Opacity = PreviousSlot.Opacity = Math.Clamp(_details.Value, 0, 1);
         bool controlsVisible = Expanded || _shapeRendering;
         PreviousSlot.Visibility = controlsVisible ? Visibility.Visible : Visibility.Hidden;
-        bool seekVisible = _seekFits && controlsVisible && Seek.Width - 2 * trim >= MinimumSeekWidth;
+        bool seekVisible = _seekFits && controlsVisible;
         if (!seekVisible && SeekSlot.Visibility == Visibility.Visible)
         {
             Seek.CancelPreview();
@@ -338,7 +338,7 @@ public partial class MainWindow : Window
                 ShapeButton.Focus();
         }
         SeekSlot.Visibility = seekVisible ? Visibility.Visible : Visibility.Hidden;
-        SeekSlot.IsHitTestVisible = Seek.IsTabStop = seekVisible && Expanded;
+        SeekSlot.IsHitTestVisible = Seek.IsTabStop = seekVisible && Expanded && Seek.Width - 2 * trim >= MinimumSeekWidth;
     }
 
     private void OnSystemPreferencesChanged(object? sender, PropertyChangedEventArgs e)
@@ -425,8 +425,19 @@ public partial class MainWindow : Window
             if (!_ready || !_playing || _audio.Position <= TimeSpan.Zero)
                 throw new InvalidOperationException("The demo audio must play and advance.");
             int layoutResizes = 0;
+            bool seekFadedIn = false, seekFadedOut = false;
             void CountResize(object sender, SizeChangedEventArgs e) => layoutResizes++;
+            void ObserveSeekFade(object? sender, EventArgs e)
+            {
+                if (!Seek.IsVisible || SeekClip.Rect.Width <= 0 || SeekSlot.Opacity is not (> .02 and < .98))
+                    return;
+                if (Expanded)
+                    seekFadedIn = true;
+                else
+                    seekFadedOut = true;
+            }
             Capsule.SizeChanged += CountResize;
+            CompositionTarget.Rendering += ObserveSeekFade;
             toggle.Toggle();
             await Task.Delay(85);
             double widthBeforeReverse = _capsuleBounds.Width;
@@ -446,8 +457,11 @@ public partial class MainWindow : Window
                 !Seek.IsTabStop || !PreviousButton.IsTabStop || Math.Abs(_capsuleBounds.Width - ExpandedWidth) > .7 || ShapeArrow.Angle != 180)
                 throw new InvalidOperationException("The expanded bar must reveal the existing playback controls.");
             Capsule.SizeChanged -= CountResize;
+            CompositionTarget.Rendering -= ObserveSeekFade;
             if (layoutResizes != 0)
                 throw new InvalidOperationException("The glass outline must animate without resizing the layout.");
+            if (!ShellTransitions.GetReducedMotion(this) && (!seekFadedIn || !seekFadedOut))
+                throw new InvalidOperationException("The seek control must draw intermediate opacity frames on both transitions.");
             Seek.BorderCover.RaiseEvent(new MouseEventArgs(Mouse.PrimaryDevice, 0) { RoutedEvent = Mouse.MouseEnterEvent });
             await Task.Delay(200);
             if (Math.Abs(Seek.BorderBackground.Opacity - .72) > .001 ||
@@ -503,7 +517,7 @@ public partial class MainWindow : Window
                 [$"Material: {GlassScene.GetMaterial(CapsuleGlass)}", $"Live render mode: {CapsuleGlass.Mode}",
                  $"Layout resizes during the morph: {layoutResizes}",
                  "Motion: M3 Standard default spatial (700, 0.9) and fast effects (3800, 1.0)",
-                 "Passed: translucent shared hover, playback, seek, scrolling, reversal, UI Automation, Escape, single-row resize, reduced motion and transparency",
+                 "Passed: translucent shared hover, playback, seek fades, scrolling, reversal, UI Automation, Escape, single-row resize, reduced motion and transparency",
                  "PNG capture: software fallback", GlassDiagnostics.Describe()]);
             Application.Current.Shutdown(0);
         }

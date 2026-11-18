@@ -20,7 +20,7 @@ foreach ($name in $packages.Keys) {
     if ((Get-FileHash -LiteralPath $download).Hash -ne $packages[$name]) { throw "Package checksum mismatch: $name" }
     Move-Item -LiteralPath $download -Destination $target -Force
 }
-$output = Join-Path $root 'artifacts/capsule-player-demo-fluid'
+$output = Join-Path $root 'artifacts/capsule-player-demo-fade'
 $build = Join-Path $root 'artifacts/capsule-demo-build'
 & $dotnet publish (Join-Path $PSScriptRoot 'CapsulePlayerDemo.csproj') -c Release -r win-x64 --self-contained true --artifacts-path $build -o $output -v:q
 if ($LASTEXITCODE -ne 0) { throw 'Preview build failed.' }
