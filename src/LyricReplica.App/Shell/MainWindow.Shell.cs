@@ -6,7 +6,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shell;
 using System.Windows.Threading;
@@ -23,10 +22,9 @@ public sealed partial class MainWindow
     private readonly Grid _shell = new();
     private readonly Border _backdropNeutral = new() { IsHitTestVisible = false };
     private readonly Border _backdropShade = new() { Background = Brushes.Black, IsHitTestVisible = false };
-    private readonly BlurEffect _libraryBlur = new() { RenderingBias = RenderingBias.Performance };
-    private readonly BlurEffect _lyricsBlur = new() { RenderingBias = RenderingBias.Performance };
     private readonly WindowChrome _libraryChrome = new() { UseAeroCaptionButtons = false };
     private LibraryView? _library;
+    private PageTransitionLayer _libraryTransition = null!, _lyricsTransition = null!;
     private Viewbox? _shellLegacyBackdrop;
     private bool _lyricsShown, _lyricsEntering, _stoppingForClose;
     private double _lastVolumeSent;
@@ -56,8 +54,8 @@ public sealed partial class MainWindow
         _shell.Children.Add(_shellLegacyBackdrop);
         _shell.Children.Add(_backdropNeutral);
         _shell.Children.Add(_backdropShade);
-        _shell.Children.Add(_library);
-        _shell.Children.Add(_root);
+        _shell.Children.Add(_libraryTransition = new PageTransitionLayer(_library));
+        _shell.Children.Add(_lyricsTransition = new PageTransitionLayer(_root));
         SetPageBlend(0);
         Content = _shell;
         Title = "LyricReplica";
@@ -221,7 +219,12 @@ public sealed partial class MainWindow
     private void AnimatePageBlend(bool animate)
     {
         bool showLyrics = _lyricsShown;
-        ShellTransitions.To(this, LyricsProgressProperty, showLyrics ? 1 : 0, MotionTokens.LyricsPage,
+        double target = showLyrics ? 1 : 0;
+        var timing = MotionTokens.LyricsPage with
+        {
+            Milliseconds = (int)Math.Ceiling(MotionTokens.LyricsPage.Milliseconds * Math.Abs(target - LyricsProgress))
+        };
+        ShellTransitions.To(this, LyricsProgressProperty, target, timing,
             immediate: !animate || ShellTransitions.GetReducedMotion(_library!), completed: () =>
             {
                 _lyricsEntering = false;
@@ -241,23 +244,12 @@ public sealed partial class MainWindow
 
     private void SetPageBlend(double progress)
     {
-        double libraryOpacity = 1 - progress;
-        _backdropNeutral.Opacity = .58 * libraryOpacity;
-        _backdropShade.Opacity = .18 * libraryOpacity;
-        SetPagePose(_library!, _libraryBlur, libraryOpacity);
-        SetPagePose(_root, _lyricsBlur, progress);
-
-        static void SetPagePose(UIElement page, BlurEffect blur, double opacity)
-        {
-            page.Opacity = opacity;
-            if (opacity is > .01 and < .99)
-            {
-                blur.Radius = 7 * (1 - opacity);
-                page.Effect = blur;
-            }
-            else
-                page.Effect = null;
-        }
+        double tint = 1 - MotionTokens.Move.Ease(progress);
+        _backdropNeutral.Opacity = .58 * tint;
+        _backdropShade.Opacity = .18 * tint;
+        double delay = (double)MotionTokens.LyricsPageStaggerMs / MotionTokens.LyricsPage.Milliseconds;
+        _libraryTransition.SetPose(1 - MotionTokens.Move.Ease(Math.Clamp(progress / (1 - delay), 0, 1)));
+        _lyricsTransition.SetPose(MotionTokens.Move.Ease(Math.Clamp((progress - delay) / (1 - delay), 0, 1)));
     }
 
     internal void OpenLyricsSettings()

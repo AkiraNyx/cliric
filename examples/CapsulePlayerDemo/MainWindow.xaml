@@ -12,6 +12,13 @@
         <SolidColorBrush x:Key="Secondary" Color="#BDB8C3" />
         <SolidColorBrush x:Key="CapsuleControlText" Color="#F5F5F7" />
         <SolidColorBrush x:Key="CapsuleCaption" Color="#E1E5F0" />
+        <Style x:Key="CapsuleMaterial" TargetType="lg:GlassLens">
+            <Setter Property="Radius" Value="capsule" />
+            <Setter Property="Refraction" Value="40.5" />
+            <Setter Property="lg:GlassScene.Material" Value="Clear" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+        </Style>
         <Style x:Key="CapsuleControlFocus">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -139,8 +146,7 @@
         <Grid x:Name="Capsule" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="16,0,16,16"
               Width="384" Height="54" Background="Transparent" player:ShellTransitions.PlaybackFeedback="True">
             <Grid.Clip><RectangleGeometry x:Name="CapsuleOutline" RadiusX="27" RadiusY="27" /></Grid.Clip>
-            <lg:GlassLens x:Name="CapsuleGlass" Radius="capsule" Refraction="40.5" lg:GlassScene.Material="Clear"
-                          Focusable="False" IsHitTestVisible="False" />
+            <lg:GlassLens x:Name="CapsuleGlass" Style="{StaticResource CapsuleMaterial}" />
             <Border x:Name="GlassShade" IsHitTestVisible="False">
                 <Border.Clip><RectangleGeometry x:Name="ShadeBounds" /></Border.Clip>
                 <Border.Background><SolidColorBrush x:Name="GlassColor" Color="Transparent" /></Border.Background>
@@ -201,9 +207,12 @@
                 </ToggleButton>
             </Grid>
         </Grid>
-        <Border x:Name="ToolGroup" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,16,16"
-                Width="156" Height="54" CornerRadius="27" BorderThickness="1" BorderBrush="{StaticResource Shell.Stroke}"
-                Background="{DynamicResource CapsuleUtilityBrush}">
+        <Grid x:Name="ToolGroup" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,16,16"
+              Width="156" Height="54" Background="Transparent">
+            <Grid.Clip><RectangleGeometry x:Name="ToolOutline" RadiusX="27" RadiusY="27" /></Grid.Clip>
+            <lg:GlassLens x:Name="ToolGlass" Style="{StaticResource CapsuleMaterial}" />
+            <Border x:Name="ToolShade" Margin="1" CornerRadius="26" IsHitTestVisible="False"
+                    Background="{Binding Background, ElementName=GlassShade}" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <ToggleButton x:Name="SoundTool" Style="{StaticResource CapsuleTool}" Click="ToggleTool" Tag="{Binding ElementName=SoundOptions}"
                               ToolTip="声音" AutomationProperties.Name="声音">
@@ -227,7 +236,7 @@
                     </StackPanel>
                 </ToggleButton>
             </StackPanel>
-        </Border>
+        </Grid>
         <Border x:Name="ToolFlyout" Width="272" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="16,0,0,78"
                 CornerRadius="14" Padding="14" Background="{DynamicResource CapsulePanelBrush}" BorderThickness="1"
                 BorderBrush="{StaticResource Shell.Stroke}" Visibility="Collapsed" Focusable="False">

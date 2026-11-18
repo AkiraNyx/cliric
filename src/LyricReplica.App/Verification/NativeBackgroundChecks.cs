@@ -1,9 +1,9 @@
+using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shell;
 using LyricReplica.Core;
@@ -25,36 +25,96 @@ public sealed partial class MainWindow
             _backdropNeutral.Opacity <= 0 || _backdropShade.Opacity <= 0)
             throw new InvalidOperationException("The two pages must share the active artwork and backdrop.");
 
+        double early = MotionTokens.LyricsPageStaggerMs / (2d * MotionTokens.LyricsPage.Milliseconds);
+        SetPageBlend(early);
+        bool openingIsStaggered = _libraryTransition.Amount is > 0 and < 1 && _lyricsTransition.Amount == 0;
+        SetPageBlend(1 - early);
+        bool closingIsStaggered = _lyricsTransition.Amount is > 0 and < 1 && _libraryTransition.Amount == 0;
+        SetPageBlend(0);
+        if (!openingIsStaggered || !closingIsStaggered)
+            throw new InvalidOperationException("The outgoing page must start fading before the next one appears in either direction.");
+
         ShowLyrics();
-        await Task.Delay(100);
+        await Task.Delay(155);
         double progress = LyricsProgress;
-        if (progress is <= .02 or >= .99 ||
-            _library!.Effect is not BlurEffect { Radius: > 0 } || _root.Effect is not BlurEffect { Radius: > 0 } ||
-            Math.Abs(_library.Opacity + _root.Opacity - 1) > .001 ||
+        if (!_libraryTransition.UsesCachedBlur || !_lyricsTransition.UsesCachedBlur ||
+            _libraryTransition.Amount <= 0 || _lyricsTransition.Amount <= 0 ||
+            _libraryTransition.Amount + _lyricsTransition.Amount >= 1 ||
             _backdropNeutral.Opacity is <= 0 or >= .58 || _backdropShade.Opacity is <= 0 or >= .18 ||
             _legacyTime <= time || crop != BackdropBounds() || viewport != _shell.RenderSize ||
             !ReferenceEquals(chrome, WindowChrome.GetWindowChrome(this)))
-            throw new InvalidOperationException($"The page blend must advance both Gaussian fades and the same backdrop in a fixed viewport. Progress={progress:F3}.");
+            throw new InvalidOperationException($"The staggered fades must reuse cached blur in the same viewport. Progress={progress:F3}.");
         CaptureShell(Path.Combine(folder, "lyrics-transition.png"));
         progress = LyricsProgress;
         ShowLibrary();
         if (Math.Abs(progress - LyricsProgress) > .025)
             throw new InvalidOperationException("Reversing the page blend must continue from its current progress.");
-        await Task.Delay(300);
-        if (LyricsProgress != 0 || _root.IsVisible || !_library.IsVisible || _library.Effect is not null)
+        int settle = MotionTokens.LyricsPage.Milliseconds + 90;
+        await Task.Delay(settle);
+        if (LyricsProgress != 0 || _root.IsVisible || !_library!.IsVisible || _library.CacheMode is not null ||
+            _libraryTransition.UsesCachedBlur || _lyricsTransition.UsesCachedBlur)
             throw new InvalidOperationException("Returning must settle on the sharp library surface.");
         CaptureShell(Path.Combine(folder, "player-shared-background.png"));
 
         ShowLyrics();
-        await Task.Delay(300);
-        if (LyricsProgress != 1 || !_root.IsVisible || _library.IsVisible || _root.Effect is not null ||
+        await Task.Delay(settle);
+        if (LyricsProgress != 1 || !_root.IsVisible || _library.IsVisible || _root.CacheMode is not null ||
+            _lyricsTransition.UsesCachedBlur ||
             _backdropNeutral.Opacity != 0 || _backdropShade.Opacity != 0 || viewport != _shell.RenderSize)
             throw new InvalidOperationException("The settled lyric page must show the unfiltered shared backdrop.");
         CaptureShell(Path.Combine(folder, "lyrics-shared-background.png"));
         ShowLibrary();
-        await Task.Delay(300);
+        await Task.Delay(settle);
+        if (_args.Contains("--profile-page-blend"))
+            await ProfilePageBlendAsync(folder);
 
         Rect BackdropBounds() => backdrop.TransformToVisual(_shell).TransformBounds(new Rect(backdrop.RenderSize));
+    }
+
+    private async Task ProfilePageBlendAsync(string folder)
+    {
+        var frames = new List<double>();
+        var preparation = new List<double>();
+        TimeSpan? renderingTime = null;
+        long? lastFrame = null;
+        void Observe(object? sender, EventArgs e)
+        {
+            if (e is not RenderingEventArgs frame || frame.RenderingTime == renderingTime)
+                return;
+            renderingTime = frame.RenderingTime;
+            if (LyricsProgress is <= 0 or >= 1)
+            {
+                lastFrame = null;
+                return;
+            }
+            long now = Stopwatch.GetTimestamp();
+            if (lastFrame is { } previous)
+                frames.Add(Stopwatch.GetElapsedTime(previous, now).TotalMilliseconds);
+            lastFrame = now;
+        }
+        CompositionTarget.Rendering += Observe;
+        try
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                long start = Stopwatch.GetTimestamp();
+                ShowLyrics();
+                preparation.Add(Stopwatch.GetElapsedTime(start).TotalMilliseconds);
+                await Task.Delay(450);
+                ShowLibrary();
+                await Task.Delay(450);
+            }
+        }
+        finally { CompositionTarget.Rendering -= Observe; }
+        frames.Sort();
+        if (frames.Count == 0)
+            throw new InvalidOperationException("No transition render callbacks were observed.");
+        File.WriteAllText(Path.Combine(folder, "page-blend-timing.json"), JsonSerializer.Serialize(new
+        {
+            assemblySha256 = App.AssemblySha256, viewport = _shell.RenderSize, dpi = VisualTreeHelper.GetDpi(_shell),
+            tier = RenderCapability.Tier >> 16, count = frames.Count, medianMs = frames[frames.Count / 2],
+            p95Ms = frames[(int)(frames.Count * .95)], maxMs = frames[^1], preparationMs = preparation
+        }, LyricsFile.JsonOptions));
     }
 
     private async Task CheckNativeBackgroundsAsync(string folder)
@@ -91,12 +151,12 @@ public sealed partial class MainWindow
             var renderer = _background.Children[0];
             var size = _shell.RenderSize;
             ShowLibrary();
-            await Task.Delay(300);
+            await Task.Delay(MotionTokens.LyricsPage.Milliseconds + 90);
             if (!_independentPresentation || !_library!.IsVisible || WindowState != WindowState.Maximized ||
                 !ReferenceEquals(renderer, _background.Children[0]) || _shell.RenderSize != size)
                 throw new InvalidOperationException("Returning while maximized must preserve the same native background and viewport.");
             ShowLyrics();
-            await Task.Delay(300);
+            await Task.Delay(MotionTokens.LyricsPage.Milliseconds + 90);
             if (!_independentPresentation || !_root.IsVisible || WindowState != WindowState.Maximized ||
                 !ReferenceEquals(renderer, _background.Children[0]) || _shell.RenderSize != size)
                 throw new InvalidOperationException("Opening lyrics while maximized must preserve the same native background and viewport.");

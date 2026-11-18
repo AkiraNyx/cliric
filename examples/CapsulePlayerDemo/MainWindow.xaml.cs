@@ -32,9 +32,10 @@ public partial class MainWindow : Window
     private bool Expanded => ShapeButton.IsChecked == true;
     private bool? _displayedPlaying;
     private static readonly IEasingFunction Ease = new CubicEase { EasingMode = EasingMode.EaseOut };
-    // SpringOptions takes the period and bounce corresponding to the M3 stiffness and damping ratio.
-    private static readonly SpringOptions SpatialSpring = new(Math.Tau / Math.Sqrt(700), 1 - .9);
-    private static readonly SpringOptions EffectsSpring = new(Math.Tau / Math.Sqrt(3800), 0);
+    private const double ShapeTimeScale = 1.2;
+    // Stretch the M3 springs in time while retaining their damping ratio.
+    private static readonly SpringOptions SpatialSpring = new(ShapeTimeScale * Math.Tau / Math.Sqrt(700), 1 - .9);
+    private static readonly SpringOptions EffectsSpring = new(ShapeTimeScale * Math.Tau / Math.Sqrt(3800), 0);
     private readonly Spring _shape = new(0, SpatialSpring), _details = new(0, EffectsSpring);
     // shortcut: The pinned renderer exposes geometry-only updates internally, replace with a public API when available.
     private static readonly Action<GlassLens, Rect> UpdateGlassConstants = typeof(GlassLens)
@@ -89,6 +90,7 @@ public partial class MainWindow : Window
         Tracks.SelectedIndex = 0;
         UpdatePlayIcon();
         Root.SizeChanged += (_, _) => ArrangeCapsule();
+        ToolGroup.SizeChanged += (_, e) => ToolOutline.Rect = new Rect(e.NewSize);
         CapsuleGlass.LayoutUpdated += (_, _) => ApplyGlassOptics();
         StateChanged += (_, _) =>
         {
@@ -403,9 +405,8 @@ public partial class MainWindow : Window
         Resources["CapsuleControlText"] = text;
         Resources["CapsuleCaption"] = contrast ? text : new SolidColorBrush(Color.FromRgb(225, 229, 240));
         Resources["CapsuleFocusBrush"] = contrast ? SystemColors.HighlightBrush : (Brush)FindResource("Shell.Accent");
-        Resources["CapsuleUtilityBrush"] = contrast ? SystemColors.WindowBrush : new SolidColorBrush(Color.FromArgb(120, 29, 32, 39));
         Resources["CapsulePanelBrush"] = contrast ? SystemColors.WindowBrush : (Brush)FindResource("Shell.Surface");
-        GlassShade.Visibility = contrast ? Visibility.Collapsed : Visibility.Visible;
+        GlassShade.Visibility = ToolShade.Visibility = contrast ? Visibility.Collapsed : Visibility.Visible;
         ShellPlaybackControls.ApplyPalette(PreviousButton, PlayButton, NextButton, _playing);
         Seek.ApplyShellPalette();
     }
@@ -430,6 +431,9 @@ public partial class MainWindow : Window
             await Task.Delay(420);
             UpdateLayout();
             var mode = CapsuleGlass.Mode;
+            if (ToolGlass.Mode != mode || ToolGlass.Refraction != CapsuleGlass.Refraction ||
+                GlassScene.GetMaterial(ToolGlass) != GlassScene.GetMaterial(CapsuleGlass))
+                throw new InvalidOperationException("Both capsules must use the same glass material and rendering path.");
             if (mode == GlassLensMode.Shader)
             {
                 var wider = _capsuleBounds;
@@ -506,11 +510,11 @@ public partial class MainWindow : Window
                 velocityBeforeReverse <= 0 || _capsuleBounds.Width != widthBeforeReverse || _shape.Velocity != velocityBeforeReverse ||
                 _details.Velocity != opacityVelocityBeforeReverse))
                 throw new InvalidOperationException("Reversing an active morph must retain its position and both spring velocities.");
-            await Task.Delay(300);
+            await Task.Delay(410);
             if (Expanded || Seek.IsVisible || PreviousButton.IsVisible || _capsuleBounds.Width != CompactWidth || _shapeRendering || ShapeArrow.Angle != 0)
                 throw new InvalidOperationException("A reversed expansion must settle back to the compact bar.");
             toggle.Toggle();
-            await Task.Delay(320);
+            await Task.Delay(410);
             if (!Expanded || toggle.ToggleState != ToggleState.On || !Seek.IsVisible || !PreviousButton.IsVisible ||
                 !Seek.IsTabStop || !PreviousButton.IsTabStop || Math.Abs(_capsuleBounds.Width - ExpandedWidth) > .7 || ShapeArrow.Angle != 180)
                 throw new InvalidOperationException("The expanded bar must reveal the existing playback controls.");
@@ -561,7 +565,7 @@ public partial class MainWindow : Window
                 throw new InvalidOperationException("The compact sound entry must open the same audio settings.");
             CloseToolFlyout();
             PressEscape();
-            await Task.Delay(300);
+            await Task.Delay(410);
             if (Expanded || Math.Abs(_capsuleBounds.Width - Math.Min(CompactWidth, Capsule.Width)) > .7 ||
                 ShapeArrow.Angle != 0 || Seek.IsVisible || PreviousButton.IsVisible)
                 throw new InvalidOperationException("The narrow capsule must collapse back to the compact layout.");
@@ -579,14 +583,14 @@ public partial class MainWindow : Window
 
             GlassScene.SetReduceTransparency(Root, true);
             Root.InvalidateGlass();
-            if (CapsuleGlass.Mode is not (GlassLensMode.Opaque or GlassLensMode.HighContrast))
-                throw new InvalidOperationException("The capsule must honor the upstream reduced-transparency material.");
+            if (CapsuleGlass.Mode is not (GlassLensMode.Opaque or GlassLensMode.HighContrast) || ToolGlass.Mode != CapsuleGlass.Mode)
+                throw new InvalidOperationException("Both glass surfaces must honor reduced transparency.");
             Root.ClearValue(GlassScene.ReduceTransparencyProperty);
             Root.InvalidateGlass();
             File.WriteAllLines(Path.Combine(AppContext.BaseDirectory, "glass-verification.txt"),
-                [$"Material: {GlassScene.GetMaterial(CapsuleGlass)}", $"Live render mode: {CapsuleGlass.Mode}",
+                [$"Material: {GlassScene.GetMaterial(CapsuleGlass)}", $"Live render modes: {CapsuleGlass.Mode}, {ToolGlass.Mode}",
                  $"Layout resizes during the morph: {layoutResizes}",
-                 "Motion: M3 Standard default spatial (700, 0.9) and fast effects (3800, 1.0)",
+                 $"Motion: M3 Standard spatial and effects springs with {ShapeTimeScale:F1}× periods",
                  "Passed: glass geometry without relayout, pointer isolation, playback feedback, seek fades, reversal, responsive centered capsule, audio/queue/lyric actions, reduced motion and transparency",
                  "PNG capture: software fallback", GlassDiagnostics.Describe()]);
             Application.Current.Shutdown(0);
@@ -642,7 +646,7 @@ public partial class MainWindow : Window
             throw new InvalidOperationException("The capsule must fit inside its glass scene with space below.");
         var tools = ToolGroup.TransformToVisual(Root).TransformBounds(new Rect(ToolGroup.RenderSize));
         if (Math.Abs(capsule.Left + capsule.Right - Root.ActualWidth) > 1.5 || tools.Left - capsule.Right < ToolGap - 1.5 ||
-            tools.Right > Root.ActualWidth || Math.Abs(capsule.Bottom - tools.Bottom) > 1)
+            tools.Right > Root.ActualWidth || Math.Abs(capsule.Bottom - tools.Bottom) > 1 || GlassScene.FindScene(ToolGlass) != Root)
             throw new InvalidOperationException("The separate tool group must fit beside the centered capsule.");
         var blankGlass = Root.InputHitTest(new Point((capsule.Left + capsule.Right) / 2, capsule.Bottom - 3));
         var corner = Root.InputHitTest(new Point(capsule.Left + 1, capsule.Top + 1));
@@ -661,17 +665,19 @@ public partial class MainWindow : Window
         var image = new RenderTargetBitmap((int)Root.ActualWidth, (int)Root.ActualHeight, 96, 96, PixelFormats.Pbgra32);
         // WPF bitmap capture cannot draw the upstream pixel shader 3.0 path.
         GlassScene.SetRenderMode(CapsuleGlass, GlassRenderMode.Fallback);
+        GlassScene.SetRenderMode(ToolGlass, GlassRenderMode.Fallback);
         try
         {
             Root.InvalidateGlass();
             await Dispatcher.Yield(DispatcherPriority.ApplicationIdle);
-            if (CapsuleGlass.Mode == GlassLensMode.Shader)
+            if (CapsuleGlass.Mode == GlassLensMode.Shader || ToolGlass.Mode == GlassLensMode.Shader)
                 throw new InvalidOperationException("Bitmap capture must use the rendered software material.");
             image.Render(Root);
         }
         finally
         {
             CapsuleGlass.ClearValue(GlassScene.RenderModeProperty);
+            ToolGlass.ClearValue(GlassScene.RenderModeProperty);
             Root.InvalidateGlass();
         }
         File.WriteAllBytes(Path.Combine(AppContext.BaseDirectory, name), Artwork.Encode(image));
