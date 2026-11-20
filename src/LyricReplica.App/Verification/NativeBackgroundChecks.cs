@@ -40,7 +40,7 @@ public sealed partial class MainWindow
         if (!_libraryTransition.UsesCachedBlur || !_lyricsTransition.UsesCachedBlur ||
             _libraryTransition.Amount <= 0 || _lyricsTransition.Amount <= 0 ||
             _libraryTransition.Amount + _lyricsTransition.Amount >= 1 ||
-            _backdropNeutral.Opacity is <= 0 or >= .58 || _backdropShade.Opacity is <= 0 or >= .18 ||
+            _backdropNeutral.Opacity is <= 0 or >= .58 || _backdropShade.Opacity is <= 0 or >= LibraryShadeOpacity ||
             _legacyTime <= time || crop != BackdropBounds() || viewport != _shell.RenderSize ||
             !ReferenceEquals(chrome, WindowChrome.GetWindowChrome(this)))
             throw new InvalidOperationException($"The staggered fades must reuse cached blur in the same viewport. Progress={progress:F3}.");
@@ -74,7 +74,10 @@ public sealed partial class MainWindow
     private async Task ProfilePageBlendAsync(string folder)
     {
         var frames = new List<double>();
-        var preparation = new List<double>();
+        var openPreparation = new List<double>();
+        var closePreparation = new List<double>();
+        double position = _clock.PositionMs;
+        bool wasPlaying = _clock.IsPlaying;
         TimeSpan? renderingTime = null;
         long? lastFrame = null;
         void Observe(object? sender, EventArgs e)
@@ -95,17 +98,30 @@ public sealed partial class MainWindow
         CompositionTarget.Rendering += Observe;
         try
         {
+            if (!wasPlaying)
+                TogglePlay();
             for (int i = 0; i < 4; i++)
             {
+                Seek(12_600);
                 long start = Stopwatch.GetTimestamp();
                 ShowLyrics();
-                preparation.Add(Stopwatch.GetElapsedTime(start).TotalMilliseconds);
-                await Task.Delay(450);
+                openPreparation.Add(Stopwatch.GetElapsedTime(start).TotalMilliseconds);
+                await Task.Delay(800);
+                start = Stopwatch.GetTimestamp();
                 ShowLibrary();
+                closePreparation.Add(Stopwatch.GetElapsedTime(start).TotalMilliseconds);
                 await Task.Delay(450);
+                if (!_clock.IsPlaying || _clock.PositionMs < 13_400 || LyricsProgress != 0)
+                    throw new InvalidOperationException("The transition must settle while the playback clock continues.");
             }
         }
-        finally { CompositionTarget.Rendering -= Observe; }
+        finally
+        {
+            CompositionTarget.Rendering -= Observe;
+            if (!wasPlaying && _clock.IsPlaying)
+                TogglePlay();
+            Seek(position);
+        }
         frames.Sort();
         if (frames.Count == 0)
             throw new InvalidOperationException("No transition render callbacks were observed.");
@@ -113,7 +129,8 @@ public sealed partial class MainWindow
         {
             assemblySha256 = App.AssemblySha256, viewport = _shell.RenderSize, dpi = VisualTreeHelper.GetDpi(_shell),
             tier = RenderCapability.Tier >> 16, count = frames.Count, medianMs = frames[frames.Count / 2],
-            p95Ms = frames[(int)(frames.Count * .95)], maxMs = frames[^1], preparationMs = preparation
+            p95Ms = frames[(int)(frames.Count * .95)], maxMs = frames[^1], playing = true,
+            openPreparationMs = openPreparation, closePreparationMs = closePreparation
         }, LyricsFile.JsonOptions));
     }
 

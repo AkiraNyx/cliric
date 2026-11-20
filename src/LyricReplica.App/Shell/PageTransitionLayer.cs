@@ -7,48 +7,32 @@ namespace LyricReplica.App;
 
 internal sealed class PageTransitionLayer : Grid
 {
-    private static readonly BitmapCache SharpCache = MotionTokens.Freeze(new BitmapCache());
     private static readonly BitmapCache BlurCache = MotionTokens.Freeze(new BitmapCache { RenderAtScale = .5 });
-    private static readonly BlurEffect Gaussian = MotionTokens.Freeze(new BlurEffect { Radius = 6, RenderingBias = RenderingBias.Performance });
-    private readonly FrameworkElement _page;
-    private readonly Border _sharp, _blurred;
-    private readonly VisualBrush _source = new() { AutoLayoutContent = false, ViewboxUnits = BrushMappingMode.Absolute, Stretch = Stretch.Fill };
+    private readonly BlurEffect _blur = new() { RenderingBias = RenderingBias.Performance };
+    private readonly Border _surface;
 
     internal double Amount { get; private set; }
-    internal bool UsesCachedBlur => _source.Visual is not null;
+    internal bool UsesCachedBlur => CacheMode is not null;
 
     internal PageTransitionLayer(FrameworkElement page)
     {
-        _page = page;
-        _sharp = new Border { Child = page };
-        // Cache the filtered result on its parent so fading it doesn't rerun the Gaussian.
-        _blurred = new Border
-        {
-            CacheMode = BlurCache,
-            Child = new Border { Background = _source, Effect = Gaussian },
-            IsHitTestVisible = false,
-            Visibility = Visibility.Hidden
-        };
-        page.SizeChanged += (_, e) => _source.Viewbox = new Rect(e.NewSize);
-        Children.Add(_sharp);
-        Children.Add(_blurred);
+        _surface = new Border { Child = page };
+        Children.Add(_surface);
     }
 
     internal void SetPose(double amount)
     {
         Amount = amount;
-        double blurMix = Math.Min(1, (1 - amount) * 1.5);
-        double blurOpacity = amount * blurMix;
-        bool showBlur = blurOpacity > .004;
-        if (showBlur != UsesCachedBlur)
+        Opacity = amount;
+        // Half-DIP steps keep the low-resolution surface reusable between blur changes.
+        double radius = Math.Round(12 * (1 - amount)) / 2;
+        bool soften = amount > .004 && radius > 0;
+        if (soften)
+            _blur.Radius = radius;
+        if (soften != UsesCachedBlur)
         {
-            _source.Visual = showBlur ? _page : null;
-            _page.CacheMode = showBlur ? SharpCache : null;
-            _blurred.Visibility = showBlur ? Visibility.Visible : Visibility.Hidden;
+            _surface.Effect = soften ? _blur : null;
+            CacheMode = soften ? BlurCache : null;
         }
-
-        _blurred.Opacity = blurOpacity;
-        // Match the page's opacity after compositing the blur over the sharp pass.
-        _sharp.Opacity = showBlur ? (amount - blurOpacity) / (1 - blurOpacity) : amount;
     }
 }

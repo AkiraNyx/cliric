@@ -19,6 +19,7 @@ public sealed partial class MainWindow
     private static readonly DependencyProperty LyricsProgressProperty = DependencyProperty.Register(
         nameof(LyricsProgress), typeof(double), typeof(MainWindow),
         new PropertyMetadata(0d, (window, change) => ((MainWindow)window).SetPageBlend((double)change.NewValue)));
+    private const double LibraryShadeOpacity = .12;
     private readonly Grid _shell = new();
     private readonly Border _backdropNeutral = new() { IsHitTestVisible = false };
     private readonly Border _backdropShade = new() { Background = Brushes.Black, IsHitTestVisible = false };
@@ -246,7 +247,7 @@ public sealed partial class MainWindow
     {
         double tint = 1 - MotionTokens.Move.Ease(progress);
         _backdropNeutral.Opacity = .58 * tint;
-        _backdropShade.Opacity = .18 * tint;
+        _backdropShade.Opacity = LibraryShadeOpacity * tint;
         double delay = (double)MotionTokens.LyricsPageStaggerMs / MotionTokens.LyricsPage.Milliseconds;
         _libraryTransition.SetPose(1 - MotionTokens.Move.Ease(Math.Clamp(progress / (1 - delay), 0, 1)));
         _lyricsTransition.SetPose(MotionTokens.Move.Ease(Math.Clamp((progress - delay) / (1 - delay), 0, 1)));
