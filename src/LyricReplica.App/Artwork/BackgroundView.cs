@@ -28,6 +28,7 @@ public sealed class BackgroundView : Grid, IDisposable
     private bool _disposed;
     private FrameworkElement? _renderView;
     private bool _independent;
+    private bool _inlineFrameAvailable;
     private IsolationBackground? _isolation;
     private IsolationPalettes _paletteMode;
     private int _paletteGeneration;
@@ -93,8 +94,9 @@ public sealed class BackgroundView : Grid, IDisposable
         if (_mode == mode && !force)
             return;
         int generation = ++_generation;
-        _independent = SupportsIndependent(mode) && options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && Window.GetWindow(this)?.WindowState == WindowState.Maximized;
+        _independent = ShouldUseIndependent(mode, options);
         _mode = mode;
+        _inlineFrameAvailable = false;
         ++_paletteGeneration;
         _session?.Dispose();
         _session = null;
@@ -123,6 +125,8 @@ public sealed class BackgroundView : Grid, IDisposable
                 var session = _session;
                 session.FirstFramePresented += OnReady;
                 session.Faulted += OnFaulted;
+                if (_independent)
+                    Children.Add(_legacy);
                 Children.Add(view);
                 if (_encoded.Length > 0)
                     await session.SetArtworkAsync(new BackgroundArtwork(_id, _encoded));
@@ -148,6 +152,11 @@ public sealed class BackgroundView : Grid, IDisposable
     }
 
     internal static bool SupportsIndependent(BackgroundMode mode) => mode is BackgroundMode.ReferenceAppleMusic or BackgroundMode.Modern;
+
+    private bool ShouldUseIndependent(BackgroundMode mode, ViewOptions options) =>
+        SupportsIndependent(mode) && options.AppleMusicLyrics.EnableIndependentBackgroundRenderer &&
+        Window.GetWindow(this) is { WindowState: WindowState.Maximized } window &&
+        (window is not MainWindow main || main.CanPresentIndependentBackground);
 
     internal static IBackgroundSession CreateIosSession(BackgroundMode mode, AppleMusicIosBackgroundSettings settings,
         bool lightTheme, bool independent, int presetSlot = -1) =>
@@ -195,8 +204,11 @@ public sealed class BackgroundView : Grid, IDisposable
             Dispatcher.InvokeAsync(NotifyReady);
         void NotifyReady()
         {
-            if (!_disposed && ReferenceEquals(sender, _session))
-                Ready?.Invoke();
+            if (_disposed || !ReferenceEquals(sender, _session))
+                return;
+            if (_independent)
+                Children.Remove(_legacy);
+            Ready?.Invoke();
         }
     }
     private void OnFaulted(object? sender, BackgroundFaultedEventArgs e) => Dispatcher.InvokeAsync(() => { if (ReferenceEquals(sender, _session)) Fallback(e.Exception); });
@@ -215,9 +227,9 @@ public sealed class BackgroundView : Grid, IDisposable
         Children.Add(_legacy);
         Fault?.Invoke(LastError);
     }
-    public void Update(bool playing, bool portrait, bool visible, ViewOptions options, double elapsed)
+    public void Update(bool playing, bool portrait, bool visible, ViewOptions options, double elapsed, bool holdInlineFrame = false)
     {
-        bool independent = SupportsIndependent(_mode) && options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && Window.GetWindow(this)?.WindowState == WindowState.Maximized;
+        bool independent = ShouldUseIndependent(_mode, options);
         if (independent != _independent)
         {
             _ = SetModeAsync(_mode, options, true);
@@ -226,12 +238,21 @@ public sealed class BackgroundView : Grid, IDisposable
         if (_renderView is not null)
         {
             _renderView.Visibility = options.ReduceMotion ? Visibility.Hidden : Visibility.Visible;
-            if (options.ReduceMotion && !Children.Contains(_legacy))
-                Children.Add(_legacy);
-            else if (!options.ReduceMotion && Children.Contains(_legacy))
+            bool showBackdrop = options.ReduceMotion || IndependentRendererActive && !RendererReady;
+            if (showBackdrop && !Children.Contains(_legacy))
+                Children.Insert(0, _legacy);
+            else if (!showBackdrop && Children.Contains(_legacy))
                 Children.Remove(_legacy);
         }
-        _session?.UpdateState(new BackgroundState { IsPlaying = playing && !options.ReduceMotion, IsVertical = portrait, IsVisible = visible && !options.ReduceMotion, IsBehindLyrics = true, IsLightTheme = options.LightTheme });
+        bool presenting = visible && !options.ReduceMotion;
+        if (_session is { } session)
+        {
+            // Inline sessions keep their last texture attached when frame production pauses.
+            bool hold = holdInlineFrame && !_independent && _inlineFrameAvailable;
+            session.UpdateState(new BackgroundState { IsPlaying = playing && !options.ReduceMotion, IsVertical = portrait, IsVisible = presenting && !hold, IsBehindLyrics = true, IsLightTheme = options.LightTheme });
+            if (!holdInlineFrame)
+                _inlineFrameAvailable = presenting && _encoded.Length > 0;
+        }
         if ((_session is null || options.ReduceMotion) && _mode != BackgroundMode.Solid)
         {
             if (!options.ReduceMotion)

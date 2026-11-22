@@ -19,18 +19,20 @@ public sealed partial class MainWindow
     private static readonly DependencyProperty LyricsProgressProperty = DependencyProperty.Register(
         nameof(LyricsProgress), typeof(double), typeof(MainWindow),
         new PropertyMetadata(0d, (window, change) => ((MainWindow)window).SetPageBlend((double)change.NewValue)));
+    private static readonly BitmapCache PageFadeCache = MotionTokens.Freeze(new BitmapCache());
     private const double LibraryShadeOpacity = .12;
     private readonly Grid _shell = new();
     private readonly Border _backdropNeutral = new() { IsHitTestVisible = false };
     private readonly Border _backdropShade = new() { Background = Brushes.Black, IsHitTestVisible = false };
     private readonly WindowChrome _libraryChrome = new() { UseAeroCaptionButtons = false };
     private LibraryView? _library;
-    private PageTransitionLayer _libraryTransition = null!, _lyricsTransition = null!;
+    private readonly Border _libraryTransition = new(), _lyricsTransition = new();
     private Viewbox? _shellLegacyBackdrop;
     private bool _lyricsShown, _lyricsEntering, _stoppingForClose;
     private double _lastVolumeSent;
 
     internal bool LyricsShown => _lyricsShown;
+    internal bool CanPresentIndependentBackground => !_hostedByPlayer || _fullscreen;
     internal double LyricsProgress => (double)GetValue(LyricsProgressProperty);
 
     private void BuildShell()
@@ -55,8 +57,10 @@ public sealed partial class MainWindow
         _shell.Children.Add(_shellLegacyBackdrop);
         _shell.Children.Add(_backdropNeutral);
         _shell.Children.Add(_backdropShade);
-        _shell.Children.Add(_libraryTransition = new PageTransitionLayer(_library));
-        _shell.Children.Add(_lyricsTransition = new PageTransitionLayer(_root));
+        _libraryTransition.Child = _library;
+        _lyricsTransition.Child = _root;
+        _shell.Children.Add(_libraryTransition);
+        _shell.Children.Add(_lyricsTransition);
         SetPageBlend(0);
         Content = _shell;
         Title = "LyricReplica";
@@ -79,12 +83,25 @@ public sealed partial class MainWindow
 
     private IntPtr HandleLibraryFrame(IntPtr hwnd, int message, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
+        const int systemCommand = 0x0112;
+        const int maximize = 0xF030, restore = 0xF120;
         const int ncHitTest = 0x0084;
         const int ncMouseMove = 0x00A0;
         const int ncLeftButtonDown = 0x00A1;
         const int ncMouseLeave = 0x02A2;
         const int mouseMove = 0x0200;
         const int maxButton = 9;
+        if (_lyricsShown && !_updatingWindowChrome && message == systemCommand)
+        {
+            long command = wParam.ToInt64() & 0xFFF0;
+            if (command == maximize && !_fullscreen ||
+                command == restore && _fullscreen && WindowState == WindowState.Maximized)
+            {
+                handled = true;
+                ToggleFullscreen();
+                return IntPtr.Zero;
+            }
+        }
         if (_lyricsShown || _fullscreen || _library is not { } library)
             return ConstrainMaximizedLibrary(hwnd, message, wParam, lParam, ref handled);
 
@@ -240,7 +257,7 @@ public sealed partial class MainWindow
                     if (_fullscreen)
                         ToggleFullscreen();
                 }
-            });
+            }, beginOnNextTick: true);
     }
 
     private void SetPageBlend(double progress)
@@ -249,8 +266,14 @@ public sealed partial class MainWindow
         _backdropNeutral.Opacity = .58 * tint;
         _backdropShade.Opacity = LibraryShadeOpacity * tint;
         double delay = (double)MotionTokens.LyricsPageStaggerMs / MotionTokens.LyricsPage.Milliseconds;
-        _libraryTransition.SetPose(1 - MotionTokens.Move.Ease(Math.Clamp(progress / (1 - delay), 0, 1)));
-        _lyricsTransition.SetPose(MotionTokens.Move.Ease(Math.Clamp((progress - delay) / (1 - delay), 0, 1)));
+        FadeLayer(_libraryTransition, 1 - MotionTokens.Move.Ease(Math.Clamp(progress / (1 - delay), 0, 1)));
+        FadeLayer(_lyricsTransition, MotionTokens.Move.Ease(Math.Clamp((progress - delay) / (1 - delay), 0, 1)));
+
+        static void FadeLayer(Border layer, double opacity)
+        {
+            layer.CacheMode = opacity is > 0 and < 1 ? PageFadeCache : null;
+            layer.Opacity = opacity;
+        }
     }
 
     internal void OpenLyricsSettings()

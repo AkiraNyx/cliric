@@ -35,7 +35,7 @@ public static class ShellTransitions
     private static readonly ConditionalWeakTable<DependencyObject, Dictionary<DependencyProperty, Transition>> Active = new();
 
     internal static void To(IAnimatable target, DependencyProperty property, double value, MotionTiming timing,
-        bool immediate = false, Action? completed = null)
+        bool immediate = false, Action? completed = null, bool beginOnNextTick = false)
     {
         var element = (DependencyObject)target;
         double current = (double)element.GetValue(property);
@@ -58,8 +58,13 @@ public static class ShellTransitions
         properties[property] = transition;
         clock.Completed += (_, _) => Complete(target, property, transition);
         // Replace before removing the old clock so WPF snapshots its visible value.
+        if (beginOnNextTick)
+            element.SetCurrentValue(property, current);
         target.ApplyAnimationClock(property, clock, HandoffBehavior.SnapshotAndReplace);
-        clock.Controller!.SeekAlignedToLastTick(TimeSpan.Zero, TimeSeekOrigin.BeginTime);
+        if (beginOnNextTick)
+            clock.Controller!.Begin();
+        else
+            clock.Controller!.SeekAlignedToLastTick(TimeSpan.Zero, TimeSeekOrigin.BeginTime);
         previous?.Clock.Controller?.Remove();
     }
 

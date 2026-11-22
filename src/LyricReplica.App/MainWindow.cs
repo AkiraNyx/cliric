@@ -223,8 +223,8 @@ public sealed partial class MainWindow : Window
         if (WindowChrome.GetWindowChrome(this) != _lyricsChrome)
             WindowChrome.SetWindowChrome(this, _lyricsChrome);
         _lyricsChrome.ResizeBorderThickness = new Thickness(maximized ? 0 : 5);
-        bool fixedSize = maximized && BackgroundView.SupportsIndependent(_options.Background) && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer;
-        if (fixedSize && ResizeMode != ResizeMode.NoResize)
+        bool fixedSize = (maximized || _fullscreen) && BackgroundView.SupportsIndependent(_options.Background) && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer;
+        if (maximized && fixedSize && ResizeMode != ResizeMode.NoResize)
         {
             _updatingWindowChrome = true;
             try
@@ -263,7 +263,7 @@ public sealed partial class MainWindow : Window
     {
         if (_disposed)
             return;
-        bool transparent = ready && WindowState == WindowState.Maximized && BackgroundView.SupportsIndependent(_options.Background) && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && !_options.ReduceMotion;
+        bool transparent = ready && CanPresentIndependentBackground && WindowState == WindowState.Maximized && BackgroundView.SupportsIndependent(_options.Background) && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && !_options.ReduceMotion;
         if (_independentPresentation == transparent)
             return;
         _independentPresentation = transparent;
@@ -635,7 +635,8 @@ public sealed partial class MainWindow : Window
             int rate = Math.Clamp(_options.AppleMusicLyrics.BackgroundDynamicFrameRate, 1, 120);
             _reference.UpdateLegacy(Math.Floor(_legacyTime * rate) / rate, _options.LightTheme, _options.Background == BackgroundMode.Static || _options.ReduceMotion);
         }
-        _background.Update(_clock.IsPlaying, portrait, visible, _options, elapsed);
+        _background.Update(_clock.IsPlaying, portrait, visible, _options, elapsed,
+            holdInlineFrame: _hostedByPlayer && LyricsProgress is > 0 and < 1);
         UpdateIndependentPresentation(_background.IndependentRendererActive && _background.RendererReady);
         _background.Visibility = legacy ? Visibility.Hidden : Visibility.Visible;
     }
@@ -906,12 +907,17 @@ public sealed partial class MainWindow : Window
                     Close();
                 break;
             case MagicAction.Maximize:
-                WindowState = WindowState.Maximized;
+                if (_hostedByPlayer && !_fullscreen)
+                    ToggleFullscreen();
+                else
+                    WindowState = WindowState.Maximized;
                 _rebuildPending = true;
                 break;
             case MagicAction.Restore:
-                _fullscreen = false;
-                WindowState = WindowState.Normal;
+                if (_fullscreen)
+                    ToggleFullscreen();
+                else
+                    WindowState = WindowState.Normal;
                 _rebuildPending = true;
                 break;
             case MagicAction.Minimize:
@@ -1377,7 +1383,7 @@ public sealed partial class MainWindow : Window
     {
         if (!_fullscreen)
         {
-            _restoreBounds = new Rect(Left, Top, Width, Height);
+            _restoreBounds = WindowState == WindowState.Normal ? new Rect(Left, Top, Width, Height) : RestoreBounds;
             _restoreState = WindowState;
             WindowState = WindowState.Normal;
             _fullscreen = true;

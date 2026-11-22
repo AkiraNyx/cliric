@@ -57,7 +57,7 @@ public sealed partial class MainWindow
         {
             _options.Topmost = true;
             Topmost = true;
-            ToggleFullscreen();
+            ExecuteMagic(MagicAction.Maximize);
             await Task.Delay(200);
             var bounds = new
             {
@@ -75,7 +75,7 @@ public sealed partial class MainWindow
                 assemblySha256 = App.AssemblySha256,
                 bounds
             }, LyricsFile.JsonOptions));
-            if (Topmost || Math.Abs(bounds.contentWidth - bounds.screenWidth) > 2 || Math.Abs(bounds.contentHeight - bounds.screenHeight) > 2)
+            if (!_fullscreen || Topmost || Math.Abs(bounds.contentWidth - bounds.screenWidth) > 2 || Math.Abs(bounds.contentHeight - bounds.screenHeight) > 2)
                 throw new InvalidOperationException("Maximized content/pinning differs from the current primary monitor policy: " + JsonSerializer.Serialize(bounds));
             _options.Background = BackgroundMode.Modern;
             _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer = true;
@@ -83,10 +83,21 @@ public sealed partial class MainWindow
             await Task.Delay(200);
             if (WindowState != WindowState.Maximized || ResizeMode != ResizeMode.NoResize)
                 throw new InvalidOperationException("Independent maximized mode did not enter NoResize.");
-            ToggleFullscreen();
+            ExecuteMagic(MagicAction.Restore);
             await Task.Delay(200);
-            if (!Topmost || ResizeMode != ResizeMode.CanResize || WindowChrome.GetWindowChrome(this) != (_hostedByPlayer ? _libraryChrome : _lyricsChrome) || _root.Margin != new Thickness(0) || Math.Abs(ActualWidth - width) > 1 || Math.Abs(ActualHeight - height) > 1)
+            if (_fullscreen || !Topmost || ResizeMode != ResizeMode.CanResize || WindowChrome.GetWindowChrome(this) != (_hostedByPlayer ? _libraryChrome : _lyricsChrome) || _root.Margin != new Thickness(0) || Math.Abs(ActualWidth - width) > 1 || Math.Abs(ActualHeight - height) > 1)
                 throw new InvalidOperationException("Restoring the native window did not recover its size, pinning and resize border.");
+            if (_hostedByPlayer)
+            {
+                SystemCommands.MaximizeWindow(this);
+                await Task.Delay(200);
+                if (!_fullscreen || WindowState != WindowState.Maximized || Math.Abs(_root.ActualHeight - bounds.screenHeight) > 2)
+                    throw new InvalidOperationException("The system maximize command must enter lyrics fullscreen.");
+                SystemCommands.RestoreWindow(this);
+                await Task.Delay(200);
+                if (_fullscreen || WindowState != WindowState.Normal)
+                    throw new InvalidOperationException("The system restore command must exit lyrics fullscreen.");
+            }
             File.WriteAllText(report, JsonSerializer.Serialize(new
             {
                 passed = true,
