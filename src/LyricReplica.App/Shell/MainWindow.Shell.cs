@@ -299,7 +299,7 @@ public sealed partial class MainWindow
                 bool draw = warm || opacity > 1d / 255;
                 layer.Opacity = draw ? 1 : 0;
                 if (draw)
-                    effect.SetPose(layer.RenderSize, opacity);
+                    effect.SetPose(opacity, VisualTreeHelper.GetDpi(layer).PixelsPerDip);
             }
             else
                 layer.Opacity = opacity;
@@ -386,7 +386,10 @@ public sealed partial class MainWindow
 
     internal void CaptureShell(string path)
     {
-        var bitmap = new RenderTargetBitmap(Math.Max(1, (int)_shell.ActualWidth), Math.Max(1, (int)_shell.ActualHeight), 96, 96, PixelFormats.Pbgra32);
+        var dpi = VisualTreeHelper.GetDpi(_shell);
+        int width = Math.Max(1, (int)Math.Ceiling(_shell.ActualWidth * dpi.DpiScaleX));
+        int height = Math.Max(1, (int)Math.Ceiling(_shell.ActualHeight * dpi.DpiScaleY));
+        var bitmap = new RenderTargetBitmap(width, height, dpi.PixelsPerInchX, dpi.PixelsPerInchY, PixelFormats.Pbgra32);
         bitmap.Render(_shell);
         File.WriteAllBytes(path, Artwork.Encode(bitmap));
     }

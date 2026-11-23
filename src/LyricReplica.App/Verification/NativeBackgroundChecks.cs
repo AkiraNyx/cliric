@@ -37,7 +37,7 @@ public sealed partial class MainWindow
         SetPageBlend(0);
         if (!openingIsStaggered || !closingIsStaggered || !overlap)
             throw new InvalidOperationException("The pages must have a brief overlap in both directions.");
-        CheckPageFadeBlur();
+        CheckPageFadeBlur(VisualTreeHelper.GetDpi(_shell));
 
         ShowLyrics();
         await Task.Delay(MotionTokens.LyricsPage.Milliseconds / 2);
@@ -50,7 +50,9 @@ public sealed partial class MainWindow
             _legacyTime <= time || crop != BackdropBounds() || viewport != _shell.RenderSize ||
             !ReferenceEquals(chrome, WindowChrome.GetWindowChrome(this)))
             throw new InvalidOperationException($"The staggered fades must retain full-resolution content in the same viewport. Progress={progress:F3}.");
+        SetPageBlend(.25);
         CaptureShell(Path.Combine(folder, "lyrics-transition.png"));
+        SetPageBlend(LyricsProgress);
         progress = LyricsProgress;
         ShowLibrary();
         if (Math.Abs(progress - LyricsProgress) > .025)
@@ -77,27 +79,37 @@ public sealed partial class MainWindow
         Rect BackdropBounds() => backdrop.TransformToVisual(_shell).TransformBounds(new Rect(backdrop.RenderSize));
     }
 
-    private static void CheckPageFadeBlur()
+    private static void CheckPageFadeBlur(DpiScale dpi)
     {
         var effect = new PageFadeEffect();
-        var size = new Size(64, 16);
+        var size = new Size(65 / dpi.DpiScaleX, 16 / dpi.DpiScaleY);
         var layer = new Border
         {
             Background = Brushes.Transparent, Effect = effect, CacheMode = new BitmapCache(),
-            Child = new Border { Width = 32, HorizontalAlignment = HorizontalAlignment.Right, Background = Brushes.White }
+            Child = new Border { Width = 1 / dpi.DpiScaleX, HorizontalAlignment = HorizontalAlignment.Center, Background = Brushes.White }
         };
         layer.Measure(size);
         layer.Arrange(new Rect(size));
-        effect.SetPose(size, .5);
-        var frame = new RenderTargetBitmap(64, 16, 96, 96, PixelFormats.Pbgra32);
+        effect.SetPose(.4, dpi.PixelsPerDip);
+        var frame = new RenderTargetBitmap(65, 16, dpi.PixelsPerInchX, dpi.PixelsPerInchY, PixelFormats.Pbgra32);
         frame.Render(layer);
-        var pixel = new byte[4];
-        frame.CopyPixels(new Int32Rect(31, 8, 1, 1), pixel, 4, 0);
-        if (pixel[3] is 0 or >= 128)
-            throw new InvalidOperationException("The transition shader must soften a sharp edge while fading it.");
-        frame.CopyPixels(new Int32Rect(48, 8, 1, 1), pixel, 4, 0);
-        if (pixel[3] is < 126 or > 129)
-            throw new InvalidOperationException("The transition shader must keep the requested foreground opacity.");
+        var row = new byte[65 * 4];
+        frame.CopyPixels(new Int32Rect(0, 8, 65, 1), row, row.Length, 0);
+        int Alpha(int x) => row[x * 4 + 3];
+        const int center = 32;
+        if (Alpha(center - 2) < 3 || Alpha(center + 2) < 3 || Alpha(center) >= 70)
+            throw new InvalidOperationException("The transition blur must spread a one-pixel stroke across adjacent pixels. " + Profile());
+        for (int distance = 1; distance <= 5; distance++)
+        {
+            if (Alpha(center - distance) > Alpha(center - distance + 1) + 1 ||
+                Alpha(center + distance) > Alpha(center + distance - 1) + 1)
+                throw new InvalidOperationException("The transition blur must have one peak and a smooth falloff. " + Profile());
+        }
+        int totalAlpha = Enumerable.Range(0, 65).Sum(Alpha);
+        if (totalAlpha is < 98 or > 106)
+            throw new InvalidOperationException($"The transition blur must preserve the requested foreground opacity. Total alpha={totalAlpha}. " + Profile());
+
+        string Profile() => string.Join(",", Enumerable.Range(center - 5, 11).Select(Alpha));
     }
 
     private async Task ProfilePageBlendAsync(string folder)
