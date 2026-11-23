@@ -4,7 +4,9 @@ using System.Text.Json;
 using System.Windows;
 using System.Windows.Shell;
 using System.Windows.Interop;
+using System.Windows.Media;
 using LyricReplica.Core;
+using LyricReplica.App.Reference;
 
 namespace LyricReplica.App;
 
@@ -44,6 +46,23 @@ public sealed partial class MainWindow
 
     [DllImport("user32.dll", EntryPoint = "SendMessageW")]
     private static extern IntPtr SendMessage(IntPtr window, int message, IntPtr wParam, IntPtr lParam);
+
+    private void CheckLyricPlaybackHitTargets()
+    {
+        var buttons = _reference.Elements.OfType<ImageButton>().Where(button => button.IsVisible && InputMap.GetClick(button).Length > 0);
+        var targets = buttons.Cast<FrameworkElement>().Append((_portrait ? _seekVertical : _seek).BorderCover).ToArray();
+        if (targets.Length < 6)
+            throw new InvalidOperationException("The lyrics playback controls must be visible in the test layout.");
+        foreach (var control in targets)
+        {
+            var center = new Point(control.ActualWidth / 2, control.ActualHeight / 2);
+            var hit = InputHitTest(control.TranslatePoint(center, this));
+            int nativeHit = GetNativeHit(control.PointToScreen(center));
+            if (!control.IsEnabled || hit is not Visual visual ||
+                (!ReferenceEquals(control, visual) && !control.IsAncestorOf(visual)) || nativeHit != 1)
+                throw new InvalidOperationException($"Playback target {control.Name}/{InputMap.GetClick(control)} hit {hit?.GetType().Name}, native={nativeHit}, enabled={control.IsEnabled}.");
+        }
+    }
 
     private async Task CheckNativeWindowAsync(string folder)
     {

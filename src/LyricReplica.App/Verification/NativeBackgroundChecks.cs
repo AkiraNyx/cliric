@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -31,18 +32,20 @@ public sealed partial class MainWindow
         SetPageBlend(1 - early);
         bool closingIsStaggered = _lyricsTransition.Opacity is > 0 and < 1 && _libraryTransition.Opacity == 0;
         SetPageBlend(.5);
-        bool fullResolutionOverlap = _libraryTransition.Opacity > 0 && _lyricsTransition.Opacity > 0 &&
-            _libraryTransition.Opacity + _lyricsTransition.Opacity < 1 &&
-            _libraryTransition.CacheMode is BitmapCache { RenderAtScale: 1 } &&
-            _lyricsTransition.CacheMode is BitmapCache { RenderAtScale: 1 };
+        bool overlap = _libraryTransition.Opacity > 0 && _lyricsTransition.Opacity > 0 &&
+            _libraryTransition.Opacity + _lyricsTransition.Opacity < 1;
         SetPageBlend(0);
-        if (!openingIsStaggered || !closingIsStaggered || !fullResolutionOverlap)
-            throw new InvalidOperationException("The pages must have a brief full-resolution overlap in both directions.");
+        if (!openingIsStaggered || !closingIsStaggered || !overlap)
+            throw new InvalidOperationException("The pages must have a brief overlap in both directions.");
+        CheckPageFadeBlur();
 
         ShowLyrics();
         await Task.Delay(MotionTokens.LyricsPage.Milliseconds / 2);
         double progress = LyricsProgress;
         if (progress is <= 0 or >= 1 ||
+            _libraryTransition.CacheMode is not BitmapCache { RenderAtScale: 1 } ||
+            _lyricsTransition.CacheMode is not BitmapCache { RenderAtScale: 1 } ||
+            _libraryTransition.Effect is not PageFadeEffect || _lyricsTransition.Effect is not PageFadeEffect ||
             _backdropNeutral.Opacity is <= 0 or >= .58 || _backdropShade.Opacity is <= 0 or >= LibraryShadeOpacity ||
             _legacyTime <= time || crop != BackdropBounds() || viewport != _shell.RenderSize ||
             !ReferenceEquals(chrome, WindowChrome.GetWindowChrome(this)))
@@ -55,7 +58,8 @@ public sealed partial class MainWindow
         int settle = MotionTokens.LyricsPage.Milliseconds + 90;
         await Task.Delay(settle);
         if (LyricsProgress != 0 || _root.IsVisible || !_library!.IsVisible || _libraryTransition.Opacity != 1 || _lyricsTransition.Opacity != 0 ||
-            _libraryTransition.CacheMode is not null || _lyricsTransition.CacheMode is not null)
+            _libraryTransition.CacheMode is not null || _lyricsTransition.CacheMode is not null ||
+            _libraryTransition.Effect is not null || _lyricsTransition.Effect is not null)
             throw new InvalidOperationException("Returning must settle on the sharp library surface.");
         CaptureShell(Path.Combine(folder, "player-shared-background.png"));
 
@@ -73,9 +77,33 @@ public sealed partial class MainWindow
         Rect BackdropBounds() => backdrop.TransformToVisual(_shell).TransformBounds(new Rect(backdrop.RenderSize));
     }
 
+    private static void CheckPageFadeBlur()
+    {
+        var effect = new PageFadeEffect();
+        var size = new Size(64, 16);
+        var layer = new Border
+        {
+            Background = Brushes.Transparent, Effect = effect, CacheMode = new BitmapCache(),
+            Child = new Border { Width = 32, HorizontalAlignment = HorizontalAlignment.Right, Background = Brushes.White }
+        };
+        layer.Measure(size);
+        layer.Arrange(new Rect(size));
+        effect.SetPose(size, .5);
+        var frame = new RenderTargetBitmap(64, 16, 96, 96, PixelFormats.Pbgra32);
+        frame.Render(layer);
+        var pixel = new byte[4];
+        frame.CopyPixels(new Int32Rect(31, 8, 1, 1), pixel, 4, 0);
+        if (pixel[3] is 0 or >= 128)
+            throw new InvalidOperationException("The transition shader must soften a sharp edge while fading it.");
+        frame.CopyPixels(new Int32Rect(48, 8, 1, 1), pixel, 4, 0);
+        if (pixel[3] is < 126 or > 129)
+            throw new InvalidOperationException("The transition shader must keep the requested foreground opacity.");
+    }
+
     private async Task ProfilePageBlendAsync(string folder)
     {
         var frames = new List<double>();
+        var handoffFrames = new List<double>();
         var openPreparation = new List<double>();
         var closePreparation = new List<double>();
         double position = _clock.PositionMs;
@@ -96,14 +124,20 @@ public sealed partial class MainWindow
             if (e is not RenderingEventArgs frame || frame.RenderingTime == renderingTime)
                 return;
             renderingTime = frame.RenderingTime;
-            if (LyricsProgress is <= 0 or >= 1)
+            double progress = LyricsProgress;
+            if (progress is <= 0 or >= 1)
             {
                 lastFrame = null;
                 return;
             }
             long now = Stopwatch.GetTimestamp();
             if (lastFrame is { } previous)
-                frames.Add(Stopwatch.GetElapsedTime(previous, now).TotalMilliseconds);
+            {
+                double interval = Stopwatch.GetElapsedTime(previous, now).TotalMilliseconds;
+                frames.Add(interval);
+                if (progress is >= .35 and <= .65)
+                    handoffFrames.Add(interval);
+            }
             lastFrame = now;
         }
         CompositionTarget.Rendering += Observe;
@@ -118,6 +152,8 @@ public sealed partial class MainWindow
                 ShowLyrics();
                 openPreparation.Add(Stopwatch.GetElapsedTime(start).TotalMilliseconds);
                 await Task.Delay(800);
+                if (i == 0)
+                    CheckLyricPlaybackHitTargets();
                 start = Stopwatch.GetTimestamp();
                 ShowLibrary();
                 closePreparation.Add(Stopwatch.GetElapsedTime(start).TotalMilliseconds);
@@ -139,6 +175,7 @@ public sealed partial class MainWindow
             _rebuildPending = true;
         }
         frames.Sort();
+        handoffFrames.Sort();
         if (frames.Count == 0)
             throw new InvalidOperationException("No transition render callbacks were observed.");
         File.WriteAllText(Path.Combine(folder, "page-blend-timing.json"), JsonSerializer.Serialize(new
@@ -147,6 +184,8 @@ public sealed partial class MainWindow
             tier = RenderCapability.Tier >> 16, count = frames.Count, medianMs = frames[frames.Count / 2],
             p95Ms = frames[(int)(frames.Count * .95)], maxMs = frames[^1], playing = true,
             background = profileBackground.ToString(), lightTheme = true, plusLighter = true,
+            handoffCount = handoffFrames.Count,
+            handoffP95Ms = handoffFrames.Count > 0 ? handoffFrames[(int)(handoffFrames.Count * .95)] : (double?)null,
             openPreparationMs = openPreparation, closePreparationMs = closePreparation
         }, LyricsFile.JsonOptions));
     }
@@ -210,6 +249,7 @@ public sealed partial class MainWindow
         await WaitForRenderer();
         if (!_background.IndependentRendererActive || ResizeMode != ResizeMode.NoResize)
             throw new InvalidOperationException("The independent background host did not enter the native NoResize path.");
+        CheckLyricPlaybackHitTargets();
         var target = ((HwndSource)PresentationSource.FromVisual(this)).CompositionTarget;
         var foreground = new RenderTargetBitmap(8, 8, 96, 96, PixelFormats.Pbgra32);
         foreground.Render(_hostedByPlayer ? _shell : _root);

@@ -13,7 +13,7 @@ internal static class MotionTokens
 
     internal static readonly MotionTiming PageEnter = new(250, Freeze(new QuadraticEase { EasingMode = EasingMode.EaseOut }));
     internal static readonly MotionTiming LyricsPage = new(340, null);
-    internal const int LyricsPageStaggerMs = 150;
+    internal const int LyricsPageStaggerMs = 162;
     internal static readonly MotionTiming PopupEnter = new(200, Enter);
     internal static readonly MotionTiming PopupExit = new(150, Exit);
     internal static readonly MotionTiming PressIn = new(85, Enter);

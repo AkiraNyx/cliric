@@ -26,7 +26,9 @@ public sealed partial class MainWindow
     private readonly Border _backdropShade = new() { Background = Brushes.Black, IsHitTestVisible = false };
     private readonly WindowChrome _libraryChrome = new() { UseAeroCaptionButtons = false };
     private LibraryView? _library;
-    private readonly Border _libraryTransition = new(), _lyricsTransition = new();
+    private readonly Border _libraryTransition = new() { Background = Brushes.Transparent },
+        _lyricsTransition = new() { Background = Brushes.Transparent, IsHitTestVisible = false };
+    private PageFadeEffect _libraryFade = null!, _lyricsFade = null!;
     private Viewbox? _shellLegacyBackdrop;
     private bool _lyricsShown, _lyricsEntering, _stoppingForClose;
     private double _lastVolumeSent;
@@ -59,6 +61,8 @@ public sealed partial class MainWindow
         _shell.Children.Add(_backdropShade);
         _libraryTransition.Child = _library;
         _lyricsTransition.Child = _root;
+        _libraryFade = new PageFadeEffect();
+        _lyricsFade = new PageFadeEffect();
         _shell.Children.Add(_libraryTransition);
         _shell.Children.Add(_lyricsTransition);
         SetPageBlend(0);
@@ -196,8 +200,8 @@ public sealed partial class MainWindow
         UpdateWindowChrome();
         _lyricsEntering = false;
         _root.Visibility = Visibility.Visible;
-        _root.IsHitTestVisible = true;
-        _library.IsHitTestVisible = false;
+        _lyricsTransition.IsHitTestVisible = true;
+        _libraryTransition.IsHitTestVisible = false;
         _library.Pause(true);
         UpdateLyricsVisibility();
         if (!_lyricsLoaded)
@@ -224,13 +228,12 @@ public sealed partial class MainWindow
         foreach (var popup in new[] { _root.ContextMenu, _reference.Get<ContextMenu>("MenuThreeDot"), _reference.Get<ContextMenu>("MenuArtistNameClick") })
             if (popup is not null)
                 popup.IsOpen = false;
-        _root.IsHitTestVisible = false;
+        _lyricsTransition.IsHitTestVisible = false;
         _scroll.StopWheelAnimation();
         UpdateLyricsVisibility();
         UpdateWindowChrome();
         _library.Visibility = Visibility.Visible;
-        _library.IsHitTestVisible = true;
-        _library.Pause(false);
+        _libraryTransition.IsHitTestVisible = true;
         AnimatePageBlend(animate);
     }
 
@@ -242,9 +245,20 @@ public sealed partial class MainWindow
         {
             Milliseconds = (int)Math.Ceiling(MotionTokens.LyricsPage.Milliseconds * Math.Abs(target - LyricsProgress))
         };
+        bool immediate = !animate || ShellTransitions.GetReducedMotion(_library!);
+        if (!immediate && timing.Milliseconds > 0)
+        {
+            // Realize both foreground caches before the incoming layer gains opacity.
+            PrepareFade(_libraryTransition, _libraryFade);
+            PrepareFade(_lyricsTransition, _lyricsFade);
+            SetPageBlend(LyricsProgress);
+        }
         ShellTransitions.To(this, LyricsProgressProperty, target, timing,
-            immediate: !animate || ShellTransitions.GetReducedMotion(_library!), completed: () =>
+            immediate: immediate, completed: () =>
             {
+                _libraryTransition.Effect = _lyricsTransition.Effect = null;
+                _libraryTransition.CacheMode = _lyricsTransition.CacheMode = null;
+                SetPageBlend(target);
                 _lyricsEntering = false;
                 if (_disposed)
                     return;
@@ -253,11 +267,19 @@ public sealed partial class MainWindow
                 else
                 {
                     _root.Visibility = Visibility.Hidden;
+                    _library!.Pause(false);
                     // Complete the blend in one viewport before restoring explicit fullscreen.
                     if (_fullscreen)
                         ToggleFullscreen();
                 }
             }, beginOnNextTick: true);
+
+        static void PrepareFade(Border layer, PageFadeEffect effect)
+        {
+            layer.CacheMode = PageFadeCache;
+            layer.Effect = effect;
+            layer.Opacity = 1;
+        }
     }
 
     private void SetPageBlend(double progress)
@@ -266,13 +288,21 @@ public sealed partial class MainWindow
         _backdropNeutral.Opacity = .58 * tint;
         _backdropShade.Opacity = LibraryShadeOpacity * tint;
         double delay = (double)MotionTokens.LyricsPageStaggerMs / MotionTokens.LyricsPage.Milliseconds;
-        FadeLayer(_libraryTransition, 1 - MotionTokens.Move.Ease(Math.Clamp(progress / (1 - delay), 0, 1)));
-        FadeLayer(_lyricsTransition, MotionTokens.Move.Ease(Math.Clamp((progress - delay) / (1 - delay), 0, 1)));
+        bool warm = progress == (_lyricsShown ? 0 : 1);
+        FadeLayer(_libraryTransition, 1 - MotionTokens.Move.Ease(Math.Clamp(progress / (1 - delay), 0, 1)), warm);
+        FadeLayer(_lyricsTransition, MotionTokens.Move.Ease(Math.Clamp((progress - delay) / (1 - delay), 0, 1)), warm);
 
-        static void FadeLayer(Border layer, double opacity)
+        static void FadeLayer(Border layer, double opacity, bool warm)
         {
-            layer.CacheMode = opacity is > 0 and < 1 ? PageFadeCache : null;
-            layer.Opacity = opacity;
+            if (layer.Effect is PageFadeEffect effect)
+            {
+                bool draw = warm || opacity > 1d / 255;
+                layer.Opacity = draw ? 1 : 0;
+                if (draw)
+                    effect.SetPose(layer.RenderSize, opacity);
+            }
+            else
+                layer.Opacity = opacity;
         }
     }
 

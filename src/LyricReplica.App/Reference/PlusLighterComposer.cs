@@ -67,8 +67,8 @@ public sealed class PlusLighterComposer(ReferencePageView page) : IDisposable
         Grid.SetColumnSpan(_overlay, 2);
         Panel.SetZIndex(_overlay, 1);
         _overlay.Children.Add(_paint);
-        int index = Math.Max(1, stage.Children.IndexOf(page.Get<Viewbox>("ViewboxSongInfo")));
-        index = Math.Min(index, stage.Children.Count);
+        // Keep the mask holder behind the playback controls after the backdrop moves outside MainGrid.
+        int index = stage.Children.IndexOf(page.Get<Viewbox>("ViewboxSongInfo"));
         stage.Children.Insert(index, _overlay);
         stage.Children.Insert(index + 1, _holder);
     }
