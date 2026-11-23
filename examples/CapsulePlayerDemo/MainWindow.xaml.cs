@@ -42,6 +42,7 @@ public partial class MainWindow : Window
         .GetMethod("UpdateShaderConstants", BindingFlags.Instance | BindingFlags.NonPublic)!
         .CreateDelegate<Action<GlassLens, Rect>>();
     private readonly TranslateTransform _trackShift = new(), _transportShift = new();
+    private readonly DrawingBrush _fallbackMask;
     private Rect _capsuleBounds = Rect.Empty;
     private bool _seekFits;
     private bool _shapeRendering;
@@ -50,6 +51,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        _fallbackMask = new DrawingBrush(new GeometryDrawing(Brushes.White, null, CapsuleOutline)) { Stretch = Stretch.None };
+        ToolShade.Background = GlassColor;
         TrackStamp.RenderTransform = _trackShift;
         Transport.RenderTransform = ShapeButton.RenderTransform = _transportShift;
         FontFamily = new FontFamily(new Uri("pack://application:,,,/LyricReplica;component/"), "./Assets/Fonts/#MiSans VF, Microsoft YaHei UI");
@@ -379,7 +382,10 @@ public partial class MainWindow : Window
 
     private void ApplyGlassOptics()
     {
-        if (CapsuleGlass.Mode == GlassLensMode.Shader && !_capsuleBounds.IsEmpty)
+        bool usesShader = CapsuleGlass.Mode == GlassLensMode.Shader;
+        // The shader draws its own fractional edge coverage and rim.
+        CapsuleGlass.OpacityMask = usesShader ? null : _fallbackMask;
+        if (usesShader && !_capsuleBounds.IsEmpty)
             UpdateGlassConstants(CapsuleGlass, _capsuleBounds);
     }
 
@@ -650,7 +656,10 @@ public partial class MainWindow : Window
             throw new InvalidOperationException("The separate tool group must fit beside the centered capsule.");
         var blankGlass = Root.InputHitTest(new Point((capsule.Left + capsule.Right) / 2, capsule.Bottom - 3));
         var corner = Root.InputHitTest(new Point(capsule.Left + 1, capsule.Top + 1));
-        if (blankGlass != Capsule || (corner is DependencyObject target && (target == Capsule || Capsule.IsAncestorOf(target))))
+        var blankToolGlass = Root.InputHitTest(new Point((tools.Left + tools.Right) / 2, tools.Bottom - 3));
+        var toolCorner = Root.InputHitTest(new Point(tools.Left + 1, tools.Top + 1));
+        if (blankGlass != CapsuleHitArea || (corner is DependencyObject target && Capsule.IsAncestorOf(target)) ||
+            blankToolGlass != ToolHitArea || (toolCorner is DependencyObject toolTarget && ToolGroup.IsAncestorOf(toolTarget)))
             throw new InvalidOperationException("Blank glass must intercept input within the rounded capsule outline.");
         var transport = Transport.TransformToVisual(CapsuleContent).TransformBounds(new Rect(Transport.RenderSize));
         var options = ShapeButton.TransformToVisual(CapsuleContent).TransformBounds(new Rect(ShapeButton.RenderSize));
