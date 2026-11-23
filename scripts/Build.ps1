@@ -13,6 +13,7 @@ if($Test){
   if($LASTEXITCODE -ne 0){throw 'Core tests failed'}
 }
 if(Test-Path -LiteralPath 'src/LyricReplica.App/LyricReplica.App.csproj'){
+  & (Join-Path $PSScriptRoot 'Setup-LiquidGlass.ps1')
   $buildArgs=@('build','src/LyricReplica.App/LyricReplica.App.csproj','-c',$Configuration,'--artifacts-path','artifacts/build')
   if($OfflineVerify){$buildArgs+=@('-o','artifacts/offline-build')}
   & $dotnet @buildArgs

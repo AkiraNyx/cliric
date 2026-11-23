@@ -553,4 +553,34 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="CapsuleControlFocus">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border BorderBrush="{DynamicResource CapsuleFocusBrush}" BorderThickness="2" CornerRadius="18" Margin="-2" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="CapsuleToggle" TargetType="ToggleButton" BasedOn="{StaticResource Shell.Toggle}">
+        <Setter Property="local:ShellAssist.CornerRadius" Value="18" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource CapsuleControlFocus}" />
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{StaticResource Shell.ControlHover}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="CapsuleTool" TargetType="ToggleButton" BasedOn="{StaticResource CapsuleToggle}">
+        <Setter Property="Width" Value="48" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource CapsuleControlText}" />
+    </Style>
+    <Style x:Key="ToolLabel" TargetType="local:MiSansLabel" BasedOn="{StaticResource Shell.Caption}">
+        <Setter Property="Foreground" Value="{DynamicResource CapsuleCaption}" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
 </ResourceDictionary>

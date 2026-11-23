@@ -9,7 +9,6 @@ namespace CapsulePlayerDemo;
 
 public partial class MainWindow
 {
-    private const double ToolGap = 10, WideToolsWidth = 156, NarrowToolsWidth = 84;
     private enum DemoRepeat { Off, Queue, Track }
 
     private readonly HashSet<int> _favorites = [];
@@ -17,16 +16,13 @@ public partial class MainWindow
     private ToggleButton? _toolAnchor;
     private FrameworkElement? _toolSection;
 
-    private double ArrangeTools(double available)
+    private void UpdateToolLayout()
     {
-        bool wide = available >= CompactWidth + 2 * (WideToolsWidth + ToolGap);
-        ToolGroup.Width = wide ? WideToolsWidth : NarrowToolsWidth;
-        SoundTool.Visibility = wide ? Visibility.Visible : Visibility.Collapsed;
+        bool wide = PlaybackBar.HasSoundTool;
         CompactSound.Visibility = wide ? Visibility.Collapsed : Visibility.Visible;
-        QueueTool.Width = LyricsTool.Width = wide ? 48 : 36;
         if (ReferenceEquals(_toolSection, SoundOptions) && _toolAnchor is { } oldAnchor)
         {
-            var anchor = wide ? SoundTool : TrackStamp;
+            var anchor = wide ? PlaybackBar.SoundTool : PlaybackBar.TrackStamp;
             if (anchor != oldAnchor)
             {
                 oldAnchor.IsChecked = false;
@@ -35,7 +31,6 @@ public partial class MainWindow
             }
         }
         PlaceToolFlyout();
-        return ToolGroup.Width;
     }
 
     private void ToggleTool(object sender, RoutedEventArgs e)
@@ -73,8 +68,8 @@ public partial class MainWindow
             return;
         const double inset = 16;
         double rightAligned = Math.Max(inset, Root.ActualWidth - ToolFlyout.Width - inset);
-        double left = anchor == TrackStamp
-            ? Math.Clamp(TrackStamp.TranslatePoint(new Point(), Root).X, inset, rightAligned)
+        double left = anchor == PlaybackBar.TrackStamp
+            ? Math.Clamp(PlaybackBar.TrackStamp.TranslatePoint(new Point(), Root).X, inset, rightAligned)
             : rightAligned;
         ToolFlyout.Margin = new Thickness(left, 0, 0, 78);
     }
@@ -99,7 +94,7 @@ public partial class MainWindow
 
     private void ChangeVolume(object sender, RoutedPropertyChangedEventArgs<double> e) => _audio.Volume = e.NewValue / 100;
 
-    private void OpenCompactSound(object sender, RoutedEventArgs e) => OpenToolFlyout(TrackStamp, SoundOptions);
+    private void OpenCompactSound(object sender, RoutedEventArgs e) => OpenToolFlyout(PlaybackBar.TrackStamp, SoundOptions);
 
     private void ChangeRepeat(object sender, RoutedEventArgs e)
     {
@@ -140,7 +135,7 @@ public partial class MainWindow
         bool favorite = _favorites.Contains(Tracks.SelectedIndex);
         FavoriteToggle.IsChecked = favorite;
         FavoriteToggle.Content = favorite ? "取消收藏" : "收藏";
-        FavoriteMark.Visibility = favorite ? Visibility.Visible : Visibility.Collapsed;
+        PlaybackBar.FavoriteMark.Visibility = favorite ? Visibility.Visible : Visibility.Collapsed;
         CopyTitleButton.Content = "复制曲名";
     }
 
@@ -148,7 +143,7 @@ public partial class MainWindow
     {
         try
         {
-            Clipboard.SetDataObject(CapsuleTitle.Text, true);
+            Clipboard.SetDataObject(PlaybackBar.CapsuleTitle.Text, true);
             CloseToolFlyout();
         }
         catch (ExternalException)

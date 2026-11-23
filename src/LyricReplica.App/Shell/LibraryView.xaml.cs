@@ -63,6 +63,7 @@ public sealed partial class LibraryView : UserControl
         _systemAnimationsEnabled = _selfTest || SystemParameters.ClientAreaAnimation;
         FontFamily = MiSansTypography.Family;
         InitializeComponent();
+        _playbackScene = CreatePlaybackScene();
         InitializeTypography();
         SettingsVolume.AttachValueEditor(SettingsVolumeValue, 0);
         _page = HomePage;
@@ -72,9 +73,7 @@ public sealed partial class LibraryView : UserControl
         QueueSurface.Margin = new Thickness(0, 0, 0, MotionTokens.PopupTravel);
         AccountPopup.CustomPopupPlacementCallback = (popup, target, _) => PlaceShellPopup(AccountButton, popup, target, above: false);
         QueuePopup.CustomPopupPlacementCallback = (popup, target, _) => PlaceShellPopup(QueueButton, popup, target, above: true);
-        LibraryRoot.IsEnabled = false;
-        ShellPlaybackControls.Initialize(PreviousButton, PlayButton, NextButton);
-        Progress.UseShellLayout();
+        _playbackScene.IsEnabled = false;
         Progress.SeekRequested += position => lyrics.SeekFromPlayer(position, Progress.Dragging);
         _refresh.Tick += (_, _) =>
         {
@@ -124,7 +123,7 @@ public sealed partial class LibraryView : UserControl
         await _lyrics.StartPlaybackAsync();
         if (!IsVisible && !_lyrics.IsVisible)
             return;
-        LibraryRoot.IsEnabled = true;
+        _playbackScene.IsEnabled = true;
         RefreshPlayer();
         _refresh.Start();
         if (_selfTest)
@@ -137,10 +136,11 @@ public sealed partial class LibraryView : UserControl
         {
             SuspendPlaylistLoad();
             CloseShellPopups();
+            PlaybackBar.AnimateShape(immediate: true);
             _refresh.Stop();
             _page.StopWheelAnimation();
         }
-        else if (LibraryRoot.IsEnabled)
+        else if (_playbackScene.IsEnabled)
         {
             if (_suspendedPlaylistOffset.HasValue)
                 Dispatcher.InvokeAsync(ResumePlaylistLoad, DispatcherPriority.Background);
@@ -164,8 +164,7 @@ public sealed partial class LibraryView : UserControl
                 return;
             if (e.PropertyName == nameof(SystemParameters.HighContrast))
             {
-                ShellPlaybackControls.ApplyPalette(PreviousButton, PlayButton, NextButton, _lyrics.Playing);
-                Progress.ApplyShellPalette();
+                PlaybackBar.ApplyPalette(_lyrics.Playing);
                 return;
             }
             _systemAnimationsEnabled = SystemParameters.ClientAreaAnimation;
@@ -186,7 +185,7 @@ public sealed partial class LibraryView : UserControl
                 QueueScroller?.FinishWheelAnimation();
             ShellTransitions.Settle(Dispatcher);
         }
-        Progress.SetShellReducedMotion(reduced);
+        PlaybackBar.ApplyMotionPreference(reduced);
         UpdatePageTitle();
     }
 
@@ -199,7 +198,6 @@ public sealed partial class LibraryView : UserControl
         LyricsButton.ToolTip = !controls ? "先添加或选择曲目" : loading ? "正在加载曲目…" : "打开 Apple Music 歌词";
         PreviousButton.IsEnabled = NextButton.IsEnabled = controls;
         Progress.IsEnabled = controls && _lyrics.Clock.DurationMs > 0;
-        FavoriteButton.IsEnabled = _lyrics.TrackIndex >= 0;
         NetEaseQualityButton.IsEnabled = !loading;
         PlayButton.ToolTip = HeroPlay.ToolTip = loading ? "正在加载音频…" : !controls ? "先添加或选择曲目" : _lyrics.Playing ? "暂停" : "播放";
     }
@@ -214,13 +212,14 @@ public sealed partial class LibraryView : UserControl
         if (artwork is not null && artworkChanged)
             _artworkCache[song.Id] = artwork;
 
-        TrackTitle.Text = HeroTitle.Text = song.Title;
-        TrackArtist.Text = HeroArtist.Text = _lyrics.TrackArtist;
+        PlaybackBar.CapsuleTitle.Text = HeroTitle.Text = song.Title;
+        PlaybackBar.CapsuleArtist.Text = HeroArtist.Text = _lyrics.TrackArtist;
+        if (trackChanged)
+            PlaybackBar.TrackStamp.ToolTip = _lyrics.CanControlPlayback ? $"{song.Title}\n{_lyrics.TrackArtist}" : "曲目操作";
         HeroSource.Text = !_lyrics.CanControlPlayback ? "" : string.IsNullOrWhiteSpace(song.Album) ? _lyrics.PlaybackSource : $"{song.Album} · {_lyrics.PlaybackSource}";
         bool qualityVisible = _lyrics.ClientTrack is not null && UseClientSession;
         NetEaseQualityButton.Visibility = qualityVisible ? Visibility.Visible : Visibility.Collapsed;
-        UpdatePlaybackSideColumn(qualityVisible);
-        NetEaseQualityButton.Content = IsNarrow ? "音质" : QualityName(_lyrics.ActualNetEaseQuality) ?? "音质";
+        NetEaseQualityButton.Content = QualityName(_lyrics.ActualNetEaseQuality) ?? "音质";
         NetEaseQualityButton.ToolTip = QualityName(_lyrics.ActualNetEaseQuality) is { } actual ? $"当前音质 · {actual}" : "网易云音质";
         if (artworkChanged)
             ShowArtwork(artwork);
@@ -246,14 +245,12 @@ public sealed partial class LibraryView : UserControl
         bool hearted = _lyrics.IsHearted;
         if (_displayedHeart != hearted)
         {
-            if (_displayedHeart.HasValue && FavoriteGlyph.IsVisible)
-                ShellTransitions.Reveal(FavoriteGlyph, .55, 0, MotionTokens.PlaybackState, MotionReduced);
+            var favorite = PlaybackBar.FavoriteMark;
+            favorite.Visibility = hearted ? Visibility.Visible : Visibility.Collapsed;
+            if (_displayedHeart.HasValue && favorite.IsVisible)
+                ShellTransitions.Reveal(favorite, .55, 0, MotionTokens.PlaybackState, MotionReduced);
             _displayedHeart = hearted;
-            string label = hearted ? "已收藏" : "收藏";
-            FavoriteGlyph.Text = hearted ? "" : "";
-            FavoriteGlyph.Foreground = hearted ? (Brush)FindResource("Shell.Accent") : (Brush)FindResource("Shell.Primary");
-            FavoriteButton.ToolTip = label;
-            AutomationProperties.SetName(FavoriteButton, label);
+            AutomationProperties.SetHelpText(PlaybackBar.TrackStamp, hearted ? "已收藏 · 查看曲目操作" : "查看收藏和更多操作");
         }
 
         ShuffleButton.Tag = _lyrics.ShuffleActive;
@@ -302,11 +299,13 @@ public sealed partial class LibraryView : UserControl
 
     private void ShowArtwork(ImageSource? artwork)
     {
-        Cover.ImageSource = HeroCover.ImageSource = artwork;
-        if (_displayedSong is null || MotionReduced || artwork is null || !CoverFrame.IsVisible)
-            ShellTransitions.Set(CoverFrame, OpacityProperty, 1);
+        HeroCover.ImageSource = artwork;
+        PlaybackBar.SetArtwork(artwork);
+        var cover = PlaybackBar.CoverFrame;
+        if (_displayedSong is null || MotionReduced || artwork is null || !cover.IsVisible)
+            ShellTransitions.Set(cover, OpacityProperty, 1);
         else
-            ShellTransitions.Reveal(CoverFrame, CoverFrame.Opacity < .99 ? CoverFrame.Opacity : .76, 0,
+            ShellTransitions.Reveal(cover, cover.Opacity < .99 ? cover.Opacity : .76, 0,
                 MotionTokens.ArtworkReveal, immediate: false);
     }
 
@@ -334,30 +333,16 @@ public sealed partial class LibraryView : UserControl
 
     internal void ShowNotice(string text) => _lyrics.Notify(text);
 
-    private void UpdatePlaybackSideColumn(bool qualityVisible)
-    {
-        PlaybackSideColumn.Width = qualityVisible ? GridLength.Auto : new GridLength(1, GridUnitType.Star);
-        PlaybackSideColumn.MinWidth = IsCompact ? 132 : 264;
-    }
-
     private Image PlayGlyph => (Image)PlayButton.Content;
 
     private void UpdateLayoutMode(double width)
     {
         IsCompact = width < 1000;
         IsNarrow = width < 760;
-        bool stacked = width < 660;
         SidebarColumn.Width = new GridLength(IsCompact ? 76 : 244);
         AlbumColumn = width < 900 ? new GridLength(0) : new GridLength(1, GridUnitType.Star);
-        TrackSummaryColumn.MinWidth = stacked ? 0 : 190;
-        Grid.SetColumnSpan(TrackDetails, stacked ? 2 : 1);
-        Grid.SetRow(TransportArea, stacked ? 1 : 0);
-        Grid.SetColumn(TransportArea, stacked ? 0 : 1);
-        Grid.SetColumnSpan(TransportArea, stacked ? 3 : 1);
-        TransportArea.Margin = stacked ? new Thickness(18, 6, 18, 0) : new Thickness(18, 0, 18, 0);
         double content = Math.Max(0, width - SidebarColumn.Width.Value - 80);
         RecommendedPlaylists.Tag = Math.Clamp((int)(content / 162), 2, 6);
-        VolumeSlider.Visibility = width < 1000 ? Visibility.Collapsed : Visibility.Visible;
         HeroArt.Width = HeroArt.Height = width < 600 ? 104 : IsNarrow ? 132 : 184;
         HeroContent.Margin = new Thickness(IsNarrow ? 18 : 22);
         HeroText.Margin = new Thickness(IsNarrow ? 16 : 24, 0, 0, 0);
@@ -365,7 +350,7 @@ public sealed partial class LibraryView : UserControl
         HeroTitle.FontSize = IsNarrow ? 24 : 32;
         HeroSource.Visibility = IsNarrow ? Visibility.Collapsed : Visibility.Visible;
         foreach (var page in new[] { HomeContent, SearchContent, PlaylistContent, SettingsContent })
-            page.Margin = new Thickness(IsNarrow ? 24 : 40, 16, IsNarrow ? 24 : 40, 36);
+            page.Margin = new Thickness(IsNarrow ? 24 : 40, 16, IsNarrow ? 24 : 40, 88);
         UpdatePageTitle();
     }
 
@@ -539,6 +524,22 @@ public sealed partial class LibraryView : UserControl
             OnAccountKeyDown(sender, e);
         else if (e.Key == Key.Escape && QueuePopup.IsOpen)
             OnQueueKeyDown(sender, e);
+        else if (e.Key == Key.Escape && _soundAnchor is { } soundAnchor)
+        {
+            CloseSound(animate: true);
+            soundAnchor.Focus();
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Escape && Progress.Dragging)
+        {
+            Progress.CancelPreview();
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Escape && PlaybackBar.Expanded && PlaybackBar.IsKeyboardFocusWithin)
+        {
+            PlaybackBar.ShapeButton.IsChecked = false;
+            e.Handled = true;
+        }
         else if (e.Key == Key.F && (Keyboard.Modifiers & ModifierKeys.Control) != 0)
         {
             e.Handled = true;
@@ -551,7 +552,11 @@ public sealed partial class LibraryView : UserControl
 
     // Lyrics and track list
 
-    private void OpenLyricsPage(object sender, RoutedEventArgs e) => _lyrics.ShowLyrics();
+    private void OpenLyricsPage(object sender, RoutedEventArgs e)
+    {
+        LyricsButton.IsChecked = false;
+        _lyrics.ShowLyrics();
+    }
 
     private async void PlaySelectedTrack(object sender, MouseButtonEventArgs e)
     {
@@ -614,16 +619,39 @@ public sealed partial class LibraryView : UserControl
 
     private void OpenTrackActions(object sender, RoutedEventArgs e)
     {
-        var menu = new ContextMenu { PlacementTarget = MoreButton, Placement = PlacementMode.Top, VerticalOffset = -6 };
+        var anchor = PlaybackBar.TrackStamp;
+        if (_shellMenu is { } previous && previous.PlacementTarget == anchor)
+        {
+            previous.IsOpen = false;
+            return;
+        }
+        if (_soundAnchor == anchor)
+        {
+            CloseSound(animate: true);
+            return;
+        }
+        CloseSound(animate: false);
+        CloseAccount(animate: false);
+        CloseQueue(animate: false);
+        var menu = new ContextMenu { PlacementTarget = anchor, Placement = PlacementMode.Top, VerticalOffset = -6 };
         ReferenceMenus.Apply(menu);
+        Add(_lyrics.IsHearted ? "取消收藏" : "收藏", () => _lyrics.Favorite(), _lyrics.TrackIndex >= 0);
+        if (!PlaybackBar.HasSoundTool)
+            Add("声音…", () => ShowSound(anchor));
         Add("为当前曲目关联音频…", () => _lyrics.OpenAudio(_lyrics));
         Add("更换封面…", () => _lyrics.OpenCover(_lyrics));
         menu.Items.Add(new Separator());
         Add("歌词设置", () => ShowPage(SettingsPage));
-        OpenShellMenu(menu);
-        void Add(string header, Action action)
+        anchor.IsChecked = true;
+        menu.Closed += (_, _) =>
         {
-            var item = new MenuItem { Header = header };
+            if (_soundAnchor != anchor)
+                anchor.IsChecked = false;
+        };
+        OpenShellMenu(menu);
+        void Add(string header, Action action, bool enabled = true)
+        {
+            var item = new MenuItem { Header = header, IsEnabled = enabled };
             item.Click += (_, _) => action();
             menu.Items.Add(item);
         }
@@ -647,6 +675,7 @@ public sealed partial class LibraryView : UserControl
     {
         CloseAccount(animate: false);
         CloseQueue(animate: false);
+        CloseSound(animate: false);
         if (_shellMenu is { } menu)
             menu.IsOpen = false;
     }
@@ -672,6 +701,8 @@ public sealed partial class LibraryView : UserControl
             CloseAccount(animate: true);
         if (_queueExpanded && !QueueButton.IsMouseOver && !QueueSurface.IsMouseOver)
             CloseQueue(animate: true);
+        if (_soundAnchor is { IsMouseOver: false } && !SoundSurface.IsMouseOver)
+            CloseSound(animate: true);
     }
 
     private void ToggleQueuePopup(object sender, RoutedEventArgs e)
@@ -682,6 +713,7 @@ public sealed partial class LibraryView : UserControl
             return;
         }
         CloseAccount(animate: false);
+        CloseSound(animate: false);
         _queueExpanded = true;
         QueueButton.SetCurrentValue(ToggleButton.IsCheckedProperty, true);
         QueueSurface.IsHitTestVisible = true;
@@ -764,7 +796,6 @@ public sealed partial class LibraryView : UserControl
     private void NextTrack(object sender, RoutedEventArgs e) => _lyrics.Next();
     private void ToggleShuffle(object sender, RoutedEventArgs e) => _lyrics.ToggleShuffle();
     private void ToggleRepeat(object sender, RoutedEventArgs e) => _lyrics.ToggleRepeat();
-    private void ToggleFavorite(object sender, RoutedEventArgs e) => _lyrics.Favorite();
 
     // Volume
 

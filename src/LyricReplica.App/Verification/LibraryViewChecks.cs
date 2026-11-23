@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using LiquidGlass.Wpf;
 using LyricReplica.Core;
 
 namespace LyricReplica.App;
@@ -41,7 +42,7 @@ public sealed partial class LibraryView
         await _lyrics.SeedDemoTracksForVerificationAsync();
         RefreshPlayer();
         assertions++;
-        if (_lyrics.LyricsShown || TrackList.Items.Count != _lyrics.Playlist.Count || Cover.ImageSource is null || _lyrics.OwnedWindows.Count != 0)
+        if (_lyrics.LyricsShown || TrackList.Items.Count != _lyrics.Playlist.Count || PlaybackBar.MiniCover.ImageSource is null || _lyrics.OwnedWindows.Count != 0)
             throw new InvalidOperationException("The app must open on the library with its song and playlist, in a single window.");
         assertions++;
 
@@ -84,6 +85,28 @@ public sealed partial class LibraryView
             new PlaylistTile(new NetEaseMusic.ClientPlaylist(i, $"示例歌单 {i}", ""), Artwork.Create(i))).ToArray();
         await Settle();
         CapturePlayer(folder, "player.png");
+        var glassMode = PlaybackBar.CapsuleGlass.Mode;
+        if (PlaybackBar.Expanded || Progress.IsVisible || Progress.IsTabStop || glassMode != PlaybackBar.ToolGlass.Mode ||
+            GlassScene.FindScene(PlaybackBar.CapsuleGlass) != _playbackScene || GlassScene.FindScene(PlaybackBar.ToolGlass) != _playbackScene)
+            throw new InvalidOperationException("The library must start with a compact capsule and a shared glass scene.");
+        PlaybackBar.ShapeButton.IsChecked = true;
+        await Task.Delay(425);
+        if (!Progress.IsVisible || !Progress.IsTabStop || !PreviousButton.IsVisible ||
+            Progress.ActualWidth < PlaybackCapsule.MinimumSeekWidth - .7)
+            throw new InvalidOperationException("The expanded capsule must expose the live seek and previous-track controls.");
+        Click(PlaybackBar.SoundTool);
+        await Idle();
+        double originalSliderVolume = VolumeSlider.Value;
+        VolumeSlider.Value = 41;
+        if (!SoundSurface.IsVisible || !PlaybackBar.SoundTool.IsChecked.GetValueOrDefault() || !ContainsPopup(SoundSurface) ||
+            Math.Abs(_lyrics.Options.Volume - .41) > .001 || SettingsVolume.Value != 41)
+            throw new InvalidOperationException("The sound panel must control the current player volume.");
+        VolumeSlider.Value = originalSliderVolume;
+        Click(PlaybackBar.SoundTool);
+        await Settle();
+        if (SoundSurface.IsVisible)
+            throw new InvalidOperationException("Clicking the sound tool again must close its panel.");
+        assertions += 2;
         Click(AccountButton);
         await Idle();
         if (!AccountPopup.IsOpen || !LoginButton.IsVisible || QrPanel.IsVisible || !ContainsPopup(AccountSurface))
@@ -284,13 +307,25 @@ public sealed partial class LibraryView
             _lyrics.Height = h;
             await Settle();
             CapturePlayer(folder, name);
-            var details = TrackDetails.TransformToAncestor(PlaybackBar).TransformBounds(new Rect(TrackDetails.RenderSize));
-            var lyricsButton = LyricsButton.TransformToAncestor(PlaybackBar).TransformBounds(new Rect(LyricsButton.RenderSize));
-            var queueButton = QueueButton.TransformToAncestor(PlaybackBar).TransformBounds(new Rect(QueueButton.RenderSize));
-            var seek = Progress.TransformToAncestor(PlaybackBar).TransformBounds(new Rect(Progress.RenderSize));
-            if (!IsCompact || RecommendedPlaylists.ActualHeight < 54 || Progress.ActualWidth < 150 || details.Top < 0 || details.Bottom > PlaybackBar.ActualHeight ||
-                lyricsButton.Right > PlaybackBar.ActualWidth || details.IntersectsWith(seek) || queueButton.IntersectsWith(seek) || lyricsButton.IntersectsWith(seek))
-                throw new InvalidOperationException($"Player at {w}×{h}: queue {TrackList.ActualHeight}, seek {Progress.ActualWidth}, details {details}, lyrics {lyricsButton} within {PlaybackBar.RenderSize}.");
+            var capsule = PlaybackBar.Capsule.TransformToVisual(PlaybackBar).TransformBounds(PlaybackBar.CapsuleBounds);
+            var tools = PlaybackBar.ToolGroup.TransformToVisual(PlaybackBar).TransformBounds(new Rect(PlaybackBar.ToolGroup.RenderSize));
+            var blank = PlaybackBar.InputHitTest(new Point((capsule.Left + capsule.Right) / 2, capsule.Bottom - 3));
+            var corner = PlaybackBar.InputHitTest(new Point(capsule.Left + 1, capsule.Top + 1));
+            if (!IsCompact || RecommendedPlaylists.ActualHeight < 54 || Progress.IsVisible || Progress.IsTabStop ||
+                Math.Abs(capsule.Left + capsule.Right - PlaybackBar.ActualWidth) > 1.5 || capsule.Right > tools.Left - 8 ||
+                tools.Right > PlaybackBar.ActualWidth || !QueueButton.IsVisible || !LyricsButton.IsVisible ||
+                blank != PlaybackBar.CapsuleHitArea || corner is DependencyObject target && PlaybackBar.Capsule.IsAncestorOf(target))
+                throw new InvalidOperationException($"The capsule layout must fit and keep its rounded hit area at {w}×{h}.");
+            if (!PlaybackBar.HasSoundTool)
+            {
+                Click(PlaybackBar.TrackStamp);
+                var sound = _shellMenu?.Items.OfType<MenuItem>().Single(item => Equals(item.Header, "声音…"));
+                sound?.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent, sound));
+                await Idle();
+                if (!SoundSurface.IsVisible || !ContainsPopup(SoundSurface))
+                    throw new InvalidOperationException("The narrow capsule must retain its audio settings entry.");
+                CloseSound(animate: false);
+            }
             Click(AccountButton);
             await Idle();
             bool accountFits = ContainsPopup(AccountSurface);
@@ -388,7 +423,8 @@ public sealed partial class LibraryView
         File.WriteAllText(Path.Combine(folder, "native-player.json"), JsonSerializer.Serialize(new
         {
             passed = true, assemblySha256 = App.AssemblySha256, assertions, maximizeCaptionHit,
-            scope = "Empty startup, bottom queue, native Windows caption, compact playback layout, shell motion, and lyric settings hand-off"
+            capsuleRenderMode = glassMode.ToString(),
+            scope = "Glass capsule playback and panels, empty startup, native Windows caption, shell motion, and lyric settings hand-off"
         }, LyricsFile.JsonOptions));
         bool client = Environment.GetCommandLineArgs().Contains("--netease-client-test");
         if (client || Environment.GetCommandLineArgs().Contains("--netease-test"))
@@ -449,17 +485,16 @@ public sealed partial class LibraryView
 
             NetEaseQualityButton.Content = QualityName("jymaster");
             NetEaseQualityButton.Visibility = Visibility.Visible;
-            UpdatePlaybackSideColumn(qualityVisible: true);
+            ShowSound(PlaybackBar.SoundTool);
             await Idle();
             var quality = Descendants(NetEaseQualityButton).OfType<MiSansLabel>().Single(label => label.Text == "超清母带");
-            var qualityBounds = NetEaseQualityButton.TransformToAncestor(PlaybackLayout).TransformBounds(new Rect(NetEaseQualityButton.RenderSize));
-            double sideStart = PlaybackLayout.ActualWidth - PlaybackSideColumn.ActualWidth;
-            if (!VolumeSlider.IsVisible || !Fits(quality) || qualityBounds.Left < sideStart - .6)
-                throw new InvalidOperationException("The full quality label must fit its playback column with volume controls visible.");
+            if (!VolumeSlider.IsVisible || !Fits(quality) || !ContainsPopup(SoundSurface))
+                throw new InvalidOperationException("The full quality label must fit the sound panel alongside the volume controls.");
             CapturePlayer(folder, "player-metadata.png");
         }
         finally
         {
+            CloseSound(animate: false);
             _lyrics.Width = width;
             ApplyPlayerTypography(original);
             ShowNetEaseTracks(tracks);
@@ -493,12 +528,12 @@ public sealed partial class LibraryView
             {
                 RoutedEvent = Keyboard.PreviewKeyDownEvent
             });
-            if (TrackArtist.FontWeight.ToOpenTypeWeight() != weight || FontPreview.FontWeight.ToOpenTypeWeight() != weight)
+            if (PlaybackBar.CapsuleArtist.FontWeight.ToOpenTypeWeight() != weight || FontPreview.FontWeight.ToOpenTypeWeight() != weight)
                 throw new InvalidOperationException("Entering a weight must update the preview and the player immediately.");
 
             tabular.IsChecked = (features & MiSansTypography.Tabular) != 0;
             Click(tabular);
-            if (MiSansTypography.GetFeatures(TrackArtist) != features || MiSansTypography.GetFeatures(FontPreview) != features)
+            if (MiSansTypography.GetFeatures(PlaybackBar.CapsuleArtist) != features || MiSansTypography.GetFeatures(FontPreview) != features)
                 throw new InvalidOperationException("Checking a feature must update the preview and the player immediately.");
 
             await Settle();
@@ -541,8 +576,8 @@ public sealed partial class LibraryView
         try
         {
             ApplyPlayerTypography(new PlayerTypography(441, MiSansTypography.Tabular));
-            if (TrackArtist.FontWeight.ToOpenTypeWeight() != 441 || TrackArtist.FontFamily.Source != MiSansTypography.Family.Source ||
-                MiSansTypography.GetFeatures(TrackArtist) != MiSansTypography.Tabular ||
+            if (PlaybackBar.CapsuleArtist.FontWeight.ToOpenTypeWeight() != 441 || PlaybackBar.CapsuleArtist.FontFamily.Source != MiSansTypography.Family.Source ||
+                MiSansTypography.GetFeatures(PlaybackBar.CapsuleArtist) != MiSansTypography.Tabular ||
                 Typography.GetNumeralAlignment(SearchQuery) != FontNumeralAlignment.Tabular)
                 throw new InvalidOperationException("The font settings must reach main-window labels and the native input controls.");
         }
@@ -706,7 +741,7 @@ public sealed partial class LibraryView
             throw new InvalidOperationException("Playback ticks must change the fill without invalidating the seek track's arrangement.");
         RefreshPlayer();
 
-        Click(MoreButton);
+        Click(PlaybackBar.TrackStamp);
         await Idle();
         if (_shellMenu is not { IsOpen: true } menu)
             throw new InvalidOperationException("Main-player context menu must open with its normal input target.");
@@ -865,7 +900,17 @@ public sealed partial class LibraryView
     private void CapturePlayer(string folder, string filename)
     {
         var image = new RenderTargetBitmap((int)ActualWidth, (int)ActualHeight, 96, 96, PixelFormats.Pbgra32);
-        image.Render(this);
+        // WPF's offscreen bitmap cannot render the live pixel shader.
+        GlassScene.SetRenderMode(PlaybackBar, GlassRenderMode.Fallback);
+        try
+        {
+            UpdateLayout();
+            image.Render(this);
+        }
+        finally
+        {
+            PlaybackBar.ClearValue(GlassScene.RenderModeProperty);
+        }
         File.WriteAllBytes(Path.Combine(folder, filename), Artwork.Encode(image));
     }
 
@@ -923,7 +968,7 @@ public sealed partial class LibraryView
             var cover = (BitmapImage)_lyrics.TrackArtwork!;
             string[] coverSurfaces = ["WebImageAlbum", "WebImageAlbumSmall", "WebImageBackground"];
             var lyricImages = WordEdgeChecks.Find(_lyrics).OfType<Reference.ArtworkImage>().ToArray();
-            if (cover.PixelWidth == 0 || !ReferenceEquals(Cover.ImageSource, cover) || !ReferenceEquals(HeroCover.ImageSource, cover) ||
+            if (cover.PixelWidth == 0 || !ReferenceEquals(PlaybackBar.MiniCover.ImageSource, cover) || !ReferenceEquals(HeroCover.ImageSource, cover) ||
                 coverSurfaces.Any(name => !lyricImages.Any(image => image.Name == name && ReferenceEquals(image.Source, cover))))
                 throw new InvalidOperationException("The NetEase cover did not reach the library, lyric covers and background.");
             if (_lyrics.CurrentSong.Title != track.Title || _lyrics.CurrentSong.Lines.Count == 0)

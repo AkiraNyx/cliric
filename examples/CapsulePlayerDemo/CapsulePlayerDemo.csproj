@@ -10,10 +10,5 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/LyricReplica.App/LyricReplica.App.csproj" />
-    <PackageReference Include="LiquidGlassEngineering.Wpf" Version="1.0.2" GeneratePathProperty="true" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(PkgLiquidGlassEngineering_Wpf)' != ''">
-    <None Include="$(PkgLiquidGlassEngineering_Wpf)/LICENSE;$(PkgLiquidGlassEngineering_Wpf)/NOTICE.md"
-          Link="licenses/LiquidGlassEngineering/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>
