@@ -13,9 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using LiquidGlass;
 using LiquidGlass.Wpf;
-using LyricReplica.App;
-using Timeline = LyricReplica.Core.Timeline;
-using static LyricReplica.App.PlaybackCapsule;
+using Cliric.App;
+using Timeline = Cliric.Core.Timeline;
+using static Cliric.App.PlaybackCapsule;
 
 namespace CapsulePlayerDemo;
 
@@ -33,7 +33,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        FontFamily = new FontFamily(new Uri("pack://application:,,,/LyricReplica;component/"), "./Assets/Fonts/#MiSans VF, Microsoft YaHei UI");
+        FontFamily = new FontFamily(new Uri("pack://application:,,,/Cliric;component/"), "./Assets/Fonts/#MiSans VF, Microsoft YaHei UI");
         PlaybackBar.InitializeControls();
         PlaybackBar.PreviousButton.Click += Previous;
         PlaybackBar.PlayButton.Click += TogglePlay;
@@ -148,7 +148,7 @@ public partial class MainWindow : Window
 
     private void OnSeek(double position)
     {
-        if (_ready && LyricReplica.App.MainWindow.PlayerSeekTarget(position, PlaybackBar.Seek.TotalTime, PlaybackBar.Seek.Dragging) is { } target)
+        if (_ready && Cliric.App.MainWindow.PlayerSeekTarget(position, PlaybackBar.Seek.TotalTime, PlaybackBar.Seek.Dragging) is { } target)
             _audio.Position = TimeSpan.FromMilliseconds(target);
     }
 
@@ -335,7 +335,7 @@ public partial class MainWindow : Window
             toggle.Toggle();
             await Task.Delay(410);
             if (!Expanded || toggle.ToggleState != ToggleState.On || !PlaybackBar.Seek.IsVisible || !PlaybackBar.PreviousButton.IsVisible ||
-                !PlaybackBar.Seek.IsTabStop || !PlaybackBar.PreviousButton.IsTabStop || Math.Abs(PlaybackBar.CapsuleBounds.Width - ExpandedWidth) > .7 || PlaybackBar.ShapeArrow.Angle != 180)
+                !PlaybackBar.Seek.IsTabStop || !PlaybackBar.PreviousButton.IsTabStop || Math.Abs(PlaybackBar.CapsuleBounds.Width - PlaybackBar.Capsule.Width) > .7 || PlaybackBar.ShapeArrow.Angle != 180)
                 throw new InvalidOperationException("The expanded bar must reveal the existing playback controls.");
             PlaybackBar.Capsule.SizeChanged -= CountResize;
             CompositionTarget.Rendering -= ObserveSeekFade;
@@ -475,6 +475,11 @@ public partial class MainWindow : Window
             blankToolGlass != PlaybackBar.ToolHitArea || (toolCorner is DependencyObject toolTarget && PlaybackBar.ToolGroup.IsAncestorOf(toolTarget)))
             throw new InvalidOperationException("Blank glass must intercept input within the rounded capsule outline.");
         var transport = PlaybackBar.Transport.TransformToVisual(PlaybackBar.CapsuleContent).TransformBounds(new Rect(PlaybackBar.Transport.RenderSize));
+        if (!PlaybackBar.PreviousButton.IsVisible)
+        {
+            transport.X += PlaybackBar.PreviousSlot.Width;
+            transport.Width -= PlaybackBar.PreviousSlot.Width;
+        }
         var options = PlaybackBar.ShapeButton.TransformToVisual(PlaybackBar.CapsuleContent).TransformBounds(new Rect(PlaybackBar.ShapeButton.RenderSize));
         var stamp = PlaybackBar.TrackStamp.TransformToVisual(PlaybackBar.CapsuleContent).TransformBounds(new Rect(PlaybackBar.TrackStamp.RenderSize));
         var progress = PlaybackBar.Seek.IsVisible ? PlaybackBar.Seek.TransformToVisual(PlaybackBar.CapsuleContent).TransformBounds(new Rect(PlaybackBar.Seek.RenderSize)) : Rect.Empty;

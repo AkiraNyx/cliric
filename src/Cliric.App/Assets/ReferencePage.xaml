@@ -1,0 +1,586 @@
+<?xml version='1.0' encoding='utf-8'?>
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:p="clr-namespace:Cliric.App.Reference" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="#FF1A1A1A" FontFamily="{DynamicResource Font.Apple.SpotifyMix}" Foreground="#FFFFFFFF">
+  <UserControl.Resources>
+    <Style x:Key="{x:Type p:InfoMarquee}" TargetType="{x:Type p:InfoMarquee}">
+      <Setter Property="Control.Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type p:InfoMarquee}">
+            <Grid x:Name="PART_Grid">
+              <Grid.OpacityMask>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                  <GradientStop Color="Transparent" Offset="0" />
+                  <GradientStop x:Name="PART_StopStart" Color="Black" Offset="0.1" />
+                  <GradientStop x:Name="PART_StopEnd" Color="Black" Offset="0.9" />
+                  <GradientStop Color="Transparent" Offset="1" />
+                </LinearGradientBrush>
+              </Grid.OpacityMask>
+              <Grid.Children>
+                <Canvas Background="#00FFFFFF" ClipToBounds="True" x:Name="PART_Canvas">
+                  <Canvas.Children>
+                    <Canvas x:Name="PART_ItemsCanvas">
+                      <Canvas.Children>
+                        <ContentPresenter Content="{TemplateBinding ContentControl.Content}" x:Name="PART_Content" />
+                        <Rectangle Visibility="Collapsed" IsHitTestVisible="False" x:Name="PART_ContentCopy" />
+                      </Canvas.Children>
+                    </Canvas>
+                  </Canvas.Children>
+                </Canvas>
+              </Grid.Children>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </UserControl.Resources>
+  <Grid x:Name="MainGrid">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="0.82*" x:Name="ColumnDefinitionLeftSide" />
+      <ColumnDefinition x:Name="ColumnDefinitionRightSide" />
+    </Grid.ColumnDefinitions>
+    <Grid.Children>
+      <Viewbox Grid.ColumnSpan="2" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True" x:Name="ViewboxBackground">
+        <Grid RenderTransformOrigin="0.5,0.5">
+          <Grid.Children>
+            <Border Background="#FF000000" Opacity="1" />
+            <Border Background="#FF000000" Opacity="0.6" x:Name="BorderBackgroundBackColor" />
+            <Grid Opacity="0.7" RenderTransformOrigin="0.5,0.5" x:Name="GridBackgroundSub1">
+              <Grid.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform x:Name="GridBackgroundScaleTransform" ScaleX="2" ScaleY="2" />
+                  <TranslateTransform x:Name="GridBackgroundTranslateTransform" X="0" Y="0" />
+                  <RotateTransform x:Name="GridBackgroundRotateTransform" CenterX="0" CenterY="0" Angle="0" />
+                </TransformGroup>
+              </Grid.RenderTransform>
+              <Grid.Children>
+                <Canvas Height="640" Width="640">
+                  <Canvas.CacheMode>
+                    <BitmapCache x:Name="BackgroundBitmapCache1" EnableClearType="True" RenderAtScale="0.6" />
+                  </Canvas.CacheMode>
+                  <Canvas.Children>
+                    <Grid Height="640" Width="640">
+                      <Grid.Effect>
+                        <BlurEffect x:Name="WebImageBackgroundBlurEffect" Radius="320" KernelType="Gaussian" />
+                      </Grid.Effect>
+                      <Grid.Children>
+                        <p:ArtworkImage Fill="True" IsAnimationEnabled="False" Url="{Binding Url, ElementName=WebImageAlbum}" />
+                        <p:ArtworkImage Height="320" Width="320" Fill="True" IsAnimationEnabled="False" Url="{Binding Url, ElementName=WebImageAlbum}" x:Name="WebImageBackground" />
+                      </Grid.Children>
+                    </Grid>
+                  </Canvas.Children>
+                </Canvas>
+              </Grid.Children>
+            </Grid>
+            <Grid Opacity="0.5" RenderTransformOrigin="0.5,0.5" x:Name="GridBackgroundSub2">
+              <Grid.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform x:Name="GridBackgroundScaleTransform2" ScaleX="2" ScaleY="2" />
+                  <TranslateTransform x:Name="GridBackgroundTranslateTransform2" X="0" Y="0" />
+                  <RotateTransform x:Name="GridBackgroundRotateTransform2" CenterX="0" CenterY="0" Angle="0" />
+                </TransformGroup>
+              </Grid.RenderTransform>
+              <Grid.Children>
+                <Canvas Height="640" Width="640">
+                  <Canvas.CacheMode>
+                    <BitmapCache x:Name="BackgroundBitmapCache2" EnableClearType="True" RenderAtScale="0.7" />
+                  </Canvas.CacheMode>
+                  <Canvas.Children>
+                    <Grid Height="640" Width="640">
+                      <Grid.Effect>
+                        <BlurEffect KernelType="Gaussian" Radius="{Binding Radius, ElementName=WebImageBackgroundBlurEffect}" />
+                      </Grid.Effect>
+                      <Grid.Children>
+                        <p:ArtworkImage Fill="True" IsAnimationEnabled="False" Url="{Binding Url, ElementName=WebImageAlbum}" />
+                        <p:ArtworkImage Height="360" Width="360" Fill="True" IsAnimationEnabled="False" Url="{Binding Url, ElementName=WebImageAlbum}" />
+                      </Grid.Children>
+                    </Grid>
+                  </Canvas.Children>
+                </Canvas>
+              </Grid.Children>
+            </Grid>
+            <Border Background="#FF000000" Opacity="0.27" x:Name="BorderBackgroundFrontBlackMask" />
+          </Grid.Children>
+        </Grid>
+      </Viewbox>
+      <Viewbox Margin="0,70" x:Name="ViewboxSongInfo">
+        <StackPanel Width="450" VerticalAlignment="Center" x:Name="StackPanelSongInfo">
+          <StackPanel.Children>
+            <Grid Width="330" Height="330" VerticalAlignment="Top" Margin="0,0,0,25" RenderTransformOrigin="0.5,0.5" x:Name="GridArtwork">
+              <Grid.Effect>
+                <DropShadowEffect BlurRadius="50" ShadowDepth="15" Color="Black" Opacity="0.35" Direction="270" />
+              </Grid.Effect>
+              <Grid.RenderTransform>
+                <ScaleTransform ScaleX="0.75" ScaleY="0.75" />
+              </Grid.RenderTransform>
+              <Grid.Children>
+                <p:ArtworkImage IsAnimationEnabled="False" CornerRadius="10" x:Name="WebImageAlbum" />
+                <MediaElement Source="" LoadedBehavior="Manual" p:RoundedClip.CornerRadius="10" x:Name="WebImageHumanVideo" />
+              </Grid.Children>
+            </Grid>
+            <Grid Margin="60,0,60,0" Background="#00FFFFFF" x:Name="GridTrackInfo">
+              <Grid.Children>
+                <Grid Margin="0,0,85,0" x:Name="GridTrackInfoTextHost">
+                  <Grid.OpacityMask>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                      <GradientStop Offset="0.925" Color="White" />
+                      <GradientStop Offset="0.999" Color="Transparent" />
+                    </LinearGradientBrush>
+                  </Grid.OpacityMask>
+                  <Grid.Children>
+                    <p:InfoMarquee Margin="0,4,0,0" VerticalAlignment="Top" SyncGroup="AppleMusicSongInfoMain" AnimationDelay="0:0:2">
+                      <StackPanel Orientation="Horizontal">
+                        <StackPanel.Children>
+                          <TextBlock Text="Someday" VerticalAlignment="Center" FontWeight="Medium" FontSize="18.5" Foreground="#FFFFFFFF" x:Name="TextBlockTrackName" />
+                          <TextBlock Text="🅴" VerticalAlignment="Center" Margin="5,0,0,-1" Visibility="Collapsed" FontFamily="{DynamicResource Font.Apple}" FontSize="18.5" Foreground="#FFFFFFFF" Opacity="0.7" FontWeight="{Binding FontWeight, ElementName=TextBlockTrackName}" x:Name="TextBlockExplicit" />
+                        </StackPanel.Children>
+                      </StackPanel>
+                    </p:InfoMarquee>
+                    <Grid>
+                      <Grid.Children>
+                        <Border Background="#00FFFFFF" />
+                        <p:InfoMarquee Margin="0,28,0,0" SyncGroup="AppleMusicSongInfoMain" AnimationDelay="0:0:2">
+                          <TextBlock Text="OneRepublic" FontSize="18" Foreground="#FFFFFFFF" HorizontalAlignment="Left" Opacity="0.5" Cursor="Hand" x:Name="TextBlockArtist" />
+                        </p:InfoMarquee>
+                      </Grid.Children>
+                    </Grid>
+                    <GroupBox Visibility="Hidden">
+                      <GroupBox.ContextMenu>
+                        <ContextMenu FontFamily="{DynamicResource Font.Apple.SpotifyMix}" Foreground="#FFFFFFFF" Background="#F4444444" FontSize="14" x:Name="MenuArtistNameClick">
+                          <ContextMenu.Items>
+                            <p:IconMenuItem>
+                              <p:IconMenuItem.Header>
+                                <Grid>
+                                  <Grid.Children>
+                                    <StackPanel Margin="0,1,40,1">
+                                      <StackPanel.Children>
+                                        <TextBlock Text="{DynamicResource String.Page.AppleMusicLyrics.Menu.ArtistClick.GoToArtist}" />
+                                        <TextBlock Margin="0,5,0,0" Text="OneRepublic" FontSize="12" Opacity="0.5" MaxWidth="250" TextWrapping="Wrap" x:Name="TextBlockGoToArtistContent" />
+                                      </StackPanel.Children>
+                                    </StackPanel>
+                                    <Image Source="{DynamicResource Apple.Music.Artist}" Width="22" Height="22" HorizontalAlignment="Right" />
+                                  </Grid.Children>
+                                </Grid>
+                              </p:IconMenuItem.Header>
+                            </p:IconMenuItem>
+                            <Separator />
+                            <p:IconMenuItem>
+                              <p:IconMenuItem.Header>
+                                <Grid>
+                                  <Grid.Children>
+                                    <StackPanel Margin="0,1,40,1">
+                                      <StackPanel.Children>
+                                        <TextBlock Text="{DynamicResource String.Page.AppleMusicLyrics.Menu.ArtistClick.GoToAlbum}" />
+                                        <TextBlock Margin="0,5,0,0" Text="Human (Deluxe)" FontSize="12" Opacity="0.5" MaxWidth="250" TextWrapping="Wrap" x:Name="TextBlockGoToAlbumContent" />
+                                      </StackPanel.Children>
+                                    </StackPanel>
+                                    <Image Source="{DynamicResource Apple.Music.Album}" Width="22" Height="22" HorizontalAlignment="Right" />
+                                  </Grid.Children>
+                                </Grid>
+                              </p:IconMenuItem.Header>
+                            </p:IconMenuItem>
+                            <Separator Visibility="Collapsed" x:Name="MenuItemShowPlaylistSeparator" />
+                            <p:IconMenuItem Visibility="Collapsed" x:Name="MenuItemShowPlaylist">
+                              <p:IconMenuItem.Header>
+                                <Grid>
+                                  <Grid.Children>
+                                    <StackPanel Margin="0,1,40,1">
+                                      <StackPanel.Children>
+                                        <TextBlock Text="{DynamicResource String.Page.AppleMusicLyrics.Menu.ArtistClick.GoToPlaylist}" />
+                                        <TextBlock Margin="0,5,0,0" Text="Best of OneRepublic" FontSize="12" Opacity="0.5" MaxWidth="250" TextWrapping="Wrap" x:Name="TextBlockGoToPlaylistContent" />
+                                      </StackPanel.Children>
+                                    </StackPanel>
+                                    <Image Source="{DynamicResource Apple.Music.Playlist}" Width="22" Height="22" HorizontalAlignment="Right" />
+                                  </Grid.Children>
+                                </Grid>
+                              </p:IconMenuItem.Header>
+                            </p:IconMenuItem>
+                          </ContextMenu.Items>
+                        </ContextMenu>
+                      </GroupBox.ContextMenu>
+                    </GroupBox>
+                  </Grid.Children>
+                </Grid>
+                <p:FavoriteButton Width="28" Height="28" Margin="0,2,44,-2" HorizontalAlignment="Right" IsFavorited="{Binding IsHearted, Mode=TwoWay}" x:Name="FavoriteButtonMain">
+                  <p:FavoriteButton.RenderTransform>
+                    <TranslateTransform />
+                  </p:FavoriteButton.RenderTransform>
+                </p:FavoriteButton>
+                <Grid Width="28" Height="28" Margin="0,2,0,-2" HorizontalAlignment="Right" x:Name="GridThreeDotMenu">
+                  <Grid.RenderTransform>
+                    <TranslateTransform x:Name="GridThreeDotMenuTranslateTrasform" />
+                  </Grid.RenderTransform>
+                  <Grid.Children>
+                    <Border Background="#FFFFFFFF" Opacity="0.1" CornerRadius="14" x:Name="BorderMenuBackground" />
+                    <Image Source="{DynamicResource Apple.Menu}" />
+                  </Grid.Children>
+                </Grid>
+                <Border CornerRadius="20" Background="#00FFFFFF" Height="42" Width="42" Margin="0,2,37,-2" Cursor="Hand" HorizontalAlignment="Right" x:Name="BorderFavoriteButtonMainForMousePoint" />
+                <Border Background="#00FFFFFF" Cursor="Hand" CornerRadius="20" Height="42" Width="42" HorizontalAlignment="Right" Margin="0,2,-6,-2" Visibility="{Binding Visibility, ElementName=GridThreeDotMenu}" x:Name="BorderMenuBackgroundForMousePoint" />
+                <GroupBox Visibility="Hidden">
+                  <GroupBox.ContextMenu>
+                    <ContextMenu FontFamily="{DynamicResource Font.Apple}" Foreground="#FFFFFFFF" Background="#E8444444" FontSize="14" x:Name="MenuThreeDot">
+                      <ContextMenu.Items>
+                        <p:IconMenuItem x:Name="MenuItemAddToLibrary">
+                          <p:IconMenuItem.Header>
+                            <Grid>
+                              <Grid.Children>
+                                <TextBlock Text="{DynamicResource String.Page.AppleMusicLyrics.Menu.AddToLibrary}" Margin="0,1,50,1" />
+                                <p:SymbolIcon HorizontalAlignment="Right" Foreground="#FFFFFFFF" Symbol="Library16" />
+                              </Grid.Children>
+                            </Grid>
+                          </p:IconMenuItem.Header>
+                        </p:IconMenuItem>
+                        <p:IconMenuItem Foreground="{DynamicResource Brush.Apple.Button.Foreground}" x:Name="MenuItemDeleteFromLibrary">
+                          <p:IconMenuItem.Header>
+                            <Grid>
+                              <Grid.Children>
+                                <TextBlock Text="{DynamicResource String.Page.AppleMusicLyrics.Menu.DeleteFromLibrary}" Margin="0,1,50,1" />
+                                <Image Source="{DynamicResource Apple.Trash.Red}" Margin="0,0,0,-2" Width="18" Height="18" HorizontalAlignment="Right" />
+                              </Grid.Children>
+                            </Grid>
+                          </p:IconMenuItem.Header>
+                        </p:IconMenuItem>
+                        <Separator Height="8" Background="#3F000000" BorderBrush="#3F000000" x:Name="MenuSeparatorLibrary" />
+                        <p:IconMenuItem x:Name="MenuItemShowArtist">
+                          <p:IconMenuItem.Header>
+                            <Grid>
+                              <Grid.Children>
+                                <TextBlock Text="{DynamicResource String.Page.AppleMusicLyrics.Menu.ShowArtist}" Margin="0,1,50,1" />
+                                <Image Source="{DynamicResource Apple.Music.Artist}" Margin="0,-3,-3,-3" Width="22" Height="22" HorizontalAlignment="Right" />
+                              </Grid.Children>
+                            </Grid>
+                          </p:IconMenuItem.Header>
+                        </p:IconMenuItem>
+                        <Separator />
+                        <p:IconMenuItem x:Name="MenuItemShowAlbum">
+                          <p:IconMenuItem.Header>
+                            <Grid>
+                              <Grid.Children>
+                                <TextBlock Text="{DynamicResource String.Page.AppleMusicLyrics.Menu.ShowAlbum}" Margin="0,1,50,1" />
+                                <Image Source="{DynamicResource Apple.Music.Album}" Margin="0,-3,-3,-3" Width="22" Height="22" HorizontalAlignment="Right" />
+                              </Grid.Children>
+                            </Grid>
+                          </p:IconMenuItem.Header>
+                        </p:IconMenuItem>
+                        <Separator />
+                        <p:IconMenuItem x:Name="MenuItemOpenTrackManagement">
+                          <p:IconMenuItem.Header>
+                            <Grid>
+                              <Grid.Children>
+                                <TextBlock Text="{DynamicResource String.Menu.Track.OpenTrackManagement}" Margin="0,1,50,1" />
+                                <Image Source="{DynamicResource Apple.Music.Song}" Margin="0,-3,-3,-3" Width="22" Height="22" HorizontalAlignment="Right" />
+                              </Grid.Children>
+                            </Grid>
+                          </p:IconMenuItem.Header>
+                        </p:IconMenuItem>
+                        <Separator Height="8" Background="#3F000000" BorderBrush="#3F000000" />
+                        <p:IconMenuItem>
+                          <p:IconMenuItem.Header>
+                            <Grid>
+                              <Grid.Children>
+                                <TextBlock Text="{DynamicResource String.Menu.Pages.CopySpotifyURI}" Margin="0,1,50,1" />
+                                <Image Source="{DynamicResource Apple.Code}" Width="16" Height="16" HorizontalAlignment="Right" />
+                              </Grid.Children>
+                            </Grid>
+                          </p:IconMenuItem.Header>
+                        </p:IconMenuItem>
+                        <Separator />
+                        <p:IconMenuItem>
+                          <p:IconMenuItem.Header>
+                            <Grid>
+                              <Grid.Children>
+                                <TextBlock Text="{DynamicResource String.Menu.Pages.CopySpotifyLink}" Margin="0,1,50,1" />
+                                <Image Source="{DynamicResource Apple.Share}" Width="16" Height="16" HorizontalAlignment="Right" />
+                              </Grid.Children>
+                            </Grid>
+                          </p:IconMenuItem.Header>
+                        </p:IconMenuItem>
+                        <Separator />
+                        <p:IconMenuItem>
+                          <p:IconMenuItem.Header>
+                            <Grid>
+                              <Grid.Children>
+                                <TextBlock Text="{DynamicResource String.Menu.Pages.ShowInSpotify}" Margin="0,1,50,1" />
+                                <TextBlock Text="&#xE8A7;" FontFamily="Segoe MDL2 Assets" FontSize="16" HorizontalAlignment="Right" />
+                              </Grid.Children>
+                            </Grid>
+                          </p:IconMenuItem.Header>
+                        </p:IconMenuItem>
+                      </ContextMenu.Items>
+                    </ContextMenu>
+                  </GroupBox.ContextMenu>
+                </GroupBox>
+              </Grid.Children>
+            </Grid>
+            <p:ReferenceStateBar TotalTime="1000" CurrentTime="10" Height="40" VerticalAlignment="Top" Margin="53.5,10,53.5,0"
+                                 TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto" TextOptions.TextHintingMode="Auto"
+                                 p:InputMap.ValueChanged="AppleMusicPlayerStateBar_ValueChanged" x:Name="AppleMusicPlayerStateBar" />
+            <Grid Margin="12.5,5,14,-10" Visibility="Visible" x:Name="GridHorizontalControls">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.75*" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="1.1*" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="1.75*" />
+              </Grid.ColumnDefinitions>
+              <Grid.Children>
+                <p:ImageButton ImageSource="{DynamicResource Apple.Music.ShuffleButton}" Height="36" Width="36" p:InputMap.Click="ImageClickableShuffle_Click" x:Name="ImageClickableShuffleButton" />
+                <p:NextButton Grid.Column="1" Height="50" Width="50" RenderTransformOrigin="0.5,0.5" p:InputMap.Click="ImageClickablePrevious_Click">
+                  <p:NextButton.RenderTransform>
+                    <RotateTransform Angle="180" />
+                  </p:NextButton.RenderTransform>
+                </p:NextButton>
+                <p:ImageButton ImageSource="{DynamicResource Apple.Music.PauseButton}" Grid.Column="2" Height="50" Width="50" ImageMargin="3" p:InputMap.Click="ImageClickablePauseButton_Click" x:Name="ImageClickablePauseButton" />
+                <p:ImageButton Visibility="Collapsed" ImageSource="{DynamicResource Apple.Music.PlayButton}" Grid.Column="2" Height="50" Width="50" ImageMargin="3" p:InputMap.Click="ImageClickablePlayButton_Click" x:Name="ImageClickablePlayButton" />
+                <p:NextButton Grid.Column="3" Height="50" Width="50" p:InputMap.Click="ImageClickableNext_Click" />
+                <p:ImageButton ImageSource="{DynamicResource Apple.Music.RepeatButton}" Grid.Column="4" Height="36" Width="36" p:InputMap.Click="ImageClickableRepeat_Click" x:Name="ImageClickableRepeatButton" />
+              </Grid.Children>
+            </Grid>
+          </StackPanel.Children>
+        </StackPanel>
+      </Viewbox>
+      <Grid Margin="15,0,15,0" Grid.Column="1" x:Name="GridLyrics">
+        <Grid.Children>
+          <Grid ClipToBounds="True" x:Name="GridLyricsMaskHost">
+            <Grid.OpacityMask>
+              <LinearGradientBrush x:Name="BrushGridLyricsOpacityMask" StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStop x:Name="GradientStop1GridLyrics" Offset="0" Color="Transparent" />
+                <GradientStop x:Name="GradientStop2GridLyrics" Offset="0" Color="White" />
+                <GradientStop x:Name="GradientStop3GridLyrics" Offset="1" Color="White" />
+                <GradientStop x:Name="GradientStop4GridLyrics" Offset="1" Color="Transparent" />
+              </LinearGradientBrush>
+            </Grid.OpacityMask>
+            <Grid.Children>
+              <Border Background="#00FFFFFF" />
+              <Grid VerticalAlignment="Top" Height="{Binding ActualHeight, ElementName=MainGrid}" x:Name="ViewBoxLyrics">
+                <Grid.Children>
+                  <Grid HorizontalAlignment="Left" VerticalAlignment="Top" ClipToBounds="True" x:Name="GridLyricsInViewbox">
+                    <Grid.Children>
+                      <p:TouchScrollViewer Height="600" Width="515" PanningMode="VerticalOnly" CanContentScroll="False" IsInertiaEnabled="True" VerticalScrollBarVisibility="Hidden" FocusVisualStyle="{x:Null}" x:Name="ScrollViewerLyrics">
+                        <p:SpacedStackPanel Margin="8.2,450,8.2,0" Spacing="4" x:Name="StackPanelLyrics" />
+                      </p:TouchScrollViewer>
+                      <p:BreathingDots Margin="24,130,24,0" Width="60" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.1,0.5" x:Name="AppleMusicBreathingDots" />
+                    </Grid.Children>
+                  </Grid>
+                </Grid.Children>
+              </Grid>
+            </Grid.Children>
+          </Grid>
+          <Grid VerticalAlignment="Bottom" Visibility="Hidden" x:Name="GridVerticalControls">
+            <Grid.Children>
+              <Border Background="#00FFFFFF" />
+              <Viewbox Margin="20,0,20,30" x:Name="ViewboxVerticalControls">
+                <StackPanel Margin="0,0,0,50">
+                  <StackPanel.Children>
+                    <p:ReferenceStateBar ForceWidth="700" Height="40" VerticalAlignment="Top" Margin="-7,0,-7,0"
+                                         TotalTime="{Binding ElementName=AppleMusicPlayerStateBar, Path=TotalTime, Mode=TwoWay}"
+                                         CurrentTime="{Binding ElementName=AppleMusicPlayerStateBar, Path=CurrentTime, Mode=TwoWay}"
+                                         FontWeight="{Binding ElementName=AppleMusicPlayerStateBar, Path=FontWeight}"
+                                         TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto" TextOptions.TextHintingMode="Auto"
+                                         p:InputMap.ValueChanged="AppleMusicPlayerStateBar_ValueChanged" x:Name="AppleMusicPlayerStateBarVertical" />
+                    <Grid Margin="0,30,0,-10" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+                      <Grid.RenderTransform>
+                        <ScaleTransform ScaleX="1.4" ScaleY="1.4" />
+                      </Grid.RenderTransform>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.75*" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="1.1*" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="0.75*" />
+                      </Grid.ColumnDefinitions>
+                      <Grid.Children>
+                        <p:NextButton Grid.Column="1" Height="50" Width="50" RenderTransformOrigin="0.5,0.5" p:InputMap.Click="ImageClickablePrevious_Click">
+                          <p:NextButton.RenderTransform>
+                            <RotateTransform Angle="180" />
+                          </p:NextButton.RenderTransform>
+                        </p:NextButton>
+                        <p:ImageButton ImageSource="{DynamicResource Apple.Music.PauseButton}" Grid.Column="2" Height="50" Width="50" ImageMargin="3" Visibility="{Binding Visibility, ElementName=ImageClickablePauseButton}" p:InputMap.Click="ImageClickablePauseButton_Click" />
+                        <p:ImageButton ImageSource="{DynamicResource Apple.Music.PlayButton}" Grid.Column="2" Height="50" Width="50" ImageMargin="3" Visibility="{Binding Visibility, ElementName=ImageClickablePlayButton}" p:InputMap.Click="ImageClickablePlayButton_Click" />
+                        <p:NextButton Grid.Column="3" Height="50" Width="50" p:InputMap.Click="ImageClickableNext_Click" />
+                      </Grid.Children>
+                    </Grid>
+                  </StackPanel.Children>
+                </StackPanel>
+              </Viewbox>
+            </Grid.Children>
+          </Grid>
+        </Grid.Children>
+      </Grid>
+      <Viewbox Margin="15" VerticalAlignment="Top" Grid.Column="1" x:Name="ViewboxSongInfoSmall">
+        <Grid Width="515" Margin="35" x:Name="GridSongInfoSmall">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120" x:Name="ViewboxSongInfoSmallColumnDefinition1" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="128" />
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+          </Grid.RowDefinitions>
+          <Grid.Children>
+            <Border Background="#00FFFFFF" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="-60,-60,-60,0" />
+            <Border Grid.RowSpan="2" HorizontalAlignment="Left" Width="{Binding Width, ElementName=WebImageAlbumSmall}" Height="{Binding Height, ElementName=WebImageAlbumSmall}">
+              <Border.Effect>
+                <DropShadowEffect BlurRadius="12" ShadowDepth="4" Color="Black" Opacity="0.45" Direction="270" />
+              </Border.Effect>
+              <Border.Child>
+                <p:ArtworkImage Width="100" Height="100" IsAnimationEnabled="False" CornerRadius="10" Url="{Binding Url, ElementName=WebImageAlbum}" x:Name="WebImageAlbumSmall" />
+              </Border.Child>
+            </Border>
+            <Grid VerticalAlignment="Bottom" Grid.Column="1" x:Name="GridSongInfoSmallTitleHost">
+              <Grid.OpacityMask>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                  <GradientStop Offset="0.925" Color="White" />
+                  <GradientStop Offset="0.999" Color="Transparent" />
+                </LinearGradientBrush>
+              </Grid.OpacityMask>
+              <Grid.Children>
+                <Border Background="#00FFFFFF" />
+                <Grid x:Name="DockPanelVerticalModeTrackName">
+                  <Grid.Children>
+                    <p:InfoMarquee SyncGroup="AppleMusicSongInfoVertical" AnimationDelay="0:0:2">
+                      <StackPanel Orientation="Horizontal">
+                        <StackPanel.Children>
+                          <TextBlock Margin="0,0,0,1" VerticalAlignment="Center" FontSize="25" Foreground="#FFFFFFFF" Text="{Binding Text, ElementName=TextBlockTrackName}" FontWeight="{Binding FontWeight, ElementName=TextBlockTrackName}" x:Name="TextBlockVerticalModeTrackName" />
+                          <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="7.5,0,0,0" Text="🅴" FontFamily="{DynamicResource Font.Apple}" FontSize="25" Foreground="#FFFFFFFF" Visibility="{Binding Visibility, ElementName=TextBlockExplicit}" FontWeight="{Binding FontWeight, ElementName=TextBlockTrackName}" Opacity="{Binding Opacity, ElementName=TextBlockExplicit}" />
+                        </StackPanel.Children>
+                      </StackPanel>
+                    </p:InfoMarquee>
+                  </Grid.Children>
+                </Grid>
+              </Grid.Children>
+            </Grid>
+            <TextBlock Margin="0,5,0,0" FontSize="25" Foreground="#FFFFFFFF" Opacity="0.5" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="1" Grid.Column="1" Cursor="Hand" Text="{Binding Text, ElementName=TextBlockArtist}" />
+          </Grid.Children>
+        </Grid>
+      </Viewbox>
+      <Border Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18,18,0,0" Padding="10,6,10,7" Background="#2A000000" BorderBrush="#26FFFFFF" BorderThickness="1" CornerRadius="12" IsHitTestVisible="False" x:Name="BorderFpsOverlay">
+        <Border.Child>
+          <StackPanel>
+            <StackPanel.Children>
+              <TextBlock Text="FPS" FontSize="10.5" Opacity="0.68" FontWeight="Medium" Foreground="#FFFFFFFF" />
+              <TextBlock Margin="0,-1,0,0" Text="0" FontSize="19" FontWeight="SemiBold" Foreground="#FFFFFFFF" x:Name="TextBlockFps" />
+            </StackPanel.Children>
+          </StackPanel>
+        </Border.Child>
+      </Border>
+      <GroupBox Visibility="Hidden">
+        <GroupBox.ContextMenu>
+          <ContextMenu FontFamily="{DynamicResource Font.Menu.Book}" x:Name="MenuRightClick">
+            <ContextMenu.Items>
+              <p:IconMenuItem Header="{DynamicResource String.Menu.MainWindow.Main.View.Topmost}" InputGestureText="Ctrl + T" SymbolIcon="Empty" x:Name="MenuItemTopmost" />
+              <Separator />
+              <MenuItem Header="{DynamicResource String.Menu.AppleMusicLyrics.Zoom.In}" InputGestureText="Ctrl + =" />
+              <MenuItem Header="{DynamicResource String.Menu.AppleMusicLyrics.Zoom.Out}" InputGestureText="Ctrl + -" />
+              <MenuItem Header="{DynamicResource String.Menu.AppleMusicLyrics.Zoom.Reset}" InputGestureText="Ctrl + 0" />
+              <Separator />
+              <p:IconMenuItem Header="{DynamicResource String.Menu.AppleMusicLyrics.Blur}" SymbolIcon="Checkmark12" x:Name="MenuItemBlur" />
+              <p:IconMenuItem Header="{DynamicResource String.Menu.AppleMusicLyrics.BoldText}" SymbolIcon="Checkmark12" x:Name="MenuItemBoldText" />
+              <Separator />
+              <p:IconMenuItem Header="{DynamicResource String.Menu.AppleMusicLyrics.Translation}" InputGestureText="Alt + C" SymbolIcon="Checkmark12" x:Name="MenuItemTranslation" />
+            </ContextMenu.Items>
+          </ContextMenu>
+        </GroupBox.ContextMenu>
+      </GroupBox>
+      <Grid IsHitTestVisible="False" Opacity="0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" x:Name="GridMagicStripFeatureNotice">
+        <Grid.Children>
+          <Border Background="#3FFFFFFF" CornerRadius="25" Opacity="0.76" Visibility="{Binding Visibility, ElementName=ViewboxSongInfoSmall, Converter={StaticResource VisibilityConverter}}" x:Name="BorderMagicStripFeatureNotice">
+            <Border.Child>
+              <StackPanel Margin="15,15,15,15" Orientation="Horizontal">
+                <StackPanel.Children>
+                  <p:SymbolIcon Foreground="#FFFFFFFF" FontWeight="Bold" FontSize="46" VerticalAlignment="Center" Margin="0,0,0,-2" Symbol="Dismiss16" x:Name="SymbolMagicStripFeatureNotice" />
+                  <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10,0,5,0" FontSize="32" Text="{DynamicResource String.Page.AppleMusicLyrics.MagicButton.Close}" x:Name="TextBlockMagicStripFeatureNotice" />
+                </StackPanel.Children>
+              </StackPanel>
+            </Border.Child>
+          </Border>
+          <Border Background="#3FFFFFFF" CornerRadius="25" Opacity="0.76" Width="150" Visibility="{Binding Visibility, ElementName=BorderMagicStripFeatureNotice, Converter={StaticResource VisibilityConverter}}">
+            <Border.Child>
+              <StackPanel Margin="0,15,0,15">
+                <StackPanel.Children>
+                  <p:SymbolIcon Foreground="#FFFFFFFF" FontWeight="Bold" FontSize="80" VerticalAlignment="Top" Symbol="{Binding Symbol, ElementName=SymbolMagicStripFeatureNotice}" />
+                  <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="15,5" FontSize="18" Text="{Binding Text, ElementName=TextBlockMagicStripFeatureNotice}" />
+                </StackPanel.Children>
+              </StackPanel>
+            </Border.Child>
+          </Border>
+        </Grid.Children>
+      </Grid>
+      <Grid VerticalAlignment="Top" Height="120" Margin="-20,-22,-20,0" Grid.ColumnSpan="1" x:Name="GridMagicButton">
+        <Grid.Children>
+          <Border Background="#00FFFFFF" />
+          <Border Cursor="None" MinHeight="80" MinWidth="120" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="BorderMagicButtonOutside">
+            <Border.Child>
+              <Grid x:Name="GridMagicButtonInside">
+                <Grid.Children>
+                  <Border Background="#00FFFFFF" CornerRadius="30" />
+                  <Border Opacity="0.25" Height="8" Width="40" Background="#FFFFFFFF" CornerRadius="4" x:Name="BorderMagicButtonInside" />
+                  <Border Height="{Binding ActualHeight, ElementName=BorderMagicButtonInside}" Width="{Binding ActualWidth, ElementName=BorderMagicButtonInside}" Margin="{Binding Margin, ElementName=BorderMagicButtonInside}">
+                    <Border.Child>
+                      <Viewbox Opacity="0" Margin="6" x:Name="ViewboxMagicButtonInside">
+                        <p:SymbolIcon Foreground="#FFFFFFFF" FontWeight="Bold" Symbol="Dismiss16" x:Name="SymbolMagicButton" />
+                      </Viewbox>
+                    </Border.Child>
+                  </Border>
+                  <Grid Margin="{Binding Margin, ElementName=BorderMagicButtonInside}">
+                    <Grid.Children>
+                      <TextBlock Visibility="Collapsed" FontWeight="Regular" Text="{DynamicResource String.Page.AppleMusicLyrics.MagicButton.Tip1}" Foreground="#FFFFFFFF" FontSize="0.01" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,10" x:Name="TextBlockMagicButtonTip1" />
+                      <TextBlock Visibility="Collapsed" Text="{DynamicResource String.Page.AppleMusicLyrics.MagicButton.Tip2}" Foreground="#FFFFFFFF" FontSize="0.01" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,10" FontWeight="{Binding FontWeight, ElementName=TextBlockMagicButtonTip1}" x:Name="TextBlockMagicButtonTip2" />
+                      <TextBlock Visibility="Collapsed" Text="{DynamicResource String.Page.AppleMusicLyrics.MagicButton.Tip3}" Foreground="#FFFFFFFF" FontSize="0.01" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,10" FontWeight="{Binding FontWeight, ElementName=TextBlockMagicButtonTip1}" x:Name="TextBlockMagicButtonTip3" />
+                      <TextBlock Visibility="Collapsed" Text="{DynamicResource String.Page.AppleMusicLyrics.MagicButton.Tip4}" Foreground="#FFFFFFFF" FontSize="0.01" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,10" FontWeight="{Binding FontWeight, ElementName=TextBlockMagicButtonTip1}" x:Name="TextBlockMagicButtonTip4" />
+                    </Grid.Children>
+                  </Grid>
+                </Grid.Children>
+              </Grid>
+            </Border.Child>
+          </Border>
+        </Grid.Children>
+      </Grid>
+      <Viewbox Margin="15" VerticalAlignment="Top" Grid.Column="1" Visibility="{Binding Visibility, ElementName=ViewboxSongInfoSmall}" x:Name="ViewboxSongInfoSmallOverlay">
+        <Grid Margin="35" Width="{Binding Width, ElementName=GridSongInfoSmall}" Height="{Binding ActualHeight, ElementName=GridSongInfoSmall}" x:Name="GridSongInfoSmallOverlay">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding Width, ElementName=ViewboxSongInfoSmallColumnDefinition1}" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="128" />
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+          </Grid.RowDefinitions>
+          <Grid.Children>
+            <Grid Grid.Row="1" Grid.Column="1" x:Name="GridSongInfoSmallArtistHost">
+              <Grid.OpacityMask>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                  <GradientStop Offset="0.925" Color="White" />
+                  <GradientStop Offset="0.999" Color="Transparent" />
+                </LinearGradientBrush>
+              </Grid.OpacityMask>
+              <Grid.Children>
+                <Border Background="#00FFFFFF" />
+                <p:InfoMarquee SyncGroup="AppleMusicSongInfoVertical" AnimationDelay="0:0:2" VerticalAlignment="Top">
+                  <TextBlock Margin="0,5,0,0" FontSize="25" Foreground="#FFFFFFFF" Opacity="0.5" HorizontalAlignment="Left" Cursor="Hand" Text="{Binding Text, ElementName=TextBlockArtist}" FontWeight="{Binding FontWeight, ElementName=TextBlockArtist}" x:Name="TextBlockVerticalModeArtistName" />
+                </p:InfoMarquee>
+              </Grid.Children>
+            </Grid>
+            <p:FavoriteButton Width="44" Height="44" Grid.Column="2" Grid.RowSpan="2" Margin="0,0,69,0" Cursor="Hand" HorizontalAlignment="Right" IsFavorited="{Binding IsHearted, Mode=TwoWay}" x:Name="FavoriteButtonVerticalMode">
+              <p:FavoriteButton.RenderTransform>
+                <TranslateTransform />
+              </p:FavoriteButton.RenderTransform>
+            </p:FavoriteButton>
+            <Grid Width="44" Height="44" HorizontalAlignment="Right" Cursor="Hand" Visibility="{Binding Visibility, ElementName=GridThreeDotMenu}" Grid.Column="2" Grid.RowSpan="2" x:Name="GridThreeDotMenuVerticalMode">
+              <Grid.RenderTransform>
+                <TranslateTransform x:Name="GridThreeDotMenuVerticalModeTranslateTrasform" />
+              </Grid.RenderTransform>
+              <Grid.Children>
+                <Border Background="#FFFFFFFF" Opacity="0.1" CornerRadius="22" />
+                <Image Source="{DynamicResource Apple.Menu}" />
+              </Grid.Children>
+            </Grid>
+            <Border CornerRadius="20" Background="#00FFFFFF" Grid.Column="2" Grid.RowSpan="2" Height="66" Width="66" Margin="0,0,58,0" Cursor="Hand" HorizontalAlignment="Right" x:Name="BorderFavoriteButtonVerticalModeForMousePoint" />
+            <Border Background="#00FFFFFF" Cursor="Hand" Grid.Column="2" Grid.RowSpan="2" CornerRadius="20" Height="66" Width="66" HorizontalAlignment="Right" Margin="0,0,-11,0" Visibility="{Binding Visibility, ElementName=GridThreeDotMenu}" x:Name="BorderMenuVerticalModeBackgroundForMousePoint" />
+          </Grid.Children>
+        </Grid>
+      </Viewbox>
+    </Grid.Children>
+  </Grid>
+</UserControl>

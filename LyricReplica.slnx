@@ -1,5 +1,0 @@
-<Solution>
-  <Project Path="src/LyricReplica.Core/LyricReplica.Core.csproj" />
-  <Project Path="src/LyricReplica.App/LyricReplica.App.csproj" />
-  <Project Path="tests/LyricReplica.Tests/LyricReplica.Tests.csproj" />
-</Solution>

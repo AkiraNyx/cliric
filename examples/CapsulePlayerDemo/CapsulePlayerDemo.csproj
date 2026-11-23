@@ -5,10 +5,10 @@
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <ApplicationManifest>../../src/LyricReplica.App/app.manifest</ApplicationManifest>
+    <ApplicationManifest>../../src/Cliric.App/app.manifest</ApplicationManifest>
     <RestoreAdditionalProjectSources>$(MSBuildThisFileDirectory)../../tools/capsule-preview-packages;$(RestoreAdditionalProjectSources)</RestoreAdditionalProjectSources>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../../src/LyricReplica.App/LyricReplica.App.csproj" />
+    <ProjectReference Include="../../src/Cliric.App/Cliric.App.csproj" />
   </ItemGroup>
 </Project>

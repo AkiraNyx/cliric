@@ -4,8 +4,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/LyricReplica;component/Assets/AppleMusicIcons.xaml" />
-                <ResourceDictionary Source="/LyricReplica;component/Shell/ShellStyles.xaml" />
+                <ResourceDictionary Source="/Cliric;component/Assets/AppleMusicIcons.xaml" />
+                <ResourceDictionary Source="/Cliric;component/Shell/ShellStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

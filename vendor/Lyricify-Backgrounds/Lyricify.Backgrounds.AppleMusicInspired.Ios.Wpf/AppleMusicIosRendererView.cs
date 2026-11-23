@@ -678,7 +678,8 @@ namespace Lyricify.Backgrounds.AppleMusicInspired.Ios.Wpf
             {
                 if (_compositionPresenter == null)
                 {
-                    _d3DImage.Lock();
+                    if (!_d3DImage.TryLock(new Duration(TimeSpan.Zero)))
+                        return;
                     imageLocked = true;
                 }
 

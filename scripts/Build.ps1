@@ -9,23 +9,23 @@ $dotnet=Join-Path $root 'tools\dotnet\dotnet.exe'
 if(-not(Test-Path -LiteralPath $dotnet)){ & (Join-Path $PSScriptRoot 'Setup-Sdk.ps1') }
 Set-Location $root
 if($Test){
-  & $dotnet run --project tests/LyricReplica.Tests/LyricReplica.Tests.csproj -c $Configuration
+  & $dotnet run --project tests/Cliric.Tests/Cliric.Tests.csproj -c $Configuration
   if($LASTEXITCODE -ne 0){throw 'Core tests failed'}
 }
-if(Test-Path -LiteralPath 'src/LyricReplica.App/LyricReplica.App.csproj'){
+if(Test-Path -LiteralPath 'src/Cliric.App/Cliric.App.csproj'){
   & (Join-Path $PSScriptRoot 'Setup-LiquidGlass.ps1')
-  $buildArgs=@('build','src/LyricReplica.App/LyricReplica.App.csproj','-c',$Configuration,'--artifacts-path','artifacts/build')
+  $buildArgs=@('build','src/Cliric.App/Cliric.App.csproj','-c',$Configuration,'--artifacts-path','artifacts/build')
   if($OfflineVerify){$buildArgs+=@('-o','artifacts/offline-build')}
   & $dotnet @buildArgs
   if($LASTEXITCODE -ne 0){throw 'WPF build failed'}
   if($OfflineVerify){
-    & $dotnet artifacts/offline-build/LyricReplica.dll --verify-offscreen
+    & $dotnet artifacts/offline-build/Cliric.dll --verify-offscreen
     if($LASTEXITCODE -ne 0){throw 'Offscreen verification failed; see artifacts/offline-build/UserData/Offscreen/failure.txt'}
   }
   if($Publish){
-    $delivery=Join-Path $root 'artifacts/current'
-    if(Get-Process -Name LyricReplica -ErrorAction SilentlyContinue|Where-Object Path -eq (Join-Path $delivery 'LyricReplica.exe')){throw 'Close the current LyricReplica window before rebuilding its running package.'}
-    & $dotnet publish src/LyricReplica.App/LyricReplica.App.csproj -c $Configuration -r win-x64 --self-contained true --artifacts-path artifacts/publish-build -o $delivery
+    $delivery=Join-Path $root 'artifacts/cliric'
+    if(Get-Process -Name Cliric -ErrorAction SilentlyContinue|Where-Object Path -eq (Join-Path $delivery 'Cliric.exe')){throw 'Close the current Cliric window before rebuilding its running package.'}
+    & $dotnet publish src/Cliric.App/Cliric.App.csproj -c $Configuration -r win-x64 --self-contained true -p:DebugType=None -p:DebugSymbols=false --artifacts-path artifacts/publish-build -o $delivery
     if($LASTEXITCODE -ne 0){throw 'Publish failed'}
   }
 }

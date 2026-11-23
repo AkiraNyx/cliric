@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="src/Cliric.Core/Cliric.Core.csproj" />
+  <Project Path="src/Cliric.App/Cliric.App.csproj" />
+  <Project Path="tests/Cliric.Tests/Cliric.Tests.csproj" />
+</Solution>
