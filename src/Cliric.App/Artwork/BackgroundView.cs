@@ -155,8 +155,8 @@ public sealed class BackgroundView : Grid, IDisposable
 
     private bool ShouldUseIndependent(BackgroundMode mode, ViewOptions options) =>
         SupportsIndependent(mode) && options.AppleMusicLyrics.EnableIndependentBackgroundRenderer &&
-        Window.GetWindow(this) is { } window &&
-        (window is MainWindow main ? main.CanPresentIndependentBackground : window.WindowState == WindowState.Maximized);
+        Window.GetWindow(this) is { WindowState: WindowState.Maximized } window &&
+        (window is not MainWindow main || main.CanPresentIndependentBackground);
 
     internal static IBackgroundSession CreateIosSession(BackgroundMode mode, AppleMusicIosBackgroundSettings settings,
         bool lightTheme, bool independent, int presetSlot = -1) =>

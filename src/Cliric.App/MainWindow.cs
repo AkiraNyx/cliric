@@ -263,7 +263,7 @@ public sealed partial class MainWindow : Window
     {
         if (_disposed)
             return;
-        bool transparent = ready && CanPresentIndependentBackground &&
+        bool transparent = ready && CanPresentIndependentBackground && WindowState == WindowState.Maximized &&
             BackgroundView.SupportsIndependent(_options.Background) && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && !_options.ReduceMotion;
         if (_independentPresentation == transparent)
             return;
@@ -274,7 +274,6 @@ public sealed partial class MainWindow : Window
         UpdateGlassFrame();
         if (PresentationSource.FromVisual(this) is HwndSource source && source.CompositionTarget is { } target)
             target.BackgroundColor = transparent ? Colors.Transparent : Colors.Black;
-        UpdateLyricBlend();
     }
     private Button Button(string label, string automation, Action action, double width = 36, double height = 36)
     {
@@ -813,24 +812,16 @@ public sealed partial class MainWindow : Window
         }
         else
             maskHost.OpacityMask = null;
-        UpdateLyricBlend();
+        bool sourceBackground = UseReferenceBackdrop;
+        bool independent = BackgroundView.SupportsIndependent(_options.Background) && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && WindowState == WindowState.Maximized;
+        _blend.Update(_options.AppleMusicLyrics.EnablePlusLighter && !independent, _options.AppleMusicLyrics.PlusLighterEffectPreset,
+            sourceBackground ? _reference.Get<Viewbox>("ViewboxBackground") : _background, !sourceBackground);
         // Follow reads the new row offsets in this same rendering callback.
         _scroll.UpdateLayout();
         _anchor = -2;
         _autoScrolling = false;
     }
 
-    private void UpdateLyricBlend()
-    {
-        if (_blend is null)
-            return;
-        bool sourceBackground = UseReferenceBackdrop;
-        bool independent = _independentPresentation ||
-            BackgroundView.SupportsIndependent(_options.Background) &&
-            _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && WindowState == WindowState.Maximized;
-        _blend.Update(_options.AppleMusicLyrics.EnablePlusLighter && !independent, _options.AppleMusicLyrics.PlusLighterEffectPreset,
-            sourceBackground ? _reference.Get<Viewbox>("ViewboxBackground") : _background, !sourceBackground);
-    }
     private void SetVerticalControls(bool shown)
     {
         _verticalControlsShown = shown && _portrait;

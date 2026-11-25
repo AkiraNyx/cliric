@@ -34,13 +34,7 @@ public sealed partial class MainWindow
     private double _lastVolumeSent;
 
     internal bool LyricsShown => _lyricsShown;
-    internal bool CanPresentIndependentBackground => WindowState switch
-    {
-        WindowState.Maximized => !_hostedByPlayer || _fullscreen,
-        WindowState.Normal => _hostedByPlayer && _options.Background == BackgroundMode.ReferenceAppleMusic &&
-            (_lyricsShown ? LyricsProgress >= 1 : LyricsProgress > 0),
-        _ => false
-    };
+    internal bool CanPresentIndependentBackground => !_hostedByPlayer || _fullscreen;
     internal double LyricsProgress => (double)GetValue(LyricsProgressProperty);
 
     private void BuildShell()

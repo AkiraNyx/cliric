@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
-using System.Windows;
 using System.Windows.Media;
 using Cliric.Core;
 
@@ -54,35 +53,18 @@ public sealed partial class MainWindow
             double start = liked ? Math.Max(0, timed[0].StartMs - _options.TimelineOffsetMs - 400) : 900;
             double duration = liked ? Math.Clamp(timed[Math.Min(4, timed.Length - 1)].StartMs - _options.TimelineOffsetMs - start + 800, 7500, 22000) : 6100;
             var windowed = await MeasureAsync(start, duration);
-            bool windowedResizeVerified = false;
-            if (windowed.IndependentPresented)
-            {
-                double width = Width;
-                Width -= 80;
-                await Task.Delay(300, token);
-                if (!_independentPresentation || _blend.Active || ResizeMode != ResizeMode.CanResize || Math.Abs(ActualWidth - Width) > 5)
-                    throw new InvalidOperationException("Windowed independent rendering must preserve the resizable viewport.");
-                Width = width;
-                windowedResizeVerified = true;
-            }
+            if (windowed.Independent || windowed.IndependentPresented)
+                throw new InvalidOperationException("Windowed lyrics must retain the inline background.");
             ToggleFullscreen();
             var fullscreen = await MeasureAsync(start, duration);
             if (windowed.Switches < 2 || fullscreen.Switches < 2)
                 throw new InvalidOperationException("Each window mode must include at least two line changes.");
-            if (windowedResizeVerified)
-            {
-                ToggleFullscreen();
-                ShowLibrary();
-                await Task.Delay(700, token);
-                if (_independentPresentation || _background.IndependentRendererActive || _library?.IsVisible != true)
-                    throw new InvalidOperationException("Returning to the library must restore the inline background.");
-            }
             File.WriteAllText(Path.Combine(App.DataFolder, "lyric-switch-frames.json"),
                 JsonSerializer.Serialize(new
                 {
                     reference, liked, track = liked ? _song.Title : null, artist = liked ? _song.Artist : null,
                     background = _options.Background.ToString(), _options.AudioReactive, _options.ReduceMotion, _options.AppleMusicLyrics.EnablePlusLighter,
-                    windowed, fullscreen, windowedResizeVerified
+                    windowed, fullscreen
                 }, LyricsFile.JsonOptions));
         }
         finally
