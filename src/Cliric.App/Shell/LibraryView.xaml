@@ -349,8 +349,8 @@
 
 
                     <DockPanel x:Name="SearchState" Margin="0,16,0,10">
-                        <local:Spinner x:Name="SearchSpinner" DockPanel.Dock="Left" Width="16" Height="16" Margin="0,0,8,0" Visibility="Collapsed" />
-                        <local:MiSansLabel x:Name="SearchStatus" Style="{StaticResource Shell.Caption}" FontSize="13" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
+                        <local:Spinner x:Name="SearchSpinner" DockPanel.Dock="Left" Width="16" Height="16" Margin="0,0,8,0" VerticalAlignment="Center" Visibility="Collapsed" />
+                        <local:MiSansLabel x:Name="SearchStatus" Style="{StaticResource Shell.Caption}" FontSize="13" VerticalAlignment="Center" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
                     </DockPanel>
                     <ListBox x:Name="SearchResults" ItemTemplate="{StaticResource NetEaseTrackRow}" Template="{StaticResource BareList}" Grid.IsSharedSizeScope="True" ItemContainerStyle="{StaticResource Shell.Row}"
                              VirtualizingPanel.IsVirtualizing="False" Background="Transparent" BorderThickness="0"
@@ -376,8 +376,8 @@
                         </StackPanel>
                     </DockPanel>
                     <DockPanel Margin="0,18,0,10">
-                        <local:Spinner x:Name="PlaylistSpinner" DockPanel.Dock="Left" Width="16" Height="16" Margin="0,0,8,0" Visibility="Collapsed" />
-                        <local:MiSansLabel x:Name="PlaylistStatus" Style="{StaticResource Shell.Caption}" FontSize="13" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
+                        <local:Spinner x:Name="PlaylistSpinner" DockPanel.Dock="Left" Width="16" Height="16" Margin="0,0,8,0" VerticalAlignment="Center" Visibility="Collapsed" />
+                        <local:MiSansLabel x:Name="PlaylistStatus" Style="{StaticResource Shell.Caption}" FontSize="13" VerticalAlignment="Center" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
                     </DockPanel>
                     <ListBox x:Name="PlaylistTracks" ItemTemplate="{StaticResource NetEaseTrackRow}" Template="{StaticResource BareList}"
                              Grid.IsSharedSizeScope="True" ItemContainerStyle="{StaticResource Shell.Row}" Background="Transparent" BorderThickness="0"
@@ -454,7 +454,7 @@
                             <local:MiSansLabel Text="Windows 音乐播放器与同步歌词" Style="{StaticResource Shell.Caption}" Margin="0,4,0,8" />
                             <local:MiSansLabel x:Name="AboutVersion" Style="{StaticResource Shell.Caption}" />
                             <local:MiSansLabel Text="作者 AkiraNyx" Style="{StaticResource Shell.Caption}" Margin="0,3,0,0" />
-                            <local:MiSansLabel Text="项目许可证尚未声明。第三方许可随程序提供。" Style="{StaticResource Shell.Caption}" TextWrapping="Wrap" Margin="0,3,0,0" />
+                            <local:MiSansLabel Text="开源许可证 AGPL-3.0-or-later" Style="{StaticResource Shell.Caption}" TextWrapping="Wrap" Margin="0,3,0,0" />
                             <Button Style="{StaticResource Shell.Pill}" Click="OpenProjectRepository" Content="GitHub · AkiraNyx/cliric" HorizontalAlignment="Left" Margin="0,10,0,0" />
                         </StackPanel>
                     </Border>
@@ -521,8 +521,7 @@
             <Popup x:Name="AccountPopup" Placement="Custom" PlacementTarget="{Binding ElementName=AccountButton}"
                    StaysOpen="True" AllowsTransparency="True" Opened="OnAccountOpened" Closed="OnAccountClosed" PopupAnimation="None">
                 <Grid>
-                    <Border x:Name="AccountSurface" Style="{StaticResource Card}" Margin="0" Width="318" BorderBrush="{StaticResource Shell.Stroke}"
-                            BorderThickness="1" RenderOptions.ClearTypeHint="Enabled" PreviewKeyDown="OnAccountKeyDown">
+                    <Border x:Name="AccountSurface" Style="{StaticResource Shell.Flyout}" Width="318" PreviewKeyDown="OnAccountKeyDown">
                         <StackPanel>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -540,7 +539,7 @@
                                         </Rectangle>
                                     </Grid>
                                 </Border>
-                                <StackPanel Grid.Column="1" Margin="14,0,12,0" VerticalAlignment="Center">
+                                <StackPanel Grid.Column="1" Margin="12,0,12,0" VerticalAlignment="Center">
                                     <local:MiSansLabel x:Name="LoginTitle" FontWeight="{DynamicResource Shell.SemiboldWeight}" />
                                     <local:MiSansLabel x:Name="LoginDetail" Style="{StaticResource Shell.Caption}" Margin="0,3,0,0" TextWrapping="Wrap" />
                                 </StackPanel>
@@ -580,9 +579,8 @@
 
         <local:PlaybackCapsule x:Name="PlaybackBar" />
 
-        <Border x:Name="SoundSurface" Width="276" Padding="14" CornerRadius="14"
+        <Border x:Name="SoundSurface" Width="276" Style="{StaticResource Shell.Flyout}"
                 HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="16,0,0,78"
-                Background="{StaticResource Shell.Surface}" BorderBrush="{StaticResource Shell.Stroke}" BorderThickness="1"
                 Visibility="Collapsed" IsHitTestVisible="False" local:ShellTransitions.PlaybackFeedback="True">
             <StackPanel>
                 <local:MiSansLabel Text="声音" Style="{StaticResource Shell.Heading}" FontSize="18" Margin="4,0,0,8" />
@@ -603,10 +601,9 @@
 
         <Popup x:Name="QueuePopup" Placement="Custom"
                StaysOpen="True" AllowsTransparency="True" Opened="OnQueuePopupOpened" Closed="OnQueuePopupClosed" PopupAnimation="None">
-            <Border x:Name="QueueSurface" Background="{StaticResource Shell.Surface}" BorderBrush="{StaticResource Shell.Stroke}"
-                    BorderThickness="1" CornerRadius="12" Padding="14" Width="428" RenderOptions.ClearTypeHint="Enabled" PreviewKeyDown="OnQueueKeyDown">
+            <Border x:Name="QueueSurface" Style="{StaticResource Shell.Flyout}" Width="428" PreviewKeyDown="OnQueueKeyDown">
                 <StackPanel>
-                    <DockPanel Margin="4,0,0,9">
+                    <DockPanel Margin="4,0,4,8">
                         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" local:ShellTransitions.PlaybackFeedback="True">
                             <Button x:Name="ShuffleButton" Style="{StaticResource Shell.ModeButton}" Click="ToggleShuffle"
                                     ToolTip="随机播放" AutomationProperties.Name="随机播放">

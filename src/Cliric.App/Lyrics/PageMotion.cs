@@ -195,7 +195,7 @@ public sealed partial class MainWindow
         while (end < PullCount && PullY(end) - _scroll.ActualHeight - _linesPanel.Margin.Top <= target)
             end++;
         _autoScrolling = false;
-        _scroll.ScrollToVerticalOffset(target);
+        _scroll.SetFrameOffset(target);
         if (compensateOnly)
         {
             for (int i = line + 1; i < end; i++)
@@ -222,7 +222,7 @@ public sealed partial class MainWindow
         double from = move.Y + compensation;
         move.BeginAnimation(TranslateTransform.YProperty, null);
         move.Y = from;
-        if (_options.ReduceMotion)
+        if (_options.ReduceMotion || duration <= 0 || Math.Abs(from - target) < .1)
         {
             move.Y = target;
             return;

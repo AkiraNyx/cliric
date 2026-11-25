@@ -145,8 +145,8 @@ public sealed class LyricRow : Grid
     private bool? _linePlaying;
     private double? _finishClockStartedMs;
     private double? _prepareClockStartedMs, _stoppedClockStartedMs;
-    private double _tailClockUntil;
-    private bool _wordVisualActive;
+    private bool _inactiveWordsSettled;
+    private readonly TranslateTransform _backingContentShift = new();
     private readonly bool _hanWithoutKana;
     private double _prepareLyricTime;
     private sealed class WordResetState
@@ -165,6 +165,7 @@ public sealed class LyricRow : Grid
     }
     internal double NextLineStartMs { get; set; } = -1;
     internal bool FinishingWords => _wordRun.Finishing;
+    internal bool LinePlaybackActive => _linePlaying == true;
     internal int RunningWord => _wordRun.CurrentWord;
     private readonly UserControl _view;
     private readonly Grid _outside;
@@ -522,8 +523,6 @@ public sealed class LyricRow : Grid
         _finishClockStartedMs = previous._finishClockStartedMs;
         _prepareClockStartedMs = previous._prepareClockStartedMs;
         _stoppedClockStartedMs = previous._stoppedClockStartedMs;
-        _tailClockUntil = previous._tailClockUntil;
-        _wordVisualActive = previous._wordVisualActive;
         _prepareLyricTime = previous._prepareLyricTime;
         SlotOpen = previous.SlotOpen;
         _lineAnimation = previous._lineAnimation;
@@ -615,7 +614,7 @@ public sealed class LyricRow : Grid
 
     private bool ChineseSweep() => _options.AppleMusicLyrics.KaraokeChineseRollingEasing && _hanWithoutKana;
     public void Update(double time, double rowTime, bool active, int distance, double activationStart, double activationEnd,
-        long generation = 0, double? animationTimeMs = null, bool completeNaturalTail = false)
+        long generation = 0, double? animationTimeMs = null)
     {
         if (_appliedResetSequence != _wordReset.Sequence)
         {
@@ -628,26 +627,20 @@ public sealed class LyricRow : Grid
             }
             finally { _applyingWordReset = false; }
         }
-        double tailSampleTime = animationTimeMs ?? rowTime;
-        double wordEnd = _karaoke ? _line.Words[^1].EndMs : 0;
-        bool naturalTail = completeNaturalTail && _karaoke && !_background && !_options.ReduceMotion &&
-            !(_options.AppleMusicLyrics.BuggyApple && _options.AppleMusicLyrics.BuggyAppleOptions.WordShineAnimationInterruption) &&
-            wordEnd >= activationEnd - (rowTime - time) - 275;
-        if (active || _lastUpdate?.Generation != generation)
-            _tailClockUntil = 0;
-        else if (SlotOpen && naturalTail)
-            _tailClockUntil = tailSampleTime + Math.Max(90, wordEnd - time + 90);
-        bool singing = active || naturalTail && tailSampleTime < _tailClockUntil;
+        bool canSettleWords = animationTimeMs.HasValue && !active && !_wordReset.Blocked && !_applyingWordReset;
+        if (!canSettleWords || _lastUpdate is not { Active: false } previous ||
+            previous.Generation != generation || rowTime < previous.RowTime)
+            _inactiveWordsSettled = false;
         _lastUpdate = (time, rowTime, active, distance, activationStart, activationEnd, generation);
         _lastAnimationTimeMs = animationTimeMs ?? time;
-        Frame = UpdateLineAnimation(rowTime, singing, activationStart, activationEnd, animationTimeMs);
+        Frame = UpdateLineAnimation(rowTime, active, activationStart, activationEnd, animationTimeMs);
         Opacity = Frame.RootOpacity;
         _rootScale.ScaleX = _rootScale.ScaleY = Frame.RootScale;
         _contentScale.ScaleX = _contentScale.ScaleY = _background ? 1 : Frame.ContentScale;
+        bool wasActive = SlotOpen;
         SlotOpen = active;
-        if (!singing && _wordVisualActive)
+        if (!active && wasActive)
             _stoppedClockStartedMs = animationTimeMs;
-        _wordVisualActive = singing;
         double elapsed = active ? Math.Max(0, rowTime - activationStart) : Math.Max(0, rowTime - activationEnd);
         double growth = _options.ReduceMotion ? 1 : Motion.Scroll(elapsed / (Motion.ScrollParameters().Duration * 1000 * _options.AnimationSpeed));
         if (_background)
@@ -674,8 +667,13 @@ public sealed class LyricRow : Grid
         else if (_backingRows.Any(x => x.Above))
         {
             double shift = animationTimeMs.HasValue ? _backingRows.Where(x => x.Above).Sum(x => x.Row.ParentContentOffsetY) : _backingRows.Where(x => x.Above).Sum(x => x.Row.NaturalHeight) * (active ? -1 : rowTime > activationEnd ? 1 : 0) * (1 - growth);
-            foreach (var child in new FrameworkElement[] { _glyphHost, _plainText }.Concat(_secondary))
-                child.RenderTransform = new TranslateTransform(0, shift);
+            if (!ReferenceEquals(_glyphHost.RenderTransform, _backingContentShift))
+            {
+                _glyphHost.RenderTransform = _plainText.RenderTransform = _backingContentShift;
+                foreach (var text in _secondary)
+                    text.RenderTransform = _backingContentShift;
+            }
+            _backingContentShift.Y = shift;
         }
         if (_overlapBottom is { } bottom && animationTimeMs is { } mainClock)
         {
@@ -698,7 +696,7 @@ public sealed class LyricRow : Grid
         int level = distance < 0 ? Math.Min(-distance + 1, 4) : Math.Min(distance, 4);
         bool hoverRestore = _options.AppleMusicLyrics.DisableBlurAtLyricsLineMouseOver && _feedback?.Hovered == true, hoverChanged = hoverRestore != _hoverBlurRestored;
         _hoverBlurRestored = hoverRestore;
-        double radius = _options.Blur && !singing && !hoverRestore ? BlurRadii[level] * _scale * _options.BlurLevel : 0;
+        double radius = _options.Blur && !active && !hoverRestore ? BlurRadii[level] * _scale * _options.BlurLevel : 0;
         if (_background)
             radius = Math.Min(radius, 7);
         if (Math.Abs(radius - _lastBlur) > .01)
@@ -712,17 +710,18 @@ public sealed class LyricRow : Grid
             else
                 _blur.BeginAnimation(BlurEffect.RadiusProperty, new DoubleAnimation(radius, TimeSpan.FromMilliseconds(hoverChanged ? (hoverRestore ? 100 : 250) : 90)) { EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut } });
         }
+        if (_inactiveWordsSettled)
+            return;
         if (animationTimeMs.HasValue)
         foreach (var strip in _strips)
             strip.Progress = MaskProgress(strip, time, animationTimeMs);
         bool wasFinishing = _wordRun.Finishing;
         int previousWord = _wordRun.CurrentWord;
         bool reset = false;
-        if (animationTimeMs.HasValue && !singing)
+        if (animationTimeMs.HasValue && !active)
             _wordRun.Stop();
         else if (!_wordReset.Blocked && !_applyingWordReset)
-            reset = _wordRun.Advance(time, _line.Words, NextLineStartMs, _options.AppleMusicLyrics.LineSwitchingAppleIosStyle164,
-                generation, singing, completeLastWord: naturalTail);
+            reset = _wordRun.Advance(time, _line.Words, NextLineStartMs, _options.AppleMusicLyrics.LineSwitchingAppleIosStyle164, generation, active);
         if (reset && _resumeResetWords)
         {
             _resumeResetWords = false;
@@ -744,7 +743,7 @@ public sealed class LyricRow : Grid
                 strip.SweepClockStartedMs = null;
                 strip.Frozen = false;
                 strip.SavedColors = null;
-                strip.Canvas.OpacityMask = singing ? strip.Mask : null;
+                strip.Canvas.OpacityMask = active ? strip.Mask : null;
                 foreach (var view in strip.Words)
                 {
                     view.MotionWord = null;
@@ -828,7 +827,7 @@ public sealed class LyricRow : Grid
             bool eventExit = animationTimeMs.HasValue && _lineAnimation is { Playing: false };
             double stopElapsed = eventExit ? Math.Max(0, animationTimeMs!.Value - _lineAnimationStartedMs) : rowTime - activationEnd;
             double stopDuration = eventExit ? _lineAnimation!.PlayedDurationMs : sudden ? 10 : Math.Truncate(SingOpacityDuration * _options.AnimationSpeed);
-            if (!singing && activationEnd > 0 && stopElapsed >= stopDuration)
+            if (!active && activationEnd > 0 && stopElapsed >= stopDuration)
                 strip.Canvas.OpacityMask = null;
             strip.Canvas.Opacity = strip.Canvas.OpacityMask is null ? 47d / 255 : 1;
             var colors = animationTimeMs is { } colorClock && strip.ColorAnimation is { } colorPlan ? colorPlan.At(Math.Max(0, colorClock - strip.ColorAnimationStartedMs)) : Frame;
@@ -847,7 +846,7 @@ public sealed class LyricRow : Grid
                 double lyricOrigin = selected ?? _prepareLyricTime;
                 double? clockOrigin = selected.HasValue ? view.ClockStartedMs : _prepareClockStartedMs;
                 double effectTime = AnimationTime(time, animationTimeMs, clockOrigin, lyricOrigin);
-                bool past = !singing && activationEnd > 0 && rowTime > activationEnd;
+                bool past = activationEnd > 0 && rowTime > activationEnd;
                 bool resetStopping = view.ResetStoppedAtMs.HasValue;
                 double stopTime = view.ResetStoppedAtMs ?? AnimationTime(activationEnd - (rowTime - time), _stoppedClockStartedMs, clockOrigin, lyricOrigin);
                 double floatHeight = _options.AppleMusicLyrics.GetFloatHeight();
@@ -866,7 +865,7 @@ public sealed class LyricRow : Grid
                     double opacity = 0;
                     if (!_options.ReduceMotion && effectActive)
                     {
-                        if (singing && !resetStopping)
+                        if (active && !resetStopping)
                             opacity = Motion.WordGlow(effectTime, motionWord);
                         else if ((past || resetStopping) && !immediate)
                             opacity = _options.Preset == MotionPreset.Lyricify ? Motion.WordGlow(effectTime, motionWord, stopTime) : Motion.WordGlow(stopTime, motionWord) * (1 - Math.Clamp((effectTime - stopTime) / 700, 0, 1));
@@ -896,7 +895,7 @@ public sealed class LyricRow : Grid
                     (double Scale, double Y, double Glow) state = (1, 0, 0);
                     if (!_options.ReduceMotion)
                     {
-                        if (singing && wordStarted && !resetStopping)
+                        if (active && wordStarted && !resetStopping)
                             state = Pose(effectTime);
                         else if ((past || resetStopping) && wordStarted && view.Word.StartMs <= stopTime)
                         {
@@ -972,6 +971,10 @@ public sealed class LyricRow : Grid
                 }
             }
         }
+        _inactiveWordsSettled = canSettleWords && _strips.All(strip =>
+            strip.Canvas.OpacityMask is null && strip.Words.All(word =>
+                word.Host.Effect is null && word.Floats.All(move => move.Move.Y == 0) &&
+                word.Glyphs.All(glyph => glyph.Move.Y == 0 && glyph.Scale.ScaleX == 1 && glyph.View.Effect is null)));
     }
     private void ApplyGlow(FrameworkElement target, Canvas word, double opacity, double baseRadius)
     {

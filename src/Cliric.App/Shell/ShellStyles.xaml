@@ -18,6 +18,15 @@
     <FontWeight x:Key="Shell.SemiboldWeight">520</FontWeight>
     <FontWeight x:Key="Shell.BoldWeight">630</FontWeight>
 
+    <Style x:Key="Shell.Flyout" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource Shell.Surface}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Shell.Stroke}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="Padding" Value="14" />
+        <Setter Property="RenderOptions.ClearTypeHint" Value="Enabled" />
+    </Style>
+
     <Style TargetType="local:MiSansLabel">
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Template">
@@ -49,6 +58,7 @@
         <Setter Property="FontSize" Value="16" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="TextAlignment" Value="Center" />
         <Setter Property="TextOptions.TextRenderingMode" Value="Grayscale" />
     </Style>
     <Style x:Key="Shell.Heading" TargetType="local:MiSansLabel" BasedOn="{StaticResource {x:Type local:MiSansLabel}}">

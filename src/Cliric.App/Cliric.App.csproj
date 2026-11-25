@@ -23,6 +23,7 @@
     <None Include="../../vendor/Lyricify-Lyrics-Helper/LICENSE" Link="licenses/Lyricify-Lyrics-Helper.txt" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../../vendor/Wpf.Ui/LICENSE.txt" Link="licenses/Wpf.Ui.txt" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../../vendor/MiSans/LICENSE.pdf" Link="licenses/MiSans.pdf" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Include="../../LICENSE" Link="LICENSE" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <Resource Include="Assets/Fonts/*.otf" />
     <Resource Include="Assets/Fonts/*.ttf" />
     <Resource Include="Assets/Shaders/*.ps" />

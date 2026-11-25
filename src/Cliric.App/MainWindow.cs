@@ -549,9 +549,19 @@ public sealed partial class MainWindow : Window
             row.Pull.BeginAnimation(TranslateTransform.YProperty, null);
             row.Pull.Y = 0;
         }
-        bool slotChange = _rows.Any(r => r.Backgrounds.Any(b => b.SlotOpen != Timeline.Active(r.Data, lyricTime)));
-        CapturePullLayout();
-        ConfigureSwitchDelays(anchor, lyricTime, now);
+        bool lineChange = false, slotChange = false;
+        foreach (var row in _rows)
+        {
+            bool active = Timeline.Active(row.Data, lyricTime);
+            lineChange |= row.Main.SlotOpen != active;
+            slotChange |= row.Backgrounds.Count != 0 && row.Backgrounds[0].SlotOpen != active;
+        }
+        if (slotChange)
+            CapturePullLayout();
+        else
+            _pullLayout.Clear();
+        if (lineChange)
+            ConfigureSwitchDelays(anchor, lyricTime, now);
         double[]? previous = slotChange && !discontinuity && !_options.ReduceMotion ? _rows.Select(r => VisualTreeHelper.GetOffset(r.Host).Y + r.Pull.Y).ToArray() : null;
         for (int i = 0; i < _rows.Count; i++)
         {
@@ -560,8 +570,7 @@ public sealed partial class MainWindow : Window
             double start = row.Data.Untimed ? double.PositiveInfinity : row.Data.StartMs;
             foreach (var backing in row.Backgrounds)
                 backing.Update(wordTime, lyricTime, active, i - anchor, start, row.Data.EndMs, _clock.Generation, animationTime);
-            row.Main.Update(wordTime, lyricTime, active, i - anchor, start, row.Data.EndMs, _clock.Generation, animationTime,
-                completeNaturalTail: true);
+            row.Main.Update(wordTime, lyricTime, active, i - anchor, start, row.Data.EndMs, _clock.Generation, animationTime);
         }
         if (_credit is not null)
             ((StackPanel)_credit.FindName("StackPanelLyrics")).Opacity = anchor >= _rows.Count ? 1 : _options.Blur ? .4 : .3;

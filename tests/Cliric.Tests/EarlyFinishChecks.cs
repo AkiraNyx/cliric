@@ -42,12 +42,6 @@ static class EarlyFinishChecks
         var noNext = new WordRunState();
         noNext.Advance(5000, [new() { StartMs = 1000, DurationMs = 9000 }], -1, false, 1);
         check(!noNext.Finishing, "last page row has no forced next-line finish");
-        var natural = new WordRunState();
-        LyricWord[] tail = [new() { StartMs = 1000, DurationMs = 600 }, new() { StartMs = 1750, DurationMs = 450 }];
-        natural.Advance(1600, tail, 2000, false, 1, completeLastWord: true);
-        natural.Advance(1800, tail, 2000, false, 1, completeLastWord: true);
-        check(!natural.Finishing && natural.CurrentWord == 1 && natural.DispatchFor(1)?.DurationMs == 400,
-            "natural tails dispatch their final word even during the reference early-finish window");
         var rows = new List<DisplayLine> { new(new() { Text = "a", EndMs = 2000 }, [], 1000, false), new(new() { Text = "b", EndMs = 4000 }, [], 3000, false), new(new() { Text = "c", EndMs = 6000 }, [], 5000, false) };
         check(WordSweep.NextLineStart(rows, 0) == 3000 && WordSweep.NextLineStart(rows, 2) == -1, "next-start selection follows the next main row or the final sentinel");
         rows[0] = rows[0] with

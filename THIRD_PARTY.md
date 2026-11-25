@@ -1,3 +1,7 @@
+# Cliric licensing
+
+Original Cliric source code is licensed under the GNU Affero General Public License, version 3 or (at your option) any later version. See [LICENSE](LICENSE).
+
 # Third-party notices
 
 - The player interface uses MiSans VF by Xiaomi and Hanyi Fonts. It embeds the original simplified-Chinese variable font from the [official MiSans download](https://hyperos.mi.com/font/en/download/). See vendor/MiSans/LICENSE.pdf.

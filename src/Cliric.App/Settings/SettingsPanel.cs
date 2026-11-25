@@ -24,14 +24,14 @@ public sealed class SettingsPanel : StackPanel
         _settings = options.AppleMusicLyrics;
         _changed = changed;
         Heading("背景与文字");
-        Choice("ComboBoxAppleMusicLyricsBackground", "背景", ["静态", "动态", "动态律动", "动态流动", "Apple Music 原版（4.4.2）", "Cliric 现代"], (int)_settings.Background, i => _settings.Background = (BackgroundTypes)i, true);
+        Choice("ComboBoxAppleMusicLyricsBackground", "背景", ["静态", "动态", "动态律动", "动态流动", "Apple Music 原版（4.4.2）", "Lyricify 现代（开源）"], (int)_settings.Background, i => _settings.Background = (BackgroundTypes)i, true);
         _conditional["independent"] = Check("ToggleSwitchAppleMusicLyricsIndependentBackgroundRendering", "独立渲染背景", _settings.EnableIndependentBackgroundRenderer, v => _settings.EnableIndependentBackgroundRenderer = v, true);
         _conditional["palette"] = Choice("ComboBoxAppleMusicLyricsBackground_Isolation_Palette", "取色算法", ["自动", "KMeans", "OctTree", "MedianCut 1", "MedianCut 2"], (int)_settings.BackgroundDynamicIsolationPalettes, i => _settings.BackgroundDynamicIsolationPalettes = (IsolationPalettes)i, true);
         Check("ToggleSwitchAppleMusicLyricsBlurLyrics", "歌词模糊", _settings.BlurLyrics, v => _settings.BlurLyrics = v);
         _conditional["blur"] = Slider("SliderAppleMusicLyricsBlurLevel", "模糊程度", 1, 9, _settings.BlurLevel * 5, 1, v => _settings.BlurLevel = v / 5);
         Check("ToggleSwitchAppleMusicLyricsDisableBlurAtLyricsLineMouseOver", "鼠标悬停时取消模糊", _settings.DisableBlurAtLyricsLineMouseOver, v => _settings.DisableBlurAtLyricsLineMouseOver = v);
         Check("ToggleSwitchAppleMusicLyricsBoldText", "粗体文字", _settings.BoldText, v => _settings.BoldText = v);
-        Choice("ComboBoxAppleMusicLyricsFontPreset", "字体预设", ["默认", "Cliric 混合样式", "Cliric 圆形样式", "SF Pro", "自定义"], (int)_settings.FontPreset, i => _settings.FontPreset = (FontPresets)i);
+        Choice("ComboBoxAppleMusicLyricsFontPreset", "字体预设", ["默认", "Spotify Mix", "Spotify Circular", "SF Pro", "自定义"], (int)_settings.FontPreset, i => _settings.FontPreset = (FontPresets)i);
         var font = new ComboBox { Name = "HostCustomFontFamily", IsEditable = true, ItemsSource = Fonts.SystemFontFamilies.Select(f => f.Source).OrderBy(x => x).ToArray(), Text = _settings.FontFamily, Margin = new Thickness(0, 7, 0, 5) };
         var customFont = new StackPanel();
         customFont.Children.Add(font);
@@ -89,7 +89,7 @@ public sealed class SettingsPanel : StackPanel
         traditional.IsEnabled = false;
         traditional.ToolTip = "独立工程提供当前歌词页；传统页入口属于原客户端。";
         Heading("翻译与歌词来源");
-        Choice("HostLyricsParser", "歌词解析方式（下次载入生效）", ["内置解析器", "扩展解析器"],
+        Choice("HostLyricsParser", "歌词解析方式（下次载入生效）", ["内置解析器", "Lyricify Lyrics Helper"],
             options.UseLyricifyParser ? 1 : 0, i => options.UseLyricifyParser = i == 1);
         Check("HostTranslation", "显示翻译", options.Translation, v => options.Translation = v);
         Choice("ComboBoxLyricsRomajiMode", "音译显示", ["禁用", "翻译优先", "罗马音优先", "仅罗马音"], (int)options.RomajiOption, v => options.RomajiOption = (RomajiOptions)v);
@@ -226,7 +226,7 @@ public sealed class SettingsPanel : StackPanel
             BackgroundTypes.DynamicIsolation => "动态流动根据封面取色生成流动网格，当前没有接入系统音频。",
             BackgroundTypes.AppleMusicOriginal when !ios => "当前使用兼容背景。原版效果需要 4.4.2 渲染组件。",
             BackgroundTypes.AppleMusicOriginal => "使用本地 4.4.2 背景渲染组件。",
-            _ => "使用随 Cliric 发布的现代背景渲染器。"
+            _ => "使用随程序提供的 Lyricify Backgrounds 现代背景。"
         };
         if (ios)
             _backgroundAudioNote.Text += _options.ReduceMotion ? "关闭减少动态效果后可启用系统音频律动。" : "支持系统音频低频律动。";

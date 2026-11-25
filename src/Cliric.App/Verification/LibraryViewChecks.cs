@@ -20,6 +20,12 @@ public sealed partial class LibraryView
 {
     private async Task VerifyPlayerAsync()
     {
+        if (Environment.GetCommandLineArgs().Contains("--lyric-switch-test"))
+        {
+            await _lyrics.VerifyLyricSwitchFramesAsync();
+            _lyrics.Close();
+            return;
+        }
         if (Environment.GetCommandLineArgs().Contains("--lyric-lift-test"))
         {
             await _lyrics.VerifyWindowedLyricLiftAsync();

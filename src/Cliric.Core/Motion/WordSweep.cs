@@ -126,8 +126,7 @@ public sealed class WordRunState
     }
     public void Stop() => _running = false;
 
-    public bool Advance(double time, IReadOnlyList<LyricWord> words, double nextStart, bool ios164, long generation,
-        bool running = true, bool completeLastWord = false)
+    public bool Advance(double time, IReadOnlyList<LyricWord> words, double nextStart, bool ios164, long generation, bool running = true)
     {
         bool reset = generation != _generation || time < _previousTime || running && !_running;
         double previous = reset ? double.NaN : _previousTime;
@@ -144,7 +143,7 @@ public sealed class WordRunState
         _running = running;
         if (running && !Finishing)
         {
-            if (completeLastWord || nextStart < 0 || nextStart - time >= 500 || CurrentWord >= words.Count - 1 && ios164)
+            if (nextStart < 0 || nextStart - time >= 500 || CurrentWord >= words.Count - 1 && ios164)
             {
                 int first = CurrentWord + 1;
                 while (CurrentWord < words.Count - 1 && words[CurrentWord + 1].StartMs <= time)

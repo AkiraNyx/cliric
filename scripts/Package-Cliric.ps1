@@ -44,6 +44,7 @@ try {
     Add-Tree (Join-Path $root 'tools/ncm-cli-0.1.7/node_modules') 'tools/ncm-cli-0.1.7/node_modules'
     Add-Tree $mpvPath 'tools/ncm-cli-0.1.7/mpv'
     Add-File (Join-Path $root 'Start-Cliric.cmd') 'Start-Cliric.cmd'
+    Add-File (Join-Path $root 'LICENSE') 'LICENSE'
     Add-File (Join-Path $root 'THIRD_PARTY.md') 'THIRD_PARTY.md'
     Add-File $node 'tools/node/node.exe'
     Add-Text 'tools/node/LICENSE.txt' $nodeLicense
