@@ -20,7 +20,7 @@ PullingParameterChecks.Run(Check);
 foreach (bool ios in new[] { false, true })
 foreach (bool timed in new[] { false, true })
 {
-    var breathingSettings = new AppleMusicSettings { InterLineAnimationPreset = ios ? InterLineAnimationPresetTypes.iOS : InterLineAnimationPresetTypes.Lyricify, PullingEffect = true, PullingDelay = 2.5, AnimationSpeed = 1.5 };
+    var breathingSettings = new AppleMusicSettings { InterLineAnimationPreset = ios ? InterLineAnimationPresetTypes.iOS : InterLineAnimationPresetTypes.Cliric, PullingEffect = true, PullingDelay = 2.5, AnimationSpeed = 1.5 };
     int scroll = ios ? (int)Math.Round(Motion.ScrollParameters().Duration * 1000) : timed ? 500 : 620;
     Near(Motion.BreathingEndExtensionMs(breathingSettings, timed), (int)(scroll * (ios ? 1d / 31 : .03) * 2.5 * 1.5), "page breathing compensation uses the actual karaoke scroll duration");
     breathingSettings.PullingEffect = false;
@@ -35,7 +35,7 @@ var multiSettings = new AppleMusicSettings();
 var multiple = LyricsPreparation.ForPage(overlapSong, false, false, multiSettings, true);
 var single = LyricsPreparation.ForPage(overlapSong, false, false, multiSettings, false);
 Check(multiple[0].EndMs > multiple[1].StartMs && single[0].EndMs == single[1].StartMs, "global multiline switch changes overlapping karaoke boundaries");
-multiSettings.InterLineAnimationPreset = InterLineAnimationPresetTypes.Lyricify;
+multiSettings.InterLineAnimationPreset = InterLineAnimationPresetTypes.Cliric;
 var classic = LyricsPreparation.ForPage(overlapSong, false, false, multiSettings, false);
 Near(classic[0].StartMs, 700, "legacy page uses its original fixed 300ms entry lead");
 Check(classic[0].EndMs == classic[1].StartMs, "legacy page respects the global single-line setting");
@@ -249,30 +249,30 @@ Near(Motion.WordGlow(2350, glowWord), 0, "short word glow ends at word end plus 
 Check(FloatingMotion.Y(1200, 2000, 1000, 1000, 41) > 0, "future word is prepared below the baseline");
 Check(FloatingMotion.Y(5000, 2000, 1000, 1000, 41) < 0, "sung word reaches the lifted baseline");
 var legacyWord = new LyricWord { Text = "hi", StartMs = 1000, DurationMs = 2000 };
-var legacyPose = Motion.Glyph(1600, legacyWord, 0, 2, MotionPreset.Lyricify, 41, 50, true);
+var legacyPose = Motion.Glyph(1600, legacyWord, 0, 2, MotionPreset.Cliric, 41, 50, true);
 Check(legacyPose.Scale > 1 && legacyPose.Scale < 1.08 && legacyPose.Y < 0, "legacy two-character target follows its source parameters");
-legacyPose = Motion.Glyph(10000, legacyWord, 0, 2, MotionPreset.Lyricify, 41, 50, true);
+legacyPose = Motion.Glyph(10000, legacyWord, 0, 2, MotionPreset.Cliric, 41, 50, true);
 Near(legacyPose.Scale, 1, "legacy character returns to neutral");
-Near(Motion.Glyph(1049, legacyWord, 0, 2, MotionPreset.Lyricify, 41, 50, true).Scale, 1, "legacy first character waits for its capped 50 ms delay");
-Near(Motion.Glyph(1100, legacyWord, 0, 2, MotionPreset.Lyricify, 41, 50, true).Scale, 1.0002430555555555, "legacy first character grows from its recovered start time");
-Near(Motion.Glyph(1420, legacyWord, 1, 2, MotionPreset.Lyricify, 41, 50, true).Scale, 1, "legacy second character includes the preceding integer waits");
-Check(Motion.Glyph(1500, legacyWord, 1, 2, MotionPreset.Lyricify, 41, 50, true).Scale > 1, "legacy plain second character has started at 500 ms");
+Near(Motion.Glyph(1049, legacyWord, 0, 2, MotionPreset.Cliric, 41, 50, true).Scale, 1, "legacy first character waits for its capped 50 ms delay");
+Near(Motion.Glyph(1100, legacyWord, 0, 2, MotionPreset.Cliric, 41, 50, true).Scale, 1.0002430555555555, "legacy first character grows from its recovered start time");
+Near(Motion.Glyph(1420, legacyWord, 1, 2, MotionPreset.Cliric, 41, 50, true).Scale, 1, "legacy second character includes the preceding integer waits");
+Check(Motion.Glyph(1500, legacyWord, 1, 2, MotionPreset.Cliric, 41, 50, true).Scale > 1, "legacy plain second character has started at 500 ms");
 var legacySyllables = new LyricWord { Text = "hi", StartMs = 1000, DurationMs = 2000, Syllables = [new() { Text = "h", StartMs = 1000, DurationMs = 300 }, new() { Text = "i", StartMs = 1300, DurationMs = 1700 }] };
-Near(Motion.Glyph(1500, legacySyllables, 1, 2, MotionPreset.Lyricify, 41, 50, true).Scale, 1, "legacy syllable timing delays the second character until 550 ms");
-Check(Motion.Glyph(1600, legacySyllables, 1, 2, MotionPreset.Lyricify, 41, 50, true).Scale > 1, "legacy syllable-delayed character eventually starts");
+Near(Motion.Glyph(1500, legacySyllables, 1, 2, MotionPreset.Cliric, 41, 50, true).Scale, 1, "legacy syllable timing delays the second character until 550 ms");
+Check(Motion.Glyph(1600, legacySyllables, 1, 2, MotionPreset.Cliric, 41, 50, true).Scale > 1, "legacy syllable-delayed character eventually starts");
 var leadingSyllables = new LyricWord { Text = " hi", StartMs = 1000, DurationMs = 2000, Syllables = [new() { Text = " ", StartMs = 1000, DurationMs = 100 }, new() { Text = "h", StartMs = 1100, DurationMs = 300 }, new() { Text = "i", StartMs = 1400, DurationMs = 1700 }] };
-Near(Motion.Glyph(1600, leadingSyllables, 1, 2, MotionPreset.Lyricify, 41, 50, true).Scale, Motion.Glyph(1600, legacySyllables, 1, 2, MotionPreset.Lyricify, 41, 50, true).Scale, "legacy subitem lookup counts the leading space without animating it");
+Near(Motion.Glyph(1600, leadingSyllables, 1, 2, MotionPreset.Cliric, 41, 50, true).Scale, Motion.Glyph(1600, legacySyllables, 1, 2, MotionPreset.Cliric, 41, 50, true).Scale, "legacy subitem lookup counts the leading space without animating it");
 legacySyllables.Syllables.Insert(0, new() { Text = "", StartMs = 1000, DurationMs = 0 });
-Check(double.IsFinite(Motion.Glyph(1600, legacySyllables, 1, 2, MotionPreset.Lyricify, 41, 50, true).Scale), "empty legacy syllables cannot divide by zero");
+Check(double.IsFinite(Motion.Glyph(1600, legacySyllables, 1, 2, MotionPreset.Cliric, 41, 50, true).Scale), "empty legacy syllables cannot divide by zero");
 var gapSyllables = new LyricWord { Text = "hey", StartMs = 1000, DurationMs = 2000, Syllables = [new() { Text = "h", StartMs = 1000, DurationMs = 100 }, new() { Text = "e", StartMs = 1300, DurationMs = 200 }, new() { Text = "y", StartMs = 1500, DurationMs = 1500 }] };
-Near(Motion.Glyph(1188, gapSyllables, 1, 3, MotionPreset.Lyricify, 41, 50, true).Scale, 1, "legacy subitem gaps contribute to the next character delay");
-Check(Motion.Glyph(1198, gapSyllables, 1, 3, MotionPreset.Lyricify, 41, 50, true).Scale > 1, "legacy character starts after the gap-adjusted 188 ms wait");
+Near(Motion.Glyph(1188, gapSyllables, 1, 3, MotionPreset.Cliric, 41, 50, true).Scale, 1, "legacy subitem gaps contribute to the next character delay");
+Check(Motion.Glyph(1198, gapSyllables, 1, 3, MotionPreset.Cliric, 41, 50, true).Scale > 1, "legacy character starts after the gap-adjusted 188 ms wait");
 gapSyllables.Syllables[0].DurationMs = 1;
 gapSyllables.Syllables[1].StartMs = 1001;
 gapSyllables.Syllables[1].DurationMs = 1;
 gapSyllables.Syllables[2].StartMs = 1002;
-Near(Motion.Glyph(1094, gapSyllables, 1, 3, MotionPreset.Lyricify, 41, 50, true).Scale, 1, "legacy per-subitem step has an 80 ms minimum");
-Check(Motion.Glyph(1104, gapSyllables, 1, 3, MotionPreset.Lyricify, 41, 50, true).Scale > 1, "legacy minimum-step character starts after 94 ms");
+Near(Motion.Glyph(1094, gapSyllables, 1, 3, MotionPreset.Cliric, 41, 50, true).Scale, 1, "legacy per-subitem step has an 80 ms minimum");
+Check(Motion.Glyph(1104, gapSyllables, 1, 3, MotionPreset.Cliric, 41, 50, true).Scale > 1, "legacy minimum-step character starts after 94 ms");
 var longOverlap = Timeline.Group(new Song { Lines = [new() { Text = "long", StartMs = 1000, EndMs = 10000 }, new() { Text = "short", StartMs = 2000, EndMs = 3000 }] }, false, false);
 using (var nativePreparation = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Fixtures", "lyrics-preparation-original.json"))))
 {

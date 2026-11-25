@@ -984,7 +984,7 @@ public sealed partial class LibraryView
         try
         {
             if (client)
-                _lyrics.Options.UseLyricifyParser = true;
+                _lyrics.Options.UseCliricExtendedParser = true;
             await _lyrics.PlayNetEaseAsync(track, timeout.Token);
             await WaitForAsync(() => _lyrics.Clock.IsPlaying && _lyrics.Clock.PositionMs > 600);
             using var decoder = Process.GetProcessById(await NetEaseMusic.GetPlaybackProcessIdAsync(timeout.Token));
@@ -1040,7 +1040,7 @@ public sealed partial class LibraryView
             File.WriteAllText(Path.Combine(App.DataFolder, "verification", report), JsonSerializer.Serialize(new
             {
                 passed = true, assemblySha256 = App.AssemblySha256, trackId = track.OriginalId, decodedDurationMs = decodedDuration, wordTimedLines,
-                availableQualityCount = levels.Length, qualitySwitchVerified = switched is not null, lyricifyParserSelected = _lyrics.Options.UseLyricifyParser,
+                availableQualityCount = levels.Length, qualitySwitchVerified = switched is not null, cliricExtendedParserSelected = _lyrics.Options.UseCliricExtendedParser,
                 coverWidth = cover.PixelWidth, coverHeight = cover.PixelHeight,
                 decoderWindow = false,
                 scope = client

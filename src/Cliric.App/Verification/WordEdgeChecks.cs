@@ -237,7 +237,7 @@ internal static class WordEdgeChecks
         futureOptions.AppleMusicLyrics.BuggyAppleOptions.WordShineAnimationInterruption = true;
         future.Update(2000.01, 2000.01, false, 0, 0, 1700, 1);
         check(futureScale.ScaleX == 1 && Math.Abs(futureMove.Y - (-4 * (1 - 300.01 / 607))) < 1e-9, "outer baseline return also follows the immediate inactive word reset");
-        var legacyOptions = new ViewOptions { Preset = MotionPreset.Lyricify };
+        var legacyOptions = new ViewOptions { Preset = MotionPreset.Cliric };
         var legacyLine = new LyricLine { Text = "ab", StartMs = 1000, EndMs = 3000, Words = [new() { Text = "ab", StartMs = 1000, DurationMs = 2000 }] };
         var legacy = new LyricRow(legacyLine, false, false, 500, 1, new FontFamily("Segoe UI"), legacyOptions);
         legacy.Measure(new Size(500, double.PositiveInfinity));

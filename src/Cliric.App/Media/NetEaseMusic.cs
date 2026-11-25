@@ -58,14 +58,14 @@ internal static partial class NetEaseMusic
         return Artwork.Decode(image.ToArray());
     }
 
-    public static async Task<Song> LoadLyricsAsync(NetEaseTrack track, CancellationToken cancellationToken, bool useLyricifyParser = false)
+    public static async Task<Song> LoadLyricsAsync(NetEaseTrack track, CancellationToken cancellationToken, bool useCliricExtendedParser = false)
     {
         if (track.ClientSession)
-            return await LoadClientLyricsAsync(track, cancellationToken, useLyricifyParser);
+            return await LoadClientLyricsAsync(track, cancellationToken, useCliricExtendedParser);
         var response = await RunAsync(cancellationToken, "song", "lyric", "--songId", track.Id);
         var data = response.TryGetProperty("data", out var payload) ? payload : default;
         string lyric = ReadText(data, "lyric");
-        Func<string, Song> parseLrc = useLyricifyParser ? LyricifyParser.ParseLrc : LyricsFile.ParseLrc;
+        Func<string, Song> parseLrc = useCliricExtendedParser ? CliricExtendedParser.ParseLrc : LyricsFile.ParseLrc;
         var song = parseLrc(string.IsNullOrWhiteSpace(lyric) ? ReadText(data, "txtLyric") : lyric);
         ApplySecondary(ReadText(data, "transLyric"), (line, value) => line.Translation = value);
         ApplySecondary(ReadText(data, "romalrc"), (line, value) => line.Romanization = value);

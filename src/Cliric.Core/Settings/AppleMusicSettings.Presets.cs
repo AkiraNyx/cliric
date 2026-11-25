@@ -34,7 +34,7 @@ public sealed partial class AppleMusicSettings
         BackgroundVocalsNativePosition?0:1,
         BackgroundVocalsEnterAnimation==0?0:BackgroundVocalsEnterAnimation==2?3:BackgroundVocalsEnterDirectionLeft?2:1,
         IosStylePreset==17?1:IosStylePreset==16?2:0,
-        WordShineEffectPreset switch { WordShineEffectPresetTypes.iOS264=>0,WordShineEffectPresetTypes.Android=>2,WordShineEffectPresetTypes.Lyricify=>3,_=>1 },
+        WordShineEffectPreset switch { WordShineEffectPresetTypes.iOS264=>0,WordShineEffectPresetTypes.Android=>2,WordShineEffectPresetTypes.Cliric=>3,_=>1 },
         BreathingDotsAlignmentLeft?0:1, HighlightLineZooming, (int)InterLineAnimationPreset, (int)TranslationLinePreset
     ];
     public int GetStylePreset()
@@ -98,7 +98,7 @@ public sealed partial class AppleMusicSettings
                 {
                     0 => WordShineEffectPresetTypes.iOS264,
                     2 => WordShineEffectPresetTypes.Android,
-                    3 => WordShineEffectPresetTypes.Lyricify,
+                    3 => WordShineEffectPresetTypes.Cliric,
                     _ => WordShineEffectPresetTypes.iOS162
                 };
                 break;

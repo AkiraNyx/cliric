@@ -37,7 +37,7 @@ internal static class ReferenceAppleMusicBackground
 
     private static string AssemblyPath(string name) => Path.Combine(Payload, name + ".dll");
 
-    private sealed class ReferenceContext() : AssemblyLoadContext("Lyricify 4.4.2 background")
+    private sealed class ReferenceContext() : AssemblyLoadContext("Cliric reference background (4.4.2)")
     {
         protected override Assembly? Load(AssemblyName assemblyName)
         {

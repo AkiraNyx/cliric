@@ -157,7 +157,7 @@ public sealed record DisplayLine(LyricLine Main, IReadOnlyList<LyricLine> Backgr
 
 public enum MotionPreset
 {
-    Ios264, Ios, Android, Lyricify
+    Ios264, Ios, Android, Cliric
 }
 public enum BackgroundMode
 {
@@ -170,7 +170,7 @@ public enum RomajiOptions
 
 public sealed class ViewOptions
 {
-    public bool UseLyricifyParser { get; set; }
+    public bool UseCliricExtendedParser { get; set; }
     public AppleMusicSettings AppleMusicLyrics { get; set; } = new();
     public bool Translation { get; set; } = true;
     public RomajiOptions RomajiOption
@@ -263,8 +263,8 @@ public sealed class ViewOptions
     [JsonIgnore]
     public MotionPreset Preset
     {
-        get => AppleMusicLyrics.WordShineEffectPreset switch { WordShineEffectPresetTypes.iOS264 => MotionPreset.Ios264, WordShineEffectPresetTypes.Android => MotionPreset.Android, WordShineEffectPresetTypes.Lyricify => MotionPreset.Lyricify, _ => MotionPreset.Ios };
-        set => AppleMusicLyrics.WordShineEffectPreset = value switch { MotionPreset.Ios264 => WordShineEffectPresetTypes.iOS264, MotionPreset.Android => WordShineEffectPresetTypes.Android, MotionPreset.Lyricify => WordShineEffectPresetTypes.Lyricify, _ => WordShineEffectPresetTypes.iOS162 };
+        get => AppleMusicLyrics.WordShineEffectPreset switch { WordShineEffectPresetTypes.iOS264 => MotionPreset.Ios264, WordShineEffectPresetTypes.Android => MotionPreset.Android, WordShineEffectPresetTypes.Cliric => MotionPreset.Cliric, _ => MotionPreset.Ios };
+        set => AppleMusicLyrics.WordShineEffectPreset = value switch { MotionPreset.Ios264 => WordShineEffectPresetTypes.iOS264, MotionPreset.Android => WordShineEffectPresetTypes.Android, MotionPreset.Cliric => WordShineEffectPresetTypes.Cliric, _ => WordShineEffectPresetTypes.iOS162 };
     }
     [JsonIgnore]
     public BackgroundMode Background
@@ -275,7 +275,7 @@ public sealed class ViewOptions
             BackgroundTypes.DynamicBeating => BackgroundMode.DynamicBeating,
             BackgroundTypes.DynamicIsolation => BackgroundMode.Isolation,
             BackgroundTypes.AppleMusicOriginal => BackgroundMode.ReferenceAppleMusic,
-            BackgroundTypes.LyricifyModern => BackgroundMode.Modern,
+            BackgroundTypes.CliricModern => BackgroundMode.Modern,
             _ => BackgroundMode.Static
         };
         set => AppleMusicLyrics.Background = value switch
@@ -284,7 +284,7 @@ public sealed class ViewOptions
             BackgroundMode.DynamicBeating => BackgroundTypes.DynamicBeating,
             BackgroundMode.Isolation => BackgroundTypes.DynamicIsolation,
             BackgroundMode.ReferenceAppleMusic => BackgroundTypes.AppleMusicOriginal,
-            BackgroundMode.Modern or BackgroundMode.Classic => BackgroundTypes.LyricifyModern,
+            BackgroundMode.Modern or BackgroundMode.Classic => BackgroundTypes.CliricModern,
             _ => BackgroundTypes.Static
         };
     }

@@ -137,7 +137,7 @@ public sealed partial class MainWindow
                 else if (!active && i == anchor && now >= _manualUntil && i + 1 < _groups.Count && _groups[i + 1].StartMs - row.Data.EndMs > 6000 && !_dots.PlaybackActive)
                     delay = Delay(1, 1);
             }
-            double effective = Math.Max(0, delay) * (_options.AppleMusicLyrics.InterLineAnimationPreset == InterLineAnimationPresetTypes.Lyricify && row.Main.OpacityTransition.UseBackEase ? 1.66 : 1);
+            double effective = Math.Max(0, delay) * (_options.AppleMusicLyrics.InterLineAnimationPreset == InterLineAnimationPresetTypes.Cliric && row.Main.OpacityTransition.UseBackEase ? 1.66 : 1);
             row.Main.SwitchDelayMs = effective;
             foreach (var background in row.Backgrounds)
                 background.SwitchDelayMs = effective;

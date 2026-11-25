@@ -88,7 +88,7 @@ public sealed partial class MainWindow
         File.WriteAllText(Path.Combine(folder, "background-comparison.json"), JsonSerializer.Serialize(new
         {
             assemblySha256 = App.AssemblySha256,
-            original = "WPF renderer and mesh assemblies bundled with Lyricify 4.4.2, shared host contracts and audio helper",
+            original = "WPF renderer and mesh assemblies from the 4.4.2 reference release, shared host contracts and audio helper",
             modern = "Current build of the open-source WPF renderer",
             scope = "Same covers, dimensions, DPI and preset; normal WPF window with system-audio response disabled",
             results
@@ -112,7 +112,7 @@ public sealed partial class MainWindow
             {
                 drawing.DrawRectangle(Brushes.Black, null, new Rect(0, 0, 2 * width + gap, height + labelHeight));
                 drawing.DrawText(Label("Apple Music 原版 · 4.4.2"), new Point(8, 7));
-                drawing.DrawText(Label("Lyricify 现代 · 开源"), new Point(width + gap + 8, 7));
+                drawing.DrawText(Label("Cliric 现代 · 开源"), new Point(width + gap + 8, 7));
                 drawing.DrawImage(first, new Rect(0, labelHeight, width, height));
                 drawing.DrawImage(second, new Rect(width + gap, labelHeight, width, height));
             }

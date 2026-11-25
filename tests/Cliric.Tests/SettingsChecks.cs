@@ -5,8 +5,15 @@ using Cliric.Core;
 
 static class SettingsChecks
 {
+    private static string LocalEnumName(string referenceName) => referenceName.Replace("Lyricify", "Cliric", StringComparison.Ordinal);
+
     public static void Run(Action<bool, string> check)
     {
+        var renamed = SettingsFile.Parse("""{"UseLyricifyParser":true}""");
+        check(renamed.UseCliricExtendedParser &&
+            !SettingsFile.Parse("""{"UseCliricExtendedParser":false,"UseLyricifyParser":true}""").UseCliricExtendedParser &&
+            JsonSerializer.Serialize(renamed).Contains("\"UseCliricExtendedParser\":true", StringComparison.Ordinal),
+            "legacy parser preferences load and serialize under the Cliric setting");
         using var contract = JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Fixtures/settings-original.json")));
         var original = contract.RootElement;
         var settings = new AppleMusicSettings();
@@ -22,7 +29,7 @@ static class SettingsChecks
                 JsonValueKind.Null => value is null,
                 JsonValueKind.True or JsonValueKind.False => Equals(value, target.GetBoolean()),
                 JsonValueKind.Number => value is not null && Math.Abs(Convert.ToDouble(value) - target.GetDouble()) < 1e-9,
-                _ => value is double d ? double.IsNaN(d) && target.GetString() == "NaN" : value is Enum e ? Equals(e, Enum.Parse(e.GetType(), target.GetString()!)) : Equals(value, target.GetString())
+                _ => value is double d ? double.IsNaN(d) && target.GetString() == "NaN" : value is Enum e ? Equals(e, Enum.Parse(e.GetType(), LocalEnumName(target.GetString()!))) : Equals(value, target.GetString())
             };
             check(equal, "reference setting default " + propertyPath);
         }
@@ -46,7 +53,7 @@ static class SettingsChecks
                 check(actual.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name == key && saved.RootElement.TryGetProperty(key, out _), "reference setting JSON key " + name);
                 if (property.GetProperty("enumMembers").ValueKind == JsonValueKind.Array)
                     foreach (var member in property.GetProperty("enumMembers").EnumerateArray())
-                        check(Convert.ToInt64(Enum.Parse(actual.PropertyType, member.GetProperty("name").GetString()!)) == member.GetProperty("value").GetInt64(), "reference setting enum " + name);
+                        check(Convert.ToInt64(Enum.Parse(actual.PropertyType, LocalEnumName(member.GetProperty("name").GetString()!))) == member.GetProperty("value").GetInt64(), "reference setting enum " + name);
             }
         }
         foreach (var preset in original.GetProperty("stylePresets").EnumerateArray())
@@ -75,7 +82,7 @@ static class SettingsChecks
         settings.WordShineEffectPreset = (WordShineEffectPresetTypes)99;
         settings.InterLineAnimationPreset = (InterLineAnimationPresetTypes)(-1);
         settings.TranslationLinePreset = (TranslationLinePresetTypes)99;
-        check(settings.WordShineEffectPreset == WordShineEffectPresetTypes.iOS162 && settings.InterLineAnimationPreset == InterLineAnimationPresetTypes.iOS && settings.TranslationLinePreset == TranslationLinePresetTypes.Lyricify, "invalid enum setters match reference fallback");
+        check(settings.WordShineEffectPreset == WordShineEffectPresetTypes.iOS162 && settings.InterLineAnimationPreset == InterLineAnimationPresetTypes.iOS && settings.TranslationLinePreset == TranslationLinePresetTypes.Cliric, "invalid enum setters match reference fallback");
         for (int i = 0; i < 6; i++)
         {
             settings.SetPullingPower(i);

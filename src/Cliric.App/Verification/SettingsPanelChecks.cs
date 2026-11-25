@@ -39,7 +39,7 @@ internal static class SettingsPanelChecks
         options.Background = BackgroundMode.ReferenceAppleMusic;
         bool original = options.AppleMusicLyrics.Background == BackgroundTypes.AppleMusicOriginal;
         options.Background = BackgroundMode.Modern;
-        check(original && options.AppleMusicLyrics.Background == BackgroundTypes.LyricifyModern,
+        check(original && options.AppleMusicLyrics.Background == BackgroundTypes.CliricModern,
             "the 4.4.2 and open-source background modes persist as distinct selections");
         options.Background = BackgroundMode.Static;
         var track = new NetEaseTrack("", 1, "Sample", "Artist", "Album", 30000, true, ClientSession: true);
@@ -52,9 +52,9 @@ internal static class SettingsPanelChecks
         var parsed = NetEaseMusic.ParseClientLyrics(track, payload).Lines.Single();
         check(parsed.Text == "one two" && parsed.Words.Count == 2 && parsed.Words[1].StartMs == 1400 &&
             parsed.Words[1].DurationMs == 500 && parsed.Translation == "translation", "NetEase YRC retains absolute word timings and aligned translation");
-        var alternative = NetEaseMusic.ParseClientLyrics(track, payload, useLyricifyParser: true).Lines.Single();
+        var alternative = NetEaseMusic.ParseClientLyrics(track, payload, useCliricExtendedParser: true).Lines.Single();
         check(alternative.EndMs == parsed.EndMs && alternative.Words.Count == 2 && alternative.Translation == "translation",
-            "the selectable Lyricify parser preserves YRC header timing and translation");
+            "the Cliric extended parser preserves YRC header timing and translation");
         var jsonOptions = new JsonSerializerOptions { NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals };
         foreach (var reference in fixture.RootElement.EnumerateArray())
         {

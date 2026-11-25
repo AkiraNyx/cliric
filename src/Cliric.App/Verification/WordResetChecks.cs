@@ -56,7 +56,7 @@ internal static class WordResetChecks
                 double expected = floating ? from + (original.GetProperty("ordinaryFloat").GetProperty("to").GetDouble() - from) * 100 / original.GetProperty("ordinaryFloat").GetProperty("durationMs").GetDouble() : 0;
                 check(Math.Abs(((TranslateTransform)future.RenderTransform).Y - expected) < 1e-6, "future ordinary-word reset lift matches the original linear target and duration across reflow");
             }
-        foreach (var preset in new[] { MotionPreset.Ios, MotionPreset.Lyricify })
+        foreach (var preset in new[] { MotionPreset.Ios, MotionPreset.Cliric })
         {
             var options = new ViewOptions { Preset = preset };
             options.AppleMusicLyrics.KaraokeStyleFloatHeight = 8;

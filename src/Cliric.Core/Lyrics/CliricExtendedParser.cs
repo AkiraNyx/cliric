@@ -3,7 +3,7 @@ using Lyricify.Lyrics.Parsers;
 
 namespace Cliric.Core;
 
-public static class LyricifyParser
+public static class CliricExtendedParser
 {
     public static Song ParseLrc(string text)
     {

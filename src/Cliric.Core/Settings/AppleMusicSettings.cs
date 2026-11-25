@@ -5,7 +5,7 @@ namespace Cliric.Core;
 // Settings keys, numeric enums and defaults come from the fixed 4.4.2 release contract.
 public enum BackgroundTypes
 {
-    Static = 0, Dynamic = 1, DynamicBeating = 2, DynamicIsolation = 3, AppleMusicOriginal = 4, LyricifyModern = 5
+    Static = 0, Dynamic = 1, DynamicBeating = 2, DynamicIsolation = 3, AppleMusicOriginal = 4, CliricModern = 5
 }
 public enum IsolationPalettes
 {
@@ -17,15 +17,15 @@ public enum FontPresets
 }
 public enum WordShineEffectPresetTypes
 {
-    Lyricify = 0, Android = 1, iOS162 = 2, iOS264 = 3
+    Cliric = 0, Android = 1, iOS162 = 2, iOS264 = 3
 }
 public enum InterLineAnimationPresetTypes
 {
-    iOS = 0, Lyricify = 1
+    iOS = 0, Cliric = 1
 }
 public enum TranslationLinePresetTypes
 {
-    Lyricify = 0, iOS = 1
+    Cliric = 0, iOS = 1
 }
 public enum PlusLighterEffectPresetTypes
 {
@@ -99,7 +99,7 @@ public sealed partial class AppleMusicSettings
     [JsonPropertyName("translation_line_preset")]
     public TranslationLinePresetTypes TranslationLinePreset
     {
-        get => _translationLine; set => _translationLine = (uint)value <= 1 ? value : TranslationLinePresetTypes.Lyricify;
+        get => _translationLine; set => _translationLine = (uint)value <= 1 ? value : TranslationLinePresetTypes.Cliric;
     }
     [JsonPropertyName("background_vocals_enter_direction_left")] public bool BackgroundVocalsEnterDirectionLeft { get; set; } = false;
     [JsonPropertyName("background_vocals_native_position")] public bool BackgroundVocalsNativePosition { get; set; } = true;

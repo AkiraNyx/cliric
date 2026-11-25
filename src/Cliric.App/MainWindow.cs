@@ -108,7 +108,7 @@ public sealed partial class MainWindow : Window
         _hostedByPlayer = hostedByPlayer;
         _songs = args.Contains("--verify-offscreen") ? DemoSongs.Create() : [];
         _sleepPrevention = args.Contains("--verify-offscreen") ? new(_ => throw new InvalidOperationException("Offscreen verification must not call the system execution-state API.")) : new();
-        if (args.Contains("--self-test") || args.Contains("--verify-offscreen"))
+        if (args.Contains("--verify-offscreen") || (args.Contains("--self-test") && !args.Contains("--lyric-switch-liked")))
         {
             _options = new();
             _options.Background = BackgroundMode.Legacy;
@@ -263,7 +263,8 @@ public sealed partial class MainWindow : Window
     {
         if (_disposed)
             return;
-        bool transparent = ready && CanPresentIndependentBackground && WindowState == WindowState.Maximized && BackgroundView.SupportsIndependent(_options.Background) && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && !_options.ReduceMotion;
+        bool transparent = ready && CanPresentIndependentBackground &&
+            BackgroundView.SupportsIndependent(_options.Background) && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && !_options.ReduceMotion;
         if (_independentPresentation == transparent)
             return;
         _independentPresentation = transparent;
@@ -273,6 +274,7 @@ public sealed partial class MainWindow : Window
         UpdateGlassFrame();
         if (PresentationSource.FromVisual(this) is HwndSource source && source.CompositionTarget is { } target)
             target.BackgroundColor = transparent ? Colors.Transparent : Colors.Black;
+        UpdateLyricBlend();
     }
     private Button Button(string label, string automation, Action action, double width = 36, double height = 36)
     {
@@ -811,13 +813,23 @@ public sealed partial class MainWindow : Window
         }
         else
             maskHost.OpacityMask = null;
-        bool sourceBackground = UseReferenceBackdrop;
-        bool independent = BackgroundView.SupportsIndependent(_options.Background) && _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && WindowState == WindowState.Maximized;
-        _blend.Update(_options.AppleMusicLyrics.EnablePlusLighter && !independent, _options.AppleMusicLyrics.PlusLighterEffectPreset, sourceBackground ? _reference.Get<Viewbox>("ViewboxBackground") : _background, !sourceBackground);
+        UpdateLyricBlend();
         // Follow reads the new row offsets in this same rendering callback.
         _scroll.UpdateLayout();
         _anchor = -2;
         _autoScrolling = false;
+    }
+
+    private void UpdateLyricBlend()
+    {
+        if (_blend is null)
+            return;
+        bool sourceBackground = UseReferenceBackdrop;
+        bool independent = _independentPresentation ||
+            BackgroundView.SupportsIndependent(_options.Background) &&
+            _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer && WindowState == WindowState.Maximized;
+        _blend.Update(_options.AppleMusicLyrics.EnablePlusLighter && !independent, _options.AppleMusicLyrics.PlusLighterEffectPreset,
+            sourceBackground ? _reference.Get<Viewbox>("ViewboxBackground") : _background, !sourceBackground);
     }
     private void SetVerticalControls(bool shown)
     {
@@ -1239,7 +1251,7 @@ public sealed partial class MainWindow : Window
     {
         Guard(() =>
         {
-            var song = LyricsFile.Load(path, _options.UseLyricifyParser);
+            var song = LyricsFile.Load(path, _options.UseCliricExtendedParser);
             if (string.IsNullOrWhiteSpace(song.AudioPath))
                 song.AudioPath = fallbackAudio;
             _songs.Add(song);

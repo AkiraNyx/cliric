@@ -28,7 +28,7 @@ static class LegacyStopChecks
             }
         }
         var shortWord = new LyricWord { Text = "ab", StartMs = 1000, DurationMs = 2000 };
-        check(Motion.GlyphDelay(shortWord, 0, 2, MotionPreset.Lyricify) == 50 && Motion.GlyphDelay(shortWord, 1, 2, MotionPreset.Lyricify) == 420, "legacy character delays retain original integer waits");
+        check(Motion.GlyphDelay(shortWord, 0, 2, MotionPreset.Cliric) == 50 && Motion.GlyphDelay(shortWord, 1, 2, MotionPreset.Cliric) == 420, "legacy character delays retain original integer waits");
         check(Motion.WordGlow(1850, shortWord, 1250) == .43 && Motion.WordGlow(2450, shortWord, 1250) == 0, "stopped legacy glow holds then clears with zero duration");
         check(Motion.WordGlow(2550, shortWord, 2500) > 0, "stopping after fade begins keeps the already attached fade clock");
     }

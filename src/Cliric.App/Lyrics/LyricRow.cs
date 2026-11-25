@@ -859,7 +859,7 @@ public sealed class LyricRow : Grid
                 bool immediate = _options.AppleMusicLyrics.BuggyApple && _options.AppleMusicLyrics.BuggyAppleOptions.WordShineAnimationInterruption;
                 bool wordStarted = view.MotionWord is not null;
                 var motionWord = view.MotionWord ?? view.Word;
-                bool effectActive = wordStarted && (_options.Preset == MotionPreset.Lyricify || Timeline.Emphasis(motionWord, view.Index == _line.Words.Count - 1, _options.Preset));
+                bool effectActive = wordStarted && (_options.Preset == MotionPreset.Cliric || Timeline.Emphasis(motionWord, view.Index == _line.Words.Count - 1, _options.Preset));
                 if (view.Glyphs.Count > 0 && _options.Preset != MotionPreset.Android)
                 {
                     double opacity = 0;
@@ -868,7 +868,7 @@ public sealed class LyricRow : Grid
                         if (active && !resetStopping)
                             opacity = Motion.WordGlow(effectTime, motionWord);
                         else if ((past || resetStopping) && !immediate)
-                            opacity = _options.Preset == MotionPreset.Lyricify ? Motion.WordGlow(effectTime, motionWord, stopTime) : Motion.WordGlow(stopTime, motionWord) * (1 - Math.Clamp((effectTime - stopTime) / 700, 0, 1));
+                            opacity = _options.Preset == MotionPreset.Cliric ? Motion.WordGlow(effectTime, motionWord, stopTime) : Motion.WordGlow(stopTime, motionWord) * (1 - Math.Clamp((effectTime - stopTime) / 700, 0, 1));
                     }
                     ApplyGlow(view.Host, view.Host, opacity, 13);
                 }
@@ -901,7 +901,7 @@ public sealed class LyricRow : Grid
                         {
                             if (immediate)
                                 state = (1, -(_options.Float ? floatHeight * factor : 0), 0);
-                            else if (_options.Preset == MotionPreset.Lyricify)
+                            else if (_options.Preset == MotionPreset.Cliric)
                                 state = Pose(effectTime, stopTime);
                             else
                                 state = Motion.StopGlyph(Pose(stopTime), effectTime - stopTime, Math.Min(motionWord.DurationMs / 1000, 3), _options.Preset == MotionPreset.Ios264 ? 1.4695433963885915 : 1.5, _options.Float ? floatHeight * factor : 0, immediate);
@@ -940,7 +940,7 @@ public sealed class LyricRow : Grid
                         double growDelay = Motion.GlyphDelay(motionWord, glyph.Index, glyph.Count, _options.Preset);
                         if (floatingEnabled)
                             initialY = PreparedY(effectActive ? Math.Min(at, motionWord.StartMs + growDelay) : at);
-                        if (_options.Preset != MotionPreset.Lyricify)
+                        if (_options.Preset != MotionPreset.Cliric)
                         {
                             if (at >= motionWord.StartMs + growDelay)
                                 glyph.StartScale ??= glyph.Scale.ScaleX;
@@ -951,7 +951,7 @@ public sealed class LyricRow : Grid
                         if (wordStarted && !effectActive)
                             return (initialScale, initialY, 0);
                         double height = glyph.View.ActualHeight > 0 ? glyph.View.ActualHeight : 50 * factor;
-                        var pose = _options.Preset == MotionPreset.Lyricify ? Motion.LegacyGlyph(at, motionWord, glyph.Index, glyph.Count, _fontSize, _options.Float, floatHeight, initialY, initialScale, stoppedAtMs, _options.AppleMusicLyrics.InterLineAnimationPreset == InterLineAnimationPresetTypes.iOS) : Motion.Glyph(at, motionWord, glyph.Index, glyph.Count, _options.Preset, _fontSize, height, _options.Float, floatHeight, initialY, initialScale);
+                        var pose = _options.Preset == MotionPreset.Cliric ? Motion.LegacyGlyph(at, motionWord, glyph.Index, glyph.Count, _fontSize, _options.Float, floatHeight, initialY, initialScale, stoppedAtMs, _options.AppleMusicLyrics.InterLineAnimationPreset == InterLineAnimationPresetTypes.iOS) : Motion.Glyph(at, motionWord, glyph.Index, glyph.Count, _options.Preset, _fontSize, height, _options.Float, floatHeight, initialY, initialScale);
                         return glyph.EarlyFromY is { } from ? (pose.Scale, EarlyY(from, at), pose.Glow) : pose;
                     }
                     double PreparedY(double at) => FloatingMotion.Prepare(at, prepareStart, _fontSize, floatHeight, _options.AnimationSpeed, ios, livePrepare ? glyph.PrepareFromY : 0);

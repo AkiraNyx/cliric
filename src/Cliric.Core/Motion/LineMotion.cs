@@ -42,7 +42,7 @@ public static class LineMotion
         AppleMusicSettings? settings = null, bool hasBackgroundVocals = false, bool useBackEase = false, double scrollGap = .2, double? singOpacityDuration = null)
     {
         double singDuration = singOpacityDuration ?? (settings?.LineSwitchingAppleIosStyle164 != false ? 700 : 350);
-        bool ios = settings?.InterLineAnimationPreset != InterLineAnimationPresetTypes.Lyricify;
+        bool ios = settings?.InterLineAnimationPreset != InterLineAnimationPresetTypes.Cliric;
         bool sudden = settings?.BuggyApple == true && (settings.BuggyAppleOptions.LyricsLineTransparencySuddenChange || hasBackgroundVocals && settings.BuggyAppleOptions.BackgroundVocalTransparencySuddenChange);
         double scrollDuration = ios ? Math.Round(Motion.ScrollParameters().Duration * 1000) : timed ? 500 : 620;
         double ratio = useBackEase ? (ios ? Motion.ScrollParameters(scrollGap).Duration / Motion.ScrollParameters().Duration : 2.26) : 1;
@@ -116,7 +116,7 @@ public static class LineMotion
         double playedTarget = timed && background ? 159d / 255 : 1, unplayedTarget = timed ? (settings?.GetPreplayOpacity() ?? 71) / 255d : playedTarget;
         double secondaryTarget = settings?.GetSecondaryAlpha(timed, background) ?? (timed ? (background ? .5 : .7) : 1);
         double played = primary, unplayed = primary, secondary = timed ? 55d / 255 : 1;
-        bool ios = settings?.InterLineAnimationPreset != InterLineAnimationPresetTypes.Lyricify;
+        bool ios = settings?.InterLineAnimationPreset != InterLineAnimationPresetTypes.Cliric;
         double scrollDuration = ios ? Math.Round(Motion.ScrollParameters().Duration * 1000) : 500;
         double backRatio = ios ? Motion.ScrollParameters(scrollGap).Duration / Motion.ScrollParameters().Duration : 2.26;
         double playedEnter = settings?.LineSwitchingOpacitySpeedAppleIosStyle164 == true ? 0 : 200 * speed;

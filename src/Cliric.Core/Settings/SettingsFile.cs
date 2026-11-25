@@ -24,6 +24,8 @@ public static class SettingsFile
         var options = JsonSerializer.Deserialize<ViewOptions>(json, LyricsFile.JsonOptions) ?? new();
         if (!document.RootElement.EnumerateObject().Any(p => p.Name.Equals(nameof(ViewOptions.RomajiOption), StringComparison.OrdinalIgnoreCase)))
             Copy<bool>("Romanization", v => options.Romanization = v);
+        if (!document.RootElement.EnumerateObject().Any(p => p.Name.Equals(nameof(ViewOptions.UseCliricExtendedParser), StringComparison.OrdinalIgnoreCase)))
+            Copy<bool>("UseLyricifyParser", v => options.UseCliricExtendedParser = v);
         if (!document.RootElement.EnumerateObject().Any(p => p.Name.Equals(nameof(ViewOptions.AppleMusicLyrics), StringComparison.OrdinalIgnoreCase)))
         {
             // Older replica profiles stored these values flat; migrate them before writing the nested contract.

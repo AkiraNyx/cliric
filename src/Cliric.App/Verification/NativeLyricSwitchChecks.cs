@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
+using System.Windows;
 using System.Windows.Media;
 using Cliric.Core;
 
@@ -9,71 +10,133 @@ namespace Cliric.App;
 public sealed partial class MainWindow
 {
     private readonly record struct SwitchFrameReport(int Frames, int Switches, bool Independent,
-        double Fps, double P95FrameMs, double P95WorkMs, double P95SwitchMs);
+        double Fps, double P95FrameMs, double P95WorkMs, double P95SwitchMs,
+        double StartMs, double EndMs, double MaxSwitchMs, bool IndependentPresented, bool BackgroundFaulted, bool PlusLighterActive);
 
     internal async Task VerifyLyricSwitchFramesAsync()
     {
-        const int lineLength = 1350;
-        const string text = "这一行窗边的光慢慢向下一行移动";
+        bool liked = _args.Contains("--lyric-switch-liked");
+        using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(100));
+        var token = timeout.Token;
         Width = 1240;
         Height = 820;
-        _options.ReduceMotion = false;
-        _options.AudioReactive = false;
-        _options.EnableMultiLine = false;
-        _options.Float = true;
-        _options.AppleMusicLyrics.Karaoke = true;
-        _options.AppleMusicLyrics.PullingEffect = true;
-        _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer = true;
         bool reference = ReferenceAppleMusicBackground.Available;
-        _options.Background = reference ? BackgroundMode.ReferenceAppleMusic : BackgroundMode.Modern;
-
-        var song = new Song { Title = "Line movement", DurationMs = lineLength * 75 };
-        for (int line = 0; line < 75; line++)
+        try
         {
-            double start = line * lineLength;
-            song.Lines.Add(new LyricLine
+            if (liked)
             {
-                Text = text, StartMs = start, EndMs = start + lineLength,
-                Words = text.Select((character, i) => new LyricWord
-                {
-                    Text = character.ToString(),
-                    StartMs = start + i * lineLength / (double)text.Length,
-                    DurationMs = lineLength / (double)text.Length
-                }).ToList()
-            });
-        }
-        _songs.Add(song);
-        await LoadSongAsync(_songs.Count - 1);
-        ShowLyrics();
-        var windowed = await MeasureAsync();
-        ToggleFullscreen();
-        var fullscreen = await MeasureAsync();
-        if (windowed.Switches < 2 || fullscreen.Switches < 2)
-            throw new InvalidOperationException("Each window mode must include at least two line changes.");
-        File.WriteAllText(Path.Combine(App.DataFolder, "lyric-switch-frames.json"),
-            JsonSerializer.Serialize(new { reference, windowed, fullscreen }, LyricsFile.JsonOptions));
+                var page = await NetEaseMusic.ReadClientLibraryAsync("liked", 0, 0, token);
+                if (page.TrackIds is not { Length: > 0 } ids)
+                    throw new InvalidOperationException("我喜欢的音乐没有返回首曲。");
+                var first = page.Tracks.FirstOrDefault(track => track.OriginalId == ids[0])
+                    ?? throw new InvalidOperationException("未能读取我喜欢的音乐的首曲资料。");
+                if (!await PlayNetEaseAsync(first, token))
+                    throw new InvalidOperationException("我喜欢的音乐的首曲未开始播放。");
+            }
+            else
+            {
+                _options.ReduceMotion = false;
+                _options.AudioReactive = false;
+                _options.EnableMultiLine = false;
+                _options.Float = true;
+                _options.AppleMusicLyrics.Karaoke = true;
+                _options.AppleMusicLyrics.PullingEffect = true;
+                _options.AppleMusicLyrics.EnableIndependentBackgroundRenderer = true;
+                _options.Background = reference ? BackgroundMode.ReferenceAppleMusic : BackgroundMode.Modern;
+                _songs.Add(CreateLyricFrameFixture());
+                await LoadSongAsync(_songs.Count - 1);
+            }
 
-        async Task<SwitchFrameReport> MeasureAsync()
+            ShowLyrics();
+            var timed = _groups.Where(line => !line.Untimed && line.EndMs > line.StartMs).ToArray();
+            if (timed.Length < 4)
+                throw new InvalidOperationException("曲目需要至少四句有时间轴的歌词。");
+            double start = liked ? Math.Max(0, timed[0].StartMs - _options.TimelineOffsetMs - 400) : 900;
+            double duration = liked ? Math.Clamp(timed[Math.Min(4, timed.Length - 1)].StartMs - _options.TimelineOffsetMs - start + 800, 7500, 22000) : 6100;
+            var windowed = await MeasureAsync(start, duration);
+            bool windowedResizeVerified = false;
+            if (windowed.IndependentPresented)
+            {
+                double width = Width;
+                Width -= 80;
+                await Task.Delay(300, token);
+                if (!_independentPresentation || _blend.Active || ResizeMode != ResizeMode.CanResize || Math.Abs(ActualWidth - Width) > 5)
+                    throw new InvalidOperationException("Windowed independent rendering must preserve the resizable viewport.");
+                Width = width;
+                windowedResizeVerified = true;
+            }
+            ToggleFullscreen();
+            var fullscreen = await MeasureAsync(start, duration);
+            if (windowed.Switches < 2 || fullscreen.Switches < 2)
+                throw new InvalidOperationException("Each window mode must include at least two line changes.");
+            if (windowedResizeVerified)
+            {
+                ToggleFullscreen();
+                ShowLibrary();
+                await Task.Delay(700, token);
+                if (_independentPresentation || _background.IndependentRendererActive || _library?.IsVisible != true)
+                    throw new InvalidOperationException("Returning to the library must restore the inline background.");
+            }
+            File.WriteAllText(Path.Combine(App.DataFolder, "lyric-switch-frames.json"),
+                JsonSerializer.Serialize(new
+                {
+                    reference, liked, track = liked ? _song.Title : null, artist = liked ? _song.Artist : null,
+                    background = _options.Background.ToString(), _options.AudioReactive, _options.ReduceMotion, _options.AppleMusicLyrics.EnablePlusLighter,
+                    windowed, fullscreen, windowedResizeVerified
+                }, LyricsFile.JsonOptions));
+        }
+        finally
         {
-            _clock.Seek(900);
-            await Task.Delay(1000);
+            if (liked)
+                await StopNetEaseAsync();
+        }
+
+        async Task<SwitchFrameReport> MeasureAsync(double start, double duration)
+        {
+            if (liked)
+            {
+                if (_netEasePlayRequested)
+                    await ControlNetEaseAsync("pause", true);
+                await ControlNetEaseAsync("time-pos", start / 1000);
+            }
+            else
+                _clock.Seek(start);
+            await Task.Delay(1000, token);
             List<double> frameMs = [], workMs = [], switchMs = [];
             long previousTick = 0;
             TimeSpan previousFrame = TimeSpan.MinValue;
             int switches = 0, switchFrames = 0;
-            _clock.Play();
+            if (liked)
+            {
+                await ControlNetEaseAsync("pause", false);
+                for (int i = 0; i < 20 && !_clock.IsPlaying; i++)
+                    await Task.Delay(50, token);
+                if (!_clock.IsPlaying || Math.Abs(_clock.PositionMs - start) > 1500)
+                    throw new InvalidOperationException("首曲未在请求的测试位置开始播放。");
+            }
+            else
+                _clock.Play();
+            double startedAt = _clock.PositionMs, endedAt = startedAt;
             CompositionTarget.Rendering -= OnRendering;
             CompositionTarget.Rendering += Sample;
-            try { await Task.Delay(6100); }
+            try
+            {
+                await Task.Delay(TimeSpan.FromMilliseconds(duration), token);
+                endedAt = _clock.PositionMs;
+            }
             finally
             {
                 CompositionTarget.Rendering -= Sample;
                 CompositionTarget.Rendering += OnRendering;
-                _clock.Pause();
+                if (liked && _netEasePlayRequested)
+                    await ControlNetEaseAsync("pause", true);
+                else
+                    _clock.Pause();
             }
             return new(frameMs.Count, switches, _background.IndependentRendererActive,
                 frameMs.Count > 0 ? 1000 / frameMs.Average() : 0,
-                Percentile(frameMs, .95), Percentile(workMs, .95), Percentile(switchMs, .95));
+                Percentile(frameMs, .95), Percentile(workMs, .95), Percentile(switchMs, .95),
+                startedAt, endedAt, switchMs.DefaultIfEmpty().Max(), _independentPresentation, _background.LastError is not null, _blend.Active);
 
             void Sample(object? sender, EventArgs e)
             {
@@ -104,5 +167,27 @@ public sealed partial class MainWindow
                 previousTick = tick;
             }
         }
+    }
+
+    private static Song CreateLyricFrameFixture()
+    {
+        const int lineLength = 1350;
+        const string text = "这一行窗边的光慢慢向下一行移动";
+        var song = new Song { Title = "Line movement", DurationMs = lineLength * 75 };
+        for (int line = 0; line < 75; line++)
+        {
+            double start = line * lineLength;
+            song.Lines.Add(new LyricLine
+            {
+                Text = text, StartMs = start, EndMs = start + lineLength,
+                Words = text.Select((character, i) => new LyricWord
+                {
+                    Text = character.ToString(),
+                    StartMs = start + i * lineLength / (double)text.Length,
+                    DurationMs = lineLength / (double)text.Length
+                }).ToList()
+            });
+        }
+        return song;
     }
 }

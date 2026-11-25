@@ -10,7 +10,7 @@ public static partial class LyricsFile
 {
     public static readonly JsonSerializerOptions JsonOptions = new() { PropertyNameCaseInsensitive = true, WriteIndented = true };
 
-    public static Song Load(string path, bool useLyricifyParser = false)
+    public static Song Load(string path, bool useCliricExtendedParser = false)
     {
         var info = new FileInfo(path);
         if (info.Length > 5 * 1024 * 1024)
@@ -19,8 +19,8 @@ public static partial class LyricsFile
         Song song = Path.GetExtension(path).ToLowerInvariant() switch
         {
             ".json" => JsonSerializer.Deserialize<Song>(text, JsonOptions) ?? throw new FormatException("JSON 歌词为空。"),
-            ".ttml" or ".xml" => useLyricifyParser ? LyricifyParser.ParseTtml(text) : ParseTtml(text),
-            _ => useLyricifyParser ? LyricifyParser.ParseLrc(text) : ParseLrc(text)
+            ".ttml" or ".xml" => useCliricExtendedParser ? CliricExtendedParser.ParseTtml(text) : ParseTtml(text),
+            _ => useCliricExtendedParser ? CliricExtendedParser.ParseLrc(text) : ParseLrc(text)
         };
         if (song.Title == "未命名歌曲")
             song.Title = Path.GetFileNameWithoutExtension(path);

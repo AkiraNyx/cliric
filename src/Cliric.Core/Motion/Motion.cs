@@ -75,7 +75,7 @@ public static class Motion
     {
         if (count <= 0 || index < 0 || index >= count || timeMs < word.StartMs)
             return (initialScale, initialY, 0);
-        if (preset == MotionPreset.Lyricify)
+        if (preset == MotionPreset.Cliric)
             return LegacyGlyph(timeMs, word, index, count, fontSize, floating, floatHeight, initialY, initialScale);
         double d = Math.Max(word.DurationMs / 1000, .001), t = (timeMs - word.StartMs) / 1000;
         double stagger = Math.Min(.4 * d / count, .4), grow = Math.Round(stagger * (index + 1) * 1000) / 1000, hold = Math.Round(2 * d / count * 1000) / 1000;
@@ -110,7 +110,7 @@ public static class Motion
         double duration = Math.Max(response * multiplier, .001), progress = Critical(elapsedMs / TimeSpan.FromSeconds(duration).TotalMilliseconds, response, duration);
         return (1 + (from.Scale - 1) * (1 - progress), -lift + (from.Y + lift) * (1 - progress), from.Glow * (1 - Math.Clamp(elapsedMs / 700, 0, 1)));
     }
-    public static double GlyphDelay(LyricWord word, int index, int count, MotionPreset preset) => preset == MotionPreset.Lyricify ? LegacySchedule(word, index, count).GrowAt : Math.Round(Math.Min(.4 * (word.DurationMs / 1000) / Math.Max(1, count), .4) * (index + 1) * 1000);
+    public static double GlyphDelay(LyricWord word, int index, int count, MotionPreset preset) => preset == MotionPreset.Cliric ? LegacySchedule(word, index, count).GrowAt : Math.Round(Math.Min(.4 * (word.DurationMs / 1000) / Math.Max(1, count), .4) * (index + 1) * 1000);
     public static (double Scale, double Y, double Glow) LegacyGlyph(double time, LyricWord word, int index, int count, double fontSize, bool floating, double floatHeight = 2.75, double initialY = 0, double initialScale = 1, double stoppedAtMs = double.PositiveInfinity, bool ios = true)
     {
         if (count <= 0 || index < 0 || index >= count || time < word.StartMs)

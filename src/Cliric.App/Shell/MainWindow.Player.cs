@@ -142,7 +142,7 @@ public sealed partial class MainWindow
         if (!track.Playable)
             throw new InvalidOperationException("当前授权不可播放这首歌曲。");
         long selection = ++_queueSelection;
-        var song = await NetEaseMusic.LoadLyricsAsync(track, cancellationToken, _options.UseLyricifyParser);
+        var song = await NetEaseMusic.LoadLyricsAsync(track, cancellationToken, _options.UseCliricExtendedParser);
         cancellationToken.ThrowIfCancellationRequested();
         if (_disposed || selection != _queueSelection)
             return false;
@@ -192,7 +192,7 @@ public sealed partial class MainWindow
                 if (_disposed || selection != _queueSelection)
                     return false;
                 Song first;
-                try { first = await NetEaseMusic.LoadLyricsAsync(playable[index], token, _options.UseLyricifyParser); }
+                try { first = await NetEaseMusic.LoadLyricsAsync(playable[index], token, _options.UseCliricExtendedParser); }
                 catch (Exception error) when (error is not OperationCanceledException)
                 {
                     lastError = error;
@@ -248,7 +248,7 @@ public sealed partial class MainWindow
     {
         if (!_unloadedQueueLyrics.Contains(song.Id) || !_netEaseTracks.TryGetValue(song.Id, out var track))
             return;
-        var lyrics = await NetEaseMusic.LoadLyricsAsync(track, token, _options.UseLyricifyParser);
+        var lyrics = await NetEaseMusic.LoadLyricsAsync(track, token, _options.UseCliricExtendedParser);
         token.ThrowIfCancellationRequested();
         if (_netEaseTracks.TryGetValue(song.Id, out var currentTrack) && ReferenceEquals(track, currentTrack))
             UpdateQueuedLyrics(song.Id, lyrics);

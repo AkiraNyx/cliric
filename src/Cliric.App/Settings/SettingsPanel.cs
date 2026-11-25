@@ -24,7 +24,7 @@ public sealed class SettingsPanel : StackPanel
         _settings = options.AppleMusicLyrics;
         _changed = changed;
         Heading("背景与文字");
-        Choice("ComboBoxAppleMusicLyricsBackground", "背景", ["静态", "动态", "动态律动", "动态流动", "Apple Music 原版（4.4.2）", "Lyricify 现代（开源）"], (int)_settings.Background, i => _settings.Background = (BackgroundTypes)i, true);
+        Choice("ComboBoxAppleMusicLyricsBackground", "背景", ["静态", "动态", "动态律动", "动态流动", "Apple Music 原版（4.4.2）", "Cliric 现代（开源）"], (int)_settings.Background, i => _settings.Background = (BackgroundTypes)i, true);
         _conditional["independent"] = Check("ToggleSwitchAppleMusicLyricsIndependentBackgroundRendering", "独立渲染背景", _settings.EnableIndependentBackgroundRenderer, v => _settings.EnableIndependentBackgroundRenderer = v, true);
         _conditional["palette"] = Choice("ComboBoxAppleMusicLyricsBackground_Isolation_Palette", "取色算法", ["自动", "KMeans", "OctTree", "MedianCut 1", "MedianCut 2"], (int)_settings.BackgroundDynamicIsolationPalettes, i => _settings.BackgroundDynamicIsolationPalettes = (IsolationPalettes)i, true);
         Check("ToggleSwitchAppleMusicLyricsBlurLyrics", "歌词模糊", _settings.BlurLyrics, v => _settings.BlurLyrics = v);
@@ -89,8 +89,8 @@ public sealed class SettingsPanel : StackPanel
         traditional.IsEnabled = false;
         traditional.ToolTip = "独立工程提供当前歌词页；传统页入口属于原客户端。";
         Heading("翻译与歌词来源");
-        Choice("HostLyricsParser", "歌词解析方式（下次载入生效）", ["内置解析器", "Lyricify Lyrics Helper"],
-            options.UseLyricifyParser ? 1 : 0, i => options.UseLyricifyParser = i == 1);
+        Choice("HostLyricsParser", "歌词解析方式（下次载入生效）", ["内置解析器", "Cliric 扩展解析器"],
+            options.UseCliricExtendedParser ? 1 : 0, i => options.UseCliricExtendedParser = i == 1);
         Check("HostTranslation", "显示翻译", options.Translation, v => options.Translation = v);
         Choice("ComboBoxLyricsRomajiMode", "音译显示", ["禁用", "翻译优先", "罗马音优先", "仅罗马音"], (int)options.RomajiOption, v => options.RomajiOption = (RomajiOptions)v);
         Check("HostEnableMultiLine", "允许同时高亮多行", options.EnableMultiLine, v => options.EnableMultiLine = v);
@@ -215,7 +215,7 @@ public sealed class SettingsPanel : StackPanel
     }
     private void UpdateConditionalVisibility()
     {
-        bool ios = _settings.Background == BackgroundTypes.LyricifyModern ||
+        bool ios = _settings.Background == BackgroundTypes.CliricModern ||
             _settings.Background == BackgroundTypes.AppleMusicOriginal && ReferenceAppleMusicBackground.Available;
         _audioReactive.IsEnabled = ios && !_options.ReduceMotion;
         _backgroundAudioNote.Text = _settings.Background switch
@@ -226,7 +226,7 @@ public sealed class SettingsPanel : StackPanel
             BackgroundTypes.DynamicIsolation => "动态流动根据封面取色生成流动网格，当前没有接入系统音频。",
             BackgroundTypes.AppleMusicOriginal when !ios => "当前使用兼容背景。原版效果需要 4.4.2 渲染组件。",
             BackgroundTypes.AppleMusicOriginal => "使用本地 4.4.2 背景渲染组件。",
-            _ => "使用随程序提供的 Lyricify Backgrounds 现代背景。"
+            _ => "使用随 Cliric 提供的现代动态背景。"
         };
         if (ios)
             _backgroundAudioNote.Text += _options.ReduceMotion ? "关闭减少动态效果后可启用系统音频律动。" : "支持系统音频低频律动。";

@@ -110,16 +110,16 @@ internal static partial class NetEaseMusic
         return tracks.ToArray();
     }
 
-    private static async Task<Song> LoadClientLyricsAsync(NetEaseTrack track, CancellationToken token, bool useLyricifyParser)
+    private static async Task<Song> LoadClientLyricsAsync(NetEaseTrack track, CancellationToken token, bool useCliricExtendedParser)
     {
         var response = await RunClientAsync(new { operation = "lyrics", id = track.OriginalId }, token);
-        return ParseClientLyrics(track, response, useLyricifyParser);
+        return ParseClientLyrics(track, response, useCliricExtendedParser);
     }
 
-    internal static Song ParseClientLyrics(NetEaseTrack track, JsonElement response, bool useLyricifyParser = false)
+    internal static Song ParseClientLyrics(NetEaseTrack track, JsonElement response, bool useCliricExtendedParser = false)
     {
-        Func<string, Song> parseLrc = useLyricifyParser ? LyricifyParser.ParseLrc : LyricsFile.ParseLrc;
-        Func<string, List<LyricLine>> parseYrc = useLyricifyParser ? LyricifyParser.ParseYrc : YrcLyrics.Parse;
+        Func<string, Song> parseLrc = useCliricExtendedParser ? CliricExtendedParser.ParseLrc : LyricsFile.ParseLrc;
+        Func<string, List<LyricLine>> parseYrc = useCliricExtendedParser ? CliricExtendedParser.ParseYrc : YrcLyrics.Parse;
         var song = parseLrc(LyricText("lrc"));
         var timed = parseYrc(LyricText("yrc"));
         if (timed.Count > 0)

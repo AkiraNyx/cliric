@@ -100,7 +100,7 @@ public static class Timeline
         string text = word.Text.Trim();
         int n = text.Length;
         bool cjk = n == 1 && IsHan(text[0]);
-        if (preset != MotionPreset.Lyricify)
+        if (preset != MotionPreset.Cliric)
             return word.DurationMs > 1000 && n is > 0 && n <= ((last || preset == MotionPreset.Android) ? 7 : 6) && !cjk;
         double d = word.DurationMs;
         return n < 8 && ((n > 5 && d / n > 190) || (n is > 3 and <= 5 && d > 1100) || (n == 3 && d > 1225) ||
@@ -131,7 +131,7 @@ public static class Timeline
             if (next is not null && word.Text[^1] != ' ' && !currentHan)
                 return false;
         }
-        if (preset == MotionPreset.Lyricify && next is not null && word.Text.Trim().Length > 6)
+        if (preset == MotionPreset.Cliric && next is not null && word.Text.Trim().Length > 6)
             return false;
         return Emphasis(word, next is null, preset);
     }

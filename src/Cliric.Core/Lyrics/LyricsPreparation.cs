@@ -28,7 +28,7 @@ public static class LyricsPreparation
             return [];
         OptimizeBackground(entries);
         if ((settings is null || UseKaraoke(song, settings)) && entries.Any(row => row.Source.Words.Count > 0))
-            PrepareSing(entries, settings?.InterLineAnimationPreset != InterLineAnimationPresetTypes.Lyricify, enableMultiLine);
+            PrepareSing(entries, settings?.InterLineAnimationPreset != InterLineAnimationPresetTypes.Cliric, enableMultiLine);
         else
         for (int i = 0; i < entries.Count - 1; i++)
         {
